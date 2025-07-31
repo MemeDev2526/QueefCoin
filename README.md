@@ -1,15 +1,13 @@
-# QueefCoin Official Website
+# QueefCoin Website
 
-Welcome to the official website of **$QUEEF**, the first memecoin that normalizes queefing, empowers women, and brings laughs and gains to Web3.
+Official site for $QUEEF — the meme coin with a mission.
+Just air with flair 💨
 
-## 🌬️ What is QueefCoin?
+## Features
 
-$QUEEF is a viral, meme-fueled, community-driven token that glorifies the puff, fights stigma, and pumps charts.
+- Meme-forward design
+- Wind for Women initiative
+- Merch carousel and link
+- DEX chart and token info coming soon
 
-## 🌐 Live Site
-
-Deploy this folder to GitHub Pages or your preferred hosting to go live.
-
----
-
-> Just air with flair. Blasting Shame. Pumping Charts.
+Hosted with ❤️ on GitHub Pages.
