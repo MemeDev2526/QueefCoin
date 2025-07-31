@@ -36,8 +36,7 @@ h1, h2, .tagline, nav a, .cta-button, .queef-facts-banner {
   position: absolute;  /* Absolute position to allow banner below navbar */
   top: 60px;  /* Position the banner 80px (or the height of your navbar) below the top */
   left: 0;
-  width: 100%;
-  height: 100vh;  
+  width: 100VH;  
   background-color: #ffa500; /* Background color of the banner */
   color: #0d0d0d; /* Text color */
   font-weight: bold;
