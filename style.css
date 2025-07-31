@@ -16,10 +16,12 @@ body {
   text-align: center;
   font-size: 18px;
   min-height: 100vh;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero, .roadmap, .tokenomics, .charity, .merch {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 4em 2em;
 }
 
 }
@@ -54,7 +56,7 @@ nav a {
 }
 
 .hero {
-  background-color:  transparent;
+  background-color:  rgba(0, 0, 0, 0.5);
   padding: 4em 2em;
 }
 
