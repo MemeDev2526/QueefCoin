@@ -33,7 +33,7 @@ h1, h2, .tagline, nav a, .cta-button, .queef-facts-banner {
 .logo-banner img,
 .banner {
   width: 100%;
-  height: 100px;
+  height: 50px;
   display: block;
   margin-bottom: 1em;
 }
