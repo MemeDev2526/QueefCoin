@@ -41,6 +41,16 @@ nav {
   z-index: 1000;  /* Ensure it stays on top of other content */
 }
 
+nav {
+  position: fixed;  /* Fixed position at the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #1a1a1a;  /* Navbar background */
+  padding: 1em 0;  /* Padding for navbar */
+  z-index: 1000;  /* Ensure it's on top of other content */
+}
+
 nav ul {
   list-style: none;
   margin: 0;
@@ -55,7 +65,39 @@ nav a {
   text-decoration: none;
   font-weight: bold;
 }
+/* Scrolling Facts Banner */
+.queef-facts-banner {
+  position: absolute;  /* Position it above the fixed navbar */
+  top: 0;  /* Position it at the very top of the page */
+  left: 0;
+  width: 100%;
+  background-color: #ffa500;  /* Banner background color */
+  color: #0d0d0d;  /* Text color */
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.5em 0;
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  z-index: 999;  /* Ensure the banner appears above other content */
+  text-align: center;
+  animation: scroll-left 20s linear infinite;  /* Animation for scrolling text */
+}
 
+/* Scrolling Text */
+.queef-facts-scroll {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* Keyframe for scrolling animation */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 /* Add spacing below the navbar */
 body {
   margin: 0;
@@ -160,39 +202,3 @@ footer {
   padding: 1.5em;
   font-size: 14px;
   color: #aaa;
-}
-
-.queef-facts-banner {
-  width: 100%;
-  overflow: hidden; 
-  background-color: #ffa500;  
-  color: #0d0d0d;  
-  font-weight: bold;
-  font-size: 1rem;
-  padding: 0.5em 0;
-  border-top: 2px solid #000;
-  border-bottom: 2px solid #000;
-  position: relative;
-}
-
-/* The scrolling content */
-.queef-facts-scroll {
-  display: inline-block;
-  white-space: nowrap;
-  animation: scroll-left 20s linear infinite;
-}
-
-/* Keyframe for scrolling animation */
-@keyframes scroll-left {
-  0% {
-    transform: translateX(100%);  
-  100% {
-    transform: translateX(-100%);  
-
-/* Section Divider */
-.section-divider svg {
-  display: block;
-  width: 100%;
-  height: 80px;
-  margin-top: -1px;
-}
