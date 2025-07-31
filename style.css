@@ -11,6 +11,10 @@ body {
   padding: 0;
   text-align: center;
   font-size: 18px;
+  background-image: url('assets/bg-queefcoin.jpg');  
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 h1, h2, .tagline, nav a, .cta-button, .queef-facts-banner {
