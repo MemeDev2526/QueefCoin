@@ -54,27 +54,27 @@ nav a {
 }
 
 .hero {
-  background-color: #0d0d0d;
+  background-color:  transparent;
   padding: 4em 2em;
 }
 
 .roadmap {
-  background-color: #111111;
+  background-color:  transparent;
   padding: 4em 2em;
 }
 
 .tokenomics {
-  background-color: #171717;
+  background-color:  transparent;
   padding: 4em 2em;
 }
 
 .charity {
-  background-color: #1d1d1d;
+  background-color:  transparent;
   padding: 4em 2em;
 }
 
 .merch {
-  background-color: #222222;
+  background-color: transparent;
   padding: 4em 2em;
 }
 
