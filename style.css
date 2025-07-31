@@ -33,7 +33,7 @@ h1, h2, .tagline, nav a, .cta-button, .queef-facts-banner {
 
 /* Scrolling Facts Banner */
 .queef-facts-banner {
-  position: absolute;  /* Absolute position to allow banner below navbar */
+  position: fixed;
   top: 60px;  /* Position the banner 80px (or the height of your navbar) below the top */
   left: 0;
   width: 100VH;  
@@ -45,6 +45,7 @@ h1, h2, .tagline, nav a, .cta-button, .queef-facts-banner {
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
   z-index: 999;  /* Ensure it's above the background but below the navbar */
+  overflow: hidden;  /* Hide any overflow */
   text-align: center;
   animation: scroll-left 20s linear infinite;  /* Animation for scrolling text */
 }
