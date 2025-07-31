@@ -183,4 +183,12 @@ footer {
   padding: 1.5em;
   font-size: 14px;
   color: #aaa;
+  text-align: center;  /* Centers the footer text */
+}
+
+footer .disclaimer {
+  font-size: 12px;  /* Smaller font size for the disclaimer */
+  color: #ff6347;  /* A distinct color for the disclaimer (tomato red) */
+  font-style: italic;  /* Italicize the disclaimer for emphasis */
+  margin-top: 1em;  /* Adds some space above the disclaimer text */
 }
