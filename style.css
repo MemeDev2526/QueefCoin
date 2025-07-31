@@ -33,27 +33,28 @@ h1, h2, .tagline, nav a, .cta-button, .queef-facts-banner {
 
 /* Scrolling Facts Banner */
 .queef-facts-banner {
-  position: fixed;
-  top: 60px;  /* Position the banner 80px (or the height of your navbar) below the top */
+  position: fixed;  /* Fixed position to keep the banner at the top */
+  top: 0;  /* Position it at the top of the page */
   left: 0;
-  width: 100VH;  
-  background-color: #ffa500; /* Background color of the banner */
+  width: 100%;  /* Full width to cover the entire screen */
+  height: 60px;  /* Fixed height for the banner */
+  background-color: #ffa500; /* Banner background color */
   color: #0d0d0d; /* Text color */
   font-weight: bold;
   font-size: 1rem;
   padding: 0.5em 0;
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
-  z-index: 999;  /* Ensure it's above the background but below the navbar */
-  overflow: hidden;  /* Hide any overflow */
+  z-index: 1001;  /* Ensure it's above the background but below the navbar */
   text-align: center;
-  animation: scroll-left 20s linear infinite;  /* Animation for scrolling text */
+  overflow: hidden;  /* Hide any overflow */
 }
 
 /* Scrolling Text */
 .queef-facts-scroll {
   display: inline-block;
-  white-space: nowrap;
+  white-space: nowrap;  /* Prevent text from wrapping */
+  animation: scroll-left 20s linear infinite;  /* Animation for scrolling text */
 }
 
 /* Keyframe for scrolling text */
@@ -64,17 +65,6 @@ h1, h2, .tagline, nav a, .cta-button, .queef-facts-banner {
   100% {
     transform: translateX(-100%);  /* End at left */
   }
-}
-
-/* Navbar */
-nav {
-  position: fixed;  /* Keep navbar fixed at the top */
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #1a1a1a;  /* Navbar background color */
-  padding: 1em 0;  /* Navbar padding */
-  z-index: 1000;  /* Ensure navbar stays on top of other content */
 }
 
 /* Navbar list styling */
