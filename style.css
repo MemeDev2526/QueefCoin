@@ -4,22 +4,23 @@ html {
 }
 
 body {
-  background-image: url('assets/bg-queefcoin.jpg');  
-  background-size: cover;  /* Make the image cover the whole viewport */
-  background-position: center center;  /* Ensure the image is centered */
-  background-attachment: fixed;  /* Keeps the background fixed while scrolling */
+  font-family: 'Rubik', sans-serif;
+  background-color: #0d0d0d; 
+  color: #ffa500;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 18px;
+  background-image: url('assets/bg-queefcoin.jpg);  
+  background-size: cover;  /
+  background-position: center center;  
+  background-attachment: fixed; 
+}
+
 }
 
 h1, h2, .tagline, nav a, .cta-button, .queef-facts-banner {
   font-family: 'Luckiest Guy', cursive;
-}
-
-.logo-banner img,
-.banner {
-  width: 100%;
-  height: auto;
-  display: block;
-  margin-bottom: 1em;
 }
 
 nav ul {
