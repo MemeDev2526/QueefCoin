@@ -37,10 +37,9 @@ nav ul {
 }
 
 nav a {
-.coming-soon {
-  color: #999;
-  font-style: italic;
-  cursor: default;
+  color: #ffa500;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .hero {

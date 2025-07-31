@@ -1,3 +1,2 @@
-
-// Placeholder JavaScript functionality
-console.log('QueefCoin website loaded.');
+// Placeholder for interactivity
+console.log('QueefCoin site ready.');
