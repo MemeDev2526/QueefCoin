@@ -32,55 +32,20 @@ h1, h2, .tagline, nav a, .cta-button, .queef-facts-banner {
   font-family: 'Luckiest Guy', cursive;
 }
 
-/* Navigation bar styles */
-nav {
-  position: fixed;  /* Fixed at the top of the page */
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #1a1a1a;  /* Your background color */
-  padding: 1em 0;  /* Padding for the navbar */
-  z-index: 1000;  /* Ensure it stays on top of other content */
-}
-
-nav {
-  position: fixed;  /* Fixed position at the top */
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #1a1a1a;  /* Navbar background */
-  padding: 1em 0;  /* Padding for navbar */
-  z-index: 1000;  /* Ensure it's on top of other content */
-}
-
-nav ul {
-  list-style: none;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  gap: 3em;
-  font-size: 20px;
-}
-
-nav a {
-  color: #ffa500;
-  text-decoration: none;
-  font-weight: bold;
-}
 /* Scrolling Facts Banner */
 .queef-facts-banner {
-  position: absolute;  /* Position it above the fixed navbar */
-  top: 0;  /* Position it at the very top of the page */
+  position: absolute;  /* Position the banner above the navbar */
+  top: 0;  /* Start from the very top */
   left: 0;
   width: 100%;
-  background-color: #ffa500;  /* Banner background color */
-  color: #0d0d0d;  /* Text color */
+  background-color: #ffa500; /* Background color of the banner */
+  color: #0d0d0d; /* Text color */
   font-weight: bold;
   font-size: 1rem;
   padding: 0.5em 0;
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
-  z-index: 999;  /* Ensure the banner appears above other content */
+  z-index: 999;  /* Ensure it's above the background but below the navbar */
   text-align: center;
   animation: scroll-left 20s linear infinite;  /* Animation for scrolling text */
 }
@@ -91,14 +56,43 @@ nav a {
   white-space: nowrap;
 }
 
-/* Keyframe for scrolling animation */
+/* Keyframe for scrolling text */
 @keyframes scroll-left {
   0% {
-    transform: translateX(100%);
+    transform: translateX(100%);  /* Start from right */
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-100%);  /* End at left */
   }
+}
+
+/* Navbar */
+nav {
+  position: fixed;  /* Keep navbar fixed at the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #1a1a1a;  /* Navbar background color */
+  padding: 1em 0;  /* Navbar padding */
+  z-index: 1000;  /* Ensure navbar stays on top of other content */
+}
+
+/* Navbar list styling */
+nav ul {
+  list-style: none;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 3em;
+  font-size: 20px;
+}
+
+/* Navbar link styling */
+nav a {
+  color: #ffa500;
+  text-decoration: none;
+  font-weight: bold;
+}
 }
 /* Add spacing below the navbar */
 body {
