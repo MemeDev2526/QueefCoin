@@ -1,11 +1,11 @@
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Rubik', sans-serif;
-  background-image: url('assets/bg-queefcoin.jpg');
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-color: #0d0d0d;
   color: #ffa500;
   margin: 0;
   padding: 0;
@@ -42,8 +42,29 @@ nav a {
   font-weight: bold;
 }
 
-.hero, .roadmap, .tokenomics, .charity, .merch {
-  padding: 3em 2em;
+.hero {
+  background-color: #0d0d0d;
+  padding: 4em 2em;
+}
+
+.roadmap {
+  background-color: #111111;
+  padding: 4em 2em;
+}
+
+.tokenomics {
+  background-color: #171717;
+  padding: 4em 2em;
+}
+
+.charity {
+  background-color: #1d1d1d;
+  padding: 4em 2em;
+}
+
+.merch {
+  background-color: #222222;
+  padding: 4em 2em;
 }
 
 .cta-button {
@@ -76,7 +97,7 @@ footer {
 
 /* Scrolling facts banner */
 .queef-facts-banner {
-  width: 150%;
+  width: 100%;
   overflow: hidden;
   background-color: #ffa500;
   color: #0d0d0d;
@@ -101,4 +122,12 @@ footer {
   100% {
     transform: translateX(-100%);
   }
+}
+
+/* Section Divider */
+.section-divider svg {
+  display: block;
+  width: 100%;
+  height: 80px;
+  margin-top: -1px;
 }
