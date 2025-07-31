@@ -3,13 +3,14 @@ body {
   font-family: Arial, sans-serif;
   background-image: url('assets/bg-queefcoin.jpg');
   background-size: contain;
-  background-position: center;
-  background-attachment: fixed;
+  background-position: top center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   color: #ffa500;
   margin: 0;
   padding: 0;
   text-align: center;
+  font-size: 18px;
 }
 
 .logo-banner img,
@@ -22,12 +23,13 @@ body {
 
 nav ul {
   list-style: none;
-  padding: 0;
+  padding: 1em 0;
+  margin: 0;
   display: flex;
   justify-content: center;
-  gap: 1.5em;
-  margin: 0;
+  gap: 3em;
   background: #1a1a1a;
+  font-size: 20px;
 }
 
 nav a {
