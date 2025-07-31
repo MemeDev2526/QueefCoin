@@ -10,7 +10,7 @@ body {
   background-color: #0d0d0d;  /* Body background color */
   color: #ffa500;  /* Text color */
   background-image: url('assets/bg-queefcoin.jpg'); /* Background image */
-  background-size: Contain;
+  background-size: 100% 100%;
   background-position: center center;
   background-attachment: fixed;  /* Keeps background fixed */
   min-height: 100vh;
@@ -67,6 +67,17 @@ h1, h2, .tagline, nav a, .cta-button, .queef-facts-banner {
   }
 }
 
+/* Navbar */
+nav {
+  position: fixed;  /* Fixed position to keep navbar at the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #1a1a1a;  /* Navbar background color */
+  padding: 1em 0;  /* Navbar padding */
+  z-index: 1000;  /* Ensure navbar stays on top of other content */
+}
+
 /* Navbar list styling */
 nav ul {
   list-style: none;
@@ -83,6 +94,7 @@ nav a {
   text-decoration: none;
   font-weight: bold;
 }
+
 
 .hero {
   position: relative;
