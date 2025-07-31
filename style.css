@@ -91,12 +91,23 @@ nav a {
   height: 100vh;  /* Full height of the viewport */
   padding-top: 80px;  /* Adjust this based on navbar height */
   color: white;
+  text-align: center;
+  line-height: 1.6;  /* Increase the line height for better spacing between lines of text */
+}
 }
 
 .hero h1 {
   font-size: 3rem;
   margin-bottom: 20px;
+  letter-spacing: 2px;  /* Add space between the letters */
 }
+
+.hero p {
+  font-size: 1.25rem;  /* You can adjust the size of the paragraph text */
+  margin-bottom: 1.5em;  /* Adds more space below paragraphs */
+  line-height: 1.8;  /* Increase line height for the paragraph text */
+  letter-spacing: 1px;  /* Space out the letters slightly */
+  }
 
 .hero {
   background-color:  rgba(0, 0, 0, 0.5);
