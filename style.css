@@ -58,7 +58,7 @@ body {
 /* Navbar */
 nav {
   position: fixed;  /* Fixed position to keep navbar at the top */
-  top: 60px;
+  top: 40px;
   left: 0;
   width: 100%;
   background: #1a1a1a;  /* Navbar background color */
