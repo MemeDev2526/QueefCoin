@@ -139,6 +139,7 @@ nav a {
   cursor: not-allowed;
 }
 
+/* Carousel container */
 .carousel {
   display: flex;
   justify-content: center;
@@ -146,31 +147,35 @@ nav a {
   padding: 2em 0;
 }
 
+/* Carousel item */
 .carousel-item {
-  text-align: center; 
+  text-align: center;
 }
 
+/* Carousel image */
 .carousel img {
-  width: 200px;  
-  height: 300px;  
-  object-fit: cover;  
-  border-radius: 8px;  
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  
-  transition: transform 0.3s ease, box-shadow 0.3s ease;  
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
 /* Hover effect on the image */
 .carousel img:hover {
-  transform: scale(2.1);  /* Adjusted scaling factor for a better zoom effect */
+  transform: scale(1.1);  /* Adjusted scaling factor for a better zoom effect */
   box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);  /* Darker shadow on hover */
-  }
-  
+}
+
+/* Alt text styling */
 .alt-text {
-  margin-top: 10px;  
-  font-size: 1rem;  
-  color: #0d0d0d;  
-  font-weight: 600;  
-  text-transform: capitalize; 
-  padding: 0 10px;  
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #0d0d0d;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 0 10px;
 }
 
 footer {
