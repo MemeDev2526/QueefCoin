@@ -1,55 +1,37 @@
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #0d0d0d;
+    background-image: url('images/bg-queefcoin.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     color: #ffa500;
     margin: 0;
     padding: 0;
     text-align: center;
+    font-size: 18px;
 }
 
-header {
-    padding: 2em;
-    background-color: #1a1a1a;
+h1 {
+    font-size: 48px;
+    margin-top: 20px;
 }
 
-.logo {
-    width: 120px;
+h2 {
+    font-size: 32px;
 }
 
-.tagline {
-    font-style: italic;
-    margin: 0.5em 0 2em 0;
-}
-
-nav a {
-    margin: 0 1em;
-    color: #ffa500;
-    text-decoration: none;
-    font-weight: bold;
+p, li {
+    font-size: 20px;
 }
 
 section {
-    padding: 2em;
-    border-bottom: 1px solid #333;
+    padding: 3em 2em;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.btn {
-    display: inline-block;
-    margin: 1em;
-    padding: 0.75em 1.5em;
-    background-color: #ffa500;
-    color: #0d0d0d;
-    text-decoration: none;
-    border-radius: 6px;
-}
-
-footer {
-    padding: 1em;
-    background-color: #1a1a1a;
-    font-size: 0.9em;
+.logo {
+    width: 150px;
+    margin: 20px auto;
+    display: block;
 }
