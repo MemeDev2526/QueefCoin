@@ -1,12 +1,15 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #0d0d0d;
+  background-image: url('assets/bg-queefcoin.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   color: #ffa500;
   margin: 0;
   padding: 0;
   text-align: center;
-  font-size: 18px;
 }
 
 .logo-banner img,
