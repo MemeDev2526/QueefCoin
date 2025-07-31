@@ -2,7 +2,7 @@
 body {
   font-family: Arial, sans-serif;
   background-image: url('assets/bg-queefcoin.jpg');
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
