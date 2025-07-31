@@ -25,7 +25,7 @@ body {
   top: 0;  /* Position it at the top of the page */
   left: 0;
   width: 100%;  /* Full width to cover the entire screen */
-  height: 50px;  /* Fixed height for the banner */
+  height: 30px;  /* Fixed height for the banner */
   background-color: #ffa500; /* Banner background color */
   color: #0d0d0d; /* Text color */
   font-weight: bold;
