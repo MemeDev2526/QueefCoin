@@ -1,0 +1,1 @@
+This folder can include fonts, SVGs, stickers, or other media assets.
