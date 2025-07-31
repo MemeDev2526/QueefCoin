@@ -39,14 +39,22 @@ h1, h2, .tagline, nav a, .cta-button, .queef-facts-banner {
   margin-bottom: 1em;
 }
 
+nav {
+  position: fixed;  /* Fixed at the top of the page */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #1a1a1a;  /* Your background color */
+  padding: 1em 0;  /* Padding for the navbar */
+  z-index: 1000;  /* Ensure it stays on top of other content */
+}
+
 nav ul {
   list-style: none;
-  padding: 1em 0;
   margin: 0;
   display: flex;
   justify-content: center;
   gap: 3em;
-  background: #1a1a1a;
   font-size: 20px;
 }
 
@@ -54,7 +62,6 @@ nav a {
   color: #ffa500;
   text-decoration: none;
   font-weight: bold;
-}
 
 .hero {
   background-color:  rgba(0, 0, 0, 0.5);
