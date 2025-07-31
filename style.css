@@ -1,0 +1,66 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0d0d0d;
+  color: #ffa500;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 18px;
+}
+
+.logo-banner img,
+.banner {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 1em;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1.5em;
+  margin: 0;
+  background: #1a1a1a;
+}
+
+nav a {
+  color: #ffa500;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero, .roadmap, .tokenomics, .charity, .merch {
+  padding: 3em 2em;
+}
+
+.cta-button {
+  background-color: #ffa500;
+  color: #0d0d0d;
+  padding: 0.75em 1.5em;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 1em auto;
+  display: inline-block;
+}
+
+.cta-button.disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.carousel img {
+  width: 200px;
+  margin: 1em;
+}
+
+footer {
+  background-color: #1a1a1a;
+  padding: 1.5em;
+  font-size: 14px;
+  color: #aaa;
+}
