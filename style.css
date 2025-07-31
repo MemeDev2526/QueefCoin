@@ -137,12 +137,11 @@ footer {
   color: #aaa;
 }
 
-/* Scrolling facts banner */
 .queef-facts-banner {
   width: 100%;
-  overflow: hidden;
-  background-color: #ffa500;
-  color: #0d0d0d;
+  overflow: hidden; 
+  background-color: #ffa500;  
+  color: #0d0d0d;  
   font-weight: bold;
   font-size: 1rem;
   padding: 0.5em 0;
@@ -151,20 +150,19 @@ footer {
   position: relative;
 }
 
+/* The scrolling content */
 .queef-facts-scroll {
   display: inline-block;
   white-space: nowrap;
   animation: scroll-left 20s linear infinite;
 }
 
+/* Keyframe for scrolling animation */
 @keyframes scroll-left {
   0% {
-    transform: translateX(100%);
-  }
+    transform: translateX(100%);  
   100% {
-    transform: translateX(-100%);
-  }
-}
+    transform: translateX(-100%);  
 
 /* Section Divider */
 .section-divider svg {
