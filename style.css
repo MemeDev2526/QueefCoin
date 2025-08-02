@@ -189,7 +189,7 @@ nav a {
   background-size: cover;
   background-position: center center;
   height: 100vh;  /* Full height of the viewport */
-  padding-top: 60px;  /* Adjust this based on navbar height */
+  padding-top: 40px;  /* Adjust this based on navbar height */
   color: white;
   text-align: center;
   line-height: 1.6;  /* Increase the line height for better spacing between lines of text */
