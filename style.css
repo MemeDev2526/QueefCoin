@@ -87,7 +87,7 @@ body {
   }
 }
 
-.cta-button {
+..cta-button {
   background-color: #ffa500;
   color: #0d0d0d;
   padding: 0.75em 1.5em;
@@ -97,8 +97,14 @@ body {
   margin-top: 20px;
   cursor: pointer;
   border: none;
-  transform: translateY(20px);
+  transform: translateY(20px) scale(1); /* Combined */
   animation: slide-up 1s ease-in-out forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(0) scale(1.1); /* Keep Y at 0, scale up */
+  box-shadow: 0 0 15px #ffa500;
 }
 
 @keyframes slide-up {
