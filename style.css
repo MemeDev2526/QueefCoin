@@ -103,7 +103,7 @@ body {
 }
 
 .cta-button:hover {
-  transform: translateY(0) scale(1.1); /* Keep Y at 0, scale up */
+  transform: translateY(0) scale(2.1); /* Keep Y at 0, scale up */
   box-shadow: 0 0 15px #ffa500;
 }
 
