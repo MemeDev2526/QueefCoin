@@ -42,8 +42,9 @@ body {
 }
 
 .queef-puff {
-  width: 200px;
-  animation: puff 2s infinite ease-in-out;  /* Puff effect */
+  width: 400px;
+  height: auto;  
+  animation: puff 3s infinite ease-in-out;  /* Puff effect */
 }
 
 @keyframes puff {
