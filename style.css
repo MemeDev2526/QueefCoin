@@ -375,33 +375,34 @@ footer .disclaimer {
 }
 
 .image-banner-scroll {
-  overflow: hidden;
   width: 100%;
+  overflow: hidden;
   background-color: #0D0D0D;
   padding: 20px 0;
+  box-shadow: 0 0 20px #FFA500;
+  margin-top: -20px; /* Optional: adjust spacing overlap from hero */
 }
 
 .scroll-wrapper {
   display: flex;
-  width: 200%;
-  animation: scroll-banner 40s linear infinite;
+  width: max-content;
+  animation: scroll-banner 30s linear infinite;
 }
 
 .scroll-wrapper img {
-  width: 100vw;
-  height: auto;
-  max-height: 150px;
-  object-fit: contain;
-  box-shadow: 0 0 20px #FFA500;
+  height: 150px;
+  width: auto;
+  margin-right: 20px;
 }
-  
+
 @keyframes scroll-banner {
   0% {
-    transform: translateX(0);
+    transform: translateX(0%);
   }
   100% {
-    transform: translateX(-100vw);
+    transform: translateX(-50%);
   }
 }
+
 
 
