@@ -44,20 +44,48 @@ document.addEventListener('DOMContentLoaded', function () {
     triggerEmojiPuffsFrom(x, y);
   }
 
-  // 🎉 Enter button interaction (initial overlay animation)
+  // 🎉 Enter button click (initial burst and overlay removal)
   if (enterButton && overlay && homeSection && queefSound && puffImage) {
     enterButton.addEventListener('click', function () {
       playQueefEffect(window.innerWidth / 2, window.innerHeight / 2);
 
-      // Stop idle puff animation
+      // Stop puff idle loop and trigger explode
       puffImage.style.animation = 'none';
-      void puffImage.offsetWidth; // Force reflow
+      void puffImage.offsetWidth;
       puffImage.classList.add('puff-explode');
 
-      // Show smoke poofs
       smokePoofs.forEach((smoke) => smoke.classList.add('show'));
 
-      // Hide overlay
+      // Fade out overlay and fade in main content
       setTimeout(() => {
         overlay.style.opacity = 0;
-        overlay
+        overlay.style.pointerEvents = 'none';
+        setTimeout(() => {
+          overlay.style.display = 'none';
+          homeSection.classList.add('fade-in');
+        }, 600);
+      }, 800);
+    });
+  } else {
+    console.warn('QueefCoin overlay or enter button elements not found.');
+  }
+
+  // 💥 Global click or tap anywhere on site
+  function handleTapOrClick(e) {
+    const isTouch = e.type === 'touchstart';
+    const touch = isTouch ? e.touches[0] : e;
+    const x = touch.clientX;
+    const y = touch.clientY;
+
+    // Prevent queef burst if tapping the enter button while overlay is active
+    const inOverlay = overlay && overlay.style.display !== 'none' && overlay.style.opacity !== '0';
+    const isEnterBtn = e.target.id === 'enter-btn';
+
+    if (!inOverlay || !isEnterBtn) {
+      playQueefEffect(x, y);
+    }
+  }
+
+  document.body.addEventListener('click', handleTapOrClick);
+  document.body.addEventListener('touchstart', handleTapOrClick);
+});
