@@ -374,3 +374,34 @@ footer .disclaimer {
   }
 }
 
+.image-banner-scroll {
+  overflow: hidden;
+  width: 100%;
+  background-color: #0D0D0D;
+  padding: 20px 0;
+}
+
+.scroll-wrapper {
+  display: flex;
+  width: 200%;
+  animation: scroll-banner 40s linear infinite;
+}
+
+.scroll-wrapper img {
+  width: 100vw;
+  height: auto;
+  max-height: 150px;
+  object-fit: contain;
+  box-shadow: 0 0 20px #FFA500;
+}
+  
+@keyframes scroll-banner {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100vw);
+  }
+}
+
+
