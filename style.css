@@ -362,42 +362,34 @@ footer .disclaimer {
   }
 }
 
-.particles {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* ← Center exactly */
-  width: 0;
-  height: 0;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.particles span {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background-color: #ffa500; /* Queef orange */
-  border-radius: 50%;
-  opacity: 0;
-  animation: particle-burst 2.9s ease-out forwards;
 }
 
 .emoji-particle {
   position: absolute;
   font-size: clamp(2.5rem, 5vw, 6rem);
-  animation: particle-burst 2.9s ease-out forwards;
   opacity: 0;
+  animation: puff-emoji-burst 2.4s ease-out forwards;
   transform-origin: center;
 }
 
-@keyframes particle-burst {
+.emoji-explosion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: visible;
+}
+
+@keyframes puff-emoji-burst {
   0% {
-    transform: translate(0, 0) scale(1);
+    transform: translate(0, 0) scale(1) rotate(0deg);
     opacity: 1;
   }
   100% {
-    transform: translate(var(--x), var(--y)) scale(0.3);
+    transform: translate(var(--x), var(--y)) scale(0.4) rotate(720deg);
     opacity: 0;
   }
 }
