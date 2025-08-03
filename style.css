@@ -311,7 +311,7 @@ footer .disclaimer {
 }
 
 .puff-explode {
-  animation: puff-explode 1.6s ease-out forwards;
+  animation: puff-explode 1.8s ease-out forwards;
 }
 
 .smoke {
@@ -325,41 +325,18 @@ footer .disclaimer {
   z-index: 1;
 }
 
-.smoke-1 {
-  top: 50%;
-  left: 50%;
-  transform: translate(-120%, -120%);
-}
-
-.smoke-2 {
-  top: 50%;
-  left: 50%;
-  transform: translate(20%, -120%);
-}
-
-.smoke-3 {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 20%);
-}
+.smoke-1 { top: 50%; left: 50%; transform: translate(-120%, -120%); }
+.smoke-2 { top: 50%; left: 50%; transform: translate(20%, -120%); }
+.smoke-3 { top: 50%; left: 50%; transform: translate(-50%, 20%); }
 
 .smoke.show {
   animation: smoke-poof 2.2s ease-out forwards;
 }
 
 @keyframes smoke-poof {
-  0% {
-    transform: scale(0.5);
-    opacity: 0.2;
-  }
-  50% {
-    transform: scale(1.4);
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(2.5);
-    opacity: 0;
-  }
+  0% { transform: scale(0.5); opacity: 0.2; }
+  50% { transform: scale(1.4); opacity: 0.4; }
+  100% { transform: scale(2.5); opacity: 0; }
 }
 
 .emoji-particle {
@@ -369,7 +346,7 @@ footer .disclaimer {
   transform: translate(-50%, -50%) rotate(0deg);
   font-size: clamp(2.5rem, 5vw, 6rem);
   opacity: 0;
-  animation: puff-emoji-burst 3.4s ease-out forwards;
+  animation: puff-emoji-burst 3.8s ease-out forwards;
   transform-origin: center;
 }
 
