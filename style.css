@@ -87,7 +87,7 @@ body {
   }
 }
 
-..cta-button {
+.cta-button {
   background-color: #ffa500;
   color: #0d0d0d;
   padding: 0.75em 1.5em;
@@ -290,5 +290,22 @@ footer .disclaimer {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes puff-explode {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+.puff-explode {
+  animation: puff-explode 0.8s ease-out forwards;
 }
 
