@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const smokePoofs = document.querySelectorAll('.smoke');
   const emojiContainer = document.querySelector('.emoji-explosion');
 
+  // 💨 Burst emoji from a specific screen location
   function triggerEmojiPuffsFrom(xStart, yStart) {
     if (!emojiContainer) return;
 
@@ -34,6 +35,29 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  // 💨 Play sound and burst
   function playQueefEffect(x, y) {
     if (queefSound) {
-      queef
+      queefSound.currentTime = 0;
+      queefSound.play().catch(err => console.warn('Autoplay blocked:', err));
+    }
+    triggerEmojiPuffsFrom(x, y);
+  }
+
+  // 🎉 Enter button interaction (initial overlay animation)
+  if (enterButton && overlay && homeSection && queefSound && puffImage) {
+    enterButton.addEventListener('click', function () {
+      playQueefEffect(window.innerWidth / 2, window.innerHeight / 2);
+
+      // Stop idle puff animation
+      puffImage.style.animation = 'none';
+      void puffImage.offsetWidth; // Force reflow
+      puffImage.classList.add('puff-explode');
+
+      // Show smoke poofs
+      smokePoofs.forEach((smoke) => smoke.classList.add('show'));
+
+      // Hide overlay
+      setTimeout(() => {
+        overlay.style.opacity = 0;
+        overlay
