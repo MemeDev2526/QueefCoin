@@ -16,18 +16,27 @@ document.addEventListener('DOMContentLoaded', function () {
   if (enterButton && overlay && homeSection && queefSound && puffImage && particleContainer) {
 
     function triggerParticles() {
-      for (let i = 0; i < 12; i++) {
-        const particle = document.createElement('span');
-        const angle = (Math.PI * 2 * i) / 12;
-        const distance = 80;
-        const x = Math.cos(angle) * distance + 'px';
-        const y = Math.sin(angle) * distance + 'px';
-        particle.style.setProperty('--x', x);
-        particle.style.setProperty('--y', y);
-        particleContainer.appendChild(particle);
-        setTimeout(() => particle.remove(), 1000);
-      }
-    }
+  for (let i = 0; i < 12; i++) {
+    const particle = document.createElement('span');
+    const angle = (Math.PI * 2 * i) / 12;
+    const distance = 80;
+    const x = Math.cos(angle) * distance + 'px';
+    const y = Math.sin(angle) * distance + 'px';
+    
+    // Set custom movement direction
+    particle.style.setProperty('--x', x);
+    particle.style.setProperty('--y', y);
+    
+    // Use emoji 💨
+    particle.innerText = '💨';
+    particle.classList.add('emoji-particle');
+
+    // Add and remove
+    particleContainer.appendChild(particle);
+    setTimeout(() => particle.remove(), 1000);
+  }
+}
+
 
     enterButton.addEventListener('click', function () {
       // Play the queef sound
