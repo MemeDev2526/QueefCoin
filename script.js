@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Safety check
   if (enterButton && overlay && homeSection && queefSound && puffImage) {
 
-    function triggerEmojiPuffs() {
+  function triggerEmojiPuffs() {
   const emojiContainer = document.querySelector('.emoji-explosion');
 
   for (let i = 0; i < 20; i++) {
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     puff.style.setProperty('--x', x);
     puff.style.setProperty('--y', y);
-    puff.style.transform = `rotate(${Math.random() * 360}deg)`;
+    puff.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`; // 💨 Fix here
 
     emojiContainer.appendChild(puff);
     setTimeout(() => puff.remove(), 1500);
