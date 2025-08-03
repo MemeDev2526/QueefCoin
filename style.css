@@ -364,16 +364,17 @@ footer .disclaimer {
 .scroll-wrapper {
   display: flex;
   width: max-content;
-  animation: scroll-banner 10s linear infinite;
+  animation: scroll-banner 8s linear infinite;
 }
 
-scroll-wrapper img {
+.scroll-wrapper img {
   height: 150px;
   width: auto;
   margin-right: 2px;
   object-fit: contain;
   display: block;
 }
+
 
 @keyframes scroll-banner {
   0% {
