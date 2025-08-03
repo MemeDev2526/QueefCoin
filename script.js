@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         puff.classList.add('emoji-particle');
 
         const angle = Math.random() * 2 * Math.PI;
-        const distance = Math.random() * 800 + 200;
+        const distance = Math.random() * 1400 + 400;
         const x = Math.cos(angle) * distance + 'px';
         const y = Math.sin(angle) * distance + 'px';
 
