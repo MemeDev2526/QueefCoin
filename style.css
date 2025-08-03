@@ -361,6 +361,7 @@ footer .disclaimer {
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%); /* ← Center exactly */
   width: 0;
   height: 0;
   pointer-events: none;
@@ -374,13 +375,13 @@ footer .disclaimer {
   background-color: #ffa500; /* Queef orange */
   border-radius: 50%;
   opacity: 0;
-  animation: particle-burst 0.9s ease-out forwards;
+  animation: particle-burst 2.9s ease-out forwards;
 }
 
 .emoji-particle {
   position: absolute;
-  font-size: 2.5rem;
-  animation: particle-burst 1.9s ease-out forwards;
+  font-size: 5.5rem;
+  animation: particle-burst 2.9s ease-out forwards;
   opacity: 0;
 }
 
