@@ -309,3 +309,82 @@ footer .disclaimer {
   animation: puff-explode 0.8s ease-out forwards;
 }
 
+.smoke {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.smoke-1 {
+  top: 50%;
+  left: 50%;
+  transform: translate(-120%, -120%);
+}
+
+.smoke-2 {
+  top: 50%;
+  left: 50%;
+  transform: translate(20%, -120%);
+}
+
+.smoke-3 {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 20%);
+}
+
+.smoke.show {
+  animation: smoke-poof 1.2s ease-out forwards;
+}
+
+@keyframes smoke-poof {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.particles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.particles span {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #ffa500; /* Queef orange */
+  border-radius: 50%;
+  opacity: 0;
+  animation: particle-burst 0.9s ease-out forwards;
+}
+
+@keyframes particle-burst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(0.3);
+    opacity: 0;
+  }
+}
+
