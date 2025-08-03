@@ -94,28 +94,18 @@ body {
   border-radius: 30px;
   font-weight: bold;
   text-decoration: none;
-  margin-top: 20px;
-  cursor: pointer;
-  border: none;
-  transform: translateY(20px) scale(2); /* Combined */
+  margin: 1em auto;
+  display: inline-block;
+  transform: translateY(20px) scale(2);
   animation: slide-up 1s ease-in-out forwards;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border: none;
 }
 
 .cta-button:hover {
-  transform: translateY(0) scale(2.1); /* Keep Y at 0, scale up */
+  transform: translateY(0) scale(2.1);
   box-shadow: 0 0 15px #ffa500;
-}
-
-@keyframes slide-up {
-  0% {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
 }
 
 /* Scrolling Facts Banner */
@@ -368,7 +358,7 @@ footer .disclaimer {
   background-color: #0D0D0D;
   padding: 50px 0;
   box-shadow: 0 0 20px #FFA500;
-  margin-top: 200px; /* Optional: adjust spacing overlap from hero */
+  margin-top: 300px; /* Optional: adjust spacing overlap from hero */
 }
 
 .scroll-wrapper {
