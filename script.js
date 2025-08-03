@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const smokePoofs = document.querySelectorAll('.smoke');
   const emojiContainer = document.querySelector('.emoji-explosion');
 
-  // 💨 Burst emoji from a specific screen location
+  // 💨 Trigger emoji puff explosion from (x, y)
   function triggerEmojiPuffsFrom(xStart, yStart) {
     if (!emojiContainer) return;
 
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // 💨 Play sound and burst
+  // 💨 Play sound and puff burst
   function playQueefEffect(x, y) {
     if (queefSound) {
       queefSound.currentTime = 0;
@@ -44,19 +44,19 @@ document.addEventListener('DOMContentLoaded', function () {
     triggerEmojiPuffsFrom(x, y);
   }
 
-  // 🎉 Enter button click (initial burst and overlay removal)
+  // 🟠 Enter button interaction
   if (enterButton && overlay && homeSection && queefSound && puffImage) {
     enterButton.addEventListener('click', function () {
-      playQueefEffect(window.innerWidth / 2, window.innerHeight / 2);
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      playQueefEffect(centerX, centerY);
 
-      // Stop puff idle loop and trigger explode
       puffImage.style.animation = 'none';
-      void puffImage.offsetWidth;
+      void puffImage.offsetWidth; // force reflow
       puffImage.classList.add('puff-explode');
 
-      smokePoofs.forEach((smoke) => smoke.classList.add('show'));
+      smokePoofs.forEach(smoke => smoke.classList.add('show'));
 
-      // Fade out overlay and fade in main content
       setTimeout(() => {
         overlay.style.opacity = 0;
         overlay.style.pointerEvents = 'none';
@@ -66,26 +66,18 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 600);
       }, 800);
     });
-  } else {
-    console.warn('QueefCoin overlay or enter button elements not found.');
   }
 
-  // 💥 Global click or tap anywhere on site
-  function handleTapOrClick(e) {
-    const isTouch = e.type === 'touchstart';
-    const touch = isTouch ? e.touches[0] : e;
-    const x = touch.clientX;
-    const y = touch.clientY;
-
-    // Prevent queef burst if tapping the enter button while overlay is active
-    const inOverlay = overlay && overlay.style.display !== 'none' && overlay.style.opacity !== '0';
-    const isEnterBtn = e.target.id === 'enter-btn';
-
-    if (!inOverlay || !isEnterBtn) {
-      playQueefEffect(x, y);
-    }
+  // 🖱️ Handle mouse clicks and taps
+  function handleGlobalClick(event) {
+    const x = event.clientX || (event.touches && event.touches[0].clientX);
+    const y = event.clientY || (event.touches && event.touches[0].clientY);
+    if (x && y) playQueefEffect(x, y);
   }
 
-  document.body.addEventListener('click', handleTapOrClick);
-  document.body.addEventListener('touchstart', handleTapOrClick);
+  // Click for desktop
+  document.addEventListener('click', handleGlobalClick);
+
+  // Touch for mobile
+  document.addEventListener('touchstart', handleGlobalClick);
 });
