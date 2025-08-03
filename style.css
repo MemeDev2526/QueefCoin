@@ -8,10 +8,11 @@ body {
   font-family: 'Rubik', sans-serif;
   background-color: #0D0D0D;  /* Body background color */
   color: #ffa500;  /* Text color */
-  background-image: url('assets/bg-queefcoin.jpg'); /* Background image */
-  background-size: 100% 100%;
-  background-position: center center;
-  background-attachment: fixed;  /* Keeps background fixed */
+  background-image: url('assets/bg-queefcoin.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
   min-height: 100vh;
   padding-top: 100px;
   text-align: center;
@@ -358,7 +359,7 @@ footer .disclaimer {
   background-color: #0D0D0D;
   padding: 50px 0;
   box-shadow: 0 0 20px #FFA500;
-  margin-top: 250px; /* Optional: adjust spacing overlap from hero */
+  margin-top: 325px; /* Optional: adjust spacing overlap from hero */
 }
 
 .scroll-wrapper {
