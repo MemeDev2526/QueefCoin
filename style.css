@@ -183,6 +183,7 @@ nav a {
 }
 
 .hero {
+  margin-bottom: 2em;
   position: relative;
   background-image: url('assets/banner.jpg');  /* Your background image */
   background-color: rgba(0, 0, 0, 0.5);
@@ -386,13 +387,13 @@ footer .disclaimer {
 .scroll-wrapper {
   display: flex;
   width: max-content;
-  animation: scroll-banner 30s linear infinite;
+  animation: scroll-banner 15s linear infinite;
 }
 
 .scroll-wrapper img {
   height: 150px;
   width: auto;
-  margin-right: 20px;
+  margin-right: 2px;
 }
 
 @keyframes scroll-banner {
@@ -403,6 +404,4 @@ footer .disclaimer {
     transform: translateX(-50%);
   }
 }
-
-
 
