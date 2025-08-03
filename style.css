@@ -371,16 +371,12 @@ footer .disclaimer {
   animation: scroll-banner 8s linear infinite;
 }
 
-.scroll-wrapper img {
+.scroll-wrapper {
   height: 150px;
   width: auto;
   margin-right: 100px;
   object-fit: contain;
   display: block;
-}
-
-.scroll-wrapper img:not(:last-child) {
-  margin-right: 100px;
 }
 
 @keyframes scroll-banner {
