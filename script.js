@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // Use emoji 💨
     particle.innerText = '💨';
+    particle.style.transform = `rotate(${Math.random() * 360}deg)`;
     particle.classList.add('emoji-particle');
 
     // Add and remove
