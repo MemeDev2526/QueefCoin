@@ -366,16 +366,16 @@ footer .disclaimer {
 
 .emoji-particle {
   position: absolute;
+  left: 50%;
+  top: 50%;
   font-size: clamp(2.5rem, 5vw, 6rem);
   opacity: 0;
   animation: puff-emoji-burst 2.4s ease-out forwards;
   transform-origin: center;
-  left: 50%;
-  top: 50%;
 }
 
 .emoji-explosion {
-   position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
