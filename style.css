@@ -371,7 +371,7 @@ footer .disclaimer {
   animation: scroll-banner 8s linear infinite;
 }
 
-.scroll-wrapper {
+.scroll-wrapper img {
   height: 150px;
   width: auto;
   margin-right: 100px;
