@@ -34,9 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
     emojiContainer.appendChild(puff);
     setTimeout(() => puff.remove(), 1500);
   }
-}
-
-    }
 
     enterButton.addEventListener('click', function () {
       queefSound.currentTime = 0;
