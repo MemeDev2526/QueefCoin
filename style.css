@@ -104,7 +104,7 @@ body {
 }
 
 .cta-button:hover {
-  transform: translateY(0) scale(1.2);
+  transform: translateY(0) scale(2.2);
   box-shadow: 0 0 15px #ffa500;
 }
 
@@ -358,7 +358,7 @@ footer .disclaimer {
   background-color: #0D0D0D;
   padding: 50px 0;
   box-shadow: 0 0 20px #FFA500;
-  margin-top: 500px; /* Optional: adjust spacing overlap from hero */
+  margin-top: 850px; /* Optional: adjust spacing overlap from hero */
 }
 
 .scroll-wrapper {
