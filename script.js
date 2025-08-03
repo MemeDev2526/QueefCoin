@@ -37,6 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
       queefSound.currentTime = 0;
       queefSound.play().catch(err => console.warn('Autoplay blocked:', err));
 
+      puffImage.style.animation = 'none'; // Stop the default puff loop
+      void puffImage.offsetWidth; // Force reflow to apply the next animation
       puffImage.classList.add('puff-explode');
       smokePoofs.forEach((smoke) => smoke.classList.add('show'));
       triggerEmojiPuffs();
