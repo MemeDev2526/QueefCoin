@@ -10,58 +10,55 @@ document.addEventListener('DOMContentLoaded', function () {
   const queefSound = document.getElementById('queef-sound');
   const puffImage = document.querySelector('.queef-puff');
   const smokePoofs = document.querySelectorAll('.smoke');
-  const particleContainer = document.querySelector('.particles');
 
   // Safety check
-  if (enterButton && overlay && homeSection && queefSound && puffImage && particleContainer) {
+  if (enterButton && overlay && homeSection && queefSound && puffImage) {
 
-    function triggerParticles() {
-  for (let i = 0; i < 12; i++) {
-    const particle = document.createElement('span');
-    const angle = (Math.PI * 2 * i) / 12;
-    const distance = 80;
-    const x = Math.cos(angle) * distance + 'px';
-    const y = Math.sin(angle) * distance + 'px';
-    
-    // Set custom movement direction
-    particle.style.setProperty('--x', x);
-    particle.style.setProperty('--y', y);
-    
-    // Use emoji 💨
-    particle.innerText = '💨';
-    particle.style.transform = `rotate(${Math.random() * 360}deg)`;
-    particle.classList.add('emoji-particle');
+    function triggerEmojiPuffs() {
+      const emojiContainer = document.querySelector('.emoji-explosion');
 
-    // Add and remove
-    particleContainer.appendChild(particle);
-    setTimeout(() => particle.remove(), 1000);
-  }
-}
+      for (let i = 0; i < 20; i++) {
+        const puff = document.createElement('span');
+        puff.innerText = '💨';
+        puff.classList.add('emoji-particle');
 
+        // Random screen-wide burst directions
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = Math.random() * 800 + 200;
+        const x = Math.cos(angle) * distance + 'px';
+        const y = Math.sin(angle) * distance + 'px';
+
+        puff.style.setProperty('--x', x);
+        puff.style.setProperty('--y', y);
+
+        // Random starting point near center
+        puff.style.left = '50%';
+        puff.style.top = '50%';
+        puff.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+        emojiContainer.appendChild(puff);
+
+        setTimeout(() => puff.remove(), 1500);
+      }
+    }
 
     enterButton.addEventListener('click', function () {
-      // Play the queef sound
       queefSound.currentTime = 0;
       queefSound.play().catch(err => console.warn('Autoplay blocked:', err));
 
-      // Trigger puff explosion
       puffImage.classList.add('puff-explode');
-
-      // Smoke poofs
       smokePoofs.forEach((smoke) => smoke.classList.add('show'));
 
-      // Particle burst
-      triggerParticles();
+      triggerEmojiPuffs(); // 💨
 
-      // Fade out overlay after animation
       setTimeout(() => {
         overlay.style.opacity = 0;
         overlay.style.pointerEvents = 'none';
         setTimeout(() => {
           overlay.style.display = 'none';
           homeSection.classList.add('fade-in');
-        }, 600); // Buffer for fade-out
-      }, 800); // Match puff-explode duration
+        }, 600);
+      }, 800);
     });
 
   } else {
