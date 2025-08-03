@@ -376,6 +376,9 @@ footer .disclaimer {
   display: block;
 }
 
+.scroll-wrapper img:not(:last-child) {
+  margin-right: 30px;
+}
 
 @keyframes scroll-banner {
   0% {
