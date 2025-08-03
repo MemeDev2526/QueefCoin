@@ -377,6 +377,13 @@ footer .disclaimer {
   animation: particle-burst 0.9s ease-out forwards;
 }
 
+.emoji-particle {
+  position: absolute;
+  font-size: 2.5rem;
+  animation: particle-burst 1.9s ease-out forwards;
+  opacity: 0;
+}
+
 @keyframes particle-burst {
   0% {
     transform: translate(0, 0) scale(1);
@@ -387,4 +394,3 @@ footer .disclaimer {
     opacity: 0;
   }
 }
-
