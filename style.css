@@ -368,7 +368,7 @@ footer .disclaimer {
   background-color: #0D0D0D;
   padding: 50px 0;
   box-shadow: 0 0 20px #FFA500;
-  margin-top: 80px; /* Optional: adjust spacing overlap from hero */
+  margin-top: 200px; /* Optional: adjust spacing overlap from hero */
 }
 
 .scroll-wrapper {
@@ -377,10 +377,12 @@ footer .disclaimer {
   animation: scroll-banner 10s linear infinite;
 }
 
-.scroll-wrapper img {
+scroll-wrapper img {
   height: 150px;
   width: auto;
   margin-right: 2px;
+  object-fit: contain;
+  display: block;
 }
 
 @keyframes scroll-banner {
