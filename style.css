@@ -362,16 +362,17 @@ footer .disclaimer {
   }
 }
 
-}
-
 .emoji-particle {
   position: absolute;
   left: 50%;
   top: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
   font-size: clamp(2.5rem, 5vw, 6rem);
   opacity: 0;
   animation: puff-emoji-burst 2.4s ease-out forwards;
   transform-origin: center;
+}
+
 }
 
 .emoji-explosion {
