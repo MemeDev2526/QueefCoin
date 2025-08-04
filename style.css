@@ -1,12 +1,13 @@
 
 :root {
-  --orange: #FB6B00;
+  --orange: #FB6B00;  /* your brand orange */
   --black: #0D0D0D;
   --white: #FFFFFF;
   --gray: #AAAAAA;
   --pink: #FF69B4;
   --solana-green: #00FFA3;
 }
+
 
 
 .section-title {
@@ -28,7 +29,7 @@ body {
   width: 100%;
   font-family: 'Rubik', sans-serif;
   background-color: var(--black);
-  color: #ffa500;
+  color: var(--orange);
   background-image: url('assets/bg-queefcoin.png');
   background-size: contain;             
   background-repeat: no-repeat;       /* Prevents tiling */
@@ -97,7 +98,7 @@ body {
   margin-top: 20px;
   font-size: 1.8rem;
   font-weight: bold;
-  color: #ffa500;  /* Queef Orange */
+  color: var(--orange); /* Queef Orange */
   animation: bounce 2s ease-in-out infinite;
 }
 
@@ -111,7 +112,7 @@ body {
 }
 
 .cta-button {
-  background-color: #FB6B00;
+  background-color: var(--orange);
   color: #0d0d0d;
   padding: 0.75em 1.5em;
   border-radius: 30px;
@@ -126,9 +127,20 @@ body {
   border: none;
 }
 
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .cta-button:hover {
   transform: translateY(0) scale(2.2);
-  box-shadow: 0 0 15px #ffa500;
+  box-shadow: 0 0 15px var(--orange);
 }
 
 /* Scrolling Facts Banner */
@@ -138,7 +150,7 @@ body {
   left: 0;
   width: 100%;  /* Full width to cover the entire screen */
   height: 30px;  /* Fixed height for the banner */
-  background-color: #FB6B00; /* Banner background color */
+  background-color: var(--orange); /* Banner background color */
   color: #0d0d0d; /* Text color */
   font-weight: bold;
   font-size: 1.2rem;
@@ -236,6 +248,10 @@ nav a.active {
   color: white;
   text-align: center;
   line-height: 1.6;  /* Increase the line height for better spacing between lines of text */
+}
+
+.hero .italic {
+  font-style: italic;
 }
 
 .hero h1 {
@@ -407,7 +423,7 @@ footer .disclaimer {
   }
 }
 
-.image-banner- {
+.image-banner-scroll {
   width: 100%;
   overflow: hidden;
   background-color: var(--black);
@@ -440,21 +456,12 @@ footer .disclaimer {
 }
 
 /* === QueefCoin Section Styles (formerly inline) === */
-.hero h1,
-.subheadline,
-.hero strong {
-  color: var(--orange);
-}
-
-.hero .italic {
-  font-style: italic;
-}
 
 .roadmap {
   background-color: rgba(0, 0, 0, 0.5);
   color: var(--orange);
   padding: 4em 1em;
-  font-family: sans-serif;
+  font-family: 'Rubik', sans-serif;
 }
 
 .roadmap h2 {
@@ -539,7 +546,7 @@ footer .disclaimer {
   text-align: center;
   color: var(--orange);
   background-color: rgba(0, 0, 0, 0.65);
-  font-family: sans-serif;
+  font-family: 'Rubik', sans-serif;
 }
 
 .charity h2 {
@@ -562,49 +569,14 @@ footer .disclaimer {
   margin-top: 2em;
   text-shadow: 0 0 5px #000;
 }
-
-  header nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
-    list-style: none;
+ 
+.subheadline {
+  font-size: 1.2em;
+  text-align: center;
   }
 
-  .hero h1 {
-    font-size: 2em;
-    text-align: center;
-  }
 
-  .subheadline {
-    font-size: 1.2em;
-    text-align: center;
-  }
-
-  .cta-button {
-  padding: 0.75em 1.5em;
-  font-size: 1rem;
-  max-width: 300px;
-  width: auto;
-  display: inline-block;
-}
-
-  .scroll-wrapper {
-    height: auto;
-    flex-wrap: nowrap;
-  }
-
-  .scroll-wrapper img {
-    height: 100px;
-  }
-
-  .roadmap, .charity, .tokenomics, .merch {
-    padding: 2em 1em;
-  }
-
-.coin {
+ .coin {
   position: fixed;
   top: -80px;
   max-width: 100px;
@@ -626,6 +598,15 @@ footer .disclaimer {
   }
 }
 
+/* ✅ Add this right after section classes */
+.section-inner {
+  max-width: 1000px;
+  margin: 3em auto;
+  padding: 4em 2em;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
 /* Add at bottom of style.css */
 @media (max-width: 768px) {
   body {
@@ -690,5 +671,9 @@ footer .disclaimer {
     max-width: 250px;
     margin: 0 auto;
   }
+ 
+  .section-inner {
+  padding: 2em 1em;
+}
 
 } /* ✅ Don't forget this closing brace */
