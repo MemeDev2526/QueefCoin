@@ -1,6 +1,6 @@
 
 :root {
-  --orange: #FFA500;
+  --orange: #FB6B00;
   --black: #0D0D0D;
   --white: #FFFFFF;
   --gray: #AAAAAA;
@@ -111,7 +111,7 @@ body {
 }
 
 .cta-button {
-  background-color: #ffa500;
+  background-color: #FB6B00;
   color: #0d0d0d;
   padding: 0.75em 1.5em;
   border-radius: 30px;
@@ -138,7 +138,7 @@ body {
   left: 0;
   width: 100%;  /* Full width to cover the entire screen */
   height: 30px;  /* Fixed height for the banner */
-  background-color: #ffa500; /* Banner background color */
+  background-color: #FB6B00 /* Banner background color */
   color: #0d0d0d; /* Text color */
   font-weight: bold;
   font-size: 1.2rem;
@@ -260,11 +260,12 @@ nav a.active {
   display: flex;
   justify-content: center;
   gap: 2em;
-  padding: 2em 0;
+  flex-wrap: nowrap; /* ensures single line layout */
+  overflow-x: auto;   /* optional: allows scroll if content is wider */
 }
 
-/* Carousel item */
 .carousel-item {
+  flex: 0 0 auto; /* prevent growing or shrinking */
   text-align: center;
 }
 
