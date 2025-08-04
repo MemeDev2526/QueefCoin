@@ -490,7 +490,7 @@ nav a.active {
   background-color: var(--black);
   padding: 0;
   box-shadow: 0 0 20px var(--orange);
-  margin-top: 200px; /* Optional: adjust spacing overlap from hero */
+  margin-top: 100px; /* Optional: adjust spacing overlap from hero */
 }
 
 .scroll-wrapper {
