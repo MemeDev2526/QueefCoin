@@ -30,7 +30,7 @@ body {
   background-color: var(--black);
   color: #ffa500;
   background-image: url('assets/bg-queefcoin.png');
-  background-size: cover;             
+  background-size: contain;             
   background-repeat: no-repeat;       /* Prevents tiling */
   background-position: center center; /* Keeps it centered */
   background-attachment: fixed;       /* Locks background while scrolling */
