@@ -198,12 +198,12 @@ footer .disclaimer {
 
 nav {
   position: fixed;  /* Fixed position to keep navbar at the top */
-  top: 35px;
+  top: 50px;
   left: 0;
   width: 100%;
   background-color: var(--black);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
-  padding: 1em 0;  /* Navbar padding */
+  padding: 2em 0;  /* Navbar padding */
   z-index: 1002;  /* Ensure navbar stays on top of other content */
 }
 
@@ -408,6 +408,20 @@ nav a.active {
   font-size: 1.2em;
   margin-top: 2em;
   text-shadow: 0 0 5px #000;
+}
+
+/* ========== SECTION BODY TEXT COLORS ========== */
+.section-inner p,
+.section-inner li,
+.section-inner span,
+.section-inner .text,
+.roadmap p,
+.roadmap li,
+.charity p,
+#tokenomics p,
+#tokenomics li,
+#tiktok p {
+  color: var(--white);
 }
 
 /* ========== BUTTONS ========== */
