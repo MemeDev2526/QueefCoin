@@ -29,7 +29,7 @@ body {
   background-attachment: fixed;       /* Locks background while scrolling */
   background-origin: border-box;      /* Ensures alignment with viewport */
   min-height: 100vh;
-  padding-top: 80px;
+  padding-top: 100px;
   text-align: center;
   font-size: 18px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -204,7 +204,7 @@ nav {
   background-color: var(--black);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
   padding: 1em 0;  /* Navbar padding */
-  z-index: 1000;  /* Ensure navbar stays on top of other content */
+  z-index: 1002;  /* Ensure navbar stays on top of other content */
 }
 
 /* Navbar list styling */
@@ -415,14 +415,15 @@ nav a.active {
   margin: 1em auto;
   display: inline-block;
   transform: translateY(20px) scale(1);
-  animation: slide-up 1s ease-in-out forwards;
+  animation: slide-up 1s ease-in-out;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   border: none;
+    transform: translateY(0) scale(1); /* baseline transform */
 }
 
 .cta-button:hover {
-  transform: translateY(0) scale(2.2);
+  transform: translateY(-5px) scale(2.2);
   box-shadow: 0 0 15px var(--orange);
 }
 
