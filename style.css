@@ -198,7 +198,7 @@ footer .disclaimer {
 
 nav {
   position: fixed;  /* Fixed position to keep navbar at the top */
-  top: 50px;
+  top: 35px;
   left: 0;
   width: 100%;
   background-color: var(--black);
