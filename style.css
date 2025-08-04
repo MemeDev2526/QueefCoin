@@ -12,7 +12,6 @@
 
 .section-title {
   text-align: center;
-  font-size: 2.5em;
   margin-bottom: 1em;
   color: var(--orange);
   font-family: 'Rubik', sans-serif;
@@ -238,9 +237,10 @@ nav a.active {
 .hero {
   margin-bottom: 2em;
   position: relative;
-  color: white;
+  color: var(--orange);
   text-align: center;
   line-height: 1.2;  /* Increase the line height for better spacing between lines of text */
+  font-family: 'Rubik', sans-serif;
 }
 
 .hero .italic {
@@ -251,6 +251,7 @@ nav a.active {
   font-size: 2.5rem;
   margin-bottom: 20px;
   letter-spacing: 2px;  /* Add space between the letters */
+  color: var(--orange); /* Ensures brand orange */
 }
 
 .hero p {
@@ -258,6 +259,7 @@ nav a.active {
   margin-bottom: 1em;  /* Adds more space below paragraphs */
   line-height: 1.2;  /* Increase line height for the paragraph text */
   letter-spacing: 1px;  /* Space out the letters slightly */
+  color: var(--white); /* Optional for soft body text */
 }
 
 .roadmap, .tokenomics, .charity, .merch {
