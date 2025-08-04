@@ -29,7 +29,7 @@ body {
   font-family: 'Rubik', sans-serif;
   background-color: var(--black);
   color: var(--orange);
-  background-image: url('assets/bg-queefcoin.jpg');
+  background-image: url('assets/bg-queefcoin.png');
   background-size: auto, 100%;             
   background-repeat: no-repeat;       /* Prevents tiling */
   background-position: center center; /* Keeps it centered */
