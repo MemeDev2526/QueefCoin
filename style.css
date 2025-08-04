@@ -394,6 +394,129 @@ footer .disclaimer {
     font-size: 16px;
     padding: 0 1em;
   }
+/* === QueefCoin Section Styles (formerly inline) === */
+.hero h1,
+.subheadline,
+.hero strong {
+  color: #FFA500;
+}
+
+.hero .italic {
+  font-style: italic;
+}
+
+.roadmap {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #FFA500;
+  padding: 4em 1em;
+  font-family: sans-serif;
+}
+
+.roadmap h2 {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 1em;
+}
+
+.roadmap hr {
+  margin: 2em 0;
+  border-color: #FFA500;
+}
+
+.roadmap .final-note {
+  font-style: italic;
+  text-align: center;
+  font-size: 1.2em;
+  color: #FFFFFF;
+}
+
+#tokenomics {
+  padding: 4em 1em;
+  background-color: #0D0D0D;
+  color: #FFA500;
+  font-family: 'Rubik', sans-serif;
+}
+
+#tokenomics h2 {
+  font-size: 2.5em;
+  text-align: center;
+}
+
+#tokenomics p,
+#tokenomics ul {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #FFFFFF;
+}
+
+#tokenomics ul {
+  padding-left: 1.2em;
+}
+
+#tokenomics li {
+  margin-bottom: 1em;
+}
+
+#tokenomics .token-footer {
+  font-style: italic;
+  color: #FFA500;
+  text-align: center;
+  margin-top: 2em;
+}
+
+#tiktok {
+  padding: 4em 1em;
+  background-color: #0D0D0D;
+  color: #FFA500;
+  text-align: center;
+}
+
+#tiktok h2 {
+  font-size: 2.5em;
+}
+
+#tiktok p {
+  max-width: 600px;
+  margin: 0 auto 2em;
+}
+
+#tiktok a {
+  background-color: #FFA500;
+  color: #0D0D0D;
+  padding: 0.75em 1.5em;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.charity {
+  padding: 5em 1em;
+  text-align: center;
+  color: #FFA500;
+  background-color: rgba(0, 0, 0, 0.65);
+  font-family: sans-serif;
+}
+
+.charity h2 {
+  font-size: 2.5em;
+  margin-bottom: 1em;
+  text-shadow: 0 0 5px #000;
+}
+
+.charity p {
+  max-width: 800px;
+  margin: 0 auto 2em;
+  font-size: 1.1em;
+  line-height: 1.6;
+  text-shadow: 0 0 4px #000;
+}
+
+.charity p.italic {
+  font-style: italic;
+  font-size: 1.2em;
+  margin-top: 2em;
+  text-shadow: 0 0 5px #000;
+}
 
   header nav ul {
     display: flex;
