@@ -81,3 +81,22 @@ document.addEventListener('DOMContentLoaded', function () {
   // Touch for mobile
   document.addEventListener('touchstart', handleGlobalClick);
 });
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      for (let i = 0; i < 25; i++) {
+        const coin = document.createElement("img");
+        coin.src = "assets/queef-coin.png"; // ✅ Update path if needed
+        coin.classList.add("coin");
+        coin.style.left = `${Math.random() * 100}vw`;
+        coin.style.animationDelay = `${Math.random()}s`;
+        document.body.appendChild(coin);
+        setTimeout(() => coin.remove(), 4000);
+      }
+      observer.disconnect(); // only run once
+    }
+  });
+});
+
+observer.observe(document.querySelector("#coin-rain-container"));
