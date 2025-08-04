@@ -197,32 +197,30 @@ footer .disclaimer {
 /* ========== NAVIGATION ========== */
 
 nav {
-  position: fixed;  /* Fixed position to keep navbar at the top */
+  position: fixed;
   top: 50px;
   left: 0;
   width: 100%;
   background-color: var(--black);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
-  padding: 2em 0;  /* Navbar padding */
-  z-index: 1000;  /* Ensure navbar stays on top of other content */
+  padding: 2em 0;
+  z-index: 1000;
 }
 
-/* Navbar list styling */
-nav ul {
-  list-style: none;
-  margin: 0;
+/* === DESKTOP NAV LINKS === */
+.nav-links {
   display: flex;
   justify-content: center;
-  gap: 3em;
-  font-size: 20px;
+  gap: 2em;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
 }
 
-nav li {
-  display: flex;
-}
-
-/* Navbar link styling */
-nav a {
+/* Nav item link styling */
+.nav-links a {
+  display: block;
   color: var(--orange);
   text-decoration: none;
   padding: 0.5em 1em;
@@ -231,17 +229,24 @@ nav a {
   transition: background 0.3s, color 0.3s;
 }
 
-nav a:hover {
+.nav-links a:hover {
   background-color: var(--orange);
   color: var(--black);
 }
 
-nav a.active {
+.nav-links .coming-soon {
+  color: var(--gray);
+  font-style: italic;
+  padding: 0.5em 1em;
+}
+
+/* Highlight for active link */
+.nav-links a.active {
   background-color: var(--solana-green);
   color: var(--black);
 }
 
-/* === MOBILE NAV TOGGLE === */
+/* === BURGER MENU TOGGLE BUTTON === */
 .nav-toggle {
   display: none;
   font-size: 2rem;
@@ -249,42 +254,10 @@ nav a.active {
   color: var(--orange);
   border: none;
   cursor: pointer;
-}
-
-/* Mobile Dropdown Nav Links */
-.nav-links {
-  display: none;
-  flex-direction: column;
-  width: 100%;
-  background-color: var(--black);
+  z-index: 1001;
   position: absolute;
-  top: 100%;
-  left: 0;
-  padding: 1em 0;
-  z-index: 999;
-}
-
-.nav-links.show {
-  display: flex;
-}
-
-.nav-links li {
-  text-align: center;
-  margin: 0.5em 0;
-}
-
-.nav-links a {
-  display: block;
-  width: 100%;
-  color: var(--orange);
-  padding: 0.75em 1em;
-  text-decoration: none;
-  transition: background 0.3s, color 0.3s;
-}
-
-.nav-links a:hover {
-  background-color: var(--orange);
-  color: var(--black);
+  top: 10px;
+  right: 20px;
 }
 
 
@@ -690,16 +663,20 @@ nav a.active {
     background-position: center top;
   }
 
+ .nav-toggle {
+    display: block;
+  }
+
   .nav-links {
     display: none;
     flex-direction: column;
-    width: 100%;
     background-color: var(--black);
     position: absolute;
     top: 100%;
     left: 0;
+    width: 100%;
     padding: 1em 0;
-    z-index: 999;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
   }
 
   .nav-links.show {
@@ -709,20 +686,6 @@ nav a.active {
   .nav-links li {
     text-align: center;
     margin: 0.5em 0;
-  }
-
-  .nav-links a {
-    display: block;
-    width: 100%;
-    color: var(--orange);
-    padding: 0.75em 1em;
-    text-decoration: none;
-    transition: background 0.3s, color 0.3s;
-  }
-
-  .nav-links a:hover {
-    background-color: var(--orange);
-    color: var(--black);
   }
 
   .cta-button {
