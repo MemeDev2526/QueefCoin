@@ -581,10 +581,12 @@ footer .disclaimer {
   }
 
   .cta-button {
-    width: 100%;
-    padding: 1em;
-    font-size: 1em;
-  }
+  padding: 0.75em 1.5em;
+  font-size: 1rem;
+  max-width: 300px;
+  width: auto;
+  display: inline-block;
+}
 
   .scroll-wrapper {
     height: auto;
@@ -605,9 +607,13 @@ footer .disclaimer {
     gap: 1em;
   }
 
-  .carousel-item img {
-    width: 100%;
-    height: auto;
+  .carousel img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 }
 
@@ -673,4 +679,18 @@ footer .disclaimer {
     background-color: var(--orange);
     color: var(--black);
   }
+
+  .cta-button {
+  width: 100%;
+  max-width: 90%;
+  font-size: 1em;
+  }
+  
+   .carousel img {
+    width: 80%;
+    height: auto;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+
 } /* ✅ Don't forget this closing brace */
