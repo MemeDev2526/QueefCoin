@@ -306,7 +306,7 @@ nav a.active {
 
 .roadmap {
   color: var(--orange);
-  padding: 4em 1em;
+  padding: 2em 1em;
   font-family: 'Rubik', sans-serif;
 }
 
@@ -479,7 +479,7 @@ nav a.active {
   background-color: var(--black);
   padding: 50px 0;
   box-shadow: 0 0 20px var(--orange);
-  margin-top: 325px; /* Optional: adjust spacing overlap from hero */
+  margin-top: 200px; /* Optional: adjust spacing overlap from hero */
 }
 
 .scroll-wrapper {
