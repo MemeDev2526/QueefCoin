@@ -170,7 +170,7 @@ body {
 /* Navbar */
 nav {
   position: fixed;  /* Fixed position to keep navbar at the top */
-  top: 40px;
+  top: 50px;
   left: 0;
   width: 100%;
   background: rgba(26, 26, 26, 0.85);
