@@ -287,11 +287,7 @@ nav {
   color: var(--white);
 }
 
-.roadmap {
-  color: var(--orange);
-  font-family: 'Rubik', sans-serif;
-}
-
+/* === ROADMAP === */
 .roadmap h2 {
   text-align: center;
   font-size: 2.5em;
@@ -313,25 +309,19 @@ nav {
   font-style: italic;
   text-align: center;
   font-size: 1.2em;
-  color: var(--white);
+  color: var(--white); /* Optional: reinforces text contrast */
 }
 
-#tokenomics {
-  color: var(--orange);
-  font-family: 'Rubik', sans-serif;
-}
-
+/* === TOKENOMICS === */
 #tokenomics h2 {
   font-size: 2.5em;
   text-align: center;
 }
 
 #tokenomics p,
-
 #tokenomics ul {
   max-width: 800px;
   margin: 0 auto;
-  color: var(--white);
   list-style: none;
   padding-left: 0;
 }
@@ -347,11 +337,7 @@ nav {
   margin-top: 2em;
 }
 
-#tiktok {
-  color: var(--orange);
-  text-align: center;
-}
-
+/* === TIKTOK === */
 #tiktok h2 {
   font-size: 2.5em;
 }
@@ -370,12 +356,7 @@ nav {
   text-decoration: none;
 }
 
-.charity {
-  text-align: center;
-  color: var(--orange);
-  font-family: 'Rubik', sans-serif;
-}
-
+/* === CHARITY === */
 .charity h2 {
   font-size: 2.5em;
   margin-bottom: 1em;
