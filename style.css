@@ -169,30 +169,47 @@ body {
 
 /* Navbar */
 nav {
-  position: fixed;  /* Fixed position to keep navbar at the top */
+  position: fixed;
   top: 40px;
   left: 0;
   width: 100%;
-  background: #1a1a1a;  /* Navbar background color */
-  padding: 1em 0;  /* Navbar padding */
-  z-index: 1000;  /* Ensure navbar stays on top of other content */
+  background: rgba(26, 26, 26, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
-/* Navbar list styling */
 nav ul {
-  list-style: none;
-  margin: 0;
   display: flex;
   justify-content: center;
-  gap: 3em;
-  font-size: 20px;
+  gap: 2em;
+  margin: 0;
+  padding: 0.5em 0;
+  list-style: none;
+  font-size: 18px;
 }
 
-/* Navbar link styling */
+nav li {
+  display: flex;
+}
+
 nav a {
   color: var(--orange);
   text-decoration: none;
+  padding: 0.5em 1em;
+  border-radius: 20px;
   font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+}
+
+nav a:hover {
+  background-color: var(--orange);
+  color: var(--black);
+}
+
+nav a.active {
+  background-color: var(--solana-green);
+  color: var(--black);
 }
 
 .hero {
