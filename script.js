@@ -102,3 +102,20 @@ const observer = new IntersectionObserver(entries => {
 const coinContainer = document.querySelector("#coin-rain-container");
 if (coinContainer) observer.observe(coinContainer);
 
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+  const fromTop = window.scrollY + 100;
+  navLinks.forEach(link => {
+    const section = document.querySelector(link.getAttribute('href'));
+    if (
+      section.offsetTop <= fromTop &&
+      section.offsetTop + section.offsetHeight > fromTop
+    ) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+});
+
+
