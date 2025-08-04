@@ -4,6 +4,15 @@ console.log('QueefCoin site ready.');
 document.addEventListener('DOMContentLoaded', function () {
   const enterButton = document.getElementById('enter-btn');
   const overlay = document.querySelector('.loading-overlay');
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  }
+
   const homeSection = document.getElementById('home');
   const queefSound = document.getElementById('queef-sound');
   const puffImage = document.querySelector('.queef-puff');
