@@ -275,7 +275,13 @@ nav {
 
 /* ========== SECTION BODY TEXT COLORS ========== */
 .section-inner p,
-.section-inner li,
+.section-inner li {
+  font-size: 1.1rem;         /* Slightly larger than default (was likely 1rem) */
+  line-height: 1.75;         /* More readable spacing between lines */
+  letter-spacing: 0.02em;    /* Adds subtle space between letters */
+  margin-bottom: 1.2em;      /* Better spacing between paragraphs/list items */
+  color: var(--white);       /* Ensure readability if needed */
+}
 .section-inner span,
 .section-inner .text,
 .roadmap p,
