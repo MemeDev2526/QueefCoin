@@ -455,27 +455,32 @@ nav {
   }
 
 /* ========== IMAGE SCROLL BANNER ========== */
-.image-banner-scroll {
+/* 🔁 Fixed Bottom Scroll Banner */
+.fixed-scroll-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  overflow: hidden;
+  height: 100px;
   background-color: var(--black);
-  padding: 0;
-  box-shadow: 0 0 20px var(--orange);
-  margin-top: 70px; /* Optional: adjust spacing overlap from hero */
+  z-index: 999;
+  overflow: hidden;
+  box-shadow: 0 -2px 20px var(--orange);
 }
 
-.scroll-wrapper {
+
+.fixed-scroll-banner .scroll-wrapper {
   display: flex;
   width: max-content;
-  animation: scroll-banner 15s linear infinite;
+  animation: scroll-banner 20s linear infinite;
+  align-items: center;
+  padding-left: 100%; /* ensures seamless loop */
 }
 
-.scroll-wrapper img {
-  height: 150px;
-  width: auto;
+.fixed-scroll-banner img {
+  height: 80px;
+  margin: 0 40px;
   object-fit: contain;
-  display: block;
-  margin: 50px
 }
 
 /* ========== FACTS BANNER ========== */
@@ -602,12 +607,13 @@ nav {
   }
 }
 
+/* 🎞️ Keyframes for continuous scroll */
 @keyframes scroll-banner {
   0% {
     transform: translateX(0%);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-100%);
   }
 }
 /* Keyframe for scrolling text */
