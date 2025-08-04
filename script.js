@@ -109,22 +109,26 @@ const observer = new IntersectionObserver(entries => {
 });
 
 const coinContainer = document.querySelector("#coin-rain-container");
-if (coinContainer) observer.observe(coinContainer);
 
-const navLinks = document.querySelectorAll('nav a');
-window.addEventListener('scroll', () => {
-  const fromTop = window.scrollY + 100;
-  navLinks.forEach(link => {
-    const section = document.querySelector(link.getAttribute('href'));
-    if (
-      section.offsetTop <= fromTop &&
-      section.offsetTop + section.offsetHeight > fromTop
-    ) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
-    }
-  });
-});
+if (coinContainer) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        for (let i = 0; i < 25; i++) {
+          const coin = document.createElement("img");
+          coin.src = "assets/queef-coin.png"; // ✅ Make sure this path is valid
+          coin.classList.add("coin");
+          coin.style.left = `${Math.random() * 100}vw`;
+          coin.style.animationDelay = `${Math.random()}s`;
+          document.body.appendChild(coin);
+          setTimeout(() => coin.remove(), 4000);
+        }
+      }
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(coinContainer);
+}
+
 
 
