@@ -661,6 +661,10 @@ body.loaded .section-inner {
   body {
     font-size: 16px;
     padding: 0 1em;
+    background-image: url('assets/bg-mobile.png');
+    background-size: cover;         /* Adjust based on how you want it to fit */
+    background-position: top center;
+    background-attachment: scroll;  /* 'fixed' can cause issues on mobile */
     background-size: contain;
     background-repeat: no-repeat;
     background-attachment: scroll;
