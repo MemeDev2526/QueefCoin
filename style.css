@@ -663,10 +663,8 @@ footer .disclaimer {
 .coin {
   position: fixed;
   top: -100px;
-  width: 90px;
-  height: 80px;
   pointer-events: none;
-  animation: fall 6 linear forwards;
+  animation: fall 4s linear forwards;
   z-index: 9999;
 }
 
