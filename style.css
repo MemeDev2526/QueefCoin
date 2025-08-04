@@ -166,7 +166,7 @@ body {
   margin-bottom: 1em;  /* Adds more space below paragraphs */
   line-height: 1.2;  /* Increase line height for the paragraph text */
   letter-spacing: 1px;  /* Space out the letters slightly */
-  color: var(--white); /* Optional for soft body text */
+  color: var(--orange); /* Optional for soft body text */
 }
 
 footer {
