@@ -32,7 +32,7 @@ body {
   background-image: url('assets/bg-queefcoin.png');
   background-size: contain;             
   background-repeat: no-repeat;       /* Prevents tiling */
-  background-position: center center; /* Keeps it centered */
+  background-position: top center; /* Keeps it centered */
   background-attachment: fixed;       /* Locks background while scrolling */
   background-origin: border-box;      /* Ensures alignment with viewport */
   min-height: 100vh;
