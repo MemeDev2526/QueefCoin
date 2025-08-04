@@ -290,7 +290,7 @@ nav {
 /* === ROADMAP === */
 .roadmap h2 {
   text-align: center;
-  font-size: 2.5em;
+  font-size: 3.5em;
   margin-bottom: 1em;
 }
 
@@ -308,13 +308,13 @@ nav {
 .roadmap .final-note {
   font-style: italic;
   text-align: center;
-  font-size: 1.2em;
+  font-size: 0.8em;
   color: var(--white); /* Optional: reinforces text contrast */
 }
 
 /* === TOKENOMICS === */
 #tokenomics h2 {
-  font-size: 2.5em;
+  font-size: 3em;
   text-align: center;
 }
 
@@ -339,7 +339,7 @@ nav {
 
 /* === TIKTOK === */
 #tiktok h2 {
-  font-size: 2.5em;
+  font-size: 3em;
 }
 
 #tiktok p {
@@ -358,7 +358,7 @@ nav {
 
 /* === CHARITY === */
 .charity h2 {
-  font-size: 2.5em;
+  font-size: 3em;
   margin-bottom: 1em;
   text-shadow: 0 0 5px #000;
 }
