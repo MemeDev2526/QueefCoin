@@ -36,7 +36,7 @@ body {
   background-attachment: fixed;       /* Locks background while scrolling */
   background-origin: border-box;      /* Ensures alignment with viewport */
   min-height: 100vh;
-  padding-top: 200px;
+  padding-top: 50px;
   text-align: center;
   font-size: 16px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
