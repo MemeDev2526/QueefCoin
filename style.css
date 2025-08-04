@@ -23,7 +23,7 @@ html {
 
 body {
   margin: 0;
-  padding: 0;
+  padding: 100px;
   height: 100%;
   width: 100%;
   font-family: 'Rubik', sans-serif;
@@ -195,16 +195,17 @@ nav {
 
 .nav-links {
   display: flex;
-  gap: 2em;
-  list-style: none;
+  align-items: center;
+  gap: 2.5em; /* ⬅️ slightly more spacing between links */
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .nav-links a {
   color: var(--orange);
   text-decoration: none;
-  padding: 0.5em 1em;
+  padding: 0.6em 1em;  /* ⬅️ Slightly taller for tap area */
   border-radius: 20px;
   font-weight: bold;
   transition: background 0.3s, color 0.3s;
