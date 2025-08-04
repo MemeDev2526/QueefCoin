@@ -62,7 +62,7 @@ body {
 .queef-puff {
   width: 300px;
   height: auto;  
-  animation: puff 3s infinite ease-in-out;  /* Puff effect */
+  animation: puff 5s infinite ease-in-out;  /* Puff effect */
 }
 
 .welcome-message {
