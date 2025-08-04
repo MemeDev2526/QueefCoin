@@ -27,18 +27,18 @@ body {
   height: 100%;
   width: 100%;
   font-family: 'Rubik', sans-serif;
-  background-color: var(--gray);
-  color: var(--orange);
-  background-image: url('assets/bg-queefcoin.png');
-  background-size: cover;             
+  background-color: var(--black);
+  color: #ffa500;
+  background-image: url('assets/bg-queefcoin.jpg');
+  background-size: auto, 100%;             
   background-repeat: no-repeat;       /* Prevents tiling */
   background-position: center center; /* Keeps it centered */
   background-attachment: fixed;       /* Locks background while scrolling */
   background-origin: border-box;      /* Ensures alignment with viewport */
   min-height: 100vh;
-  padding-top: 50px;
+  padding-top: 100px;
   text-align: center;
-  font-size: 16px;
+  font-size: 18px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -80,6 +80,7 @@ body {
   100% {
     transform: scale(1);  /* Puff shrinks back */
   }
+}
 
 @keyframes puff-and-shine {
   0%, 100% {
@@ -90,12 +91,13 @@ body {
     transform: scale(1.3);
     opacity: 0.8;  /* Slight transparency in the middle of the animation */
   }
+}
 
 .welcome-message {
   margin-top: 20px;
   font-size: 1.8rem;
   font-weight: bold;
-  color: var(--orange);  /* Queef Orange */
+  color: #ffa500;  /* Queef Orange */
   animation: bounce 2s ease-in-out infinite;
 }
 
@@ -106,10 +108,11 @@ body {
   50% {
     transform: translateY(-15px);  /* Bouncing effect */
   }
+}
 
 .cta-button {
-  background-color: var(--orange);
-  color: var(--gray);
+  background-color: #ffa500;
+  color: #0d0d0d;
   padding: 0.75em 1.5em;
   border-radius: 30px;
   font-weight: bold;
@@ -124,8 +127,8 @@ body {
 }
 
 .cta-button:hover {
-  transform: translateY(0) scale(1.2);
-  box-shadow: 0 0 15px var(--orange);
+  transform: translateY(0) scale(2.2);
+  box-shadow: 0 0 15px #ffa500;
 }
 
 /* Scrolling Facts Banner */
@@ -135,8 +138,8 @@ body {
   left: 0;
   width: 100%;  /* Full width to cover the entire screen */
   height: 30px;  /* Fixed height for the banner */
-  background-color: var(--orange); /* Banner background color */
-  color: var(--gray); /* Text color */
+  background-color: #ffa500; /* Banner background color */
+  color: #0d0d0d; /* Text color */
   font-weight: bold;
   font-size: 1rem;
   padding: 0.5em 0;
@@ -162,63 +165,40 @@ body {
   100% {
     transform: translateX(-100%);  /* End at left */
   }
+}
 
 /* Navbar */
 nav {
-  position: fixed;
+  position: fixed;  /* Fixed position to keep navbar at the top */
   top: 40px;
   left: 0;
   width: 100%;
-  background-color: var(--gray); /* 🔥 Solid dark background */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6); /* Optional: depth effect */
-  z-index: 1000;
+  background: #1a1a1a;  /* Navbar background color */
+  padding: 1em 0;  /* Navbar padding */
+  z-index: 1000;  /* Ensure navbar stays on top of other content */
 }
 
-.nav-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 1em 1.5em; /* ⬅️ Increased padding for breathing room */
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 2.5em; /* ⬅️ slightly more spacing between links */
-  margin: 0;
-  padding: 0;
+/* Navbar list styling */
+nav ul {
   list-style: none;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 3em;
+  font-size: 20px;
 }
 
-.nav-links a {
-  color: var(--orange);
+/* Navbar link styling */
+nav a {
+  color: #ffa500;
   text-decoration: none;
-  padding: 0.6em 1em;  /* ⬅️ Slightly taller for tap area */
-  border-radius: 20px;
   font-weight: bold;
-  transition: background 0.3s, color 0.3s;
-}
-
-.nav-links a:hover {
-  background-color: var(--orange);
-  color: var(--gray);
-}
-
-.nav-toggle {
-  display: none;
-  font-size: 2rem;
-  background: none;
-  color: var(--orange);
-  border: none;
-  cursor: pointer;
 }
 
 .hero {
   margin-bottom: 2em;
   position: relative;
-  background-image: url('assets/banner.jpg');  
+  background-image: url('assets/banner.jpg');  /* Your background image */
   background-color: rgba(0, 0, 0, 0.5);
   background-size: cover;
   background-position: center center;
@@ -271,7 +251,7 @@ nav {
 
 /* Hover effect on the image */
 .carousel img:hover {
-  transform: scale(1.2);  /* Adjusted scaling factor for a better zoom effect */
+  transform: scale(2.1);  /* Adjusted scaling factor for a better zoom effect */
   box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);  /* Darker shadow on hover */
 }
 
@@ -279,7 +259,7 @@ nav {
 .alt-text {
   margin-top: 10px;
   font-size: 1rem;
-  color: var(--gray);
+  color: #0d0d0d;
   font-weight: 600;
   text-transform: capitalize;
   padding: 0 10px;
@@ -289,13 +269,13 @@ footer {
   background-color: #1a1a1a;
   padding: 1.5em;
   font-size: 14px;
-  color: var(--gray);
+  color: #aaa;
   text-align: center;
 }
 
 footer .disclaimer {
   font-size: 12px;  /* Smaller font size for the disclaimer */
-  color: var(--pink);  /* A distinct color for the disclaimer (tomato red) */
+  color: #ff6347;  /* A distinct color for the disclaimer (tomato red) */
   font-style: italic;  /* Italicize the disclaimer for emphasis */
   margin-top: 1em;  /* Adds some space above the disclaimer text */
 }
@@ -313,6 +293,7 @@ footer .disclaimer {
     opacity: 1;
     transform: translateY(0);
   }
+}
 
 @keyframes puff-explode {
   0% {
@@ -325,6 +306,7 @@ footer .disclaimer {
     opacity: 0;
     filter: blur(8px);
   }
+}
 
 .puff-wrapper {
   position: relative;
@@ -358,6 +340,7 @@ footer .disclaimer {
   0% { transform: scale(0.5); opacity: 0.2; }
   50% { transform: scale(1.4); opacity: 0.4; }
   100% { transform: scale(2.5); opacity: 0; }
+}
 
 .emoji-particle {
   position: absolute;
@@ -390,11 +373,12 @@ footer .disclaimer {
     transform: translate(var(--x), var(--y)) scale(0.6) rotate(720deg);
     opacity: 0;
   }
+}
 
 .image-banner-scroll {
   width: 100%;
   overflow: hidden;
-  background-color: var(--gray);
+  background-color: var(--black);
   padding: 50px 0;
   box-shadow: 0 0 20px var(--orange);
   margin-top: 325px; /* Optional: adjust spacing overlap from hero */
@@ -421,6 +405,7 @@ footer .disclaimer {
   100% {
     transform: translateX(-50%);
   }
+}
 
 /* Add at bottom of style.css */
 @media (max-width: 768px) {
@@ -428,53 +413,6 @@ footer .disclaimer {
     font-size: 16px;
     padding: 0 1em;
   }
-
-  .nav-toggle {
-    display: block;
-  }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background-color: var(--gray); /* 🔥 Updated to match desktop nav */
-    position: absolute;
-    top: 100%;
-    left: 0;
-    padding: 1em 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6); /* Optional: mobile drop shadow */
-    z-index: 999;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-
-  .nav-links li {
-    text-align: center;
-    margin: 0.5em 0;
-  }
-
-  .nav-links a {
-    color: var(--orange);
-    padding: 0.75em 1em;
-    display: block;
-    width: 100%;
-    transition: background 0.3s, color 0.3s;
-  }
-
-  .nav-links a:hover {
-    background-color: var(--orange);
-    color: var(--gray);
-  }
-
-  .nav-container {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-
 /* === QueefCoin Section Styles (formerly inline) === */
 .hero h1,
 .subheadline,
@@ -490,7 +428,7 @@ footer .disclaimer {
   background-color: rgba(0, 0, 0, 0.5);
   color: var(--orange);
   padding: 4em 1em;
-  font-family: 'Rubik', sans-serif;
+  font-family: sans-serif;
 }
 
 .roadmap h2 {
@@ -513,7 +451,7 @@ footer .disclaimer {
 
 #tokenomics {
   padding: 4em 1em;
-  background-color: var(--gray);
+  background-color: var(--black);
   color: var(--orange);
   font-family: 'Rubik', sans-serif;
 }
@@ -547,7 +485,7 @@ footer .disclaimer {
 
 #tiktok {
   padding: 4em 1em;
-  background-color: var(--gray);
+  background-color: var(--black);
   color: var(--orange);
   text-align: center;
 }
@@ -563,7 +501,7 @@ footer .disclaimer {
 
 #tiktok a {
   background-color: var(--orange);
-  color: var(--gray);
+  color: var(--black);
   padding: 0.75em 1.5em;
   border-radius: 30px;
   font-weight: bold;
@@ -575,7 +513,7 @@ footer .disclaimer {
   text-align: center;
   color: var(--orange);
   background-color: rgba(0, 0, 0, 0.65);
-  font-family: 'Rubik', sans-serif;
+  font-family: sans-serif;
 }
 
 .charity h2 {
@@ -599,8 +537,18 @@ footer .disclaimer {
   text-shadow: 0 0 5px #000;
 }
 
+  header nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
   .hero h1 {
-  font-size: clamp(2rem, 6vw, 3rem);
+    font-size: 2em;
     text-align: center;
   }
 
@@ -638,12 +586,13 @@ footer .disclaimer {
     width: 100%;
     height: auto;
   }
+}
 
 .coin {
-  will-change: transform;
-
   position: fixed;
-  top: -100px;
+  top: -50px;
+  width: 40px;
+  height: 40px;
   pointer-events: none;
   animation: fall 4s linear forwards;
   z-index: 9999;
@@ -658,3 +607,4 @@ footer .disclaimer {
     transform: translateY(100vh) rotate(360deg);
     opacity: 0;
   }
+}
