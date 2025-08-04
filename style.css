@@ -1,3 +1,22 @@
+
+:root {
+  --orange: #FFA500;
+  --black: #0D0D0D;
+  --white: #FFFFFF;
+  --gray: #AAAAAA;
+  --pink: #FF69B4;
+  --solana-green: #00FFA3;
+}
+
+
+.section-title {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 1em;
+  color: var(--orange);
+  font-family: 'Rubik', sans-serif;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -8,7 +27,7 @@ body {
   height: 100%;
   width: 100%;
   font-family: 'Rubik', sans-serif;
-  background-color: #0D0D0D;
+  background-color: var(--black);
   color: #ffa500;
   background-image: url('assets/bg-queefcoin.jpg');
   background-size: auto, 100%;             
@@ -30,7 +49,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color:  #0D0D0D;
+  background-color:  var(--black);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -135,7 +154,7 @@ body {
 .queef-facts-scroll {
   display: inline-block;
   white-space: nowrap;  /* Prevent text from wrapping */
-  animation: scroll-left 20s linear infinite;  /* Animation for scrolling text */
+  animation: scroll-left 25s linear infinite;  /* Animation for scrolling text */
 }
 
 /* Keyframe for scrolling text */
@@ -314,7 +333,7 @@ footer .disclaimer {
 .smoke-3 { top: 50%; left: 50%; transform: translate(-50%, 20%); }
 
 .smoke.show {
-  animation: smoke-poof 2.2s ease-out forwards;
+  animation: smoke-poof 1.2s ease-out forwards;
 }
 
 @keyframes smoke-poof {
@@ -359,9 +378,9 @@ footer .disclaimer {
 .image-banner-scroll {
   width: 100%;
   overflow: hidden;
-  background-color: #0D0D0D;
+  background-color: var(--black);
   padding: 50px 0;
-  box-shadow: 0 0 20px #FFA500;
+  box-shadow: 0 0 20px var(--orange);
   margin-top: 325px; /* Optional: adjust spacing overlap from hero */
 }
 
@@ -398,7 +417,7 @@ footer .disclaimer {
 .hero h1,
 .subheadline,
 .hero strong {
-  color: #FFA500;
+  color: var(--orange);
 }
 
 .hero .italic {
@@ -407,7 +426,7 @@ footer .disclaimer {
 
 .roadmap {
   background-color: rgba(0, 0, 0, 0.5);
-  color: #FFA500;
+  color: var(--orange);
   padding: 4em 1em;
   font-family: sans-serif;
 }
@@ -420,20 +439,20 @@ footer .disclaimer {
 
 .roadmap hr {
   margin: 2em 0;
-  border-color: #FFA500;
+  border-color: var(--orange);
 }
 
 .roadmap .final-note {
   font-style: italic;
   text-align: center;
   font-size: 1.2em;
-  color: #FFFFFF;
+  color: var(--white);
 }
 
 #tokenomics {
   padding: 4em 1em;
-  background-color: #0D0D0D;
-  color: #FFA500;
+  background-color: var(--black);
+  color: var(--orange);
   font-family: 'Rubik', sans-serif;
 }
 
@@ -446,7 +465,7 @@ footer .disclaimer {
 #tokenomics ul {
   max-width: 800px;
   margin: 0 auto;
-  color: #FFFFFF;
+  color: var(--white);
 }
 
 #tokenomics ul {
@@ -459,15 +478,15 @@ footer .disclaimer {
 
 #tokenomics .token-footer {
   font-style: italic;
-  color: #FFA500;
+  color: var(--orange);
   text-align: center;
   margin-top: 2em;
 }
 
 #tiktok {
   padding: 4em 1em;
-  background-color: #0D0D0D;
-  color: #FFA500;
+  background-color: var(--black);
+  color: var(--orange);
   text-align: center;
 }
 
@@ -481,8 +500,8 @@ footer .disclaimer {
 }
 
 #tiktok a {
-  background-color: #FFA500;
-  color: #0D0D0D;
+  background-color: var(--orange);
+  color: var(--black);
   padding: 0.75em 1.5em;
   border-radius: 30px;
   font-weight: bold;
@@ -492,7 +511,7 @@ footer .disclaimer {
 .charity {
   padding: 5em 1em;
   text-align: center;
-  color: #FFA500;
+  color: var(--orange);
   background-color: rgba(0, 0, 0, 0.65);
   font-family: sans-serif;
 }
