@@ -271,6 +271,9 @@ nav a.active {
   gap: 2em;
   flex-wrap: nowrap; /* ensures single line layout */
   overflow-x: auto;   /* optional: allows scroll if content is wider */
+  position: relative; /* 🔥 Add this */
+  overflow: visible;  /* ✅ This allows children (images) to pop out */
+  z-index: 1;
 }
 
 .carousel-item {
@@ -292,8 +295,8 @@ nav a.active {
 .carousel img:hover {
   transform: scale(2.1);  /* Adjusted scaling factor for a better zoom effect */
   box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);  /* Darker shadow on hover */
-  z-index: 10; /* ✅ bring it above neighbors */
-  position: relative;
+  position: relative; /* ✅ Needed to elevate above siblings */
+  z-index: 10;         /* ✅ Needed to stay on top */
 }
 
 /* Alt text styling */
@@ -590,8 +593,8 @@ footer .disclaimer {
 /* ✅ Add this right after section classes */
 .section-inner {
   max-width: 1100px;
-  margin: 3em auto;
-  padding: 4em 2em;
+  margin: 2em auto;
+  padding: 2em 2em;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
