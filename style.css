@@ -30,13 +30,13 @@ body {
   background-color: var(--black);
   color: #ffa500;
   background-image: url('assets/bg-queefcoin.png');
-  background-size: 100% auto;             
+  background-size: contain;             
   background-repeat: no-repeat;       /* Prevents tiling */
   background-position: top center; /* Keeps it centered */
   background-attachment: fixed;       /* Locks background while scrolling */
   background-origin: border-box;      /* Ensures alignment with viewport */
   min-height: 100vh;
-  padding-top: 80px;
+  padding-top: 10px;
   text-align: center;
   font-size: 18px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -212,6 +212,16 @@ nav a:hover {
 nav a.active {
   background-color: var(--solana-green);
   color: var(--black);
+}
+
+/* === MOBILE NAV TOGGLE === */
+.nav-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  color: var(--orange);
+  border: none;
+  cursor: pointer;
 }
 
 .hero {
@@ -426,12 +436,6 @@ footer .disclaimer {
   }
 }
 
-/* Add at bottom of style.css */
-@media (max-width: 768px) {
-  body {
-    font-size: 16px;
-    padding: 0 1em;
-  }
 /* === QueefCoin Section Styles (formerly inline) === */
 .hero h1,
 .subheadline,
@@ -627,3 +631,46 @@ footer .disclaimer {
     opacity: 0;
   }
 }
+
+/* Add at bottom of style.css */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    padding: 0 1em;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--black);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 1em 0;
+    z-index: 999;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links li {
+    text-align: center;
+    margin: 0.5em 0;
+  }
+
+  .nav-links a {
+    display: block;
+    width: 100%;
+    color: var(--orange);
+    padding: 0.75em 1em;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .nav-links a:hover {
+    background-color: var(--orange);
+    color: var(--black);
+  }
+} /* ✅ Don't forget this closing brace */
