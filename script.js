@@ -6,71 +6,16 @@ document.addEventListener('DOMContentLoaded', function () {
   const overlay = document.querySelector('.loading-overlay');
   const navToggle = document.getElementById('nav-toggle');
   const navLinks = document.getElementById('nav-links');
-
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-    });
-  }
-
-  // ✅ ScrollReveal goes here 👇
-  const sr = ScrollReveal({
-    distance: '30px',
-    duration: 800,
-    easing: 'ease-out',
-    origin: 'bottom',
-    scale: 0.95,
-    reset: false
-  });
-
-  sr.reveal('.hero h1', { delay: 100 });
-  sr.reveal('.hero p', { delay: 200, interval: 100 });
-  sr.reveal('.hero .cta-button', { delay: 400 });
-  sr.reveal('.roadmap h2, #tokenomics h2, .charity h2, .merch h2, footer', { delay: 150 });
-  sr.reveal('.roadmap h3, .roadmap p, .roadmap ul li, #tokenomics p, #tokenomics ul li, .charity p, .merch p, .carousel-item', {
-    delay: 200,
-    interval: 100
- });
-
   const homeSection = document.getElementById('home');
   const queefSound = document.getElementById('queef-sound');
   const puffImage = document.querySelector('.queef-puff');
   const smokePoofs = document.querySelectorAll('.smoke');
   const emojiContainer = document.querySelector('.emoji-explosion');
 
-  // 💨 Trigger emoji puff explosion from (x, y)
-  function triggerEmojiPuffsFrom(xStart, yStart) {
-    if (!emojiContainer) return;
-
-    for (let i = 0; i < 20; i++) {
-      const puff = document.createElement('span');
-      puff.innerText = '💨';
-      puff.classList.add('emoji-particle');
-
-      const angle = Math.random() * 2 * Math.PI;
-      const distance = Math.random() * 800 + 200;
-      const x = Math.cos(angle) * distance;
-      const y = Math.sin(angle) * distance;
-
-      puff.style.left = `${xStart}px`;
-      puff.style.top = `${yStart}px`;
-      puff.style.setProperty('--x', `${x}px`);
-      puff.style.setProperty('--y', `${y}px`);
-      puff.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
-      puff.style.willChange = 'transform, opacity';
-
-      emojiContainer.appendChild(puff);
-      setTimeout(() => puff.remove(), 1800);
-    }
-  }
-
-  // 💨 Play sound and puff burst
-  function playQueefEffect(x, y) {
-    if (queefSound) {
-      queefSound.currentTime = 0;
-      queefSound.play().catch(err => console.warn('Autoplay blocked:', err));
-    }
-    triggerEmojiPuffsFrom(x, y);
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
   }
 
   // 🟠 Enter button interaction
@@ -83,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
       puffImage.style.animation = 'none';
       void puffImage.offsetWidth; // force reflow
       puffImage.classList.add('puff-explode');
-
       smokePoofs.forEach(smoke => smoke.classList.add('show'));
 
       setTimeout(() => {
@@ -92,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => {
           overlay.style.display = 'none';
           homeSection.classList.add('fade-in');
+          document.body.classList.add('loaded'); // Fallback visibility
         }, 600);
       }, 800);
     });
@@ -99,7 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // 🖱️ Handle mouse clicks and taps with debounce
   let lastPuffTime = 0;
-
   function handleGlobalClick(event) {
     const now = Date.now();
     if (now - lastPuffTime < 400) return;
@@ -114,9 +58,68 @@ document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('touchstart', handleGlobalClick);
 });
 
+// ✅ ScrollReveal (run after full window load)
+window.addEventListener('load', function () {
+  const sr = ScrollReveal({
+    distance: '30px',
+    duration: 800,
+    easing: 'ease-out',
+    origin: 'bottom',
+    scale: 0.95,
+    reset: false
+  });
+
+  sr.reveal('.hero h1', { delay: 100 });
+  sr.reveal('.hero p', { delay: 200, interval: 100 });
+  sr.reveal('.hero .cta-button', { delay: 400 });
+  sr.reveal('.roadmap h2, .tokenomics h2, .charity h2, .merch h2, footer', { delay: 150 });
+  sr.reveal('.roadmap h3, .roadmap p, .roadmap ul li, .tokenomics p, .tokenomics ul li, .charity p, .merch p, .carousel-item', {
+    delay: 200,
+    interval: 100
+  });
+
+  // Debug: Check if elements are being matched
+  console.log('[ScrollReveal targets]', document.querySelectorAll('.tokenomics p, .charity p, .merch p'));
+});
+
+// 💨 Puff explosion utility
+function triggerEmojiPuffsFrom(xStart, yStart) {
+  const emojiContainer = document.querySelector('.emoji-explosion');
+  if (!emojiContainer) return;
+
+  for (let i = 0; i < 20; i++) {
+    const puff = document.createElement('span');
+    puff.innerText = '💨';
+    puff.classList.add('emoji-particle');
+
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = Math.random() * 800 + 200;
+    const x = Math.cos(angle) * distance;
+    const y = Math.sin(angle) * distance;
+
+    puff.style.left = `${xStart}px`;
+    puff.style.top = `${yStart}px`;
+    puff.style.setProperty('--x', `${x}px`);
+    puff.style.setProperty('--y', `${y}px`);
+    puff.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
+    puff.style.willChange = 'transform, opacity';
+
+    emojiContainer.appendChild(puff);
+    setTimeout(() => puff.remove(), 1800);
+  }
+}
+
+function playQueefEffect(x, y) {
+  const queefSound = document.getElementById('queef-sound');
+  if (queefSound) {
+    queefSound.currentTime = 0;
+    queefSound.play().catch(err => console.warn('Autoplay blocked:', err));
+  }
+  triggerEmojiPuffsFrom(x, y);
+}
+
 // 💰 Coin Rain Observer
 const coinContainer = document.querySelector("#coin-rain-container");
-
 if (coinContainer) {
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -126,16 +129,12 @@ if (coinContainer) {
           coin.src = "assets/queef-coin.png";
           coin.classList.add("coin");
 
-          // 🎯 Random position and delay
           coin.style.left = `${Math.random() * 100}vw`;
           coin.style.animationDelay = `${Math.random()}s`;
 
-          // 💥 Random size (60–100px)
           const size = 60 + Math.random() * 40;
           coin.style.width = `${size}px`;
           coin.style.height = `${size}px`;
-
-          // 💫 Random spin angle
           coin.style.transform = `rotate(${Math.random() * 360}deg)`;
 
           document.body.appendChild(coin);
