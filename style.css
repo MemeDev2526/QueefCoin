@@ -641,11 +641,11 @@ footer .disclaimer {
 
 .coin {
   position: fixed;
-  top: -50px;
-  width: 40px;
-  height: 40px;
+  top: -100px;
+  width: 90px;
+  height: 80px;
   pointer-events: none;
-  animation: fall 4s linear forwards;
+  animation: fall 6 linear forwards;
   z-index: 9999;
 }
 
