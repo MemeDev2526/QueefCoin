@@ -168,32 +168,31 @@ body {
 }
 
 /* Navbar */
-nav {
-  position: fixed;
-  top: 40px;
-  left: 0;
-  width: 100%;
-  background: rgba(26, 26, 26, 0.85);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+/* === NAVBAR UPGRADE === */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.5em 1em;
 }
 
-nav ul {
+.logo {
+  color: var(--orange);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.nav-links {
   display: flex;
-  justify-content: center;
   gap: 2em;
-  margin: 0;
-  padding: 0.5em 0;
   list-style: none;
-  font-size: 18px;
+  margin: 0;
+  padding: 0;
 }
 
-nav li {
-  display: flex;
-}
-
-nav a {
+.nav-links a {
   color: var(--orange);
   text-decoration: none;
   padding: 0.5em 1em;
@@ -202,14 +201,18 @@ nav a {
   transition: background 0.3s, color 0.3s;
 }
 
-nav a:hover {
+.nav-links a:hover {
   background-color: var(--orange);
   color: var(--black);
 }
 
-nav a.active {
-  background-color: var(--solana-green);
-  color: var(--black);
+.nav-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  color: var(--orange);
+  border: none;
+  cursor: pointer;
 }
 
 .hero {
@@ -430,6 +433,37 @@ footer .disclaimer {
     font-size: 16px;
     padding: 0 1em;
   }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgba(26, 26, 26, 0.95);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 1em 0;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links li {
+    text-align: center;
+    margin: 0.5em 0;
+  }
+
+  .nav-container {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
 /* === QueefCoin Section Styles (formerly inline) === */
 .hero h1,
 .subheadline,
