@@ -316,6 +316,12 @@ nav a.active {
   border-color: var(--orange);
 }
 
+.roadmap ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
 .roadmap .final-note {
   font-style: italic;
   text-align: center;
