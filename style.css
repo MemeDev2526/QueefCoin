@@ -168,7 +168,16 @@ body {
 }
 
 /* Navbar */
-/* === NAVBAR UPGRADE === */
+nav {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  background-color: var(--black); /* 🔥 Solid dark background */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6); /* Optional: depth effect */
+  z-index: 1000;
+}
+
 .nav-container {
   display: flex;
   justify-content: space-between;
@@ -442,11 +451,13 @@ footer .disclaimer {
     display: none;
     flex-direction: column;
     width: 100%;
-    background-color: rgba(26, 26, 26, 0.95);
+    background-color: var(--black); /* 🔥 Updated to match desktop nav */
     position: absolute;
     top: 100%;
     left: 0;
     padding: 1em 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6); /* Optional: mobile drop shadow */
+    z-index: 999;
   }
 
   .nav-links.show {
@@ -458,11 +469,26 @@ footer .disclaimer {
     margin: 0.5em 0;
   }
 
+  .nav-links a {
+    color: var(--orange);
+    padding: 0.75em 1em;
+    display: block;
+    width: 100%;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .nav-links a:hover {
+    background-color: var(--orange);
+    color: var(--black);
+  }
+
   .nav-container {
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
   }
 }
+
 
 /* === QueefCoin Section Styles (formerly inline) === */
 .hero h1,
