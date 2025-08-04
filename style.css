@@ -496,15 +496,15 @@ nav a.active {
 .scroll-wrapper {
   display: flex;
   width: max-content;
-  animation: scroll-banner 8s linear infinite;
+  animation: scroll-banner 15s linear infinite;
 }
 
 .scroll-wrapper img {
   height: 150px;
   width: auto;
-   object-fit: contain;
+  object-fit: contain;
   display: block;
-  margin: 0; /* 🔥 remove margin-right to avoid visible gap */
+  margin: 50px
 }
 
 /* ========== FACTS BANNER ========== */
