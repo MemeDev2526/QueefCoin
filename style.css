@@ -630,6 +630,11 @@ nav {
   animation-delay: 0.4s;
 }
 
+/* ========== FALLBACK VISIBILITY IF JS FAILS ========== */
+body.loaded .section-inner {
+  opacity: 1 !important;
+  transform: none !important;
+}
 
 /* ========== MEDIA QUERIES ========== */
 
