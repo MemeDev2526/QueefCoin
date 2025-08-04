@@ -36,7 +36,7 @@ body {
   background-attachment: fixed;       /* Locks background while scrolling */
   background-origin: border-box;      /* Ensures alignment with viewport */
   min-height: 100vh;
-  padding-top: 125px;
+  padding-top: 170px;
   text-align: center;
   font-size: 18px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -138,13 +138,13 @@ body {
   left: 0;
   width: 100%;  /* Full width to cover the entire screen */
   height: 30px;  /* Fixed height for the banner */
-  background-color: #ffa500; /* Banner background color */
+  background-color: #FFA500 /* Banner background color */
   color: #0d0d0d; /* Text color */
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.2rem;
   padding: 0.5em 0;
-  border-top: 2px solid #000;
-  border-bottom: 2px solid #000;
+  border-top: 3px solid #000;
+  border-bottom: 3px solid #000;
   z-index: 1001;  /* Ensure it's above the background but below the navbar */
   text-align: center;
   overflow: hidden;  /* Hide any overflow */
@@ -375,7 +375,7 @@ footer .disclaimer {
   }
 }
 
-.image-banner-scroll {
+.image-banner- {
   width: 100%;
   overflow: hidden;
   background-color: var(--black);
