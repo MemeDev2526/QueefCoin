@@ -477,7 +477,7 @@ nav a.active {
   width: 100%;
   overflow: hidden;
   background-color: var(--black);
-  padding: 50px 0;
+  padding: 0;
   box-shadow: 0 0 20px var(--orange);
   margin-top: 200px; /* Optional: adjust spacing overlap from hero */
 }
@@ -494,6 +494,7 @@ nav a.active {
   margin-right: 100px;
   object-fit: contain;
   display: block;
+  margin: 0; /* 🔥 remove margin-right to avoid visible gap */
 }
 
 /* ========== FACTS BANNER ========== */
