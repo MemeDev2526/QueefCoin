@@ -1,6 +1,6 @@
-
+/* ========== VARIABLES ========== */
 :root {
-  --orange: #FB6B00;  /* your brand orange */
+  --orange: #FB6B00;
   --black: #0D0D0D;
   --white: #FFFFFF;
   --gray: #AAAAAA;
@@ -8,18 +8,11 @@
   --solana-green: #00FFA3;
 }
 
-
-
-.section-title {
-  text-align: center;
-  margin-bottom: 1em;
-  color: var(--orange);
-  font-family: 'Rubik', sans-serif;
-}
-
+/* ========== BASE STYLES ========== */
 html {
   scroll-behavior: smooth;
 }
+
 
 body {
   margin: 0;
@@ -41,6 +34,8 @@ body {
   font-size: 18px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
+
+/* ========== GLOBAL OVERLAYS / UTILITIES ========== */
 
 /* Full-screen overlay for the loading animation */
 .loading-overlay {
@@ -70,29 +65,6 @@ body {
   animation: puff 3s infinite ease-in-out;  /* Puff effect */
 }
 
-@keyframes puff {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.3);  /* Puff grows in size */
-  }
-  100% {
-    transform: scale(1);  /* Puff shrinks back */
-  }
-}
-
-@keyframes puff-and-shine {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.3);
-    opacity: 0.8;  /* Slight transparency in the middle of the animation */
-  }
-}
-
 .welcome-message {
   margin-top: 20px;
   font-size: 1.8rem;
@@ -101,84 +73,129 @@ body {
   animation: bounce 2s ease-in-out infinite;
 }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-15px);  /* Bouncing effect */
-  }
-}
-
-.cta-button {
-  background-color: var(--orange);
-  color: #0d0d0d;
-  padding: 0.75em 1.5em;
-  border-radius: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  margin: 1em auto;
+/* 🌀 Puff Explosion Wrapper */
+.puff-wrapper {
+  position: relative;
   display: inline-block;
-  transform: translateY(20px) scale(1);
-  animation: slide-up 1s ease-in-out forwards;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  border: none;
 }
 
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.puff-explode {
+  animation: puff-explode 1.8s ease-out forwards;
 }
 
-.cta-button:hover {
-  transform: translateY(0) scale(2.2);
-  box-shadow: 0 0 15px var(--orange);
+/* 💨 Smoke Poof Elements */
+.smoke {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* Scrolling Facts Banner */
-.queef-facts-banner {
-  position: fixed;  /* Fixed position to keep the banner at the top */
-  top: 0;  /* Position it at the top of the page */
+.smoke-1 { top: 50%; left: 50%; transform: translate(-120%, -120%); }
+.smoke-2 { top: 50%; left: 50%; transform: translate(20%, -120%); }
+.smoke-3 { top: 50%; left: 50%; transform: translate(-50%, 20%); }
+
+.smoke.show {
+  animation: smoke-poof 1.2s ease-out forwards;
+}
+
+/* 💥 Emoji Explosion */
+.emoji-explosion {
+  position: fixed;
+  top: 0;
   left: 0;
-  width: 100%;  /* Full width to cover the entire screen */
-  height: 30px;  /* Fixed height for the banner */
-  background-color: var(--orange); /* Banner background color */
-  color: #0d0d0d; /* Text color */
-  font-weight: bold;
-  font-size: 1.2rem;
-  padding: 0.5em 0;
-  border-top: 3px solid #000;
-  border-bottom: 3px solid #000;
-  z-index: 1001;  /* Ensure it's above the background but below the navbar */
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: visible;
+}
+
+.emoji-particle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  font-size: clamp(2.5rem, 5vw, 6rem);
+  opacity: 0;
+  animation: puff-emoji-burst 3.8s ease-out forwards;
+  transform-origin: center;
+}
+
+/* ============================
+    Typography
+============================ */
+.section-title {
   text-align: center;
-  overflow: hidden;  /* Hide any overflow */
+  margin-bottom: 1em;
+  color: var(--orange);
+  font-family: 'Rubik', sans-serif;
 }
 
-/* Scrolling Text */
-.queef-facts-scroll {
-  display: inline-block;
-  white-space: nowrap;  /* Prevent text from wrapping */
-  animation: scroll-left 30s linear infinite;  /* Animation for scrolling text */
-}
-
-/* Keyframe for scrolling text */
-@keyframes scroll-left {
-  0% {
-    transform: translateX(100%);  /* Start from right */
+.subheadline {
+  font-size: 1.2em;
+  text-align: center;
   }
-  100% {
-    transform: translateX(-100%);  /* End at left */
-  }
+
+.hero {
+  margin-bottom: 2em;
+  position: relative;
+  color: var(--orange);
+  text-align: center;
+  line-height: 1.2;  /* Increase the line height for better spacing between lines of text */
+  font-family: 'Rubik', sans-serif;
 }
 
-/* Navbar */
+.hero .italic {
+  font-style: italic;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;  /* Add space between the letters */
+  color: var(--orange); /* Ensures brand orange */
+}
+
+.hero p {
+  font-size: 1.25rem;  /* You can adjust the size of the paragraph text */
+  margin-bottom: 1em;  /* Adds more space below paragraphs */
+  line-height: 1.2;  /* Increase line height for the paragraph text */
+  letter-spacing: 1px;  /* Space out the letters slightly */
+  color: var(--white); /* Optional for soft body text */
+}
+
+footer {
+  background-color: #1a1a1a;
+  padding: 1.5em;
+  font-size: 14px;
+  color: #aaa;
+  text-align: center;
+}
+
+footer .disclaimer {
+  font-size: 12px;  /* Smaller font size for the disclaimer */
+  color: #ff6347;  /* A distinct color for the disclaimer (tomato red) */
+  font-style: italic;  /* Italicize the disclaimer for emphasis */
+  margin-top: 1em;  /* Adds some space above the disclaimer text */
+}
+
+/* Alt text styling */
+.alt-text {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #0d0d0d;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 0 10px;
+}
+
+/* ========== NAVIGATION ========== */
+
 nav {
   position: fixed;  /* Fixed position to keep navbar at the top */
   top: 50px;
@@ -234,225 +251,58 @@ nav a.active {
   cursor: pointer;
 }
 
-.hero {
-  margin-bottom: 2em;
-  position: relative;
-  color: var(--orange);
+/* Mobile Dropdown Nav Links */
+.nav-links {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--black);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding: 1em 0;
+  z-index: 999;
+}
+
+.nav-links.show {
+  display: flex;
+}
+
+.nav-links li {
   text-align: center;
-  line-height: 1.2;  /* Increase the line height for better spacing between lines of text */
-  font-family: 'Rubik', sans-serif;
+  margin: 0.5em 0;
 }
 
-.hero .italic {
-  font-style: italic;
+.nav-links a {
+  display: block;
+  width: 100%;
+  color: var(--orange);
+  padding: 0.75em 1em;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
 }
 
-.hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  letter-spacing: 2px;  /* Add space between the letters */
-  color: var(--orange); /* Ensures brand orange */
+.nav-links a:hover {
+  background-color: var(--orange);
+  color: var(--black);
 }
 
-.hero p {
-  font-size: 1.25rem;  /* You can adjust the size of the paragraph text */
-  margin-bottom: 1em;  /* Adds more space below paragraphs */
-  line-height: 1.2;  /* Increase line height for the paragraph text */
-  letter-spacing: 1px;  /* Space out the letters slightly */
-  color: var(--white); /* Optional for soft body text */
+
+/* ========== LAYOUT & SECTIONS ========== */
+/* ✅ Add this right after section classes */
+
+.section-inner {
+  max-width: 1100px;
+  margin: 2em auto;
+  padding: 2em 2em;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-.roadmap, .tokenomics, .charity, .merch {
+.roadmap, .tokenomics, .twitter, .charity, .merch {
    padding: 4em 2em;
 }
-
-.carousel {
-  display: flex;
-  justify-content: center;
-  gap: 2em;
-  flex-wrap: nowrap; /* ensures single line layout */
-  overflow-x: auto;   /* optional: allows scroll if content is wider */
-  position: relative; /* 🔥 Add this */
-  overflow: visible;  /* ✅ This allows children (images) to pop out */
-  z-index: 1;
-}
-
-.carousel-item {
-  flex: 0 0 auto; /* prevent growing or shrinking */
-  text-align: center;
-}
-
-/* Carousel image */
-.carousel img {
-  width: 200px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Hover effect on the image */
-.carousel img:hover {
-  transform: scale(2.1);  /* Adjusted scaling factor for a better zoom effect */
-  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);  /* Darker shadow on hover */
-  position: relative; /* ✅ Needed to elevate above siblings */
-  z-index: 10;         /* ✅ Needed to stay on top */
-}
-
-/* Alt text styling */
-.alt-text {
-  margin-top: 10px;
-  font-size: 1rem;
-  color: #0d0d0d;
-  font-weight: 600;
-  text-transform: capitalize;
-  padding: 0 10px;
-}
-
-footer {
-  background-color: #1a1a1a;
-  padding: 1.5em;
-  font-size: 14px;
-  color: #aaa;
-  text-align: center;
-}
-
-footer .disclaimer {
-  font-size: 12px;  /* Smaller font size for the disclaimer */
-  color: #ff6347;  /* A distinct color for the disclaimer (tomato red) */
-  font-style: italic;  /* Italicize the disclaimer for emphasis */
-  margin-top: 1em;  /* Adds some space above the disclaimer text */
-}
-
-/* Fade-in animation for image banners */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 1.2s ease-out forwards;
-  animation-delay: 0.4s;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes puff-explode {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-    filter: blur(0);
-  }
-  100% {
-    transform: scale(4);
-    opacity: 0;
-    filter: blur(8px);
-  }
-}
-
-.puff-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.puff-explode {
-  animation: puff-explode 1.8s ease-out forwards;
-}
-
-.smoke {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
-  border-radius: 50%;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.smoke-1 { top: 50%; left: 50%; transform: translate(-120%, -120%); }
-.smoke-2 { top: 50%; left: 50%; transform: translate(20%, -120%); }
-.smoke-3 { top: 50%; left: 50%; transform: translate(-50%, 20%); }
-
-.smoke.show {
-  animation: smoke-poof 1.2s ease-out forwards;
-}
-
-@keyframes smoke-poof {
-  0% { transform: scale(0.5); opacity: 0.2; }
-  50% { transform: scale(1.4); opacity: 0.4; }
-  100% { transform: scale(2.5); opacity: 0; }
-}
-
-.emoji-particle {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) rotate(0deg);
-  font-size: clamp(2.5rem, 5vw, 6rem);
-  opacity: 0;
-  animation: puff-emoji-burst 3.8s ease-out forwards;
-  transform-origin: center;
-}
-
-.emoji-explosion {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 9999;
-  overflow: visible;
-}
-
-@keyframes puff-emoji-burst {
-  0% {
-    transform: translate(0, 0) scale(1.2) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(var(--x), var(--y)) scale(0.6) rotate(720deg);
-    opacity: 0;
-  }
-}
-
-.image-banner-scroll {
-  width: 100%;
-  overflow: hidden;
-  background-color: var(--black);
-  padding: 50px 0;
-  box-shadow: 0 0 20px var(--orange);
-  margin-top: 325px; /* Optional: adjust spacing overlap from hero */
-}
-
-.scroll-wrapper {
-  display: flex;
-  width: max-content;
-  animation: scroll-banner 8s linear infinite;
-}
-
-.scroll-wrapper img {
-  height: 150px;
-  width: auto;
-  margin-right: 100px;
-  object-fit: contain;
-  display: block;
-}
-
-@keyframes scroll-banner {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-/* === QueefCoin Section Styles (formerly inline) === */
 
 .roadmap {
   color: var(--orange);
@@ -490,6 +340,7 @@ footer .disclaimer {
 }
 
 #tokenomics p,
+
 #tokenomics ul {
   max-width: 800px;
   margin: 0 auto;
@@ -562,13 +413,117 @@ footer .disclaimer {
   margin-top: 2em;
   text-shadow: 0 0 5px #000;
 }
- 
-.subheadline {
-  font-size: 1.2em;
+
+/* ========== BUTTONS ========== */
+.cta-button {
+  background-color: var(--orange);
+  color: #0d0d0d;
+  padding: 0.75em 1.5em;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 1em auto;
+  display: inline-block;
+  transform: translateY(20px) scale(1);
+  animation: slide-up 1s ease-in-out forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.cta-button:hover {
+  transform: translateY(0) scale(2.2);
+  box-shadow: 0 0 15px var(--orange);
+}
+
+
+/* ========== CAROUSEL ========== */
+.carousel {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  flex-wrap: nowrap; /* ensures single line layout */
+  overflow-x: auto;   /* optional: allows scroll if content is wider */
+  position: relative; /* 🔥 Add this */
+  overflow: visible;  /* ✅ This allows children (images) to pop out */
+  z-index: 1;
+}
+
+.carousel-item {
+  flex: 0 0 auto; /* prevent growing or shrinking */
   text-align: center;
+}
+
+/* Carousel image */
+.carousel img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect on the image */
+.carousel img:hover {
+  transform: scale(2.1);  /* Adjusted scaling factor for a better zoom effect */
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);  /* Darker shadow on hover */
+  position: relative; /* ✅ Needed to elevate above siblings */
+  z-index: 10;         /* ✅ Needed to stay on top */
   }
 
+/* ========== IMAGE SCROLL BANNER ========== */
+.image-banner-scroll {
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--black);
+  padding: 50px 0;
+  box-shadow: 0 0 20px var(--orange);
+  margin-top: 325px; /* Optional: adjust spacing overlap from hero */
+}
 
+.scroll-wrapper {
+  display: flex;
+  width: max-content;
+  animation: scroll-banner 8s linear infinite;
+}
+
+.scroll-wrapper img {
+  height: 150px;
+  width: auto;
+  margin-right: 100px;
+  object-fit: contain;
+  display: block;
+}
+
+/* ========== FACTS BANNER ========== */
+/* Scrolling Facts Banner */
+.queef-facts-banner {
+  position: fixed;  /* Fixed position to keep the banner at the top */
+  top: 0;  /* Position it at the top of the page */
+  left: 0;
+  width: 100%;  /* Full width to cover the entire screen */
+  height: 30px;  /* Fixed height for the banner */
+  background-color: var(--orange); /* Banner background color */
+  color: #0d0d0d; /* Text color */
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0.5em 0;
+  border-top: 3px solid #000;
+  border-bottom: 3px solid #000;
+  z-index: 1001;  /* Ensure it's above the background but below the navbar */
+  text-align: center;
+  overflow: hidden;  /* Hide any overflow */
+}
+
+/* Scrolling Text */
+.queef-facts-scroll {
+  display: inline-block;
+  white-space: nowrap;  /* Prevent text from wrapping */
+  animation: scroll-left 30s linear infinite;  /* Animation for scrolling text */
+}
+
+/* Coin fall animation*/
  .coin {
   position: fixed;
   top: -80px;
@@ -579,6 +534,110 @@ footer .disclaimer {
   z-index: 9999;
   will-change: transform;
 }
+
+/* ========== ANIMATIONS ========== */
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);  /* Bouncing effect */
+  }
+}
+
+@keyframes puff {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);  /* Puff grows in size */
+  }
+  100% {
+    transform: scale(1);  /* Puff shrinks back */
+  }
+}
+
+@keyframes puff-and-shine {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.8;  /* Slight transparency in the middle of the animation */
+  }
+}
+
+@keyframes puff-explode {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+/* Smoke Poof */
+@keyframes smoke-poof {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes puff-emoji-burst {
+  0% {
+    transform: translate(0, 0) scale(1.2) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(0.6) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes scroll-banner {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+/* Keyframe for scrolling text */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);  /* Start from right */
+  }
+  100% {
+    transform: translateX(-100%);  /* End at left */
+  }
+}
+
 
 @keyframes fall {
   0% {
@@ -591,15 +650,25 @@ footer .disclaimer {
   }
 }
 
-/* ✅ Add this right after section classes */
-.section-inner {
-  max-width: 1100px;
-  margin: 2em auto;
-  padding: 2em 2em;
-  background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+/* Fade In Up */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
+/* Fade-in animation for image banners */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1.2s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+
+/* ========== MEDIA QUERIES ========== */
+
 /* Add at bottom of style.css */
 @media (max-width: 768px) {
   body {
@@ -669,4 +738,882 @@ footer .disclaimer {
   padding: 2em 1em;
 }
 
-} /* ✅ Don't forget this closing brace */
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+  body {
+    font-size: 15px;
+    padding: 0 0.5em;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 1em;
+    font-size: 18px;
+  }
+
+  .cta-button {
+    font-size: 0.95rem;
+    padding: 0.6em 1.2em;
+    max-width: 90%;
+  }
+
+  .carousel img {
+    width: 90%;
+    max-width: 200px;
+    height: auto;
+  }
+
+  .image-banner-scroll {
+    padding: 30px 0;
+  }
+
+  .scroll-wrapper img {
+    height: 120px;
+    margin-right: 60px;
+  }
+
+  .alt-text {
+    font-size: 0.9rem;
+  }
+
+  footer {
+    font-size: 12px;
+    padding: 1em;
+  }
+
+  footer .disclaimer {
+    font-size: 11px;
+  }
+}
+
+  /* ========== VARIABLES ========== */
+:root {
+  --orange: #FB6B00;
+  --black: #0D0D0D;
+  --white: #FFFFFF;
+  --gray: #AAAAAA;
+  --pink: #FF69B4;
+  --solana-green: #00FFA3;
+}
+
+/* ========== BASE STYLES ========== */
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Rubik', sans-serif;
+  background-color: var(--black);
+  color: var(--orange);
+  background-image: url('assets/bg-queefcoin.png');
+  background-size: contain;             
+  background-repeat: no-repeat;       /* Prevents tiling */
+  background-position: top center; /* Keeps it centered */
+  background-attachment: fixed;       /* Locks background while scrolling */
+  background-origin: border-box;      /* Ensures alignment with viewport */
+  min-height: 100vh;
+  padding-top: 80px;
+  text-align: center;
+  font-size: 18px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ========== GLOBAL OVERLAYS / UTILITIES ========== */
+
+/* Full-screen overlay for the loading animation */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color:  var(--black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;  /* Ensure it's on top of all content */
+  transition: opacity 0.6s ease-in-out;
+}
+
+/* Puff animation styling */
+.queef-puff-animation {
+  text-align: center;
+  color: white;
+  animation: puff-and-shine 4s ease-in-out infinite;  /* Puff animation */
+}
+
+.queef-puff {
+  width: 300px;
+  height: auto;  
+  animation: puff 3s infinite ease-in-out;  /* Puff effect */
+}
+
+.welcome-message {
+  margin-top: 20px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--orange); /* Queef Orange */
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* 🌀 Puff Explosion Wrapper */
+.puff-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.puff-explode {
+  animation: puff-explode 1.8s ease-out forwards;
+}
+
+/* 💨 Smoke Poof Elements */
+.smoke {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.smoke-1 { top: 50%; left: 50%; transform: translate(-120%, -120%); }
+.smoke-2 { top: 50%; left: 50%; transform: translate(20%, -120%); }
+.smoke-3 { top: 50%; left: 50%; transform: translate(-50%, 20%); }
+
+.smoke.show {
+  animation: smoke-poof 1.2s ease-out forwards;
+}
+
+/* 💥 Emoji Explosion */
+.emoji-explosion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: visible;
+}
+
+.emoji-particle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  font-size: clamp(2.5rem, 5vw, 6rem);
+  opacity: 0;
+  animation: puff-emoji-burst 3.8s ease-out forwards;
+  transform-origin: center;
+}
+
+/* ============================
+    Typography
+============================ */
+.section-title {
+  text-align: center;
+  margin-bottom: 1em;
+  color: var(--orange);
+  font-family: 'Rubik', sans-serif;
+}
+
+.subheadline {
+  font-size: 1.2em;
+  text-align: center;
+  }
+
+.hero {
+  margin-bottom: 2em;
+  position: relative;
+  color: var(--orange);
+  text-align: center;
+  line-height: 1.2;  /* Increase the line height for better spacing between lines of text */
+  font-family: 'Rubik', sans-serif;
+}
+
+.hero .italic {
+  font-style: italic;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;  /* Add space between the letters */
+  color: var(--orange); /* Ensures brand orange */
+}
+
+.hero p {
+  font-size: 1.25rem;  /* You can adjust the size of the paragraph text */
+  margin-bottom: 1em;  /* Adds more space below paragraphs */
+  line-height: 1.2;  /* Increase line height for the paragraph text */
+  letter-spacing: 1px;  /* Space out the letters slightly */
+  color: var(--white); /* Optional for soft body text */
+}
+
+footer {
+  background-color: #1a1a1a;
+  padding: 1.5em;
+  font-size: 14px;
+  color: #aaa;
+  text-align: center;
+}
+
+footer .disclaimer {
+  font-size: 12px;  /* Smaller font size for the disclaimer */
+  color: #ff6347;  /* A distinct color for the disclaimer (tomato red) */
+  font-style: italic;  /* Italicize the disclaimer for emphasis */
+  margin-top: 1em;  /* Adds some space above the disclaimer text */
+}
+
+/* Alt text styling */
+.alt-text {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #0d0d0d;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 0 10px;
+}
+
+/* ========== NAVIGATION ========== */
+
+nav {
+  position: fixed;  /* Fixed position to keep navbar at the top */
+  top: 50px;
+  left: 0;
+  width: 100%;
+  background-color: var(--black);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  padding: 1em 0;  /* Navbar padding */
+  z-index: 1000;  /* Ensure navbar stays on top of other content */
+}
+
+/* Navbar list styling */
+nav ul {
+  list-style: none;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 3em;
+  font-size: 20px;
+}
+
+nav li {
+  display: flex;
+}
+
+/* Navbar link styling */
+nav a {
+  color: var(--orange);
+  text-decoration: none;
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+}
+
+nav a:hover {
+  background-color: var(--orange);
+  color: var(--black);
+}
+
+nav a.active {
+  background-color: var(--solana-green);
+  color: var(--black);
+}
+
+/* === MOBILE NAV TOGGLE === */
+.nav-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  color: var(--orange);
+  border: none;
+  cursor: pointer;
+}
+
+/* Mobile Dropdown Nav Links */
+.nav-links {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--black);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding: 1em 0;
+  z-index: 999;
+}
+
+.nav-links.show {
+  display: flex;
+}
+
+.nav-links li {
+  text-align: center;
+  margin: 0.5em 0;
+}
+
+.nav-links a {
+  display: block;
+  width: 100%;
+  color: var(--orange);
+  padding: 0.75em 1em;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav-links a:hover {
+  background-color: var(--orange);
+  color: var(--black);
+}
+
+
+/* ========== LAYOUT & SECTIONS ========== */
+/* ✅ Add this right after section classes */
+
+.section-inner {
+  max-width: 1100px;
+  margin: 2em auto;
+  padding: 2em 2em;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.roadmap, .tokenomics, .twitter, .charity, .merch {
+   padding: 4em 2em;
+}
+
+.roadmap {
+  color: var(--orange);
+  padding: 4em 1em;
+  font-family: 'Rubik', sans-serif;
+}
+
+.roadmap h2 {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 1em;
+}
+
+.roadmap hr {
+  margin: 2em 0;
+  border-color: var(--orange);
+}
+
+.roadmap .final-note {
+  font-style: italic;
+  text-align: center;
+  font-size: 1.2em;
+  color: var(--white);
+}
+
+#tokenomics {
+  padding: 4em 1em;
+  color: var(--orange);
+  font-family: 'Rubik', sans-serif;
+}
+
+#tokenomics h2 {
+  font-size: 2.5em;
+  text-align: center;
+}
+
+#tokenomics p,
+
+#tokenomics ul {
+  max-width: 800px;
+  margin: 0 auto;
+  color: var(--white);
+}
+
+#tokenomics ul {
+  padding-left: 1.2em;
+}
+
+#tokenomics li {
+  margin-bottom: 1em;
+}
+
+#tokenomics .token-footer {
+  font-style: italic;
+  color: var(--orange);
+  text-align: center;
+  margin-top: 2em;
+}
+
+#tiktok {
+  padding: 4em 1em;
+  color: var(--orange);
+  text-align: center;
+}
+
+#tiktok h2 {
+  font-size: 2.5em;
+}
+
+#tiktok p {
+  max-width: 600px;
+  margin: 0 auto 2em;
+}
+
+#tiktok a {
+  background-color: var(--orange);
+  color: var(--black);
+  padding: 0.75em 1.5em;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.charity {
+  padding: 5em 1em;
+  text-align: center;
+  color: var(--orange);
+  font-family: 'Rubik', sans-serif;
+}
+
+.charity h2 {
+  font-size: 2.5em;
+  margin-bottom: 1em;
+  text-shadow: 0 0 5px #000;
+}
+
+.charity p {
+  max-width: 800px;
+  margin: 0 auto 2em;
+  font-size: 1.1em;
+  line-height: 1.6;
+  text-shadow: 0 0 4px #000;
+}
+
+.charity p.italic {
+  font-style: italic;
+  font-size: 1.2em;
+  margin-top: 2em;
+  text-shadow: 0 0 5px #000;
+}
+
+/* ========== BUTTONS ========== */
+.cta-button {
+  background-color: var(--orange);
+  color: #0d0d0d;
+  padding: 0.75em 1.5em;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 1em auto;
+  display: inline-block;
+  transform: translateY(20px) scale(1);
+  animation: slide-up 1s ease-in-out forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.cta-button:hover {
+  transform: translateY(0) scale(2.2);
+  box-shadow: 0 0 15px var(--orange);
+}
+
+
+/* ========== CAROUSEL ========== */
+.carousel {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  flex-wrap: nowrap; /* ensures single line layout */
+  overflow-x: auto;   /* optional: allows scroll if content is wider */
+  position: relative; /* 🔥 Add this */
+  overflow: visible;  /* ✅ This allows children (images) to pop out */
+  z-index: 1;
+}
+
+.carousel-item {
+  flex: 0 0 auto; /* prevent growing or shrinking */
+  text-align: center;
+}
+
+/* Carousel image */
+.carousel img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect on the image */
+.carousel img:hover {
+  transform: scale(2.1);  /* Adjusted scaling factor for a better zoom effect */
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);  /* Darker shadow on hover */
+  position: relative; /* ✅ Needed to elevate above siblings */
+  z-index: 10;         /* ✅ Needed to stay on top */
+  }
+
+/* ========== IMAGE SCROLL BANNER ========== */
+.image-banner-scroll {
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--black);
+  padding: 50px 0;
+  box-shadow: 0 0 20px var(--orange);
+  margin-top: 325px; /* Optional: adjust spacing overlap from hero */
+}
+
+.scroll-wrapper {
+  display: flex;
+  width: max-content;
+  animation: scroll-banner 8s linear infinite;
+}
+
+.scroll-wrapper img {
+  height: 150px;
+  width: auto;
+  margin-right: 100px;
+  object-fit: contain;
+  display: block;
+}
+
+/* ========== FACTS BANNER ========== */
+/* Scrolling Facts Banner */
+.queef-facts-banner {
+  position: fixed;  /* Fixed position to keep the banner at the top */
+  top: 0;  /* Position it at the top of the page */
+  left: 0;
+  width: 100%;  /* Full width to cover the entire screen */
+  height: 30px;  /* Fixed height for the banner */
+  background-color: var(--orange); /* Banner background color */
+  color: #0d0d0d; /* Text color */
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 0.5em 0;
+  border-top: 3px solid #000;
+  border-bottom: 3px solid #000;
+  z-index: 1001;  /* Ensure it's above the background but below the navbar */
+  text-align: center;
+  overflow: hidden;  /* Hide any overflow */
+}
+
+/* Scrolling Text */
+.queef-facts-scroll {
+  display: inline-block;
+  white-space: nowrap;  /* Prevent text from wrapping */
+  animation: scroll-left 30s linear infinite;  /* Animation for scrolling text */
+}
+
+/* Coin fall animation*/
+ .coin {
+  position: fixed;
+  top: -80px;
+  max-width: 100px;
+  max-height: 100px;
+  pointer-events: none;
+  animation: fall 4s linear forwards;
+  z-index: 9999;
+  will-change: transform;
+}
+
+/* ========== ANIMATIONS ========== */
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);  /* Bouncing effect */
+  }
+}
+
+@keyframes puff {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);  /* Puff grows in size */
+  }
+  100% {
+    transform: scale(1);  /* Puff shrinks back */
+  }
+}
+
+@keyframes puff-and-shine {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.8;  /* Slight transparency in the middle of the animation */
+  }
+}
+
+@keyframes puff-explode {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+/* Smoke Poof */
+@keyframes smoke-poof {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes puff-emoji-burst {
+  0% {
+    transform: translate(0, 0) scale(1.2) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(0.6) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes scroll-banner {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+/* Keyframe for scrolling text */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);  /* Start from right */
+  }
+  100% {
+    transform: translateX(-100%);  /* End at left */
+  }
+}
+
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Fade In Up */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade-in animation for image banners */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1.2s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+
+/* ========== MEDIA QUERIES ========== */
+
+/* Add at bottom of style.css */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+    padding: 0 1em;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--black);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 1em 0;
+    z-index: 999;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links li {
+    text-align: center;
+    margin: 0.5em 0;
+  }
+
+  .nav-links a {
+    display: block;
+    width: 100%;
+    color: var(--orange);
+    padding: 0.75em 1em;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .nav-links a:hover {
+    background-color: var(--orange);
+    color: var(--black);
+  }
+
+  .cta-button {
+    width: 100%;
+    max-width: 90%;
+    font-size: 1em;
+  }
+
+  .carousel {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+
+  .carousel-item {
+    scroll-snap-align: center;
+  }
+
+  .carousel img {
+    width: 80%;
+    height: auto;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+
+  .section-inner {
+    padding: 2em 1em;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+}
+
+/* ✅ Separate media query — do not nest inside 768px */
+@media (max-width: 480px) {
+  body {
+    font-size: 15px;
+    padding: 0 0.5em;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 1em;
+    font-size: 18px;
+  }
+
+  .cta-button {
+    font-size: 0.95rem;
+    padding: 0.6em 1.2em;
+    max-width: 90%;
+  }
+
+  .carousel img {
+    width: 90%;
+    max-width: 200px;
+    height: auto;
+  }
+
+  .image-banner-scroll {
+    padding: 30px 0;
+  }
+
+  .scroll-wrapper img {
+    height: 120px;
+    margin-right: 60px;
+  }
+
+  .alt-text {
+    font-size: 0.9rem;
+  }
+
+  footer {
+    font-size: 12px;
+    padding: 1em;
+  }
+
+  footer .disclaimer {
+    font-size: 11px;
+  }
+}
