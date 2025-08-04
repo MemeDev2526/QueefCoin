@@ -2,7 +2,7 @@
 :root {
   --orange: #FFA500;
   --black: #0D0D0D;
-  --white: #FFFFFF;
+  --white: var(--white);
   --gray: #AAAAAA;
   --pink: #FF69B4;
   --solana-green: #00FFA3;
@@ -28,7 +28,7 @@ body {
   width: 100%;
   font-family: 'Rubik', sans-serif;
   background-color: var(--black);
-  color: #ffa500;
+  color: var(--orange);
   background-image: url('assets/bg-queefcoin.jpg');
   background-size: auto, 100%;             
   background-repeat: no-repeat;       /* Prevents tiling */
@@ -38,7 +38,7 @@ body {
   min-height: 100vh;
   padding-top: 100px;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -97,7 +97,7 @@ body {
   margin-top: 20px;
   font-size: 1.8rem;
   font-weight: bold;
-  color: #ffa500;  /* Queef Orange */
+  color: var(--orange);  /* Queef Orange */
   animation: bounce 2s ease-in-out infinite;
 }
 
@@ -111,8 +111,8 @@ body {
 }
 
 .cta-button {
-  background-color: #ffa500;
-  color: #0d0d0d;
+  background-color: var(--orange);
+  color: var(--black);
   padding: 0.75em 1.5em;
   border-radius: 30px;
   font-weight: bold;
@@ -128,7 +128,7 @@ body {
 
 .cta-button:hover {
   transform: translateY(0) scale(2.2);
-  box-shadow: 0 0 15px #ffa500;
+  box-shadow: 0 0 15px var(--orange);
 }
 
 /* Scrolling Facts Banner */
@@ -138,8 +138,8 @@ body {
   left: 0;
   width: 100%;  /* Full width to cover the entire screen */
   height: 30px;  /* Fixed height for the banner */
-  background-color: #ffa500; /* Banner background color */
-  color: #0d0d0d; /* Text color */
+  background-color: var(--orange); /* Banner background color */
+  color: var(--black); /* Text color */
   font-weight: bold;
   font-size: 1rem;
   padding: 0.5em 0;
@@ -190,7 +190,7 @@ nav ul {
 
 /* Navbar link styling */
 nav a {
-  color: #ffa500;
+  color: var(--orange);
   text-decoration: none;
   font-weight: bold;
 }
@@ -198,7 +198,7 @@ nav a {
 .hero {
   margin-bottom: 2em;
   position: relative;
-  background-image: url('assets/banner.jpg');  /* Your background image */
+  background-image: url('assets/banner.jpg');  
   background-color: rgba(0, 0, 0, 0.5);
   background-size: cover;
   background-position: center center;
@@ -259,7 +259,7 @@ nav a {
 .alt-text {
   margin-top: 10px;
   font-size: 1rem;
-  color: #0d0d0d;
+  color: var(--black);
   font-weight: 600;
   text-transform: capitalize;
   padding: 0 10px;
@@ -269,13 +269,13 @@ footer {
   background-color: #1a1a1a;
   padding: 1.5em;
   font-size: 14px;
-  color: #aaa;
+  color: var(--gray);
   text-align: center;
 }
 
 footer .disclaimer {
   font-size: 12px;  /* Smaller font size for the disclaimer */
-  color: #ff6347;  /* A distinct color for the disclaimer (tomato red) */
+  color: var(--pink);  /* A distinct color for the disclaimer (tomato red) */
   font-style: italic;  /* Italicize the disclaimer for emphasis */
   margin-top: 1em;  /* Adds some space above the disclaimer text */
 }
@@ -428,7 +428,7 @@ footer .disclaimer {
   background-color: rgba(0, 0, 0, 0.5);
   color: var(--orange);
   padding: 4em 1em;
-  font-family: sans-serif;
+  font-family: 'Rubik', sans-serif;
 }
 
 .roadmap h2 {
@@ -513,7 +513,7 @@ footer .disclaimer {
   text-align: center;
   color: var(--orange);
   background-color: rgba(0, 0, 0, 0.65);
-  font-family: sans-serif;
+  font-family: 'Rubik', sans-serif;
 }
 
 .charity h2 {
