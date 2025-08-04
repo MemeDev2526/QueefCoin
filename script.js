@@ -116,10 +116,21 @@ if (coinContainer) {
       if (entry.isIntersecting) {
         for (let i = 0; i < 25; i++) {
           const coin = document.createElement("img");
-          coin.src = "assets/queef-coin.png"; // ✅ Make sure this path is valid
+          coin.src = "assets/queef-coin.png";
           coin.classList.add("coin");
+
+          // 🎯 Random position and delay
           coin.style.left = `${Math.random() * 100}vw`;
           coin.style.animationDelay = `${Math.random()}s`;
+
+          // 💥 Random size (60–100px)
+          const size = 60 + Math.random() * 40;
+          coin.style.width = `${size}px`;
+          coin.style.height = `${size}px`;
+
+          // 💫 Random spin angle
+          coin.style.transform = `rotate(${Math.random() * 360}deg)`;
+
           document.body.appendChild(coin);
           setTimeout(() => coin.remove(), 4000);
         }
@@ -129,6 +140,3 @@ if (coinContainer) {
 
   observer.observe(coinContainer);
 }
-
-
-
