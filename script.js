@@ -99,4 +99,6 @@ const observer = new IntersectionObserver(entries => {
   });
 });
 
-observer.observe(document.querySelector("#coin-rain-container"));
+const coinContainer = document.querySelector("#coin-rain-container");
+if (coinContainer) observer.observe(coinContainer);
+
