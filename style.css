@@ -300,6 +300,20 @@ nav a.active {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
+/* ========== SECTION BODY TEXT COLORS ========== */
+.section-inner p,
+.section-inner li,
+.section-inner span,
+.section-inner .text,
+.roadmap p,
+.roadmap li,
+.charity p,
+#tokenomics p,
+#tokenomics li,
+#tiktok p {
+  color: var(--white);
+}
+
 .roadmap {
   color: var(--orange);
   font-family: 'Rubik', sans-serif;
@@ -408,20 +422,6 @@ nav a.active {
   font-size: 1.2em;
   margin-top: 2em;
   text-shadow: 0 0 5px #000;
-}
-
-/* ========== SECTION BODY TEXT COLORS ========== */
-.section-inner p,
-.section-inner li,
-.section-inner span,
-.section-inner .text,
-.roadmap p,
-.roadmap li,
-.charity p,
-#tokenomics p,
-#tokenomics li,
-#tiktok p {
-  color: var(--white);
 }
 
 /* ========== BUTTONS ========== */
