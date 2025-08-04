@@ -684,6 +684,10 @@ nav a.active {
   body {
     font-size: 16px;
     padding: 0 1em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center top;
   }
 
   .nav-links {
@@ -762,6 +766,10 @@ nav a.active {
   body {
     font-size: 15px;
     padding: 0 0.5em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center top;
   }
 
   .hero h1 {
