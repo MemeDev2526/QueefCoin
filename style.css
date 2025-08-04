@@ -166,7 +166,7 @@ body {
 .queef-facts-scroll {
   display: inline-block;
   white-space: nowrap;  /* Prevent text from wrapping */
-  animation: scroll-left 25s linear infinite;  /* Animation for scrolling text */
+  animation: scroll-left 30s linear infinite;  /* Animation for scrolling text */
 }
 
 /* Keyframe for scrolling text */
@@ -185,8 +185,7 @@ nav {
   top: 50px;
   left: 0;
   width: 100%;
-  background: rgba(26, 26, 26, 0.85);
-  backdrop-filter: blur(10px);
+  background-color: var(--black);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
   padding: 1em 0;  /* Navbar padding */
   z-index: 1000;  /* Ensure navbar stays on top of other content */
@@ -241,7 +240,7 @@ nav a.active {
   position: relative;
   color: white;
   text-align: center;
-  line-height: 1.6;  /* Increase the line height for better spacing between lines of text */
+  line-height: 1.2;  /* Increase the line height for better spacing between lines of text */
 }
 
 .hero .italic {
@@ -249,15 +248,15 @@ nav a.active {
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: 20px;
   letter-spacing: 2px;  /* Add space between the letters */
 }
 
 .hero p {
   font-size: 1.25rem;  /* You can adjust the size of the paragraph text */
-  margin-bottom: 1.5em;  /* Adds more space below paragraphs */
-  line-height: 1.8;  /* Increase line height for the paragraph text */
+  margin-bottom: 1em;  /* Adds more space below paragraphs */
+  line-height: 1.2;  /* Increase line height for the paragraph text */
   letter-spacing: 1px;  /* Space out the letters slightly */
 }
 
@@ -595,7 +594,7 @@ footer .disclaimer {
   max-width: 1100px;
   margin: 2em auto;
   padding: 2em 2em;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
