@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
       puff.style.setProperty('--x', `${x}px`);
       puff.style.setProperty('--y', `${y}px`);
       puff.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
+      puff.style.willChange = 'transform, opacity';
 
       emojiContainer.appendChild(puff);
       setTimeout(() => puff.remove(), 1800);
@@ -77,37 +78,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 🖱️ Handle mouse clicks and taps
+  // 🖱️ Handle mouse clicks and taps with debounce
+  let lastPuffTime = 0;
+
   function handleGlobalClick(event) {
+    const now = Date.now();
+    if (now - lastPuffTime < 400) return;
+    lastPuffTime = now;
+
     const x = event.clientX || (event.touches && event.touches[0].clientX);
     const y = event.clientY || (event.touches && event.touches[0].clientY);
     if (x && y) playQueefEffect(x, y);
   }
 
-  // Click for desktop
   document.addEventListener('click', handleGlobalClick);
-
-  // Touch for mobile
   document.addEventListener('touchstart', handleGlobalClick);
 });
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      for (let i = 0; i < 25; i++) {
-        const coin = document.createElement("img");
-        coin.src = "assets/queef-coin.png"; // ✅ Update path if needed
-        coin.classList.add("coin");
-        coin.style.left = `${Math.random() * 100}vw`;
-        coin.style.animationDelay = `${Math.random()}s`;
-        document.body.appendChild(coin);
-        setTimeout(() => coin.remove(), 4000);
-      }
-      observer.disconnect(); // only run once
-    }
-  });
-});
-
+// 💰 Coin Rain Observer
 const coinContainer = document.querySelector("#coin-rain-container");
 
 if (coinContainer) {
