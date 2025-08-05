@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const navLinks = document.getElementById('nav-links');
   const homeSection = document.getElementById('home');
   const queefSound = document.getElementById('queef-sound');
+  const puffImage = document.querySelector('.queef-puff');
+  const smokePoofs = document.querySelectorAll('.smoke'); // ✅ Add this
+
   // 💨 Puff divider animation temporarily disabled
 /*
 const puffPath = document.querySelector('.puff-path');
