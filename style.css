@@ -456,28 +456,27 @@ nav {
 
 /* ========== IMAGE SCROLL BANNER ========== */
 /* 🔁 Fixed Bottom Scroll Banner */
-.fixed-scroll-banner {
-  position: fixed;
+.image-banner-scroll {
+  position: fixed;            /* Fix to the bottom of the screen */
   bottom: 0;
   left: 0;
   width: 100%;
   height: 100px;
   background-color: var(--black);
-  z-index: 999;
-  overflow: hidden;
   box-shadow: 0 -2px 20px var(--orange);
+  z-index: 1000;
+  overflow: hidden;
+  padding: 0;
 }
 
-
-.fixed-scroll-banner .scroll-wrapper {
+.scroll-wrapper {
   display: flex;
-  width: max-content;
-  animation: scroll-banner 20s linear infinite;
   align-items: center;
-  padding-left: 100%; /* ensures seamless loop */
+  width: max-content;
+  animation: scroll-banner 30s linear infinite;
 }
 
-.fixed-scroll-banner img {
+.scroll-wrapper img {
   height: 80px;
   margin: 0 40px;
   object-fit: contain;
