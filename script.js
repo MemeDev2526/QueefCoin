@@ -72,6 +72,7 @@ window.addEventListener('load', function () {
   sr.reveal('.hero h1', { delay: 100 });
   sr.reveal('.hero p', { delay: 200, interval: 100 });
   sr.reveal('.hero .cta-button', { delay: 400 });
+  sr.reveal('.puff-divider', { delay: 100 });
   sr.reveal('.roadmap h2, .tokenomics h2, .charity h2, .merch h2, footer', { delay: 150 });
   sr.reveal('.roadmap h3, .roadmap p, .roadmap ul li, .tokenomics p, .tokenomics ul li, .charity p, .merch p, .carousel-item', {
     delay: 200,
