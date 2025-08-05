@@ -476,7 +476,7 @@ nav {
 /* 🧱 Scrolling row of images */
 .scroll-wrapper {
   display: flex;
-  width: max-content;
+  width: 200%; /* Ensures full wrap of duplicated images */
   animation: scroll-banner 30s linear infinite;
   /* 👇 remove align-items here */
 }
