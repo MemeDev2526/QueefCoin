@@ -537,7 +537,7 @@ nav {
 }
 
 .puff-path {
-  animation: puffMorph 8s ease-in-out infinite alternate;
+  fill: var(--black); /* or var(--black) if you're using CSS vars */
 }
 
 
