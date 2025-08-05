@@ -522,6 +522,26 @@ nav {
   will-change: transform;
 }
 
+/* Puff Divider */
+.puff-divider {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.puff-divider svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: translateY(1px);
+}
+
+.puff-path {
+  animation: puffMorph 8s ease-in-out infinite alternate;
+}
+
+
 /* ========== ANIMATIONS ========== */
 
 @keyframes slide-up {
@@ -652,6 +672,16 @@ nav {
   transform: translateY(20px);
   animation: fadeInUp 1.2s ease-out forwards;
   animation-delay: 0.4s;
+}
+
+/* Optional morphing keyframes */
+@keyframes puffMorph {
+  0% {
+    d: path("M0,160 Q360,240 720,160 T1440,160 V320 H0 Z");
+  }
+  100% {
+    d: path("M0,160 Q360,180 720,240 T1440,160 V320 H0 Z");
+  }
 }
 
 /* ========== FALLBACK VISIBILITY IF JS FAILS ========== */
