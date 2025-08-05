@@ -13,8 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const emojiContainer = document.querySelector('.emoji-explosion');
 // 💨 Animate Puff Divider Shape
  const puffPath = document.querySelector('.puff-path');
-if (puffPath && typeof gsap !== 'undefined') {
-  gsap.registerPlugin(MorphSVGPlugin); // ✅ This is the key addition
+if (puffPath && typeof gsap !== 'undefined' && typeof window.MorphSVGPlugin !== 'undefined') {
+  const MorphSVGPlugin = window.MorphSVGPlugin; // 👈 THIS is what's missing
+  gsap.registerPlugin(MorphSVGPlugin);
   gsap.to(puffPath, {
     duration: 4,
     repeat: -1,
@@ -25,6 +26,7 @@ if (puffPath && typeof gsap !== 'undefined') {
     }
   });
 }
+  
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', () => {
       navLinks.classList.toggle('show');
