@@ -673,16 +673,6 @@ nav {
   animation-delay: 0.4s;
 }
 
-/* Optional morphing keyframes */
-@keyframes puffMorph {
-  0% {
-    d: path("M0,160 Q360,240 720,160 T1440,160 V320 H0 Z");
-  }
-  100% {
-    d: path("M0,160 Q360,180 720,240 T1440,160 V320 H0 Z");
-  }
-}
-
 /* ========== FALLBACK VISIBILITY IF JS FAILS ========== */
 body.loaded .section-inner {
   opacity: 1 !important;
