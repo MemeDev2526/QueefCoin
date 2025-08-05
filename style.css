@@ -468,19 +468,24 @@ nav {
   z-index: 1000;
   overflow: hidden;
   padding: 0;
+  
+  display: flex;             /* 👈 make the container a flexbox */
+  align-items: center;       /* 👈 center the scroll-wrapper vertically */
 }
 
+/* 🧱 Scrolling row of images */
 .scroll-wrapper {
   display: flex;
-  align-items: center;
   width: max-content;
   animation: scroll-banner 30s linear infinite;
+  /* 👇 remove align-items here */
 }
 
 .scroll-wrapper img {
   height: 60px;
   margin: 0 40px;
   object-fit: contain;
+   display: block; /* ensures no inline whitespace */
 }
 
 /* ========== FACTS BANNER ========== */
