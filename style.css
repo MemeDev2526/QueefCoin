@@ -766,7 +766,14 @@ body.loaded .section-inner {
   .hero p {
     font-size: 1rem;
   }
- 
+
+    .puff-divider {
+    height: 60px; /* Reduce puff height for mobile */
+  }
+
+  .puff-divider svg {
+    height: 60px;
+  }
 }
 
  @media (max-width: 480px) {
