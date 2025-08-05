@@ -12,18 +12,19 @@ document.addEventListener('DOMContentLoaded', function () {
   const smokePoofs = document.querySelectorAll('.smoke');
   const emojiContainer = document.querySelector('.emoji-explosion');
 // 💨 Animate Puff Divider Shape
-  const puffPath = document.querySelector('.puff-path');
-  if (puffPath && typeof gsap !== 'undefined') {
-    gsap.to(puffPath, {
-      duration: 4,
-      repeat: -1,
-      yoyo: true,
-      ease: "power1.inOut",
-      morphSVG: {
-        shape: "M0,160 Q360,180 720,240 T1440,160 V320 H0 Z"
-      }
-    });
-  }
+ const puffPath = document.querySelector('.puff-path');
+if (puffPath && typeof gsap !== 'undefined') {
+  gsap.registerPlugin(MorphSVGPlugin); // ✅ This is the key addition
+  gsap.to(puffPath, {
+    duration: 4,
+    repeat: -1,
+    yoyo: true,
+    ease: "power1.inOut",
+    morphSVG: {
+      shape: "M0,160 Q360,180 720,240 T1440,160 V320 H0 Z"
+    }
+  });
+}
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', () => {
       navLinks.classList.toggle('show');
