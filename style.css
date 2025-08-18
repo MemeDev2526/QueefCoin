@@ -482,8 +482,8 @@ nav {
 }
 
 .scroll-wrapper img {
-  height: 60px;
-  margin: 0 40px;
+  height: 40px;
+  margin: 0 30px;
   object-fit: contain;
    display: block; /* ensures no inline whitespace */
 }
