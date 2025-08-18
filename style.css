@@ -184,6 +184,32 @@ footer .disclaimer {
   font-style: italic;  /* Italicize the disclaimer for emphasis */
   margin-top: 1em;  /* Adds some space above the disclaimer text */
 }
+/* ========== BADGES (Reusable) ========== */
+.footer-badges,
+.tokenomics-badges,
+.dao-badges {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;  /* center in footer; looks good in sections too */
+  margin-top: 16px;
+}
+
+/* Set a consistent badge height; width auto */
+.footer-badges svg,
+.tokenomics-badges svg,
+.dao-badges svg {
+  height: 40px;
+}
+
+/* Optional: shrink badges on small screens */
+@media (max-width: 480px) {
+  .footer-badges svg,
+  .tokenomics-badges svg,
+  .dao-badges svg {
+    height: 34px;
+  }
+}
 
 /* Alt text styling */
 .alt-text {
