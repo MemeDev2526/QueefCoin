@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>$QUEEF — Scan Landing</title>
+  <meta name="description" content="$QUEEF — Pump the Puff. Buy, Play, Join." />
+  <link rel="preload" href="../assets/queef-sound.mp3" as="audio">
+  <link rel="stylesheet" href="scan.css" />
+</head>
+<body>
+  <main class="scan-wrap">
+    <header class="hero">
+      <img class="logo" src="../assets/logo-queef-main.png" alt="$QUEEF logo" />
+      <h1 class="tag">Pump the Puff</h1>
+      <p class="sub">You’re just in time. The puff is prophecy.</p>
+      <div class="cta-row">
+        <a class="btn primary" href="https://bonk.fun" target="_blank" rel="noopener">Buy $QUEEF</a>
+        <a class="btn ghost" href="../queefcoingame" rel="noopener">Play Puff Dodge</a>
+      </div>
+    </header>
+
+    <section class="quick-links">
+      <a class="q-card" href="https://dexscreener.com" target="_blank" rel="noopener">
+        <span>📈</span><b>Chart</b>
+      </a>
+      <a class="q-card" href="https://twitter.com/QueefCoin" target="_blank" rel="noopener">
+        <span>🐦</span><b>Twitter</b>
+      </a>
+      <a class="q-card" href="https://t.me/QueefCoin" target="_blank" rel="noopener">
+        <span>💬</span><b>Telegram</b>
+      </a>
+      <a class="q-card" href="../#wind">
+        <span>💨</span><b>Puff With Purpose</b>
+      </a>
+    </section>
+
+    <!-- Tap zone: plays sound + spawns puff particles -->
+    <button class="tap-zone" aria-label="Tap to puff">
+      <span class="tap-text">Tap to Puff</span>
+    </button>
+
+    <footer class="foot">
+      <p>Don’t Fade the Puff — <b>#PumpThePuff</b></p>
+    </footer>
+  </main>
+
+  <audio id="puff-sfx" src="../assets/queef-sound.mp3" preload="auto"></audio>
+  <script src="scan.js" defer></script>
+</body>
+</html>
