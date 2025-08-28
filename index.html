@@ -426,13 +426,38 @@
     </svg>
 
     <!-- Locked LP -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="40" viewBox="0 0 240 40">
-      <rect x="0.5" y="0.5" rx="20" ry="20" width="239" height="39" fill="#101010" stroke="#FFA500"/>
-      <path d="M120 25v-6a4 4 0 0 0-8 0v6a4 4 0 0 0 8 0z" fill="none" stroke="#FFA500" stroke-width="2"/>
-      <text x="40" y="26" fill="#FFA500" font-size="14" font-weight="600" font-family="Arial, sans-serif">
-        Locked LP
-      </text>
-    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg"
+     width="220" height="40" viewBox="0 0 220 40"
+     role="img" aria-label="Locked LP badge">
+  <defs>
+    <!-- subtle outer glow -->
+    <filter id="lpGlow" x="-20%" y="-50%" width="140%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#FFA500" flood-opacity=".35"/>
+    </filter>
+  </defs>
+
+  <!-- pill -->
+  <rect x="0.5" y="0.5" width="219" height="39" rx="20" ry="20"
+        fill="#101010" stroke="#FFA500" filter="url(#lpGlow)"/>
+
+  <!-- lock icon -->
+  <g transform="translate(20,10)" fill="none" stroke="#FFA500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- shackle -->
+    <path d="M10 12 v-4 a6 6 0 0 1 12 0 v4"/>
+    <!-- body -->
+    <rect x="8" y="12" width="16" height="14" rx="3" ry="3"/>
+    <!-- key-hole -->
+    <circle cx="16" cy="19" r="2"/>
+    <path d="M16 21 v3"/>
+  </g>
+
+  <!-- centered text -->
+  <text x="128" y="25"
+        font-family="Rubik, Arial, sans-serif"
+        font-size="14" font-weight="700"
+        text-anchor="middle"
+        fill="#FFA500">Locked LP</text>
+</svg>
 
     <!-- Contract Verified -->
     <svg xmlns="http://www.w3.org/2000/svg" width="220" height="40" viewBox="0 0 260 40">
