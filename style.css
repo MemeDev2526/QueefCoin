@@ -106,7 +106,7 @@ body.overlay-active { overflow: hidden; }
     linear-gradient(to bottom, rgba(13,13,13,.72), rgba(13,13,13,.72)),
     url("assets/welcome-background.png");
   background-size: cover;
-  background-position: center 25%;
+  background-position: center 100%;
   background-repeat: no-repeat;
   background-blend-mode: multiply;
 }
