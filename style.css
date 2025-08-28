@@ -114,10 +114,11 @@ body.overlay-active { overflow: hidden; }
 .loading-overlay .overlay-content{
   position: relative; z-index: 1;
   width: min(92vw, 860px);
+  display: grid; 
   text-align: center;
   color: var(--white);
-  padding: 0.75rem; 
-  gap: 8px;
+  padding: 0.5rem; 
+  gap: 4px;
 }
 .loading-overlay.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
@@ -133,7 +134,7 @@ body.overlay-active { overflow: hidden; }
 .queef-puff.puff-explode { animation: puff-explode .55s ease-out forwards; }
 /* STATIC TEXT — no pulse or motion */
 .welcome-message{
-  margin: 6px 10px;
+  margin: 6px 10px 6px;
   font-family: 'Luckiest Guy', sans-serif;
   font-weight: 700;
   color: var(--orange);
@@ -233,7 +234,7 @@ header { position: relative; }
   position: fixed; top: 0; left: 0; width: 100%; height: var(--status-height);
   line-height: var(--status-height);    
   background: var(--orange); color: #0d0d0d; font-weight: 700; font-size: 1.2rem;
-  padding: .5em 0; border-top: 3px solid #000; border-bottom: 3px solid #000;
+  border-top: 3px solid #000; border-bottom: 3px solid #000;
   z-index: 1001; text-align: center; overflow: hidden;
 }
 .queef-facts-scroll { display: inline-block; white-space: nowrap; animation: scroll-left 30s linear infinite; }
@@ -372,13 +373,15 @@ nav {
 }
 
 /* Popover (hover/click box with details) */
+/* Popover (hover/click box with details) */
 .puff-popover[hidden] { display: none; }
-.puff-popover{ position:absolute; inset:0; display:block; z-index:10; pointer-events:none; }
+.puff-popover { position: absolute; inset: 0; display: block; z-index: 10; pointer-events: none; }
 
 .puff-popover__card {
-  pointer-events:auto;
-  z-index:11; }
   position: absolute;
+  pointer-events: auto;
+  z-index: 11;
+
   max-width: 520px;
   min-width: 300px;
   background: rgba(20,10,35,.96);
@@ -389,6 +392,7 @@ nav {
   transform-origin: 50% 50%;
   animation: roadmapPop .18s ease-out;
 }
+
 @keyframes roadmapPop {
   from { transform: scale(.96); opacity: 0; }
   to   { transform: scale(1);   opacity: 1; }
@@ -544,7 +548,10 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
 @media (max-width: 768px) {
   body {
     font-size: 16px;
-    padding: 80px 1em 0; /* keep top padding consistent */
+    padding-top: var(--page-padding-top);   /* use variable */
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 0;
     background-image: url('assets/bg-mobile.png');
     background-repeat: no-repeat;
     background-position: center top;
