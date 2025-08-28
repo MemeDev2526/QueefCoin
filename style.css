@@ -61,15 +61,10 @@ body {
   margin: 0;
   min-height: 100vh;
   width: 100%;
-  font-family: 'Rubik', sans-serif;
   font-size: 18px;
-  color: var(--white);
   background-color: var(--black);
-  background-image: url('assets/bg-queefcoin.png');
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-size: contain;
-  background-attachment: fixed;
+  ...
+}
 
   /* keep content clear of sticky elements */
   padding-top: var(--page-padding-top);
@@ -127,15 +122,6 @@ body.overlay-active { overflow: hidden; }
   margin: 0 auto 10px;
   filter: drop-shadow(0 10px 30px rgba(255,107,0,.25));
   animation: float 4.5s ease-in-out infinite, puffGlow 2.6s ease-in-out infinite;
-}
-@keyframes float{
-  0%,100% { transform: translateY(0) scale(1); }
-  50%     { transform: translateY(-10px) scale(1.03); }
-}
-@keyframes puffGlow{
-  0%,100% { filter: drop-shadow(0 10px 30px rgba(255,107,0,.25)); }
-  50%     { filter: drop-shadow(0 16px 50px rgba(255,149,0,.45)); }
-}
 
 /* STATIC TEXT — no pulse or motion */
 .welcome-message{
@@ -161,6 +147,16 @@ body.overlay-active { overflow: hidden; }
 /* Emoji fx container stays above page content but below overlay content */
 .emoji-explosion { position: fixed; inset: 0; pointer-events: none; z-index: 9999; overflow: visible; }
 .emoji-particle { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-size: clamp(2.5rem,5vw,6rem); opacity: 0; animation: puff-emoji-burst 3.8s ease-out forwards; transform-origin: center; }
+
+/* Global links */
+a:not(.btn):not(.cta-button){
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: 700;
+}
+a:not(.btn):not(.cta-button):hover{
+  color: var(--solanaD);
+}
 
 /* =========================================================
    3) LAYOUT & TYPOGRAPHY (CORE)
@@ -224,7 +220,7 @@ nav {
 }
 .nav-links { display: flex; justify-content: center; gap: 2em; list-style: none; padding: 0; margin: 0; font-size: 18px; }
 .nav-links a { display: block; color: var(--orange); text-decoration: none; padding: .5em 1em; border-radius: 20px; font-weight: 700; transition: background .3s, color .3s; }
-.nav-links a:hover { background: var(--orange); color: var(--black); }
+.nav-links a:hover { background: var(--solanaD); color: var(--black); }
 .nav-links a.active { background: #008CFF; color: var(--black); } /* or use #FDC100 */
 .nav-links .coming-soon { color: var(--gray); font-style: italic; padding: .5em 1em; }
 
@@ -251,6 +247,8 @@ nav {
   transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
 .btn:hover, .cta-button:hover, #tiktok a:hover{
+  background: var(--orange-hi);
+  color: var(--white);
   transform:translateY(-2px) scale(1.03);
   box-shadow:0 12px 34px rgba(255,107,0,.5), inset 0 -2px 0 #C25500;
 }
@@ -266,7 +264,9 @@ nav {
 .footer-badges svg, .tokenomics-badges svg, .dao-badges svg { height: 40px; }
 
 /* Footer */
-footer { background: #1a1a1a; padding: 1.5em; font-size: 14px; color: #aaa; text-align: center; }
+footer { background: #111; padding: 1.5em; font-size: 14px; color: var(--white); text-align: center; }
+footer a { color: var(--orange); }
+footer a:hover { color: var(--solanaD); }
 footer .disclaimer { font-size: 12px; color: #ff6347; font-style: italic; margin-top: 1em; }
 /* Footer quick link row */
 .footer-links {
@@ -329,8 +329,9 @@ footer .btn {
 }
 
 .back-to-top a:hover {
-  background: var(--orange);
-  color: var(--black);
+  background: var(--orange-hi);
+  color: var(--white);
+  border-color: var(--orange-hi);
 }
 #faq summary {
   list-style: none; cursor: pointer; font-weight: 700; color: var(--orange);
