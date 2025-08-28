@@ -22,8 +22,8 @@
   --font-heading: 'Luckiest Guy', cursive;
 
   /* Layout */
-  --nav-height: 50px;
-  --status-height: 30px;  
+  --nav-height: 45px;
+  --status-height: 45px;  
   --page-padding-top: calc(50px + var(--nav-height) + var(--status-height));
   --banner-height: 70px;
 
@@ -68,7 +68,7 @@ body {
   background-color: var(--black);
 
   /* keep content clear of sticky elements */
-  padding-top: var(--page-padding-top);
+  padding-top:  var(--page-padding-top);
   padding-bottom: var(--banner-height); /* for bottom image marquee */
 
   /* center main content by default */
@@ -95,7 +95,7 @@ body.overlay-active { overflow: hidden; }
   position: fixed; inset: 0; z-index: 9998;
   display: grid; place-items: center;
   opacity: 1; visibility: visible; pointer-events: auto;
-  transition: opacity .6s ease-in-out, visibility .6s ease-in-out;
+  transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
 }
 
 /* FULLSCREEN BACKGROUND IMAGE + DARK BLEND (this hides the site) */
@@ -113,10 +113,11 @@ body.overlay-active { overflow: hidden; }
 /* FOREGROUND CONTENT STACK */
 .loading-overlay .overlay-content{
   position: relative; z-index: 1;
-  width: min(92vw, 920px);
+  width: min(92vw, 860px);
   text-align: center;
   color: var(--white);
-  padding: 1.25rem;  
+  padding: 0.75rem; 
+  gap: 8px;
 }
 .loading-overlay.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
@@ -125,21 +126,21 @@ body.overlay-active { overflow: hidden; }
   width: min(64vw, 540px);
   height: auto;
   display: block;
-  margin: 0 auto 8px;
+  margin: 0 auto 6px;
   filter: drop-shadow(0 10px 30px rgba(255,107,0,.28));
   animation: float 3.6s ease-in-out infinite, puffGlow 2.1s ease-in-out infinite;
 }
 .queef-puff.puff-explode { animation: puff-explode .55s ease-out forwards; }
 /* STATIC TEXT — no pulse or motion */
 .welcome-message{
-  margin: 8px auto 14px;
+  margin: 6px 10px;
   font-family: 'Luckiest Guy', sans-serif;
   font-weight: 700;
   color: var(--orange);
   text-shadow: 0 0 18px rgba(253,193,0,.25);
   line-height: 1.22;
   font-size: clamp(1.1rem, 2.2vw + .7rem, 2.2rem);
-  max-width: 980px;
+  max-width: 820px;
   margin-inline: auto;
   animation: none !important;   /* 👈 stop any inherited pulsing */
 }
@@ -162,7 +163,7 @@ a:not(.btn):not(.cta-button){
   font-weight: 700;
 }
 a:not(.btn):not(.cta-button):hover{
-  color: var(--solanaD);
+  color: #FFFFFF;
 }
 
 .coin { position: fixed; top: -80px; pointer-events: none; animation: fall 3.6s linear forwards; z-index: 9999; }
@@ -179,7 +180,7 @@ section { padding: 2rem 0; }
   background: rgba(0,0,0,0.7);
   border-radius: 12px;
   box-shadow: var(--shadow-lg);
-  text-align: left;
+  text-align: center;
 }
 
 .section-inner h1,
@@ -197,6 +198,8 @@ section { padding: 2rem 0; }
 .section-inner li,
 .section-inner .text,
 .section-inner span {
+  margin-left: auto;
+  margin-right: auto;
   font-size: 1.1rem;
   line-height: 1.75;
   letter-spacing: 0.02em;
@@ -204,7 +207,8 @@ section { padding: 2rem 0; }
   color: var(--white);
 }
 
-.section-inner ul { list-style: none; padding-left: 0; margin-left: 0; }
+.section-inner ul { display: inline-block; text-align: left; list-style: none; padding-left: 0;  margin-left: auto;
+  margin-right: auto; }
 .section-inner li { margin: 0 0 .8em; }
 
 /* =========================================================
@@ -215,7 +219,8 @@ header { position: relative; }
 .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
 .queef-facts-banner {
-  position: fixed; top: 0; left: 0; width: 100%; height: 30px;
+  position: fixed; top: 0; left: 0; width: 100%; height: var(--status-height);
+  line-height: var(--status-height);    
   background: var(--orange); color: #0d0d0d; font-weight: 700; font-size: 1.2rem;
   padding: .5em 0; border-top: 3px solid #000; border-bottom: 3px solid #000;
   z-index: 1001; text-align: center; overflow: hidden;
