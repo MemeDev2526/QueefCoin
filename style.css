@@ -165,7 +165,7 @@ a:not(.btn):not(.cta-button):hover{
   color: var(--solanaD);
 }
 
-.coin { position: fixed; top: -80px; pointer-events: none; animation: fall 3.6s linear forwards; z-index: 999; }
+.coin { position: fixed; top: -80px; pointer-events: none; animation: fall 3.6s linear forwards; z-index: 9999; }
 /* =========================================================
    3) LAYOUT & TYPOGRAPHY (CORE)
    ========================================================= */
@@ -224,7 +224,7 @@ header { position: relative; }
 
 /* NAV */
 nav {
-  position: fixed; top: 40px; left: 0; width: 100%;
+  position: fixed; top: var(--status-height); left: 0; width: 100%;
   background: var(--black); box-shadow: var(--shadow-md);
   padding: 1em 0; z-index: 1000;
 }
@@ -261,6 +261,13 @@ nav {
   color: var(--white);
   transform:translateY(-2px) scale(1.03);
   box-shadow:0 12px 34px rgba(255,107,0,.5), inset 0 -2px 0 #C25500;
+}
+
+.cta-button.disabled{
+  opacity: .55;
+  cursor: not-allowed;
+  filter: grayscale(.1);
+  pointer-events: none;
 }
 
 .carousel { display: flex; justify-content: center; gap: 2em; flex-wrap: nowrap; overflow-x: auto; position: relative; overflow: visible; z-index: 1; }
@@ -350,13 +357,11 @@ nav {
 
 /* Popover (hover/click box with details) */
 .puff-popover[hidden] { display: none; }
-.puff-popover {
-  position: absolute;
-  inset: 0;         /* keeps popover positioning relative to section */
-  display: block;
-}
+.puff-popover{ position:absolute; inset:0; display:block; z-index:10; pointer-events:none; }
 
 .puff-popover__card {
+  pointer-events:auto;
+  z-index:11; }
   position: absolute;
   max-width: 520px;
   min-width: 300px;
@@ -408,7 +413,7 @@ nav {
 footer { background: #111; padding: 1.5em; font-size: 14px; color: var(--white); text-align: center; }
 footer a { color: var(--orange); }
 footer a:hover { color: var(--solanaD); }
-footer .disclaimer { font-size: 12px; color: #ff6347; font-style: italic; margin-top: 1em; }
+footer .disclaimer { font-size: 12px; color: #ff3b2f; font-weight: 800; font-style: italic; letter-spacing: .2px; margin-top: 1em; }
 /* Footer quick link row */
 .footer-links {
   margin: 1rem 0 0;
@@ -428,7 +433,7 @@ footer .btn {
    6) SECTION OVERRIDES (Minimal)
    ========================================================= */
 /* HERO keeps orange copy */
-.hero { text-align: center; color: var(--orange); }
+.hero { text-align: center; margin: 2em auto; color: var(--orange); }
 .hero p { color: var(--orange); }
 
 /* ROADMAP */
