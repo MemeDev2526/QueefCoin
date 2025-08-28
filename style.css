@@ -61,32 +61,61 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + var(--status-height) +
 /* =========================================================
    2) GLOBAL OVERLAYS / SPECIAL EFFECTS
    ========================================================= */
+/* =========================================================
+   2) GLOBAL OVERLAYS / SPECIAL EFFECTS  (REPLACED)
+   ========================================================= */
+
+/* Lock the page while the overlay is up */
+body.overlay-active { overflow: hidden; }
+
+/* OVERLAY SHELL (no bg image here anymore) */
 .loading-overlay{
   position: fixed; inset: 0; z-index: 9999;
-  display: flex; align-items: center; justify-content: center;
-  background-color: var(--black);
-  /* background image fills the whole viewport */
-  background:
-    radial-gradient(ellipse at center, rgba(0,0,0,.0) 0%, rgba(0,0,0,.45) 65%, rgba(0,0,0,.75) 100%),
-    url('assets/welcome-overlay.png') center / cover no-repeat;
-  transition: opacity .6s ease-in-out;
+  display: grid; place-items: center;
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transition: opacity .6s ease-in-out, visibility .6s ease-in-out;
 }
-html.has-overlay, body.has-overlay { height: 100%; overflow: hidden; }
 
-/* Puff/emoji fx (unchanged logic-wise) */
-.queef-puff-animation { color: var(--white); animation: puff-and-shine 4s ease-in-out infinite; 
-  text-align:center; 
-  padding: 2rem; 
-  width: min(92vw, 1100px); 
+/* FULLSCREEN BACKGROUND IMAGE + DARK BLEND (this hides the site) */
+.loading-overlay .overlay-bg{
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to bottom, rgba(13,13,13,.88), rgba(13,13,13,.88)),
+    url("assets/welcome-background.png"); /* 👈 set your background image here */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
 }
+
+/* FOREGROUND CONTENT STACK */
+.loading-overlay .overlay-content{
+  position: relative; z-index: 1;
+  width: min(92vw, 1100px);
+  text-align: center; 
+  color: var(--white);
+  padding: 2rem;
+}
+
+/* MASCOT — the ONLY thing that moves */
 .queef-puff{
   width: min(60vw, 520px);
   height: auto;
-  display:block;
+  display: block;
   margin: 0 auto 10px;
   filter: drop-shadow(0 10px 30px rgba(255,107,0,.25));
-  animation: float 4.5s ease-in-out infinite;
+  animation: float 4.5s ease-in-out infinite, puffGlow 2.6s ease-in-out infinite;
 }
+@keyframes float{
+  0%,100% { transform: translateY(0) scale(1); }
+  50%     { transform: translateY(-10px) scale(1.03); }
+}
+@keyframes puffGlow{
+  0%,100% { filter: drop-shadow(0 10px 30px rgba(255,107,0,.25)); }
+  50%     { filter: drop-shadow(0 16px 50px rgba(255,149,0,.45)); }
+}
+
+/* STATIC TEXT — no pulse or motion */
 .welcome-message{
   margin: 14px 0 16px;
   font-family: 'Luckiest Guy', sans-serif;
@@ -94,23 +123,20 @@ html.has-overlay, body.has-overlay { height: 100%; overflow: hidden; }
   color: var(--orange);
   text-shadow: 0 0 18px rgba(253,193,0,.25);
   line-height: 1.22;
-  /* scales nicely from phone to desktop */
   font-size: clamp(1.1rem, 2.2vw + .7rem, 2.2rem);
   max-width: 980px;
   margin-inline: auto;
-  /* gentle glow instead of big bounce */
-  animation: puff-glow 3s ease-in-out infinite;
+  animation: none !important;   /* 👈 stop any inherited pulsing */
 }
-.welcome-message.bounce { animation: none; }
-.puff-wrapper { position: relative; display: inline-block; }
-.puff-explode { animation: puff-explode 1.8s ease-out forwards; }
 
-.smoke { position:absolute; width:140px; height:140px; border-radius:50%; background: radial-gradient(circle at 40% 40%, rgba(255,255,255,.2) 60%, rgba(255,255,255,0) 70%);filter: blur(10px); opacity:.18; pointer-events:none; mix-blend-mode:screen; z-index:1;}
-.smoke-1 { top: 50%; left: 50%; transform: translate(-220%,-40%); animation: drift 16s linear infinite; }
-.smoke-2{ left:50%; top:50%; transform:translate(-50%,-60%);  animation: drift 18s linear infinite reverse; }
-.smoke-3{ left:50%; top:50%; transform:translate(120%,-30%);  animation: drift 20s linear infinite; }
-.smoke.show { animation: smoke-poof 1.2s ease-out forwards; }
+/* OPTIONAL: hide/disable smoke so only mascot animates */
+.smoke, .smoke-1, .smoke-2, .smoke-3{
+  animation: none !important;
+  opacity: 0 !important;
+  display: none !important;
+}
 
+/* Emoji fx container stays above page content but below overlay content */
 .emoji-explosion { position: fixed; inset: 0; pointer-events: none; z-index: 9999; overflow: visible; }
 .emoji-particle { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-size: clamp(2.5rem,5vw,6rem); opacity: 0; animation: puff-emoji-burst 3.8s ease-out forwards; transform-origin: center; }
 
@@ -309,6 +335,14 @@ footer .btn {
 @keyframes scroll-left { from {transform: translateX(100%);} to {transform: translateX(-100%);} }
 @keyframes fall { from {transform: translateY(0) rotate(0); opacity:1;} to {transform: translateY(100vh) rotate(360deg); opacity:0;} }
 @keyframes fadeInUp { to { opacity:1; transform: translateY(0);} }
+@keyframes float {
+  0%,100% { transform: translateY(0) scale(1); }
+  50%     { transform: translateY(-10px) scale(1.03); }
+}
+@keyframes puffGlow {
+  0%,100% { filter: drop-shadow(0 10px 30px rgba(255,107,0,.25)); }
+  50%     { filter: drop-shadow(0 16px 50px rgba(255,149,0,.45)); }
+}
 
 .fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 1.2s ease-out forwards; animation-delay: .4s; }
 
