@@ -1,6 +1,83 @@
 // QueefCoin site interactivity
 console.log('QueefCoin site ready.');
 
+// === Puff Plan (Roadmap) copy ===
+const QC_PHASES = {
+  node1: {
+    title: "🌬️ Puff Origin",
+    body: `
+      <p><em>Where it all begins — one puff, infinite potential.</em></p>
+      <p><strong>🎯 Focus:</strong> Launch the coin. Ignite the cult. Define the legend.</p>
+      <ul>
+        <li>✅ Genesis drop on Solana via bonk.fun (because obviously it's the best)</li>
+        <li>💬 The First Gathering — Telegram opens</li>
+        <li>🐦 Twitter/X — The Puff Speaks</li>
+        <li>📦 Sticker packs, GIFs & Telegram bots unleashed</li>
+        <li>🌐 Website & meme-grade whitepaper goes live</li>
+        <li>📜 Lore Drop #1 — <em>“The Puff Prophecy”</em> — cinematic launch reel reveal</li>
+      </ul>
+    `
+  },
+  node2: {
+    title: "📈 Pump the Puff",
+    body: `
+      <p><em>We meme. We build. We go borderline cult.</em></p>
+      <p><strong>🎯 Focus:</strong> Amplify the brand. Grow the movement. Stoke the hype.</p>
+      <ul>
+        <li>🚀 Meme Raids: Operation Cloudburst</li>
+        <li>🎨 Meme War Contests w/ $QUEEF rewards</li>
+        <li>🛍️ Merch Store Launch — Puff Gear, No Shame</li>
+        <li>💸 Holder-Only Merch Discounts</li>
+        <li>🕹️ Puff Dodge DEMO — <em>“The Trial Run”</em></li>
+        <li>🔥 Mini Burn #1 — symbolic start to the prophecy</li>
+        <li>🤝 Alliances with BONK-affiliated projects</li>
+      </ul>
+    `
+  },
+  node3: {
+    title: "🚀 Puff Unleashed",
+    body: `
+      <p><em>We burn. We roar. We make the Puff soar! Let’s be unstoppable!</em></p>
+      <p><strong>🎯 Focus:</strong> Launch utility. Burn big. Unleash the puff. Go viral. Break the feed.</p>
+      <ul>
+        <li>🕹️ Puff Dodge FULL Release — Burn-Per-Play unlocked</li>
+        <li>🌍 Global Leaderboards go live</li>
+        <li>🗳️ DAO-lite voting for burns & treasury moves</li>
+        <li>🔥 The Great Burn — first large-scale community burn</li>
+        <li>🧢 Themed Restock Drops (Holder-Only Discounts)</li>
+        <li>👀 Lore Drop #2 — <em>“The Puff Takes Form”</em></li>
+      </ul>
+    `
+  },
+  node4: {
+    title: "💗 Puff With Purpose",
+    body: `
+      <p><em>The joke becomes a mission — We vote. We quest. We blow for change.</em></p>
+      <p><strong>🎯 Focus:</strong> Align the puff with a mission. Blow wind for change. Meme with meaning.</p>
+      <ul>
+        <li>🗳️ DAO chooses the first Puff-backed cause</li>
+        <li>💝 Charitable merch for chosen cause</li>
+        <li>🤝 Partnerships with mission-aligned builders</li>
+        <li>📊 Transparent donation & burn tracker goes public</li>
+        <li>📣 Lore Drop #3 — <em>“The First Quest”</em> — Meme-for-a-Cause Week begins</li>
+      </ul>
+    `
+  },
+  node5: {
+    title: "🌀 The Puff Beyond",
+    body: `
+      <p><em>We hold. We rise. We ascend together!</em></p>
+      <p><strong>🎯 Focus:</strong> Classified. Only the Puff knows.</p>
+      <ul>
+        <li>🚫 Redacted until the prophecy demands it</li>
+        <li>🗝️ Hidden clues scattered across earlier phases</li>
+        <li>🔮 Lore Drop #4 — <em>“Ascension”</em> — When the Puff rises, you’ll know</li>
+      </ul>
+    `
+  }
+};
+
+
 document.addEventListener('DOMContentLoaded', function () {
   const enterButton = document.getElementById('enter-btn');
   const overlay = document.querySelector('.loading-overlay');
@@ -30,11 +107,84 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Nav toggle
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+}
+
+ // === Roadmap (horizontal) popover wiring ===
+(function initRoadmap(){
+  const roadmap = document.querySelector('#roadmap');
+  if (!roadmap) return;
+
+  const popover = roadmap.querySelector('#puff-popover');
+  const card    = popover?.querySelector('.puff-popover__card');
+  const titleEl = popover?.querySelector('.puff-popover__title');
+  const bodyEl  = popover?.querySelector('.puff-popover__body');
+  const closeEl = popover?.querySelector('.puff-popover__close');
+
+  function positionCardNear(nodeBtn){
+    if (!roadmap || !popover || !card) return;
+
+    const rr = roadmap.getBoundingClientRect();
+    const rn = nodeBtn.getBoundingClientRect();
+
+    const fallbackW = 360, fallbackH = 220;
+    const cw = card.offsetWidth  || fallbackW;
+    const ch = card.offsetHeight || fallbackH;
+
+    let top  = (rn.top  - rr.top)  - 20;
+    let left = (rn.left - rr.left) + (rn.width/2) - (cw/2);
+
+    top  = Math.max(8, Math.min(top,  rr.height - ch - 8));
+    left = Math.max(8, Math.min(left, rr.width  - cw - 8));
+
+    card.style.top  = `${top}px`;
+    card.style.left = `${left}px`;
+  }
+
+  function openPopoverFor(nodeBtn){
+    const key  = nodeBtn.dataset.phase;
+    const data = QC_PHASES[key];
+    if (!data || !titleEl || !bodyEl) return;
+
+    titleEl.textContent = data.title;
+    bodyEl.innerHTML    = data.body;  // NOTE: HTML content
+
+    popover.hidden = false;
+    requestAnimationFrame(()=> positionCardNear(nodeBtn));
+  }
+
+  function closePopover(){ if (popover) popover.hidden = true; }
+
+  roadmap.querySelectorAll('.puff-node').forEach(btn=>{
+    btn.addEventListener('click', ()=> openPopoverFor(btn));
+  });
+
+  document.addEventListener('click', (e)=>{
+    if (!popover || popover.hidden) return;
+    const withinRoadmap = roadmap.contains(e.target);
+    const withinCard    = e.target.closest?.('.puff-popover__card');
+    if (!withinRoadmap || !withinCard) closePopover();
+  });
+
+  document.addEventListener('keydown', (e)=>{
+    if (e.key === 'Escape') closePopover();
+  });
+
+  window.addEventListener('resize', ()=>{ if (!popover.hidden) closePopover(); });
+
+  if (closeEl) closeEl.addEventListener('click', closePopover);
+
+  if (window.gsap) {
+    roadmap.querySelectorAll('.puff-node').forEach(el=>{
+      el.addEventListener('mouseenter', ()=> gsap.to(el, { duration: 0.25, scale: 1.06, ease: "power2.out" }));
+      el.addEventListener('mouseleave', ()=> gsap.to(el, { duration: 0.25, scale: 1.0,  ease: "power2.out" }));
+      gsap.to(el, { duration: 2.4, scale: 1.02, yoyo: true, repeat: -1, ease: "sine.inOut", delay: Math.random()*0.8 });
     });
   }
+})();
 
 // 🟠 Enter button interaction
 if (enterButton && overlay && homeSection && queefSound && puffImage) {
@@ -128,6 +278,8 @@ window.addEventListener('load', function () {
     delay: 200,
     interval: 100
   });
+  // Nicely stagger the roadmap nodes
+  sr.reveal('.roadmap__nodes .puff-node', { delay: 150, interval: 80, scale: 0.98 });
 
   console.log('[ScrollReveal targets]', document.querySelectorAll('.tokenomics p, .charity p, .merch p'));
 });
