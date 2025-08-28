@@ -449,7 +449,7 @@ footer .btn {
    ========================================================= */
 /* HERO keeps orange copy */
 .hero { text-align: center; margin: 2em auto; color: var(--orange); }
-.hero p { color: var(--orange); }
+.hero p { color: var(--white); }
 
 /* ROADMAP */
 .roadmap hr { margin: 2em 0; border-color: var(--orange); }
