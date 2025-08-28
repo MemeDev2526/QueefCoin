@@ -1,26 +1,54 @@
 /* =========================================================
    0) VARIABLES
    ========================================================= */
+/* =========================================================
+   0) VARIABLES & TOKENS — $QUEEF BRAND LOCKED
+   ========================================================= */
 :root {
-  --orange: #FF6B00;
-  --highlight-orange:#FF9500;   
-  --black:  #0D0D0D;
-  --white:  #FFFFFF;
-  --gray:   #AAAAAA;
-  --pink:   #FF69B4;
-  --solana-green: #00FFA3;
+  /* Brand colours */
+  --orange: #FF6B00;       /* Primary Brand Orange (Mascot & Coin) */
+  --orange-hi: #FF9500;    /* Highlight Orange */
+  --black: #0D0D0D;        /* Jet Black */
+  --white: #FFFFFF;        /* Puff White */
+  --gold: #FDC100;         /* Golden Yellow */
+  --solanaD: #008CFF;      /* Solana Blue Dark */
+  --solanaL: #94DAFF;      /* Solana Blue Light */
+  --purpleA: #2C0A44;      /* Cosmic Gradient Start */
+  --purpleB: #4D0D57;      /* Cosmic Gradient End */
 
-  /* layout */
+  /* Deprecated (safe to remove unless needed for accents) */
+  /* --pink: #FF69B4; */
+  /* --solana-green: #00FFA3; */
+
+  /* Fonts */
+  --font-body: 'Rubik', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-heading: 'Luckiest Guy', cursive;
+
+  /* Layout */
   --nav-height: 64px;
-  --status-height: 30px;  /* matches .queef-facts-banner height */
+  --status-height: 30px;  
   --page-padding-top: calc(50px + var(--nav-height) + var(--status-height));
+  --banner-height: 70px;
 
-  /* NEW */
-  --banner-height: 70px; /* desktop/tablet default */
-
-  /* shadows */
+  /* Shadows */
   --shadow-lg: 0 0 20px rgba(0,0,0,0.3);
   --shadow-md: 0 2px 12px rgba(0,0,0,0.5);
+}
+
+/* Global base */
+body {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--white);
+  background-color: var(--black);
+}
+
+/* Headings */
+h1, h2, h3, .section-title, .title, .heading {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--orange);
 }
 
 /* =========================================================
