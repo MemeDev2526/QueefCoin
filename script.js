@@ -9,43 +9,27 @@ document.addEventListener('DOMContentLoaded', function () {
   const homeSection = document.getElementById('home');
   const queefSound = document.getElementById('queef-sound');
   const puffImage = document.querySelector('.queef-puff');
-  const smokePoofs = document.querySelectorAll('.smoke'); // ✅ Add this
+  const smokePoofs = document.querySelectorAll('.smoke');
 
   function dismissOverlay() {
-  // add CSS exit state
-  overlay.classList.add('is-hidden');
-  // release scroll lock
-  document.body.classList.remove('overlay-active');
+    // add CSS exit state
+    overlay.classList.add('is-hidden');
+    // release scroll lock
+    document.body.classList.remove('overlay-active');
 
-  // remove overlay node after fade (match CSS transition ~600ms)
-  setTimeout(() => {
-    overlay?.remove();
-    document.body.classList.add('loaded'); // your fallback visibility
-    // focus main content for a11y
-    const main = document.getElementById('main');
-    if (main) main.setAttribute('tabindex', '-1'), main.focus();
-  }, 650);
-}
+    // remove overlay node after fade (match CSS transition ~600ms)
+    setTimeout(() => {
+      overlay?.remove();
+      document.body.classList.add('loaded'); // fallback visibility
+      // focus main content for a11y
+      const main = document.getElementById('main');
+      if (main) { main.setAttribute('tabindex', '-1'); main.focus(); }
+      // reveal home section
+      if (homeSection) homeSection.classList.add('fade-in');
+    }, 650);
+  }
 
-
-  // 💨 Puff divider animation temporarily disabled
-/*
-const puffPath = document.querySelector('.puff-path');
-if (puffPath && typeof gsap !== 'undefined' && typeof window.MorphSVGPlugin !== 'undefined') {
-  const MorphSVGPlugin = window.MorphSVGPlugin;
-  gsap.registerPlugin(MorphSVGPlugin);
-  gsap.to(puffPath, {
-    duration: 4,
-    repeat: -1,
-    yoyo: true,
-    ease: "power1.inOut",
-    morphSVG: {
-      shape: "M0,160 Q360,180 720,240 T1440,160 V320 H0 Z"
-    }
-  });
-}
-*/
-  
+  // Nav toggle
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', () => {
       navLinks.classList.toggle('show');
@@ -55,47 +39,42 @@ if (puffPath && typeof gsap !== 'undefined' && typeof window.MorphSVGPlugin !== 
   // 🟠 Enter button interaction
   if (enterButton && overlay && homeSection && queefSound && puffImage) {
     enterButton.addEventListener('click', () => {
-  const centerX = window.innerWidth / 2;
-  const centerY = window.innerHeight / 2;
-  playQueefEffect(centerX, centerY);
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      playQueefEffect(centerX, centerY);
 
-  // optional burst on Queefy, then dismiss
-  if (puffImage) {
-    puffImage.classList.remove('puff-explode'); // reset if clicked twice
-    void puffImage.offsetWidth; // reflow
-    puffImage.classList.add('puff-explode');
-  }
-  smokePoofs?.forEach(smoke => smoke.classList.add('show')); // no-ops if none
-  setTimeout(dismissOverlay, 800);
-});
+      // optional burst on Queefy, then dismiss
+      puffImage.classList.remove('puff-explode'); // reset if clicked twice
+      void puffImage.offsetWidth; // reflow
+      puffImage.classList.add('puff-explode');
 
-
-      setTimeout(() => {
-        overlay.style.opacity = 0;
-        overlay.style.pointerEvents = 'none';
-        setTimeout(() => {
-          overlay.style.display = 'none';
-          homeSection.classList.add('fade-in');
-          document.body.classList.add('loaded'); // Fallback visibility
-        }, 600);
-      }, 800);
+      smokePoofs.forEach(smoke => smoke.classList.add('show')); // safe if none
+      setTimeout(dismissOverlay, 800);
     });
   }
 
-  // 🖱️ Handle mouse clicks and taps with debounce
-  let lastPuffTime = 0;
-  function handleGlobalClick(event) {
-    const now = Date.now();
-    if (now - lastPuffTime < 400) return;
-    lastPuffTime = now;
-
-    const x = event.clientX || (event.touches && event.touches[0].clientX);
-    const y = event.clientY || (event.touches && event.touches[0].clientY);
-    if (x && y) playQueefEffect(x, y);
+  // 💨 Puff divider animation temporarily disabled
+  /*
+  const puffPath = document.querySelector('.puff-path');
+  if (puffPath && typeof gsap !== 'undefined' && typeof window.MorphSVGPlugin !== 'undefined') {
+    const MorphSVGPlugin = window.MorphSVGPlugin;
+    gsap.registerPlugin(MorphSVGPlugin);
+    gsap.to(puffPath, {
+      duration: 4,
+      repeat: -1,
+      yoyo: true,
+      ease: "power1.inOut",
+      morphSVG: { shape: "M0,160 Q360,180 720,240 T1440,160 V320 H0 Z" }
+    });
   }
+  */
 
-  document.addEventListener('click', handleGlobalClick);
-  document.addEventListener('touchstart', handleGlobalClick);
+  // (Optional extras—uncomment if you want these behaviors)
+  // if (queefSound) queefSound.addEventListener('ended', dismissOverlay);
+  // window.addEventListener('keydown', (e) => {
+  //   if (e.key === 'Escape' && document.querySelector('.loading-overlay')) dismissOverlay();
+  // });
+  // overlay?.addEventListener('click', (e) => { if (e.target === overlay) dismissOverlay(); });
 });
 
 // ✅ ScrollReveal (run after full window load)
@@ -119,7 +98,6 @@ window.addEventListener('load', function () {
     interval: 100
   });
 
-  // Debug: Check if elements are being matched
   console.log('[ScrollReveal targets]', document.querySelectorAll('.tokenomics p, .charity p, .merch p'));
 });
 
