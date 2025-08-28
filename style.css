@@ -102,10 +102,10 @@ body.overlay-active { overflow: hidden; }
 .loading-overlay .overlay-bg{
   position: absolute; inset: 0;
   background-image:
-    linear-gradient(to bottom, rgba(13,13,13,.88), rgba(13,13,13,.88)),
-    url("assets/welcome-background.png"); /* 👈 set your background image here */
+    linear-gradient(to bottom, rgba(13,13,13,.72), rgba(13,13,13,.72)),
+    url("assets/welcome-background.png");
   background-size: cover;
-  background-position: center;
+  background-position: center 30%;
   background-repeat: no-repeat;
   background-blend-mode: multiply;
 }
@@ -113,26 +113,26 @@ body.overlay-active { overflow: hidden; }
 /* FOREGROUND CONTENT STACK */
 .loading-overlay .overlay-content{
   position: relative; z-index: 1;
-  width: min(92vw, 1100px);
-  text-align: center; 
+  width: min(92vw, 920px);
+  text-align: center;
   color: var(--white);
-  padding: 2rem;
+  padding: 1.25rem;  
 }
 .loading-overlay.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
 /* MASCOT — the ONLY thing that moves */
 .queef-puff{
-  width: min(60vw, 520px);
+  width: min(64vw, 540px);
   height: auto;
   display: block;
-  margin: 0 auto 10px;
-  filter: drop-shadow(0 10px 30px rgba(255,107,0,.25));
-  animation: float 4.5s ease-in-out infinite, puffGlow 2.6s ease-in-out infinite;
+  margin: 0 auto 8px;
+  filter: drop-shadow(0 10px 30px rgba(255,107,0,.28));
+  animation: float 3.6s ease-in-out infinite, puffGlow 2.1s ease-in-out infinite;
 }
 .queef-puff.puff-explode { animation: puff-explode .55s ease-out forwards; }
 /* STATIC TEXT — no pulse or motion */
 .welcome-message{
-  margin: 14px 0 16px;
+  margin: 8px auto 14px;
   font-family: 'Luckiest Guy', sans-serif;
   font-weight: 700;
   color: var(--orange);
