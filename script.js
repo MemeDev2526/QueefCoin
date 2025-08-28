@@ -260,6 +260,7 @@ if (enterButton && overlay && homeSection && queefSound && puffImage) {
 
 // ✅ ScrollReveal (run after full window load)
 window.addEventListener('load', function () {
+  if (!window.ScrollReveal) return;
   const sr = ScrollReveal({
     distance: '30px',
     duration: 800,
