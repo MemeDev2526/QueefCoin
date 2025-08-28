@@ -332,42 +332,7 @@ function playQueefEffect(x, y) {
   }, {passive:true});
 })();
 
- // Mascot ambient particles
-  let puffTimer;
-  function spawnParticleBurst(){
-    const rect = mascot.getBoundingClientRect();
-    const baseX = rect.left + rect.width * 0.5 + (Math.random()*10-5);
-    const baseY = rect.top  + rect.height* 0.65;
-    for(let i=0;i<6;i++){
-      const p = document.createElement('span');
-      p.className = 'qc-particle';
-      const offsetX = (Math.random()*90 - 45);
-      const offsetY = 10 + Math.random()*14;
-
-      p.style.left = (baseX + offsetX) + 'px';
-      p.style.top  = (baseY + offsetY) + 'px';
-      const s = 8 + Math.random()*10;
-      p.style.width = p.style.height = s + 'px';
-      p.style.animationDuration = (2.6 + Math.random()*1.2) + 's';
-      particlesWrap.appendChild(p);
-      setTimeout(()=>p.remove(), 3600);
-    }
-  }
-  function startParticles(){
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    puffTimer = setInterval(spawnParticleBurst, 3200);
-  }
-
-  // Faux live counter (randomized bump)
-  const counterEl = document.getElementById('qcCount');
-  const base = 12340 + Math.floor(Math.random()*200); // varies per session
-  let ticks = 0;
-  function tickCounter(){
-    ticks += 1 + Math.floor(Math.random()*3);
-    counterEl.textContent = (base + ticks).toLocaleString();
-  }
-
-// 💰 Coin Rain Observer
+ // 💰 Coin Rain Observer
 const coinContainer = document.querySelector("#coin-rain-container");
 if (coinContainer) {
   const observer = new IntersectionObserver(entries => {
