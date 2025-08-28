@@ -11,6 +11,23 @@ document.addEventListener('DOMContentLoaded', function () {
   const puffImage = document.querySelector('.queef-puff');
   const smokePoofs = document.querySelectorAll('.smoke'); // ✅ Add this
 
+  function dismissOverlay() {
+  // add CSS exit state
+  overlay.classList.add('is-hidden');
+  // release scroll lock
+  document.body.classList.remove('overlay-active');
+
+  // remove overlay node after fade (match CSS transition ~600ms)
+  setTimeout(() => {
+    overlay?.remove();
+    document.body.classList.add('loaded'); // your fallback visibility
+    // focus main content for a11y
+    const main = document.getElementById('main');
+    if (main) main.setAttribute('tabindex', '-1'), main.focus();
+  }, 650);
+}
+
+
   // 💨 Puff divider animation temporarily disabled
 /*
 const puffPath = document.querySelector('.puff-path');
@@ -37,15 +54,21 @@ if (puffPath && typeof gsap !== 'undefined' && typeof window.MorphSVGPlugin !== 
 
   // 🟠 Enter button interaction
   if (enterButton && overlay && homeSection && queefSound && puffImage) {
-    enterButton.addEventListener('click', function () {
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-      playQueefEffect(centerX, centerY);
+    enterButton.addEventListener('click', () => {
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+  playQueefEffect(centerX, centerY);
 
-      puffImage.style.animation = 'none';
-      void puffImage.offsetWidth; // force reflow
-      puffImage.classList.add('puff-explode');
-      smokePoofs.forEach(smoke => smoke.classList.add('show'));
+  // optional burst on Queefy, then dismiss
+  if (puffImage) {
+    puffImage.classList.remove('puff-explode'); // reset if clicked twice
+    void puffImage.offsetWidth; // reflow
+    puffImage.classList.add('puff-explode');
+  }
+  smokePoofs?.forEach(smoke => smoke.classList.add('show')); // no-ops if none
+  setTimeout(dismissOverlay, 800);
+});
+
 
       setTimeout(() => {
         overlay.style.opacity = 0;
