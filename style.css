@@ -112,14 +112,18 @@ body.overlay-active { overflow: hidden; }
 }
 
 /* FOREGROUND CONTENT STACK */
-.loading-overlay .overlay-content{
-  position: relative; z-index: 1;
+.loading-overlay .overlay-content {
+  position: relative;
+  z-index: 1;
   width: min(80vw, 800px);
-  display: grid; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* center vertically */
   text-align: center;
   color: var(--white);
-  padding: 0.15rem; 
-  gap: 1px;
+  padding: 1rem 0 3rem; /* bottom padding creates button space */
+  gap: 1rem; /* consistent spacing between mascot, text, button */
 }
 .loading-overlay.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
@@ -135,7 +139,7 @@ body.overlay-active { overflow: hidden; }
 .queef-puff.puff-explode { animation: puff-explode .55s ease-out forwards; }
 /* STATIC TEXT — no pulse or motion */
 .welcome-message{
-  margin: 5px 5px 5px;
+  margin: 5px auto 40px;
   font-family: 'Luckiest Guy', sans-serif;
   font-weight: 700;
   color: var(--orange);
