@@ -23,7 +23,7 @@
   --font-heading: 'Luckiest Guy', cursive;
 
   /* Layout */
-  --nav-height: 45px;
+  --nav-height: 40px;
   --status-height: 45px;  
   --page-padding-top: calc(24px + var(--nav-height) + var(--status-height));
   --banner-height: 70px;
@@ -118,8 +118,8 @@ body.overlay-active { overflow: hidden; }
   display: grid; 
   text-align: center;
   color: var(--white);
-  padding: 0.5rem; 
-  gap: 4px;
+  padding: 0.25rem; 
+  gap: 2px;
 }
 .loading-overlay.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
@@ -234,7 +234,7 @@ header { position: relative; }
 nav {
   position: fixed; top: var(--status-height); left: 0; width: 100%;
   background: var(--black); box-shadow: var(--shadow-md);
-  padding: 1em 0; z-index: 1000;
+  padding: 0.5em 0; z-index: 1000;
 }
 .nav-links { display: flex; justify-content: center; gap: 2em; list-style: none; padding: 0; margin: 0; font-size: 18px; }
 .nav-links a { display: block; color: var(--orange); text-decoration: none; padding: .5em 1em; border-radius: 20px; font-weight: 700; transition: background .3s, color .3s; }
