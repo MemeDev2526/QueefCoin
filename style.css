@@ -212,7 +212,7 @@ section { padding: 2rem 0; }
    ========================================================= */
 header { position: relative; }
 
-.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
 .queef-facts-banner {
   position: fixed; top: 0; left: 0; width: 100%; height: 30px;
@@ -224,13 +224,13 @@ header { position: relative; }
 
 /* NAV */
 nav {
-  position: fixed; top: 50px; left: 0; width: 100%;
+  position: fixed; top: 40px; left: 0; width: 100%;
   background: var(--black); box-shadow: var(--shadow-md);
   padding: 1em 0; z-index: 1000;
 }
 .nav-links { display: flex; justify-content: center; gap: 2em; list-style: none; padding: 0; margin: 0; font-size: 18px; }
 .nav-links a { display: block; color: var(--orange); text-decoration: none; padding: .5em 1em; border-radius: 20px; font-weight: 700; transition: background .3s, color .3s; }
-.nav-links a:hover { background: var(--solanaD); color: var(--black); }
+.nav-links a:hover { background:  var(--orange-hi); color: var(--black); }
 .nav-links a.active { background: #008CFF; color: var(--black); } /* or use #FDC100 */
 .nav-links .coming-soon { color: var(--gray); font-style: italic; padding: .5em 1em; }
 
