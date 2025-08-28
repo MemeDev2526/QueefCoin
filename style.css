@@ -2,7 +2,8 @@
    0) VARIABLES
    ========================================================= */
 :root {
-  --orange: #FB6B00;
+  --orange: #FF6B00;
+  --highlight-orange:#FF9500;   
   --black:  #0D0D0D;
   --white:  #FFFFFF;
   --gray:   #AAAAAA;
@@ -11,8 +12,11 @@
 
   /* layout */
   --nav-height: 64px;
-  --status-height: 0px; /* set if you add a sticky status bar under nav */
-  --page-padding-top: calc(50px + var(--nav-height) + var(--status-height)); /* adjust with banners */
+  --status-height: 30px;  /* matches .queef-facts-banner height */
+  --page-padding-top: calc(50px + var(--nav-height) + var(--status-height));
+
+  /* NEW */
+  --banner-height: 70px; /* desktop/tablet default */
 
   /* shadows */
   --shadow-lg: 0 0 20px rgba(0,0,0,0.3);
@@ -44,7 +48,7 @@ body {
 
   /* keep content clear of sticky elements */
   padding-top: var(--page-padding-top);
-  padding-bottom: 90px; /* for bottom image marquee */
+  padding-bottom: var(--banner-height);/* for bottom image marquee */
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0,0,0,.5);
 }
@@ -52,30 +56,59 @@ body {
 img { max-width: 100%; display: block; }
 
 /* Anchor offset so section headings aren’t hidden under sticky bars */
-section[id] { scroll-margin-top: calc(var(--nav-height) + var(--status-height) + 24px); }
+section[id] { scroll-margin-top: calc(var(--nav-height) + var(--status-height) + 40px); }
 
 /* =========================================================
    2) GLOBAL OVERLAYS / SPECIAL EFFECTS
    ========================================================= */
-.loading-overlay {
-  position: fixed; inset: 0;
-  background: var(--black);
+.loading-overlay{
+  position: fixed; inset: 0; z-index: 9999;
   display: flex; align-items: center; justify-content: center;
-  z-index: 9999; transition: opacity .6s ease-in-out;
+  background-color: var(--black);
+  /* background image fills the whole viewport */
+  background:
+    radial-gradient(ellipse at center, rgba(0,0,0,.0) 0%, rgba(0,0,0,.45) 65%, rgba(0,0,0,.75) 100%),
+    url('assets/welcome-overlay.png') center / cover no-repeat;
+  transition: opacity .6s ease-in-out;
 }
+html.has-overlay, body.has-overlay { height: 100%; overflow: hidden; }
 
 /* Puff/emoji fx (unchanged logic-wise) */
-.queef-puff-animation { color: var(--white); animation: puff-and-shine 4s ease-in-out infinite; }
-.queef-puff { width: 300px; height: auto; animation: puff 5s infinite ease-in-out; }
-.welcome-message { margin-top: 20px; font-size: 1.8rem; font-weight: 700; color: var(--orange); animation: bounce 2s ease-in-out infinite; }
-
+.queef-puff-animation { color: var(--white); animation: puff-and-shine 4s ease-in-out infinite; 
+  text-align:center; 
+  padding: 2rem; 
+  width: min(92vw, 1100px); 
+}
+.queef-puff{
+  width: min(60vw, 520px);
+  height: auto;
+  display:block;
+  margin: 0 auto 10px;
+  filter: drop-shadow(0 10px 30px rgba(255,107,0,.25));
+  animation: float 4.5s ease-in-out infinite;
+}
+.welcome-message{
+  margin: 14px 0 16px;
+  font-family: 'Luckiest Guy', sans-serif;
+  font-weight: 700;
+  color: var(--orange);
+  text-shadow: 0 0 18px rgba(253,193,0,.25);
+  line-height: 1.22;
+  /* scales nicely from phone to desktop */
+  font-size: clamp(1.1rem, 2.2vw + .7rem, 2.2rem);
+  max-width: 980px;
+  margin-inline: auto;
+  /* gentle glow instead of big bounce */
+  animation: puff-glow 3s ease-in-out infinite;
+}
+.welcome-message.bounce { animation: none; }
 .puff-wrapper { position: relative; display: inline-block; }
 .puff-explode { animation: puff-explode 1.8s ease-out forwards; }
 
-.smoke { position: absolute; width: 100px; height: 100px; background: radial-gradient(circle, rgba(255,255,255,.2) 0%, rgba(255,255,255,0) 70%); border-radius: 50%; opacity: 0; pointer-events: none; z-index: 1; }
-.smoke-1 { top: 50%; left: 50%; transform: translate(-120%,-120%); }
-.smoke-2 { top: 50%; left: 50%; transform: translate(20%,-120%); }
-.smoke-3 { top: 50%; left: 50%; transform: translate(-50%,20%); }
+.smoke { position:absolute; width:140px; height:140px; border-radius:50%; background: radial-gradient(circle at 40% 40%, rgba(255,255,255,.2) 60%, rgba(255,255,255,0) 70%);filter: blur(10px); opacity:.18; pointer-events:none; mix-blend-mode:screen; z-index:1;}
+.smoke-1 { top: 50%; left: 50%; transform: translate(-220%,-40%); animation: drift 16s linear infinite; }
+.smoke-2{ left:50%; top:50%; transform:translate(-50%,-60%);  animation: drift 18s linear infinite reverse; }
+.smoke-3{ left:50%; top:50%; transform:translate(120%,-30%);  animation: drift 20s linear infinite; }
 .smoke.show { animation: smoke-poof 1.2s ease-out forwards; }
 
 .emoji-explosion { position: fixed; inset: 0; pointer-events: none; z-index: 9999; overflow: visible; }
@@ -151,24 +184,28 @@ nav {
 
 /* Bottom image marquee */
 .image-banner-scroll {
-  position: fixed; bottom: 0; left: 0; width: 100%; height: 70px;
+  position: fixed; bottom: 0; left: 0; width: 100%; height: var(--banner-height);
   background: var(--black); box-shadow: 0 -2px 20px var(--orange);
   z-index: 1000; overflow: hidden; padding: 0;
   display: flex; align-items: center;
 }
 .scroll-wrapper { display: flex; width: 200%; animation: scroll-banner 30s linear infinite; }
-.scroll-wrapper img { height: 50px; margin: 0 30px; object-fit: contain; display: block; }
+.scroll-wrapper img { height: calc(var(--banner-height) - 20px); margin: 0 16px; object-fit: contain; display: block; }
 
 /* =========================================================
    5) COMPONENTS
    ========================================================= */
 .btn, .cta-button, #tiktok a {
-  display: inline-block; font-weight: 700; text-decoration: none; cursor: pointer;
-  padding: .75em 1.5em; border-radius: 30px; border: none;
-  background: var(--orange); color: var(--black);
-  transition: transform .2s ease, box-shadow .2s ease;
+  display:inline-block; font-weight:700; text-decoration:none; cursor:pointer;
+  padding:.75em 1.5em; border-radius:30px; border:none;
+  background:var(--orange); color:var(--black);
+  box-shadow:0 8px 26px rgba(255,107,0,.35), inset 0 -2px 0 #D55E00;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
-.btn:hover, .cta-button:hover, #tiktok a:hover { transform: translateY(-3px); box-shadow: 0 0 15px var(--orange); }
+.btn:hover, .cta-button:hover, #tiktok a:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 12px 34px rgba(255,107,0,.5), inset 0 -2px 0 #C25500;
+}
 
 .carousel { display: flex; justify-content: center; gap: 2em; flex-wrap: nowrap; overflow-x: auto; position: relative; overflow: visible; z-index: 1; }
 .carousel-item { flex: 0 0 auto; text-align: center; }
@@ -183,6 +220,17 @@ nav {
 /* Footer */
 footer { background: #1a1a1a; padding: 1.5em; font-size: 14px; color: #aaa; text-align: center; }
 footer .disclaimer { font-size: 12px; color: #ff6347; font-style: italic; margin-top: 1em; }
+/* Footer quick link row */
+.footer-links {
+  margin: 1rem 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+/* Optional: slightly tighter button in footer only */
+footer .btn {
+  padding: .6em 1.1em;
+}
 
 /* Alt text under images */
 .alt-text { margin-top: 10px; font-size: 1rem; color: #0d0d0d; font-weight: 600; text-transform: capitalize; padding: 0 10px; }
@@ -275,7 +323,8 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
 }
 
 @media (max-width: 480px) {
-  body {
+ :root { --banner-height: 48px; }  /* shrink the whole bar on phones */
+   body {
     font-size: 15px;
     padding: 80px .5em 0;
     background-size: contain; background-repeat: no-repeat; background-attachment: scroll; background-position: center top;
@@ -287,9 +336,6 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
   .btn, .cta-button, #tiktok a { font-size: .95rem; padding: .6em 1.2em; max-width: 90%; }
   .carousel img { width: 90%; max-width: 200px; height: auto; }
 
-  .image-banner-scroll { padding: 20px 0; }
-  .scroll-wrapper img { height: 120px; margin-right: 60px; }
-
   .alt-text { font-size: .9rem; }
 
   footer { font-size: 12px; padding: 1em; }
@@ -297,3 +343,6 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
 
   .footer-badges svg, .tokenomics-badges svg, .dao-badges svg { height: 34px; }
 }
+ @media (max-width: 360px) {
+    :root { --banner-height: 42px; }
+  }
