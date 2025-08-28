@@ -22,7 +22,7 @@
   --font-heading: 'Luckiest Guy', cursive;
 
   /* Layout */
-  --nav-height: 64px;
+  --nav-height: 50px;
   --status-height: 30px;  
   --page-padding-top: calc(50px + var(--nav-height) + var(--status-height));
   --banner-height: 70px;
