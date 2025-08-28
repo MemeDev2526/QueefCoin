@@ -210,6 +210,12 @@ section { padding: 2rem 0; }
    ========================================================= */
 header { position: relative; }
 
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
 .queef-facts-banner {
   position: fixed; top: 0; left: 0; width: 100%; height: 30px;
   background: var(--orange); color: #0d0d0d; font-weight: 700; font-size: 1.2rem;
