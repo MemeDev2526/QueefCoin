@@ -126,16 +126,13 @@ if (navToggle && navLinks) {
 
   function positionCardNear(nodeBtn){
     if (!roadmap || !popover || !card) return;
-
     const rr = roadmap.getBoundingClientRect();
     const rn = nodeBtn.getBoundingClientRect();
+    const cw = card.offsetWidth || 420;
+    const ch = card.offsetHeight || 240;
 
-    const fallbackW = 360, fallbackH = 220;
-    const cw = card.offsetWidth  || fallbackW;
-    const ch = card.offsetHeight || fallbackH;
-
-    let top  = (rn.top  - rr.top)  - 20;
-    let left = (rn.left - rr.left) + (rn.width/2) - (cw/2);
+    let top  = (rn.top  - rr.top)  + rn.height + 12;     // below node
+    let left = (rn.left - rr.left) + rn.width/2 - cw/2;  // centered
 
     top  = Math.max(8, Math.min(top,  rr.height - ch - 8));
     left = Math.max(8, Math.min(left, rr.width  - cw - 8));
@@ -144,46 +141,30 @@ if (navToggle && navLinks) {
     card.style.left = `${left}px`;
   }
 
-  function openPopoverFor(nodeBtn){
-    const key  = nodeBtn.dataset.phase;
+  function openPopoverFor(btn){
+    const key = btn.dataset.phase;
     const data = QC_PHASES[key];
     if (!data || !titleEl || !bodyEl) return;
-
     titleEl.textContent = data.title;
-    bodyEl.innerHTML    = data.body;  // NOTE: HTML content
-
+    bodyEl.innerHTML = data.body;
     popover.hidden = false;
-    requestAnimationFrame(()=> positionCardNear(nodeBtn));
+    requestAnimationFrame(()=> positionCardNear(btn));
   }
-
   function closePopover(){ if (popover) popover.hidden = true; }
 
-  roadmap.querySelectorAll('.puff-node').forEach(btn=>{
-    btn.addEventListener('click', ()=> openPopoverFor(btn));
+  // Delegation: any click on a .puff-node inside the roadmap
+  roadmap.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.puff-node');
+    if (btn) openPopoverFor(btn);
   });
 
+  closeEl && closeEl.addEventListener('click', closePopover);
+  document.addEventListener('keydown', (e)=> e.key === 'Escape' && !popover.hidden && closePopover());
+  window.addEventListener('resize', ()=> !popover.hidden && closePopover());
   document.addEventListener('click', (e)=>{
     if (!popover || popover.hidden) return;
-    const withinRoadmap = roadmap.contains(e.target);
-    const withinCard    = e.target.closest?.('.puff-popover__card');
-    if (!withinRoadmap || !withinCard) closePopover();
+    if (!e.target.closest('#puff-popover') && !e.target.closest('.puff-node')) closePopover();
   });
-
-  document.addEventListener('keydown', (e)=>{
-    if (e.key === 'Escape') closePopover();
-  });
-
-  window.addEventListener('resize', ()=>{ if (!popover.hidden) closePopover(); });
-
-  if (closeEl) closeEl.addEventListener('click', closePopover);
-
-  if (window.gsap) {
-    roadmap.querySelectorAll('.puff-node').forEach(el=>{
-      el.addEventListener('mouseenter', ()=> gsap.to(el, { duration: 0.25, scale: 1.06, ease: "power2.out" }));
-      el.addEventListener('mouseleave', ()=> gsap.to(el, { duration: 0.25, scale: 1.0,  ease: "power2.out" }));
-      gsap.to(el, { duration: 2.4, scale: 1.02, yoyo: true, repeat: -1, ease: "sine.inOut", delay: Math.random()*0.8 });
-    });
-  }
 })();
 
 // 🟠 Enter button interaction
@@ -320,6 +301,29 @@ function playQueefEffect(x, y) {
   }
   triggerEmojiPuffsFrom(x, y);
 }
+// Global "any click or tap" -> play sound + puffs
+(function enableGlobalPuffs(){
+  const el = document.querySelector('.emoji-explosion');
+  if (!el) return;
+  const play = (x,y) => playQueefEffect(x,y);
+
+  // Click anywhere
+  document.addEventListener('click', (e) => {
+    // ignore if clicking the CTA already triggers (won't hurt if double)
+    const x = e.clientX ?? window.innerWidth/2;
+    const y = e.clientY ?? window.innerHeight/2;
+    play(x,y);
+  });
+
+  // Touch anywhere
+  document.addEventListener('touchstart', (e) => {
+    const t = e.touches?.[0];
+    const x = (t && t.clientX) || window.innerWidth/2;
+    const y = (t && t.clientY) || window.innerHeight/2;
+    play(x,y);
+  }, {passive:true});
+})();
+
 
 // 💰 Coin Rain Observer
 const coinContainer = document.querySelector("#coin-rain-container");
