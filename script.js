@@ -36,22 +36,53 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 🟠 Enter button interaction
-  if (enterButton && overlay && homeSection && queefSound && puffImage) {
-    enterButton.addEventListener('click', () => {
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-      playQueefEffect(centerX, centerY);
+// 🟠 Enter button interaction
+if (enterButton && overlay && homeSection && queefSound && puffImage) {
+  // Enter button click
+  enterButton.addEventListener('click', () => {
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    playQueefEffect(centerX, centerY);
 
-      // optional burst on Queefy, then dismiss
-      puffImage.classList.remove('puff-explode'); // reset if clicked twice
-      void puffImage.offsetWidth; // reflow
-      puffImage.classList.add('puff-explode');
+    // optional burst on Queefy, then dismiss
+    puffImage.classList.remove('puff-explode'); // reset if clicked twice
+    void puffImage.offsetWidth; // reflow
+    puffImage.classList.add('puff-explode');
 
-      smokePoofs.forEach(smoke => smoke.classList.add('show')); // safe if none
-      setTimeout(dismissOverlay, 800);
-    });
-  }
+    smokePoofs.forEach(smoke => smoke.classList.add('show')); 
+    setTimeout(dismissOverlay, 800);
+  });
+
+  // 💨 Burst on backdrop tap/click (no dismiss)
+  let lastOverlayBurst = 0;
+
+  // Click
+  overlay.addEventListener('click', (e) => {
+    if (e.target !== overlay) return; // only backdrop
+    const now = Date.now();
+    if (now - lastOverlayBurst < 300) return; // debounce
+    lastOverlayBurst = now;
+
+    const x = e.clientX ?? window.innerWidth / 2;
+    const y = e.clientY ?? window.innerHeight / 2;
+    playQueefEffect(x, y);
+  });
+
+  // Touch
+  overlay.addEventListener('touchstart', (e) => {
+    if (e.target !== overlay) return;
+    const now = Date.now();
+    if (now - lastOverlayBurst < 300) return;
+    lastOverlayBurst = now;
+
+    const t = e.touches && e.touches[0];
+    const x = (t && t.clientX) || window.innerWidth / 2;
+    const y = (t && t.clientY) || window.innerHeight / 2;
+    playQueefEffect(x, y);
+  }, { passive: true });
+}
+
+
 
   // 💨 Puff divider animation temporarily disabled
   /*
