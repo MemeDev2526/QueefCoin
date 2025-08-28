@@ -118,6 +118,7 @@ body.overlay-active { overflow: hidden; }
   color: var(--white);
   padding: 2rem;
 }
+.loading-overlay.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
 /* MASCOT — the ONLY thing that moves */
 .queef-puff{
@@ -128,7 +129,7 @@ body.overlay-active { overflow: hidden; }
   filter: drop-shadow(0 10px 30px rgba(255,107,0,.25));
   animation: float 4.5s ease-in-out infinite, puffGlow 2.6s ease-in-out infinite;
 }
-
+.queef-puff.puff-explode { animation: puff-explode .55s ease-out forwards; }
 /* STATIC TEXT — no pulse or motion */
 .welcome-message{
   margin: 14px 0 16px;
@@ -164,6 +165,7 @@ a:not(.btn):not(.cta-button):hover{
   color: var(--solanaD);
 }
 
+.coin { position: fixed; top: -80px; pointer-events: none; animation: fall 3.6s linear forwards; z-index: 999; }
 /* =========================================================
    3) LAYOUT & TYPOGRAPHY (CORE)
    ========================================================= */
@@ -210,11 +212,7 @@ section { padding: 2rem 0; }
    ========================================================= */
 header { position: relative; }
 
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
+.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
 
 .queef-facts-banner {
   position: fixed; top: 0; left: 0; width: 100%; height: 30px;
