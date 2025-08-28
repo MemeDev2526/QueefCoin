@@ -20,7 +20,7 @@
 </head>
 <body>
   <audio id="queef-sound" src="assets/queef-sound.mp3" preload="auto"></audio>
-  <div class="loading-overlay">
+  <div class="loading-overlay" role="dialog" aria-label="Welcome overlay">
     <div class="queef-puff-animation">
       <div class="puff-wrapper">
         <img src="assets/welcomemascot.png" class="queef-puff" alt="Queef Mascot">
@@ -28,7 +28,10 @@
         <div class="smoke smoke-2"></div>
         <div class="smoke smoke-3"></div>
       </div>
-      <p class="welcome-message">You just heard the Puff. What happens next is on you. #DontFadeThePuff!</p>
+      <p class="welcome-message">You just heard the Puff.<br>
+        What happens next is on you. <span class="hash">#DontFadeThePuff!</span>
+    </p>
+      
       <button id="enter-btn" class="cta-button">Pump the Puff</button>
     </div>
   </div>
