@@ -258,6 +258,137 @@ nav {
 .carousel img { width: 200px; height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform .3s, box-shadow .3s; }
 .carousel img:hover { transform: scale(2.1); box-shadow: 0 8px 12px rgba(0,0,0,0.2); position: relative; z-index: 10; }
 
+/* =========================================================
+   5A) ROADMAP — INTERACTIVE (HORIZONTAL)
+   ========================================================= */
+
+/* Section shell (keeps your brand gradient + rounded look) */
+.roadmap {
+  position: relative;
+  padding: 48px 16px 64px;
+  color: var(--white);
+  background: radial-gradient(1200px 600px at 50% 10%, #3a0b5a, var(--purpleA) 30%, var(--purpleB) 100%);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.roadmap-title {
+  font-family: var(--font-heading);
+  text-align: center;
+  margin: 0 0 20px;
+  color: var(--orange);
+  text-shadow: 0 0 16px rgba(255,149,0,.35);
+}
+
+/* The glowing track behind nodes */
+.roadmap__track {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 46%;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(255,200,255,.20),
+    rgba(255,255,255,.55),
+    rgba(255,200,255,.20)
+  );
+  filter: blur(1px) drop-shadow(0 0 18px rgba(255,149,255,.45));
+}
+
+/* Horizontal node rail */
+.roadmap__nodes {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  align-items: center;
+  gap: clamp(12px, 2vw, 24px);
+  margin-top: 16px;
+}
+
+/* Each node = image + title, clickable */
+.puff-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  justify-self: center;
+}
+
+.puff-node img {
+  width: 220px;
+  height: 300px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 24px rgba(0,0,0,.45));
+  transition: transform .2s ease;
+}
+.puff-node:hover img {
+  transform: scale(1.03);
+}
+
+.puff-node__title {
+  font-family: var(--font-heading);
+  font-size: clamp(16px, 1.6vw, 24px);
+  color: var(--orange);
+  text-shadow: 0 0 16px rgba(255,149,0,.35);
+}
+
+/* Popover (hover/click box with details) */
+.puff-popover[hidden] { display: none; }
+.puff-popover {
+  position: absolute;
+  inset: 0;         /* keeps popover positioning relative to section */
+  display: block;
+}
+
+.puff-popover__card {
+  position: absolute;
+  max-width: 520px;
+  min-width: 300px;
+  background: rgba(20,10,35,.96);
+  border: 2px solid rgba(255,149,0,.35);
+  border-radius: 18px;
+  padding: 20px 20px 18px;
+  box-shadow: 0 24px 64px rgba(0,0,0,.6);
+  transform-origin: 50% 50%;
+  animation: roadmapPop .18s ease-out;
+}
+@keyframes roadmapPop {
+  from { transform: scale(.96); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.puff-popover__title {
+  margin: 0 0 6px;
+  font-family: var(--font-heading);
+  font-size: 28px;
+  color: var(--orange);
+  letter-spacing: .5px;
+}
+
+.puff-popover__body {
+  margin: 0;
+  font: 16px/1.6 var(--font-body);
+  color: var(--white);
+  opacity: .92;
+}
+
+.puff-popover__close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: 0;
+  background: transparent;
+  color: var(--white);
+  font-size: 20px;
+  cursor: pointer;
+}
+   
 .footer-badges,
 .tokenomics-badges,
 .dao-badges { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 16px; }
@@ -399,6 +530,9 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
   .puff-divider { height: 60px; }
   .puff-divider svg { height: 60px; }
 }
+.roadmap__nodes { gap: 12px; }
+.puff-node img { width: 160px; height: 220px; }
+}   
 
 @media (max-width: 480px) {
  :root { --banner-height: 48px; }  /* shrink the whole bar on phones */
@@ -421,6 +555,10 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
 
   .footer-badges svg, .tokenomics-badges svg, .dao-badges svg { height: 34px; }
 }
+.roadmap__track { top: 50%; }
+.puff-node img { width: 140px; height: 200px; }
+.puff-popover__card { min-width: auto; width: 90vw; left: 5vw !important; }
+}   
  @media (max-width: 360px) {
     :root { --banner-height: 42px; }
   }
