@@ -12,6 +12,7 @@
   --solanaL: #94DAFF;      /* Solana Blue Light */
   --purpleA: #2C0A44;      /* Cosmic Gradient Start */
   --purpleB: #4D0D57;      /* Cosmic Gradient End */
+  --gray:#AAAAAA;          /* Soft Gray */
 
   /* Deprecated (safe to remove unless needed for accents) */
   /* --pink: #FF69B4; */
@@ -24,7 +25,7 @@
   /* Layout */
   --nav-height: 45px;
   --status-height: 45px;  
-  --page-padding-top: calc(50px + var(--nav-height) + var(--status-height));
+  --page-padding-top: calc(24px + var(--nav-height) + var(--status-height));
   --banner-height: 70px;
 
   /* Shadows */
@@ -518,7 +519,10 @@ footer .btn {
   0%,100% { transform: translateY(0) scale(1); }
   50%     { transform: translateY(-10px) scale(1.03); }
 }
-
+@keyframes puffGlow{
+  0%,100% { filter: drop-shadow(0 10px 30px rgba(255,107,0,.20)); }
+  50%     { filter: drop-shadow(0 16px 40px rgba(255,149,0,.45)); }
+}
 .fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 1.2s ease-out forwards; animation-delay: .4s; }
 
 /* JS fallback visibility */
