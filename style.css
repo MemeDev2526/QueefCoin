@@ -38,7 +38,7 @@ body {
   width: 100%;
   font-family: 'Rubik', sans-serif;
   font-size: 18px;
-  color: var(--orange);
+  color: var(--white);
   background-color: var(--black);
   background-image: url('assets/bg-queefcoin.png');
   background-repeat: no-repeat;
@@ -60,9 +60,6 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + var(--status-height) +
 
 /* =========================================================
    2) GLOBAL OVERLAYS / SPECIAL EFFECTS
-   ========================================================= */
-/* =========================================================
-   2) GLOBAL OVERLAYS / SPECIAL EFFECTS  (REPLACED)
    ========================================================= */
 
 /* Lock the page while the overlay is up */
@@ -203,7 +200,7 @@ nav {
 .nav-links { display: flex; justify-content: center; gap: 2em; list-style: none; padding: 0; margin: 0; font-size: 18px; }
 .nav-links a { display: block; color: var(--orange); text-decoration: none; padding: .5em 1em; border-radius: 20px; font-weight: 700; transition: background .3s, color .3s; }
 .nav-links a:hover { background: var(--orange); color: var(--black); }
-.nav-links a.active { background: var(--solana-green); color: var(--black); }
+.nav-links a.active { background: #008CFF; color: var(--black); } /* or use #FDC100 */
 .nav-links .coming-soon { color: var(--gray); font-style: italic; padding: .5em 1em; }
 
 .nav-toggle { display: none; position: absolute; top: 10px; right: 20px; font-size: 2rem; background: none; color: var(--orange); border: none; cursor: pointer; z-index: 1001; }
