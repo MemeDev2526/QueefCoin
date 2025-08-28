@@ -17,29 +17,34 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Rubik:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <link rel="preload" as="image" href="assets/welcome-bg.jpg">
 </head>
-<body>
-  <audio id="queef-sound" src="assets/queef-sound.mp3" preload="auto"></audio>
-  <div class="loading-overlay" role="dialog" aria-label="Welcome overlay">
-    <div class="queef-puff-animation">
+<body class="overlay-active">
+  <audio id="queef-sound" src="assets/queef-sound.mp3" preload="auto"></audio> 
+  <div class="loading-overlay" role="dialog" aria-modal="true" tabindex="-1" aria-label="Welcome overlay">
+    <!-- NEW: full-screen background layer -->
+    <div class="overlay-bg" role="img" aria-label="QueefCoin cosmic background"></div>
+
+    <!-- Foreground content (mascot + text + CTA) -->
+    <div class="overlay-content">
       <div class="puff-wrapper">
         <img src="assets/welcomemascot.png" class="queef-puff" alt="Queef Mascot">
-        <div class="smoke smoke-1"></div>
-        <div class="smoke smoke-2"></div>
-        <div class="smoke smoke-3"></div>
       </div>
-      <p class="welcome-message">You just heard the Puff.<br>
+
+      <p class="welcome-message">
+        You just heard the Puff.<br>
         What happens next is on you. <span class="hash">#DontFadeThePuff!</span>
-    </p>
-      
-      <button id="enter-btn" class="cta-button">Pump the Puff</button>
+      </p>
+
+      <button id="enter-btn" class="cta-button">Enter</button>
     </div>
   </div>
+
   <div class="emoji-explosion" aria-hidden="true"></div>
   <header>
     <div class="queef-facts-banner">
       <div class="queef-facts-scroll">
-        Queefs are totally normal 💨 | Laugh loud, puff proud 💨 | They don't smell, just sound 💨 | They are not farts 💨| They're caused by trapped air 💨 | Normalize the puff 💨 | Some find Queefs attractive and flattering 💨 | It's a natural part of the body 💨 | Puff power is real 💨 | No shame in the queef game 💨
+        Queefs are totally normal 💨 | Laugh loud, puff proud 💨 | They don't smell, just sound 💨 | They are not farts 💨 | They're caused by trapped air 💨 | Normalize the puff 💨 | Some find Queefs attractive and flattering 💨 | It's a natural part of the body 💨 | Puff power is real 💨 | No shame in the queef game 💨
       </div>
     </div>
     
@@ -50,14 +55,14 @@
       <li><a href="#home">Home</a></li>
       <li><a href="#roadmap">Roadmap</a></li>
       <li><a href="#tokenomics">Token</a></li>
-      <li><a href="#Game">Game</a></li>
+      <li><a href="#game">Game</a></li>
       <li><a href="#tiktok">TikTok</a></li>
-      <li><a href="#charity">Puff with Purpose</a></li>
+      <li><a href="#puff-with-purpose">Puff with Purpose</a></li>
       <li><a href="#merch">Merch</a></li>
       <li><a href="https://x.com/Queef_Coin_Sol" target="_blank" rel="noopener noreferrer">X</a></li>
-      <li><a href="t.me/The_QueefCoin">Telegram</span></li>
+      <li><a href="https://t.me/The_QueefCoin" target="_blank" rel="noopener noreferrer">Telegram</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><a href="assets/QueefCoin_Whitepaper.pdf" target="_blank">📄 Whitepaper</a></li>
+      <li><a href="assets/QueefCoin_Whitepaper.pdf" target="_blank" rel="noopener noreferrer">📄 Whitepaper</a></li>
    </ul>
     </div>
   </nav>
@@ -77,12 +82,13 @@
     <p><strong>Contract Address:</strong> <em>Coming Soon</em></p>
     <a href="#" class="cta-button disabled">Buy on bonk.fun (Coming Soon)</a>
     <div class="chart-frame">
-      <p><em>DEXScreener Chart: Coming Soon</em></p>
-      <p class="back-to-top">
+      <p><em>DEXScreener Chart: Coming Soon</em></p>     
+    </div>
+<p class="back-to-top">
   <a href="#home">⬆️ Back to Top</a>
 </p>
-    </div>
   </div> <!-- Close .section-inner -->
+  </section>
 
    <!-- Puff Divider temporarily disabled -->
 <!--
@@ -265,6 +271,26 @@
     <p class="italic">Puff with Purpose. Give where it matters.</p>
   </div>
 </section>
+<section id="game" class="game">
+  <div class="section-inner">
+    <h2>🎮 Puff Dodge — The Game</h2>
+    <p class="subheadline">Dodge rugs, collect $QUEEF, feed the burn.</p>
+
+    <figure class="game-teaser">
+      <img src="assets/puff-dodge-teaser.jpg" alt="Puff Dodge teaser">
+      <figcaption class="alt-text">Puff Dodge — teaser art</figcaption>
+    </figure>
+
+    <p>
+      <a class="cta-button" href="/QueefCoin/queefcoingame" target="_blank" rel="noopener noreferrer">Play Now</a>
+      <a class="cta-button" href="/QueefCoin/queefcoingame#leaderboard" target="_blank" rel="noopener noreferrer">Leaderboard</a>
+    </p>
+
+    <p class="back-to-top"><a href="#home" aria-label="Back to top">⬆️ Back to Top</a></p>
+  </div>
+</section>
+
+
   <section id="merch" class="merch">
     <div class="section-inner">
       <h2>Merch Shop</h2>
@@ -289,10 +315,7 @@
         <img src="assets/merch4.png" alt="Queef Keychain" />
         <p class="alt-text">Meme Keychain </p>  
       </div>
-      <p class="back-to-top">
-  <a href="#home">⬆️ Back to Top</a>
-</p>
-    </div>
+    <p class="back-to-top"><a href="#home">⬆️ Back to Top</a></p>
      </div>
 </section>
    
@@ -400,10 +423,7 @@
     
    <p class="back-to-top">
      <a href="#home">⬆️ Back to Top</a>
-    </p>
-    <p class="back-to-top">
-  <a href="#home">⬆️ Back to Top</a>
-</p>
+    </p>   
   </div>
 </section>
 
@@ -415,7 +435,7 @@
 
   <!-- 🔹 Footer Quick Links -->
   <div class="footer-links">
-    <a href="assets/QueefCoin_Whitepaper.pdf" target="_blank" class="footer-btn">📄 Whitepaper</a>
+    <a href="assets/QueefCoin_Whitepaper.pdf" target="_blank" rel="noopener noreferrer" class="footer-btn">📄 Whitepaper</a>
   </div>
 
   <!-- 🔹 Footer Badges -->
@@ -449,7 +469,7 @@
     </svg>
   </div>
 </footer>
-</section>
+  
   <section class="image-banner-scroll" aria-hidden="true">
     <div class="scroll-wrapper">
       <img src="assets/mascotbanner.png" alt="QueefCoin puff mascot – variant 1" />
@@ -475,7 +495,7 @@
     </div>
   </section>
   <!-- ✅ Correct placement for scripts -->
-   <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MorphSVGPlugin.min.js"></script>
   <script src="script.js" defer></script>
