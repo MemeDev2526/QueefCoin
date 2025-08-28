@@ -231,7 +231,7 @@ nav {
 .nav-links { display: flex; justify-content: center; gap: 2em; list-style: none; padding: 0; margin: 0; font-size: 18px; }
 .nav-links a { display: block; color: var(--orange); text-decoration: none; padding: .5em 1em; border-radius: 20px; font-weight: 700; transition: background .3s, color .3s; }
 .nav-links a:hover { background:  var(--orange-hi); color: var(--black); }
-.nav-links a.active { background: #008CFF; color: var(--black); } /* or use #FDC100 */
+.nav-links a.active { background: var(--orange); color: var(--black); } /* or use #FDC100 */
 .nav-links .coming-soon { color: var(--gray); font-style: italic; padding: .5em 1em; }
 
 .nav-toggle { display: none; position: absolute; top: 10px; right: 20px; font-size: 2rem; background: none; color: var(--orange); border: none; cursor: pointer; z-index: 1001; }
@@ -243,8 +243,8 @@ nav {
   z-index: 1000; overflow: hidden; padding: 0;
   display: flex; align-items: center;
 }
-.scroll-wrapper { display: flex; width: 200%; animation: scroll-banner 30s linear infinite; }
-.scroll-wrapper img { height: calc(var(--banner-height) - 20px); margin: 0 16px; object-fit: contain; display: block; }
+.scroll-wrapper { display: flex; width: 200%; animation: scroll-banner 20s linear infinite; }
+.scroll-wrapper img { height: calc(var(--banner-height) - 20px); margin: 0 10px; object-fit: contain; display: block; }
 
 /* =========================================================
    5) COMPONENTS
@@ -259,7 +259,7 @@ nav {
 .btn:hover, .cta-button:hover, #tiktok a:hover{
   background: var(--orange-hi);
   color: var(--white);
-  transform:translateY(-2px) scale(1.03);
+  transform:translateY(-2px) scale(1.5);
   box-shadow:0 12px 34px rgba(255,107,0,.5), inset 0 -2px 0 #C25500;
 }
 
