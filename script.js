@@ -79,6 +79,7 @@ const QC_PHASES = {
 
 
 document.addEventListener('DOMContentLoaded', function () {
+  document.body.classList.add('overlay-active');  // lock scroll until dismiss
   const enterButton = document.getElementById('enter-btn');
   const overlay = document.querySelector('.loading-overlay');
   const navToggle = document.getElementById('nav-toggle');
@@ -142,14 +143,21 @@ if (navToggle && navLinks) {
   }
 
   function openPopoverFor(btn){
-    const key = btn.dataset.phase;
-    const data = QC_PHASES[key];
-    if (!data || !titleEl || !bodyEl) return;
-    titleEl.textContent = data.title;
-    bodyEl.innerHTML = data.body;
-    popover.hidden = false;
-    requestAnimationFrame(()=> positionCardNear(btn));
-  }
+  const key = btn.dataset.phase;
+  const data = QC_PHASES[key];
+  if (!data || !titleEl || !bodyEl) return;
+
+  titleEl.textContent = data.title;
+  bodyEl.innerHTML = data.body;
+  popover.hidden = false;
+
+  requestAnimationFrame(()=> {
+    positionCardNear(btn);
+    // ensure visible area (mobile safety)
+    card.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  });
+}
+
   function closePopover(){ if (popover) popover.hidden = true; }
 
   // Delegation: any click on a .puff-node inside the roadmap
