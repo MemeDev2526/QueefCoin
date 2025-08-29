@@ -298,7 +298,7 @@ nav {
   color: var(--white);
   background: radial-gradient(1200px 600px at 50% 10%, #3a0b5a, var(--purpleA) 30%, var(--purpleB) 100%);
   border-radius: 18px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .roadmap-title {
@@ -370,14 +370,14 @@ nav {
 /* Popover (hover/click box with details) */
 /* Popover (hover/click box with details) */
 .puff-popover[hidden] { display: none; }
-.puff-popover { position: absolute; inset: 0; display: block; z-index: 20; pointer-events: none; }
-#puff-popover:not([hidden]) { pointer-events: auto; }
+.puff-popover { position: absolute; inset: 0; display: block; z-index: 20; pointer-events: none; opacity: 0; transition: opacity .2s ease; }
+.puff-popover:not([hidden]) { pointer-events: auto; opacity: 1; }
 
 .puff-popover__card {
   position: absolute;
   pointer-events: auto;
   z-index: 21;
-
+  opacity: 1;
   max-width: 520px;
   min-width: 300px;
   max-height: 70vh;
@@ -449,6 +449,10 @@ footer .btn {
 /* =========================================================
    6) SECTION OVERRIDES (Minimal)
    ========================================================= */
+#qc-contract{ margin-right:.25rem; }
+.cta-button.buy{ margin:12px 0 20px; }
+.chart-frame{ margin-top:20px; }
+
 /* HERO keeps orange copy */
 .hero { text-align: center; margin: 2em auto; color: var(--orange); }
 .hero p { color: var(--white); }
@@ -458,7 +462,8 @@ footer .btn {
 .roadmap .final-note { font-style: italic; text-align: center; font-size: .9em; }
 
 /* TOKENOMICS */
-#tokenomics .section-inner { max-width: 900px; }
+#tokenomics .section-inner{ max-width:920px; margin:0 auto; }
+#tokenomics p, #tokenomics li{ line-height:1.65; margin-bottom:12px; }
 #tokenomics .token-footer { font-style: italic; color: var(--orange); text-align: center; margin-top: 2em; }
 
 /* TIKTOK */
@@ -537,6 +542,14 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
 /* =========================================================
    8) RESPONSIVE
    ========================================================= */
+@media (min-width:1100px){
+  .loading-overlay .overlay-bg{
+    background-size: clamp(1200px, 85vw, 1600px) auto;
+    background-position: center top;
+    background-color:#0D0D0D;
+  }
+  .loading-overlay .overlay-content{ justify-content:flex-start; padding:10vh 0 8vh; }
+}
 @media (max-width: 768px) {
   body {
     font-size: 16px;
