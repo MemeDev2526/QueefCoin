@@ -621,8 +621,69 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
   .section-inner { padding: 2em 1em; }
   .puff-divider { height: 60px; }
   .puff-divider svg { height: 60px; }
-  .roadmap__nodes { gap: 12px; }
-  .puff-node img { width: 160px; height: 220px; }
+  /* Make the node rail horizontally scrollable */
+  .roadmap__nodes{
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    padding: 8px 8px 18px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .roadmap__nodes::-webkit-scrollbar { height: 6px; }
+  .roadmap__nodes::-webkit-scrollbar-thumb { background: rgba(255,149,0,.35); border-radius: 999px; }
+
+  /* Each node takes a readable chunk, snaps to center */
+  .puff-node{
+    flex: 0 0 72%;
+    scroll-snap-align: center;
+  }
+  .puff-node img{
+    width: 66vw;           /* smaller art on phones */
+    height: auto;
+  }
+
+  /* Track line sits a bit lower so it doesn't intersect titles */
+  .roadmap__track{ top: 55%; }
+
+  /* --- Bottom-sheet popover on mobile (readable, not clipped) --- */
+  .puff-popover{
+    position: fixed;       /* escape any clipping/positioning issues */
+    inset: auto 0 0 0;     /* stick to bottom */
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .2s ease;
+  }
+  #puff-popover:not([hidden]){ pointer-events: auto; opacity: 1; }
+
+  .puff-popover__card{
+    position: relative;
+    margin: 0 auto;
+    width: min(680px, 96vw);
+    max-height: 68vh;
+    overflow: auto;
+    border-radius: 16px 16px 0 0;
+    border-width: 1.5px;
+    padding: 16px 16px 18px;
+
+    /* slide-up animation for sheet */
+    transform: translateY(100%);
+    animation: sheetIn .22s ease-out forwards;
+  }
+  @keyframes sheetIn{
+    from{ transform: translateY(100%); opacity:.7; }
+    to  { transform: translateY(0);     opacity:1; }
+  }
+
+  .puff-popover__title{ font-size: 22px; }
+  .puff-popover__body{ font-size: 15px; line-height: 1.6; }
+  .puff-popover__close{
+    top: 8px; right: 10px; font-size: 18px;
+  }
+
+  /* prevent the section from clipping anything */
+  .roadmap{ overflow: visible; }
 }
 
 @media (max-width: 480px) {
