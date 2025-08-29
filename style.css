@@ -419,42 +419,6 @@ nav {
   cursor: pointer;
 }
 
-/* 1) Let popovers escape the section bounds */
-.roadmap {
-  /* keep the rounded corners, but don't clip children */
-  overflow: visible;   /* was: hidden */
-}
-
-/* 2) Make the popover interactive only when visible */
-.puff-popover {
-  position: absolute;
-  inset: 0;
-  display: block;
-  z-index: 10;
-  pointer-events: none;        /* default off... */
-  opacity: 0;
-  transition: opacity .2s ease;
-}
-
-/* When the node is open (via hover/focus/click), enable it */
-.puff-node:hover .puff-popover,
-.puff-node:focus-within .puff-popover,
-.puff-node.is-open .puff-popover {
-  pointer-events: auto;        /* ...turn on */
-  opacity: 1;
-}
-
-/* Ensure the card sits above tracks/imagery */
-.puff-popover__card {
-  z-index: 11;                 /* already present, keep it */
-  max-width: 520px;
-  min-width: 300px;
-  overflow: auto;              /* long text scrolls */
-}
-
-/* Safety: node images shouldn’t sit above the popover */
-.puff-node img { position: relative; z-index: 1; }
-   
 .footer-badges,
 .tokenomics-badges,
 .dao-badges { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 16px; }
