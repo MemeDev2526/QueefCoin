@@ -142,21 +142,28 @@ if (navToggle && navLinks) {
     card.style.left = `${left}px`;
   }
 
-  function openPopoverFor(btn){
+ function openPopoverFor(btn){
   const key = btn.dataset.phase;
+  if (!key) return;
   const data = QC_PHASES[key];
-  if (!data || !titleEl || !bodyEl) return;
+  if (!data || !titleEl || !bodyEl || !popover || !card) return;
 
   titleEl.textContent = data.title;
   bodyEl.innerHTML = data.body;
   popover.hidden = false;
 
-  requestAnimationFrame(()=> {
-    positionCardNear(btn);
-    // ensure visible area (mobile safety)
-    card.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  requestAnimationFrame(() => {
+    // Desktop/tablet: keep your precise positioning
+    if (window.matchMedia('(min-width: 769px)').matches) {
+      positionCardNear(btn);
+      card.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    } else {
+      // Mobile: bottom sheet — no special positioning needed
+      window.setTimeout(() => card.focus?.(), 10);
+    }
   });
 }
+
 
   function closePopover(){ if (popover) popover.hidden = true; }
 
