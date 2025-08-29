@@ -370,15 +370,17 @@ nav {
 /* Popover (hover/click box with details) */
 /* Popover (hover/click box with details) */
 .puff-popover[hidden] { display: none; }
-.puff-popover { position: absolute; inset: 0; display: block; z-index: 10; pointer-events: none; }
+.puff-popover { position: absolute; inset: 0; display: block; z-index: 20; pointer-events: none; }
+#puff-popover:not([hidden]) { pointer-events: auto; }
 
 .puff-popover__card {
   position: absolute;
   pointer-events: auto;
-  z-index: 11;
+  z-index: 21;
 
   max-width: 520px;
   min-width: 300px;
+  max-height: 70vh;
   background: rgba(20,10,35,.96);
   border: 2px solid rgba(255,149,0,.35);
   border-radius: 18px;
