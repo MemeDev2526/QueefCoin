@@ -542,14 +542,49 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
 /* =========================================================
    8) RESPONSIVE
    ========================================================= */
-@media (min-width:1100px){
+/* 1) Make room on desktop + de-zoom the BG */
+@media (min-width: 1100px){
   .loading-overlay .overlay-bg{
-    background-size: clamp(1200px, 85vw, 1600px) auto;
+    /* show more of the image (less zoom) */
+    background-size: clamp(1200px, 80vw, 1600px) auto;
     background-position: center top;
     background-color:#0D0D0D;
   }
-  .loading-overlay .overlay-content{ justify-content:flex-start; padding:10vh 0 8vh; }
 }
+
+/* 2) Keep the stack higher and reserve bottom space */
+.loading-overlay .overlay-content{
+  min-height: 100dvh;                     /* full viewport height */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;            /* start near the top */
+  padding: 8vh 2rem 18vh;                 /* reserve space for CTA */
+  gap: clamp(10px, 2vh, 20px);
+}
+
+/* 3) The CTA is fixed to the bottom while overlay is visible */
+.loading-overlay #enter-btn{
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: max(24px, env(safe-area-inset-bottom));
+  z-index: 10000;                         /* above everything */
+}
+
+/* 4) Slightly cap mascot height so it can’t push content down */
+.queef-puff{
+  width: min(50vw, 520px);
+  max-height: 38vh;                       /* important */
+  height: auto;
+}
+
+/* 5) Keep message from hugging the bottom too hard */
+.welcome-message{
+  margin: 5px 5px clamp(8px, 2vh, 14px);
+}
+
 @media (max-width: 768px) {
   body {
     font-size: 16px;
