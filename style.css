@@ -10,8 +10,8 @@
   --gold: #FDC100;         /* Golden Yellow */
   --solanaD: #008CFF;      /* Solana Blue Dark */
   --solanaL: #94DAFF;      /* Solana Blue Light */
-  --purpleA: #2C0A44;      /* Cosmic Gradient Start */
-  --purpleB: #4D0D57;      /* Cosmic Gradient End */
+  --purpleA: #2A004F;   /* Deep cosmic purple */
+  --purpleB: #3D0066;   /* Rich vivid purple */
   --gray:#AAAAAA;          /* Soft Gray */
 
   /* Deprecated (safe to remove unless needed for accents) */
@@ -38,7 +38,13 @@ body {
   font-family: var(--font-body);
   font-size: 18px;
   color: var(--white);
-  background-color: var(--black);
+  background:
+    linear-gradient(180deg,
+      var(--purpleA) 0%,
+      var(--purpleB) 55%,
+      var(--black) 100%);
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 /* Headings */
@@ -60,13 +66,17 @@ html { scroll-behavior: smooth; }
 
 /* Global base (merged into one body block) */
 body {
-  margin: 0;
-  min-height: 100vh;
-  width: 100%;
   font-family: var(--font-body);
   font-size: 18px;
   color: var(--white);
-  background-color: var(--black);
+  background:
+    linear-gradient(180deg,
+      var(--purpleA) 0%,
+      var(--purpleB) 55%,
+      var(--black) 100%);
+  background-attachment: fixed;
+  background-size: cover;
+}
 
   /* keep content clear of sticky elements */
   padding-top:  var(--page-padding-top);
@@ -299,7 +309,9 @@ nav {
   position: relative;
   padding: 48px 16px 64px;
   color: var(--white);
-  background: radial-gradient(1200px 600px at 50% 10%, #3a0b5a, var(--purpleA) 30%, var(--purpleB) 100%);
+  background:
+    radial-gradient(1200px 600px at 50% 10%, var(--purpleA), transparent 40%),
+    linear-gradient(180deg, var(--purpleA) 0%, var(--purpleB) 55%, var(--black) 100%);
   border-radius: 18px;
   overflow: visible;
 }
@@ -460,7 +472,7 @@ footer .btn {
 .hero--cosmic {
   position: relative;
   isolation: isolate;
-  background: linear-gradient(160deg, #2C0A44 0%, #4D0D57 100%); /* cosmic gradient */
+  background: linear-gradient(160deg, var(--purpleA) 0%, var(--purpleB) 55%, var(--black) 100%);
   color: #FFFFFF;
   padding-top: clamp(40px, 10vh, 140px);
   padding-bottom: clamp(20px, 8vh, 100px);
