@@ -35,9 +35,12 @@
 
 /* Global base */
 body {
+  /* type */
   font-family: var(--font-body);
   font-size: 18px;
   color: var(--white);
+
+  /* cosmic page background */
   background:
     linear-gradient(180deg,
       var(--purpleA) 0%,
@@ -45,6 +48,15 @@ body {
       var(--black) 100%);
   background-attachment: fixed;
   background-size: cover;
+
+  /* layout & readability */
+  margin: 0;
+  min-height: 100vh;
+  width: 100%;
+  padding-top: var(--page-padding-top);
+  padding-bottom: var(--banner-height); /* for bottom image marquee */
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0,0,0,.5);
 }
 
 /* Headings */
@@ -64,30 +76,6 @@ html { scroll-behavior: smooth; }
 *::before,
 *::after { box-sizing: border-box; }
 
-/* Global base (merged into one body block) */
-body {
-  font-family: var(--font-body);
-  font-size: 18px;
-  color: var(--white);
-  background:
-    linear-gradient(180deg,
-      var(--purpleA) 0%,
-      var(--purpleB) 55%,
-      var(--black) 100%);
-  background-attachment: fixed;
-  background-size: cover;
-}
-
-  /* keep content clear of sticky elements */
-  padding-top:  var(--page-padding-top);
-  padding-bottom: var(--banner-height); /* for bottom image marquee */
-
-  /* center main content by default */
-  text-align: center;
-
-  /* subtle readability boost */
-  text-shadow: 2px 2px 4px rgba(0,0,0,.5);
-}
 
 img { max-width: 100%; display: block; }
 
@@ -197,10 +185,26 @@ section { padding: 2rem 0; }
   max-width: 1200px;
   margin: 2em auto;
   padding: 2em;
-  background: rgba(0,0,0,0.7);
+  background:
+    radial-gradient(900px 500px at 75% -10%, rgba(255,149,0,.12), transparent 60%),
+    linear-gradient(180deg, rgba(42,0,79,.88) 0%, rgba(61,0,102,.88) 55%, rgba(13,13,13,.88) 100%);
+  border: 1px solid rgba(255,149,0,.18);
   border-radius: 12px;
   box-shadow: var(--shadow-lg);
-  text-align: center;
+}
+
+/* If the browser supports color-mix, switch to the variable-driven version */
+@supports (background: color-mix(in srgb, red 50%, white)) {
+  .section-inner {
+    background:
+      radial-gradient(900px 500px at 75% -10%, rgba(255,149,0,.12), transparent 60%),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--purpleA) 88%, transparent) 0%,
+        color-mix(in srgb, var(--purpleB) 88%, transparent) 55%,
+        color-mix(in srgb, var(--black)   88%, transparent) 100%
+      );
+  }
 }
 
 .section-inner h1,
@@ -688,17 +692,15 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
 /* 1) Make room on desktop + de-zoom the BG */
 @media (min-width: 1100px){
   .loading-overlay .overlay-bg{
-    /* gradient + image layered, with image de-zoomed on desktop */
     background-image:
-      linear-gradient(to bottom, rgba(13,13,13,.72), rgba(13,13,13,.72)),
+      /* subtle veil only */
+      linear-gradient(to bottom, rgba(13,13,13,.25), rgba(13,13,13,.35)),
       url("assets/welcome-background.png");
-    background-size:
-      100% 100%,                           /* gradient covers overlay */
-      clamp(1200px, 80vw, 1300px) auto;    /* image de-zoomed on desktop */
+    background-size: 100% 100%, clamp(1200px, 80vw, 1300px) auto;
     background-position: center top, center top;
     background-repeat: no-repeat, no-repeat;
     background-blend-mode: multiply;
-    background-color:#0D0D0D;              /* edge fill just in case */
+    background-color:#0D0D0D;
   }
 }
 
