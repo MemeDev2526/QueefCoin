@@ -110,12 +110,12 @@ body.overlay-active { overflow: hidden; }
 }
 
 /* FULLSCREEN BACKGROUND IMAGE + DARK BLEND (this hides the site) */
-.loading-overlay .overlay-bg{
+.loading-overlay .overlay-bg {
   position: absolute;
-  inset: 0;               /* fill the overlay */
+  inset: 0;
   z-index: 0;
- background-image:
-    linear-gradient(to bottom, rgba(9,7,17,.55), rgba(9,7,17,.65)),
+  background-image:
+    linear-gradient(to bottom, rgba(13,13,13,.25), rgba(13,13,13,.35)),
     url("assets/welcome-background.png");
   background-position: center 60%;
   background-size: cover;
