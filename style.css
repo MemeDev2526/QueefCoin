@@ -115,14 +115,14 @@ body.overlay-active { overflow: hidden; }
 .loading-overlay .overlay-content {
   position: relative;
   z-index: 1;
-  width: min(80vw, 800px);
+  width: min(70vw, 650px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center; /* center vertically */
   text-align: center;
   color: var(--white);
-  padding: 8vh 0 6vh;           /* top & bottom breathing space */
+  padding: 2vh 0 8vh;           /* top & bottom breathing space */
   gap: 0.5rem;
 }
 .loading-overlay.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
@@ -139,7 +139,7 @@ body.overlay-active { overflow: hidden; }
 .queef-puff.puff-explode { animation: puff-explode .55s ease-out forwards; }
 /* STATIC TEXT — no pulse or motion */
 .welcome-message{
-  margin: 5px 5px 40px;
+  margin: 5px 5px 30px;
   font-family: 'Luckiest Guy', sans-serif;
   font-weight: 700;
   color: var(--orange);
@@ -181,7 +181,7 @@ section { padding: 2rem 0; }
 
 /* Shared wrapper for every section */
 .section-inner {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 2em auto;
   padding: 2em;
   background: rgba(0,0,0,0.7);
@@ -251,12 +251,12 @@ nav {
 /* Bottom image marquee */
 .image-banner-scroll {
   position: fixed; bottom: 0; left: 0; width: 100%; height: var(--banner-height);
-  background: var(--black); box-shadow: 0 -2px 20px var(--orange);
+  background: var(--black); box-shadow: 0 -2px 25px var(--orange);
   z-index: 1000; overflow: hidden; padding: 0;
   display: flex; align-items: center;
 }
 .scroll-wrapper { display: flex; width: 200%; animation: scroll-banner 20s linear infinite; }
-.scroll-wrapper img { height: calc(var(--banner-height) - 20px); margin: 0 10px; object-fit: contain; display: block; }
+.scroll-wrapper img { height: calc(var(--banner-height) - 25px); margin: 0 15px; object-fit: contain; display: block; }
 
 /* =========================================================
    5) COMPONENTS
@@ -351,13 +351,13 @@ nav {
 
 .puff-node img {
   width: 220px;
-  height: 300px;
+  height: 270px;
   object-fit: contain;
   filter: drop-shadow(0 10px 24px rgba(0,0,0,.45));
   transition: transform .2s ease;
 }
 .puff-node:hover img {
-  transform: scale(1.03);
+  transform: scale(1.05);
 }
 
 .puff-node__title {
@@ -401,6 +401,7 @@ nav {
   font-size: 28px;
   color: var(--orange);
   letter-spacing: .5px;
+  z-index: 22;
 }
 
 .puff-popover__body {
@@ -458,8 +459,8 @@ footer .btn {
   isolation: isolate;
   background: linear-gradient(160deg, #2C0A44 0%, #4D0D57 100%); /* cosmic gradient */
   color: #FFFFFF;
-  padding-top: clamp(80px, 10vh, 140px);
-  padding-bottom: clamp(40px, 8vh, 100px);
+  padding-top: clamp(40px, 10vh, 140px);
+  padding-bottom: clamp(20px, 8vh, 100px);
   overflow: hidden;
 }
 
@@ -470,7 +471,7 @@ footer .btn {
   padding-top: clamp(16px, 2vh, 24px);
   padding-bottom: clamp(8px, 1.5vh, 16px);
 }
-  max-width: 1100px; /* keeps text readable on desktop */
+  max-width: 1200px; /* keeps text readable on desktop */
 }
 
 /* optional starfield & glows (swap URL for your asset path) */
@@ -545,7 +546,7 @@ footer .btn {
 .hero__contract {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   flex-wrap: wrap;
   margin: 1rem 0 1.2rem;
   font-family: "Rubik", system-ui, sans-serif;
@@ -587,7 +588,7 @@ footer .btn {
 .charity p { text-shadow: 0 0 4px #000; }
 
 /* FAQ (accordion) */
-#faq .section-inner { max-width: 900px; }
+#faq .section-inner { max-width: 1200px; }
 #faq details {
   background: rgba(0,0,0,0.7);
   border: 1px solid #222; border-radius: 10px;
@@ -665,7 +666,7 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
       url("assets/welcome-background.png");
     background-size:
       100% 100%,                           /* gradient covers overlay */
-      clamp(1200px, 80vw, 1600px) auto;    /* image de-zoomed on desktop */
+      clamp(1200px, 80vw, 1300px) auto;    /* image de-zoomed on desktop */
     background-position: center top, center top;
     background-repeat: no-repeat, no-repeat;
     background-blend-mode: multiply;
@@ -675,13 +676,13 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
 
 /* 2) Keep the stack higher and reserve bottom space */
 .loading-overlay .overlay-content{
-  min-height: 100dvh;                     /* full viewport height */
+  min-height: 90dvh;                     /* full viewport height */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;            /* start near the top */
-  padding: 8vh 2rem 18vh;                 /* reserve space for CTA */
+  padding: 5vh 2rem 12vh;                 /* reserve space for CTA */
   gap: clamp(10px, 2vh, 20px);
 }
 
