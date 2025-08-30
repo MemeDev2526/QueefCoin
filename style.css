@@ -463,7 +463,13 @@ footer .btn {
   overflow: hidden;
 }
 
+/* Make hero content sit directly on the cosmic bg */
 .hero--cosmic .section-inner {
+  background: transparent;
+  box-shadow: none;
+  padding-top: clamp(16px, 2vh, 24px);
+  padding-bottom: clamp(8px, 1.5vh, 16px);
+}
   max-width: 1100px; /* keeps text readable on desktop */
 }
 
@@ -651,27 +657,20 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
    8) RESPONSIVE
    ========================================================= */
 /* 1) Make room on desktop + de-zoom the BG */
-@media (min-width: 1100px){
+@@media (min-width: 1100px){
   .loading-overlay .overlay-bg{
-    /* show more of the image (less zoom) */
-    background-size: clamp(1200px, 80vw, 1600px) auto;
-    position: absolute; inset: 0; z-index: 0;
- background-image:
-    linear-gradient(to bottom, rgba(13,13,13,.72), rgba(13,13,13,.72)),
-    url("assets/welcome-background.png");
-
-  /* cover the gradient, clamp the image width so it looks less zoomed */
-  background-size:
-    100% 100%,                 /* gradient covers the overlay */
-    clamp(1200px, 80vw, 1600px) auto; /* image de-zoomed on desktop */
-
-  background-position:
-    center top,                /* gradient */
-    center top;                /* image */
-
-  background-repeat: no-repeat, no-repeat;
-  background-blend-mode: multiply;
-  background-color:#0D0D0D;    /* edge fill just in case */
+    /* gradient + image layered, with image de-zoomed on desktop */
+    background-image:
+      linear-gradient(to bottom, rgba(13,13,13,.72), rgba(13,13,13,.72)),
+      url("assets/welcome-background.png");
+    background-size:
+      100% 100%,                           /* gradient covers overlay */
+      clamp(1200px, 80vw, 1600px) auto;    /* image de-zoomed on desktop */
+    background-position: center top, center top;
+    background-repeat: no-repeat, no-repeat;
+    background-blend-mode: multiply;
+    background-color:#0D0D0D;              /* edge fill just in case */
+  }
 }
 
 /* 2) Keep the stack higher and reserve bottom space */
