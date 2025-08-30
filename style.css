@@ -101,12 +101,11 @@ body.overlay-active { overflow: hidden; }
 
 /* FULLSCREEN BACKGROUND IMAGE + DARK BLEND (this hides the site) */
 .loading-overlay .overlay-bg{
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(to bottom, rgba(13,13,13,.72), rgba(13,13,13,.72)),
+background-image:
+    linear-gradient(to bottom, rgba(9,7,17,.82), rgba(9,7,17,.86)),
     url("assets/welcome-background.png");
+  background-position: center 75%; /* was 80% / too high */
   background-size: cover;
-  background-position: center 100%;
   background-repeat: no-repeat;
   background-blend-mode: multiply;
 }
@@ -122,24 +121,25 @@ body.overlay-active { overflow: hidden; }
   justify-content: center; /* center vertically */
   text-align: center;
   color: var(--white);
-  padding: 2vh 0 8vh;           /* top & bottom breathing space */
-  gap: 0.5rem;
+  padding: 4vh 0 8vh;           /* top & bottom breathing space */
+  gap: 2px;
 }
 .loading-overlay.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
+
 /* MASCOT — the ONLY thing that moves */
 .queef-puff{
-  width: min(64vw, 540px);
+  width: min(64vw, 600px);
   height: auto;
   display: block;
   margin: 0 auto 1px;
-  filter: drop-shadow(0 10px 30px rgba(255,107,0,.28));
+  filter: drop-shadow(0 12px 34px rgba(255,107,0,.32));
   animation: float 3.6s ease-in-out infinite, puffGlow 2.1s ease-in-out infinite;
 }
 .queef-puff.puff-explode { animation: puff-explode .55s ease-out forwards; }
 /* STATIC TEXT — no pulse or motion */
 .welcome-message{
-  margin: 5px 5px 30px;
+  margin: 5px 5px 15px;
   font-family: 'Luckiest Guy', sans-serif;
   font-weight: 700;
   color: var(--orange);
@@ -546,7 +546,7 @@ footer .btn {
 .hero__contract {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: none;
   flex-wrap: wrap;
   margin: 1rem 0 1.2rem;
   font-family: "Rubik", system-ui, sans-serif;
@@ -572,12 +572,27 @@ footer .btn {
 .hero { text-align: center; margin: 2em auto; color: var(--orange); }
 .hero p { color: var(--white); }
 
+/* Reduce space between nav and hero headline */
+#home .section-inner{ margin-top: .9em; }           /* was 2em via .section-inner */
+.hero{ padding-top: clamp(24px, 6vh, 56px); }       /* half the previous feel */
+
+/* Contract line: keep label + hash tight, copy button aligned */
+.contract-line{
+  display:flex; align-items:center; justify-content:center; gap: 12px; flex-wrap:wrap;
+}
+.contract-line .label{ font-weight: 800; }
+.contract-line .hash{ font-weight: 800; letter-spacing:.2px; }
+
+/* Add space between the two hero CTAs */
+.cta-button + .cta-button{ margin-left: 16px; }
+
+
 /* ROADMAP */
 .roadmap hr { margin: 2em 0; border-color: var(--orange); }
 .roadmap .final-note { font-style: italic; text-align: center; font-size: .9em; }
 
 /* TOKENOMICS */
-#tokenomics .section-inner{ max-width:920px; margin:0 auto; }
+#tokenomics .section-inner{ max-width:1200px; margin:0 auto; }
 #tokenomics p, #tokenomics li{ line-height:1.65; margin-bottom:12px; }
 #tokenomics .token-footer { font-style: italic; color: var(--orange); text-align: center; margin-top: 2em; }
 
@@ -641,13 +656,10 @@ footer .btn {
 @keyframes scroll-left { from {transform: translateX(100%);} to {transform: translateX(-100%);} }
 @keyframes fall { from {transform: translateY(0) rotate(0); opacity:1;} to {transform: translateY(100vh) rotate(360deg); opacity:0;} }
 @keyframes fadeInUp { to { opacity:1; transform: translateY(0);} }
-@keyframes float {
-  0%,100% { transform: translateY(0) scale(1); }
-  50%     { transform: translateY(-10px) scale(1.03); }
-}
+@keyframes float{ 0%,100%{ transform: translateY(0) scale(1) } 50%{ transform: translateY(-16px) scale(1.035) } }
 @keyframes puffGlow{
-  0%,100% { filter: drop-shadow(0 10px 30px rgba(255,107,0,.20)); }
-  50%     { filter: drop-shadow(0 16px 40px rgba(255,149,0,.45)); }
+  0%,100%{ filter: drop-shadow(0 12px 34px rgba(255,107,0,.28)) }
+  50%{     filter: drop-shadow(0 18px 46px rgba(255,149,0,.55)) }
 }
 .fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 1.2s ease-out forwards; animation-delay: .4s; }
 
@@ -688,12 +700,24 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
 
 /* 3) The CTA is fixed to the bottom while overlay is visible */
 .loading-overlay #enter-btn{
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: max(45px, env(safe-area-inset-bottom));
+  position: static;
+  left: auto;
+  transform: none;
+  bottom: auto;
   z-index: 10000;                         /* above everything */
 }
+
+.loading-overlay #enter-btn{ --tx:0; transform: translateX(var(--tx)) translateY(0) scale(1); }
+.loading-overlay #enter-btn:hover{
+  transform: translateX(var(--tx)) translateY(-2px) scale(1.2);
+}
+
+/* Your global .cta-button hover scale was 1.5 (too big + conflicts).
+   So gently cap overlay CTA to ~8% zoom while leaving the rest alone. */
+.loading-overlay .cta-button:hover{
+  transform: translateY(-2px) scale(1.2) !important;
+}
+
 
 /* 4) Slightly cap mascot height so it can’t push content down */
 .queef-puff{
