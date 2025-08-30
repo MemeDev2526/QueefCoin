@@ -11,8 +11,9 @@
   --solanaD: #008CFF;      /* Solana Blue Dark */
   --solanaL: #94DAFF;      /* Solana Blue Light */
   --purpleA: #2A004F;   /* Deep cosmic purple */
-  --purpleB: #3D0066;   /* Rich vivid purple */
-  --gray:#AAAAAA;          /* Soft Gray */
+  --purpleB: #3D0066;      /* Rich vivid purple */
+  --blueBlack: #080A16;    /* Deep blue-black */
+  --gray: #AAAAAA;         /* Soft Gray */
 
   /* Deprecated (safe to remove unless needed for accents) */
   /* --pink: #FF69B4; */
@@ -34,6 +35,7 @@
 }
 
 /* Global base */
+/* Global base */
 body {
   /* type */
   font-family: var(--font-body);
@@ -41,23 +43,28 @@ body {
   color: var(--white);
 
   /* cosmic page background */
-  background:
-    linear-gradient(180deg,
-      var(--purpleA) 0%,
-      var(--purpleB) 55%,
-      var(--black) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--purpleA) 0%,
+    #2B0058 24%,
+    var(--purpleB) 50%,
+    var(--blueBlack) 78%,
+    var(--black) 100%
+  );
   background-attachment: fixed;
   background-size: cover;
+  background-color: var(--black); /* fallback */
 
   /* layout & readability */
   margin: 0;
   min-height: 100vh;
   width: 100%;
   padding-top: var(--page-padding-top);
-  padding-bottom: var(--banner-height); /* for bottom image marquee */
+  padding-bottom: var(--banner-height);
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0,0,0,.5);
 }
+html { background-color: var(--black); } /* safety */
 
 /* Headings */
 h1, h2, h3, .section-title, .title, .heading {
@@ -178,24 +185,25 @@ a:not(.btn):not(.cta-button):hover{
 /* =========================================================
    3) LAYOUT & TYPOGRAPHY (CORE)
    ========================================================= */
-section { padding: 2rem 0; }
-
-/* Shared wrapper for every section */
-.section-inner {
-  max-width: 1200px;
-  margin: 2em auto;
-  padding: 2em;
-  background:
-    radial-gradient(900px 500px at 75% -10%, rgba(255,149,0,.12), transparent 60%),
-    linear-gradient(180deg, rgba(42,0,79,.88) 0%, rgba(61,0,102,.88) 55%, rgba(13,13,13,.88) 100%);
-  border: 1px solid rgba(255,149,0,.18);
-  border-radius: 12px;
-  box-shadow: var(--shadow-lg);
+section{
+  margin: 0; 
+  padding: clamp(32px, 6vh, 72px) 0;
 }
 
-/* If the browser supports color-mix, switch to the variable-driven version */
+/* Shared wrapper for every section */
+.section-inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(20px, 3vw, 36px);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+} /* ← this was missing */
+
+/* Optional variable-driven gradient card version */
 @supports (background: color-mix(in srgb, red 50%, white)) {
-  .section-inner {
+  .section-inner.section-inner--card {
     background:
       radial-gradient(900px 500px at 75% -10%, rgba(255,149,0,.12), transparent 60%),
       linear-gradient(
@@ -204,6 +212,9 @@ section { padding: 2rem 0; }
         color-mix(in srgb, var(--purpleB) 88%, transparent) 55%,
         color-mix(in srgb, var(--black)   88%, transparent) 100%
       );
+    border: 1px solid rgba(255,149,0,.18);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
   }
 }
 
@@ -745,8 +756,6 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
   body {
     font-size: 16px;
     padding-top: var(--page-padding-top);   /* use variable */
-    padding-left: 1em;
-    padding-right: 1em;
     padding-bottom: 0;
     background-image: url('assets/bg-mobile.png');
     background-repeat: no-repeat;
