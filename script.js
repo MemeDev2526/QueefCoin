@@ -476,3 +476,26 @@ if (coinContainer) {
   });
 })();
 
+// === DEXTools chart shimmer ===
+(function initChartLoader(){
+  const iframe = document.getElementById('dextools-widget');
+  const placeholder = document.querySelector('.chart-placeholder');
+  if (!iframe || !placeholder) return;
+
+  let fallbackTimeout = setTimeout(() => {
+    placeholder.textContent = '⚠️ Chart failed to load. Open on DEXTools directly.';
+    placeholder.style.background = 'rgba(0,0,0,.7)';
+    placeholder.style.color = '#FF6B00';
+    placeholder.style.display = 'flex';
+    placeholder.style.alignItems = 'center';
+    placeholder.style.justifyContent = 'center';
+    placeholder.style.fontWeight = '700';
+  }, 8000); // 8s fallback
+
+  iframe.addEventListener('load', () => {
+    clearTimeout(fallbackTimeout);
+    placeholder.style.opacity = "0";
+    placeholder.style.transition = "opacity .4s ease";
+    setTimeout(() => placeholder.remove(), 500);
+  });
+})();
