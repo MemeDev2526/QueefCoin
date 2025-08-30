@@ -108,9 +108,43 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Nav toggle
+// Mobile nav: open/close + accessibility + scroll lock
 if (navToggle && navLinks) {
-  navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
+  const openNav = () => {
+    navLinks.classList.add('show');
+    navToggle.setAttribute('aria-expanded', 'true');
+    navToggle.setAttribute('aria-label', 'Close navigation');
+    navToggle.textContent = '✕';
+    document.body.classList.add('no-scroll');
+  };
+
+  const closeNav = () => {
+    navLinks.classList.remove('show');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Open navigation');
+    navToggle.textContent = '☰';
+    document.body.classList.remove('no-scroll');
+  };
+
+  const isOpen = () => navLinks.classList.contains('show');
+
+  // Toggle on button
+  navToggle.addEventListener('click', () => (isOpen() ? closeNav() : openNav()));
+
+  // Close when a menu link is clicked
+  navLinks.addEventListener('click', (e) => {
+    if (e.target.matches('a')) closeNav();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen()) closeNav();
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!isOpen()) return;
+    if (!e.target.closest('nav')) closeNav();
   });
 }
 
