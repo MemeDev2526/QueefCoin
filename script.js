@@ -402,45 +402,6 @@ if (coinContainer) {
   observer.observe(coinContainer);
 }
 
-// --- Roadmap popover: ensure title/body are set and visible
-(() => {
-  const pop = document.getElementById('puff-popover');
-  if (!pop) return;
-  const titleEl = pop.querySelector('.puff-popover__title');
-  const bodyEl  = pop.querySelector('.puff-popover__body');
-  const card    = pop.querySelector('.puff-popover__card');
-  const closeEl = pop.querySelector('.puff-popover__close');
-
-  function openFromNode(btn){
-    const key = btn.dataset.phase;
-    const data = QC_PHASES[key] || {};
-    titleEl.textContent = data.title || (btn.querySelector('.puff-node__title')?.textContent?.trim() || 'Details');
-    bodyEl.innerHTML = data.body || (btn.querySelector('img')?.alt || '');
-    pop.hidden = false;
-
-    // desktop/tablet position guard
-    if (window.matchMedia('(min-width: 769px)').matches) {
-      const rr = document.querySelector('#roadmap')?.getBoundingClientRect();
-      const rn = btn.getBoundingClientRect();
-      const cw = card.offsetWidth || 420;
-      const ch = card.offsetHeight || 240;
-      let top  = (rn.top - rr.top) + rn.height + 12;
-      let left = (rn.left - rr.left) + rn.width/2 - cw/2;
-      top  = Math.max(8, Math.min(top,  rr.height - ch - 8));
-      left = Math.max(8, Math.min(left, rr.width  - cw - 8));
-      card.style.top = `${top}px`; card.style.left = `${left}px`;
-    }
-  }
-  function close(){ pop.hidden = true; }
-
-  document.addEventListener('click', (e) => {
-    const node = e.target.closest('.puff-node');
-    if (node) { openFromNode(node); return; }
-    if (!e.target.closest('#puff-popover')) close();
-  });
-  closeEl?.addEventListener('click', close);
-  document.addEventListener('keydown', (e)=> e.key === 'Escape' && !pop.hidden && close());
-})();
 
 (function () {
   function copyText(text) {
