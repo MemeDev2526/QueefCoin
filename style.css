@@ -101,10 +101,13 @@ body.overlay-active { overflow: hidden; }
 
 /* FULLSCREEN BACKGROUND IMAGE + DARK BLEND (this hides the site) */
 .loading-overlay .overlay-bg{
-background-image:
+  position: absolute;
+  inset: 0;               /* fill the overlay */
+  z-index: 0;
+  background-image:
     linear-gradient(to bottom, rgba(9,7,17,.82), rgba(9,7,17,.86)),
     url("assets/welcome-background.png");
-  background-position: center 75%; /* was 80% / too high */
+  background-position: center 60%;
   background-size: cover;
   background-repeat: no-repeat;
   background-blend-mode: multiply;
@@ -470,8 +473,9 @@ footer .btn {
   box-shadow: none;
   padding-top: clamp(16px, 2vh, 24px);
   padding-bottom: clamp(8px, 1.5vh, 16px);
-}
   max-width: 1200px; /* keeps text readable on desktop */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* optional starfield & glows (swap URL for your asset path) */
@@ -546,11 +550,12 @@ footer .btn {
 .hero__contract {
   display: flex;
   align-items: center;
-  gap: none;
+  gap: 10px;
   flex-wrap: wrap;
   margin: 1rem 0 1.2rem;
   font-family: "Rubik", system-ui, sans-serif;
 }
+
 .hero__contract #qc-contract {
   display: inline-block;
   font-weight: 800;
@@ -566,7 +571,6 @@ footer .btn {
 
 #qc-contract{ margin-right:.25rem; }
 .cta-button.buy{ margin:12px 0 20px; }
-.chart-frame{ margin-top:20px; }
 
 /* HERO keeps orange copy */
 .hero { text-align: center; margin: 2em auto; color: var(--orange); }
@@ -670,7 +674,7 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
    8) RESPONSIVE
    ========================================================= */
 /* 1) Make room on desktop + de-zoom the BG */
-@@media (min-width: 1100px){
+@media (min-width: 1100px){
   .loading-overlay .overlay-bg{
     /* gradient + image layered, with image de-zoomed on desktop */
     background-image:
@@ -718,15 +722,7 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
   transform: translateY(-2px) scale(1.2) !important;
 }
 
-
-/* 4) Slightly cap mascot height so it can’t push content down */
-.queef-puff{
-  width: min(50vw, 520px);
-  max-height: 38vh;                       /* important */
-  height: auto;
-}
-
-/* 5) Keep message from hugging the bottom too hard */
+/* 4) Keep message from hugging the bottom too hard */
 .welcome-message{
   margin: 5px 5px clamp(8px, 2vh, 14px);
 }
