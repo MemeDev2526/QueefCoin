@@ -35,7 +35,6 @@
 }
 
 /* Global base */
-/* Global base */
 body {
   /* type */
   font-family: var(--font-body);
@@ -101,6 +100,9 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + var(--status-height) +
   white-space: nowrap !important;
   border: 0 !important;
 }
+
+/* lock page scroll when mobile menu is open */
+.no-scroll { overflow: hidden; }
 
 /* =========================================================
    2) GLOBAL OVERLAYS / SPECIAL EFFECTS
