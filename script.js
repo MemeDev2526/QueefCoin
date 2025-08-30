@@ -407,3 +407,72 @@ if (coinContainer) {
   closeEl?.addEventListener('click', close);
   document.addEventListener('keydown', (e)=> e.key === 'Escape' && !pop.hidden && close());
 })();
+
+(function () {
+  function copyText(text) {
+    // Primary: modern async Clipboard API
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+    // Fallback: hidden textarea + execCommand
+    return new Promise((resolve, reject) => {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-9999px';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, ta.value.length);
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        ok ? resolve() : reject(new Error('execCommand copy failed'));
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
+  function setupCopy(btn) {
+    const targetSel = btn.getAttribute('data-copy-target');
+    const target = document.querySelector(targetSel);
+    const feedback = document.getElementById('copy-feedback');
+    if (!target) return;
+
+    btn.addEventListener('click', async () => {
+      const text = (target.textContent || target.innerText || '').trim();
+      const prev = btn.textContent;
+      btn.disabled = true;
+
+      try {
+        await copyText(text);
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        if (feedback) feedback.textContent = 'Contract address copied to clipboard.';
+      } catch (err) {
+        btn.textContent = 'Copy failed';
+        if (feedback) feedback.textContent = 'Copy failed. Tap and hold to select manually.';
+        console.error(err);
+      } finally {
+        setTimeout(() => {
+          btn.textContent = prev;
+          btn.classList.remove('copied');
+          btn.disabled = false;
+          if (feedback) feedback.textContent = '';
+        }, 1400);
+      }
+    });
+  }
+
+  // Single button
+  const singleBtn = document.getElementById('copy-contract-btn');
+  if (singleBtn) setupCopy(singleBtn);
+
+  // If you add more copy buttons later, auto-wire them:
+  document.querySelectorAll('[data-copy-target]').forEach(btn => {
+    if (btn !== singleBtn) setupCopy(btn);
+  });
+})();
+
