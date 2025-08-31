@@ -349,6 +349,22 @@ nav {
   border-radius: 12px;
 }
 
+/* Copy button success state */
+#copy-contract-btn.copied {
+  background: #00FFA3;          /* Solana green */
+  color: #0D0D0D;               /* dark text for contrast */
+  box-shadow: 0 0 12px rgba(0, 255, 163, 0.6);
+  transform: scale(1.05);
+  transition: all 0.25s ease;
+}
+
+/* Optional: subtle "fail" style */
+#copy-contract-btn.copy-failed {
+  background: #FF3B2F;
+  color: #FFFFFF;
+  box-shadow: 0 0 12px rgba(255, 59, 47, 0.6);
+}
+
 /* =========================================================
    5A) ROADMAP — INTERACTIVE (HORIZONTAL)
    ========================================================= */
