@@ -585,7 +585,7 @@ footer .btn {
   background:
     radial-gradient(1200px 600px at 70% -10%, rgba(255,107,0,0.18), transparent 60%),
     radial-gradient(900px 500px at 20% 110%, rgba(255,149,0,0.14), transparent 60%),
-    url('/assets/hero-stars.png') repeat center/auto;
+    url('assets/hero-stars.png') repeat center/auto;
   opacity: 0.7;
   pointer-events: none;
   z-index: -1;
@@ -957,7 +957,6 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
 
   /* prevent the section from clipping anything */
   .roadmap{ overflow: visible; }
-}
 
 .chart-embed { padding-bottom: 90%; } /* taller aspect on small screens */
 }
