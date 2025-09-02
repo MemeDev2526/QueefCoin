@@ -1,37 +1,193 @@
+/* =========================================================
+   $QUEEF — Scan Landing Styles (brand-locked)
+   ========================================================= */
+
+/* Tokens */
 :root{
-  --orange:#FFA500; --black:#0D0D0D; --white:#FFFFFF; --gray:#AAAAAA; --solana:#00FFA3;
+  /* Brand colours */
+  --orange:#FF6B00;          /* Primary */
+  --orange-hi:#FF9500;       /* Highlight / hover */
+  --black:#0D0D0D;           /* Background */
+  --white:#FFFFFF;           /* Text */
+  --gold:#FDC100;            /* Price / accent */
+  --solanaD:#008CFF;         /* Link hover / focus */
+  --solanaL:#94DAFF;         /* Light accent */
+  --purpleA:#2C0A44;         /* Cosmic gradient start */
+  --purpleB:#4D0D57;         /* Cosmic gradient end */
+
+  /* UI */
   --radius:14px;
 }
 
+/* Base */
 *{box-sizing:border-box}
-html,body{height:100%; background:var(--black); color:var(--white); margin:0; font-family:Rubik, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif}
-
-.scan-wrap{min-height:100%; display:flex; flex-direction:column; gap:24px; padding:20px}
-.hero{display:grid; place-items:center; text-align:center; gap:10px; margin-top:8vh}
-.logo{width:140px; height:auto; filter: drop-shadow(0 0 12px rgba(255,165,0,.25)); animation: float 3s ease-in-out infinite}
-.tag{font-family:"Luckiest Guy", cursive; font-size:2.2rem; margin:8px 0 0}
-.sub{color:var(--gray); margin:0 0 12px}
-.cta-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
-.btn{padding:12px 18px; border-radius:var(--radius); text-decoration:none; font-weight:700; border:2px solid transparent}
-.btn.primary{background:var(--orange); color:#000}
-.btn.ghost{border-color:var(--orange); color:var(--orange)}
-
-.quick-links{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:20px 0}
-.q-card{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:12px; border-radius:12px; background:#111; color:var(--white); text-decoration:none; border:1px solid #1e1e1e}
-.q-card:hover{outline:1px solid var(--orange)}
-
-.tap-zone{position:relative; margin:24px auto 0; width:min(92vw,540px); height:160px; border-radius:18px; background:radial-gradient(80% 100% at 50% 0%, rgba(255,165,0,.15), rgba(255,165,0,0) 60%), #0b0b0b; border:1px solid #1a1a1a; color:var(--white); cursor:pointer}
-.tap-text{position:absolute; inset:0; display:grid; place-items:center; font-weight:800; letter-spacing:.5px; color:var(--solana)}
-
-.foot{margin-top:auto; text-align:center; color:var(--gray); padding:24px 0 8px}
-
-.puff{
-  position:fixed; width:18px; height:18px; border-radius:50%;
-  background:radial-gradient(circle at 30% 30%, #fff, #fff 60%, rgba(255,255,255,0) 70%);
-  pointer-events:none; opacity:.9; filter:blur(.2px);
-  animation: rise .9s ease-out forwards;
+html,body{
+  height:100%;
+  margin:0;
+  color:var(--white);
+  font-family:'Rubik', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:linear-gradient(180deg, var(--purpleA), var(--purpleB));
 }
 
+/* A11y focus cue */
+:focus-visible{
+  outline:2px solid var(--solanaD);
+  outline-offset:2px;
+}
+
+/* Layout */
+.scan-wrap{
+  min-height:100%;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  padding:20px;
+}
+
+.hero{
+  display:grid;
+  place-items:center;
+  text-align:center;
+  gap:10px;
+  margin-top:8vh;
+}
+
+.logo{
+  width:140px;
+  height:auto;
+  filter:drop-shadow(0 0 12px rgba(255,107,0,.25));
+  animation:float 3.6s ease-in-out infinite;
+}
+
+.tag{
+  font-family:'Luckiest Guy', cursive;
+  font-size:2.2rem;
+  margin:8px 0 0;
+  color:var(--orange);
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+
+.sub{
+  color:rgba(255,255,255,.8);
+  margin:0 0 12px;
+}
+
+/* CTA row */
+.cta-row{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:12px 18px;
+  border-radius:var(--radius);
+  text-decoration:none;
+  font-weight:700;
+  border:2px solid transparent;
+  transition:transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease, box-shadow .15s ease;
+  box-shadow:0 8px 22px rgba(0,0,0,.35);
+}
+
+.btn.primary{
+  background:var(--orange);
+  color:#000;
+}
+.btn.primary:hover{
+  background:var(--orange-hi);
+  color:#fff;
+  transform:translateY(-2px);
+}
+
+.btn.ghost{
+  background:transparent;
+  border-color:var(--orange);
+  color:var(--orange);
+}
+.btn.ghost:hover{
+  border-color:var(--orange-hi);
+  color:var(--orange-hi);
+  transform:translateY(-2px);
+}
+
+/* Quick links */
+.quick-links{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin:20px 0;
+}
+
+.q-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:12px;
+  border-radius:12px;
+  background:#111;
+  color:var(--white);
+  text-decoration:none;
+  border:1px solid #1e1e1e;
+  transition:transform .15s ease, outline-color .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.q-card:hover{
+  transform:translateY(-2px);
+  border-color:transparent;
+  outline:1px solid var(--solanaD);
+  box-shadow:0 10px 26px rgba(0,0,0,.35);
+}
+
+/* Tap zone (sound + particles) */
+.tap-zone{
+  position:relative;
+  margin:24px auto 0;
+  width:min(92vw,540px);
+  height:160px;
+  border-radius:18px;
+  background:
+    radial-gradient(80% 100% at 50% 0%, rgba(255,149,0,.18), rgba(255,149,0,0) 60%),
+    #0b0b0b;
+  border:1px solid #1a1a1a;
+  color:var(--white);
+  cursor:pointer;
+  box-shadow:0 12px 30px rgba(0,0,0,.45);
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.tap-zone:hover{
+  transform:translateY(-2px);
+  border-color:rgba(255,149,0,.45);
+  box-shadow:0 16px 36px rgba(0,0,0,.55);
+}
+
+.tap-text{
+  position:absolute; inset:0;
+  display:grid; place-items:center;
+  font-weight:800; letter-spacing:.5px;
+  color:var(--solanaD); /* brand hover cue */
+}
+
+/* Footer */
+.foot{
+  margin-top:auto;
+  text-align:center;
+  color:rgba(255,255,255,.75);
+  padding:24px 0 8px;
+}
+
+/* Puff particles (spawned by JS) */
+.puff{
+  position:fixed;
+  width:18px; height:18px; border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #fff, #fff 60%, rgba(255,255,255,0) 70%);
+  pointer-events:none; opacity:.9; filter:blur(.2px);
+  animation:rise .9s ease-out forwards;
+}
+
+/* Background stars (kept from your version) */
 .starfield{
   position:fixed; inset:0; pointer-events:none; z-index:-1;
   background:
@@ -39,7 +195,7 @@ html,body{height:100%; background:var(--black); color:var(--white); margin:0; fo
     radial-gradient(1px 1px at 80% 30%, #fff5, transparent 60%),
     radial-gradient(1px 1px at 50% 70%, #fff6, transparent 60%),
     radial-gradient(1px 1px at 25% 85%, #fff5, transparent 60%),
-    #070707;
+    #07070700; /* transparent because we have the cosmic gradient on body */
 }
 
 /* Animations */
