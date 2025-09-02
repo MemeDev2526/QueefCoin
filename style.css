@@ -111,12 +111,20 @@ section[id] { scroll-margin-top: calc(var(--nav-height) + var(--status-height) +
 /* Lock the page while the overlay is up */
 body.overlay-active { overflow: hidden; }
 
-/* OVERLAY SHELL (no bg image here anymore) */
+/* OVERLAY SHELL */
 .loading-overlay{
-  position: fixed; inset: 0; z-index: 9998;
-  display: grid; place-items: center;
-  opacity: 1; visibility: visible; pointer-events: auto;
+  position: fixed;
+  inset: 0;
+  width: 100vw;              /* add */
+  height: 100vh;             /* add */
+  z-index: 99998;
+  display: grid;
+  place-items: center;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
   transition: opacity .5s ease-in-out, visibility .5s ease-in-out;
+  transform: none !important; /* guard against inherited transforms */
 }
 
 /* FULLSCREEN BACKGROUND IMAGE + DARK BLEND (this hides the site) */
@@ -128,10 +136,10 @@ body.overlay-active { overflow: hidden; }
   background-image:
     linear-gradient(to bottom, rgba(9,7,17,.55), rgba(9,7,17,.65)),
     url("assets/welcome-background.png");
-  background-position: center 80%;
-  background-size: cover;
+  background-position: center 60%, center 60%;   /* nudge image down a bit */
+  background-size: cover, cover;                 /* <-- important */
   background-repeat: no-repeat, no-repeat;
-  background-blend-mode: normal; /* no multiply black-out */
+  background-blend-mode: normal;
 }
 
 /* FOREGROUND CONTENT STACK */
@@ -457,7 +465,7 @@ nav {
 .puff-popover__card {
   position: absolute;
   pointer-events: auto;
-  z-index: 23;
+  z-index: 25;
   opacity: 1;
   max-width: 520px;
   min-width: 300px;
@@ -478,6 +486,7 @@ nav {
 
 .puff-popover__title {
   display:block; 
+  opacity:1 !important;
   margin: 0 0 6px;
   font-family: var(--font-heading);
   font-size: 28px;
@@ -685,7 +694,9 @@ footer .btn {
 
 /* Contract line: keep label + hash tight, copy button aligned */
 .contract-line{
-  display:flex; align-items:center; justify-content:center; gap: 3rem; flex-wrap:wrap;
+  display:flex; align-items:center; justify-content:center; gap: 6px; flex-wrap:wrap;  /* 3rem -> 6px */
+}
+
 }
 .contract-line .label{ font-weight: 800; }
 .contract-line .hash{ font-weight: 800; letter-spacing:.2px; }
@@ -952,14 +963,15 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
 
   .puff-popover__title{ display:block !important; opacity:1 !important; color: var(--orange); font-size: 22px; }
   .puff-popover__body{ font-size: 15px; line-height: 1.6; }
-  .puff-popover__close{ top: 8px; right: 10px; font-size: 18px;}
-  }
+  .puff-popover__close{ top: 8px; right: 10px; font-size: 18px; }
 
   /* prevent the section from clipping anything */
   .roadmap{ overflow: visible; }
 
-.chart-embed { padding-bottom: 90%; } /* taller aspect on small screens */
+  /* chart: taller aspect on small screens */
+  .chart-embed { padding-bottom: 90%; }
 }
+
 
 @media (max-width: 480px) {
   :root { --banner-height: 48px; }  /* shrink the whole bar on phones */
