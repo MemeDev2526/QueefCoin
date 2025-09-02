@@ -128,8 +128,8 @@ body.overlay-active { overflow: hidden; }
   background-image:
     linear-gradient(to bottom, rgba(9,7,17,.55), rgba(9,7,17,.65)),
     url("assets/welcome-background.png");
-  background-position: center 80%, center 80%;
-  background-size: 100% 100%, cover;
+  background-position: center 80%;
+  background-size: cover;
   background-repeat: no-repeat, no-repeat;
   background-blend-mode: normal; /* no multiply black-out */
 }
@@ -477,6 +477,7 @@ nav {
 }
 
 .puff-popover__title {
+  display:block; 
   margin: 0 0 6px;
   font-family: var(--font-heading);
   font-size: 28px;
@@ -647,10 +648,10 @@ footer .btn {
 
 /* Contract row */
 .hero__contract{
-  display:flex;
+  display: inline-flex;
   align-items:center;
   justify-content:center;   /* center the trio */
-  gap: 10px;                /* small fixed space */
+  gap: 5px;                /* small fixed space */
   flex-wrap:wrap;
   margin: .6rem 0 1rem;
   font-family:"Rubik", system-ui, sans-serif;
@@ -684,14 +685,14 @@ footer .btn {
 
 /* Contract line: keep label + hash tight, copy button aligned */
 .contract-line{
-  display:flex; align-items:center; justify-content:center; gap: 6px; flex-wrap:wrap;
+  display:flex; align-items:center; justify-content:center; gap: 3rem; flex-wrap:wrap;
 }
 .contract-line .label{ font-weight: 800; }
 .contract-line .hash{ font-weight: 800; letter-spacing:.2px; }
 
 /* Add space between the two hero CTAs */
 .hero__cta .btn + .btn,
-.hero__cta .cta-button + .cta-button{ margin-left: 22px; }
+.hero__cta .cta-button + .cta-button{ margin-left: 27px; }
 
 
 
@@ -927,10 +928,9 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
     to  { transform: translateY(0);     opacity:1; }
   }
 
-  .puff-popover__title{ display:block !important; opacity:1 !important; font-size: 22px; }
+  .puff-popover__title{ display:block !important; opacity:1 !important; color: var(--orange); font-size: 22px; }
   .puff-popover__body{ font-size: 15px; line-height: 1.6; }
-  .puff-popover__close{
-    top: 8px; right: 10px; font-size: 18px;
+  .puff-popover__close{ top: 8px; right: 10px; font-size: 18px;}
   }
 
   /* prevent the section from clipping anything */
