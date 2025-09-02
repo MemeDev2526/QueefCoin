@@ -120,15 +120,18 @@ body.overlay-active { overflow: hidden; }
 }
 
 /* FULLSCREEN BACKGROUND IMAGE + DARK BLEND (this hides the site) */
-.loading-overlay .overlay-bg {
+.loading-overlay .overlay-bg{
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: url("assets/welcome-background.png");
-  background-position: center 60%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-blend-mode: multiply;
+  /* softer overlay + explicit size for BOTH layers */
+  background-image:
+    linear-gradient(to bottom, rgba(9,7,17,.55), rgba(9,7,17,.65)),
+    url("assets/welcome-background.png");
+  background-position: center 60%, center 60%;
+  background-size: 100% 100%, cover;
+  background-repeat: no-repeat, no-repeat;
+  background-blend-mode: normal; /* no multiply black-out */
 }
 
 /* FOREGROUND CONTENT STACK */
@@ -643,14 +646,17 @@ footer .btn {
 }
 
 /* Contract row */
-.hero__contract {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin: 1rem 0 1.2rem;
-  font-family: "Rubik", system-ui, sans-serif;
+.hero__contract{
+  display:flex;
+  align-items:center;
+  justify-content:center;   /* center the trio */
+  gap: 10px;                /* small fixed space */
+  flex-wrap:wrap;
+  margin: .6rem 0 1rem;
+  font-family:"Rubik", system-ui, sans-serif;
 }
+.hero__contract > *{ flex: 0 0 auto; }  /* stop stretching */
+
 
 .hero__contract #qc-contract {
   display: inline-block;
@@ -684,7 +690,9 @@ footer .btn {
 .contract-line .hash{ font-weight: 800; letter-spacing:.2px; }
 
 /* Add space between the two hero CTAs */
-.cta-button + .cta-button{ margin-left: 18px; }
+.hero__cta .btn + .btn,
+.hero__cta .cta-button + .cta-button{ margin-left: 22px; }
+
 
 
 /* ROADMAP */
@@ -770,17 +778,14 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
    8) RESPONSIVE
    ========================================================= */
 /* 1) Make room on desktop + de-zoom the BG */
-@media (min-width: 1100px){
+@media (min-width: 1200px){
   .loading-overlay .overlay-bg{
-    background-image:
-      /* subtle veil only */
-      linear-gradient(to bottom, rgba(13,13,13,.25), rgba(13,13,13,.35)),
+   background-image:
+      linear-gradient(to bottom, rgba(9,7,17,.55), rgba(9,7,17,.65)),
       url("assets/welcome-background.png");
-    background-size: 100% 100%, clamp(1200px, 80vw, 1300px) auto;
-    background-position: center top, center top;
+    background-size: 100% 100%, clamp(1200px, 82vw, 1600px) auto;
+    background-position: center 45%, center 45%;
     background-repeat: no-repeat, no-repeat;
-    background-blend-mode: multiply;
-    background-color:#0D0D0D;
   }
 }
 
@@ -922,7 +927,7 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
     to  { transform: translateY(0);     opacity:1; }
   }
 
-  .puff-popover__title{ font-size: 22px; }
+  .puff-popover__title{ display:block !important; opacity:1 !important; font-size: 22px; }
   .puff-popover__body{ font-size: 15px; line-height: 1.6; }
   .puff-popover__close{
     top: 8px; right: 10px; font-size: 18px;
