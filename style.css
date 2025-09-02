@@ -705,6 +705,28 @@ footer .btn {
 #tokenomics p, #tokenomics li{ line-height:1.65; margin-bottom:12px; }
 #tokenomics .token-footer { font-style: italic; color: var(--orange); text-align: center; margin-top: 2em; }
 
+/* TOKENOMICS STYLING */
+#tokenomics .faq-item {
+  text-align: left; /* ensure all content is left aligned */
+  margin-bottom: 0.85rem;
+}
+
+#tokenomics .faq-item summary {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 1.5rem; /* 4pt larger than body text (~16px body) */
+  font-weight: 400;
+  cursor: pointer;
+  list-style: none; /* remove default marker */
+  text-align: left;
+}
+
+#tokenomics .faq-item p,
+#tokenomics .faq-item ul {
+  font-family: 'Rubik', sans-serif;
+  font-size: 1rem; /* body base size */
+  margin-left: 0; /* flush left */
+}
+
 /* TIKTOK */
 #tiktok h2 { font-size: clamp(2rem, 5vw, 3rem); }
 
