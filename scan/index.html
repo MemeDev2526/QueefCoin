@@ -5,37 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>$QUEEF — Scan Landing</title>
   <meta name="description" content="$QUEEF — Pump the Puff. Buy, Play, Join." />
-  <link rel="preload" href="../assets/queef-sound.mp3" as="audio">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="scan.css" />
+
+  <!-- Preload sound -->
+  <link rel="preload" href="../assets/queef-sound.mp3" as="audio">
 </head>
 <body>
   <main class="scan-wrap">
     <header class="hero">
-      <img class="logo" src="../assets/logo-queef-main.png" alt="$QUEEF logo" />
-      <h1 class="tag">Pump the Puff</h1>
+      <img class="logo" src="../assets/logo-epic-final.png" alt="$QUEEF cosmic logo" />
+      <h1 class="tag">Pump the Puff 💨</h1>
       <p class="sub">You’re just in time. The puff is prophecy.</p>
       <div class="cta-row">
-        <a class="btn primary" href="https://bonk.fun" target="_blank" rel="noopener">Buy $QUEEF</a>
-        <a class="btn ghost" href="../queefcoingame" rel="noopener">Play Puff Dodge</a>
+        <a class="btn primary" href="https://bonk.fun?utm_source=qr&utm_medium=scan&utm_campaign=brand" target="_blank" rel="noopener">Buy $QUEEF</a>
+        <a class="btn ghost" href="../queefcoingame?utm_source=qr&utm_medium=scan&utm_campaign=brand" rel="noopener">Play Puff Dodge</a>
       </div>
     </header>
 
     <section class="quick-links">
-      <a class="q-card" href="https://dexscreener.com" target="_blank" rel="noopener">
+      <a class="q-card" href="https://dexscreener.com?utm_source=qr&utm_medium=scan&utm_campaign=brand" target="_blank" rel="noopener">
         <span>📈</span><b>Chart</b>
       </a>
-      <a class="q-card" href="https://twitter.com/QueefCoin" target="_blank" rel="noopener">
+      <a class="q-card" href="https://twitter.com/QueefCoinSOL?utm_source=qr&utm_medium=scan&utm_campaign=brand" target="_blank" rel="noopener">
         <span>🐦</span><b>Twitter</b>
       </a>
-      <a class="q-card" href="https://t.me/QueefCoin" target="_blank" rel="noopener">
+      <a class="q-card" href="https://t.me/QueefCoin?utm_source=qr&utm_medium=scan&utm_campaign=brand" target="_blank" rel="noopener">
         <span>💬</span><b>Telegram</b>
       </a>
       <a class="q-card" href="../#wind">
         <span>💨</span><b>Puff With Purpose</b>
       </a>
+      <a class="q-card" href="../QueefCoin_WhitePaper_v1.1.pdf?utm_source=qr&utm_medium=scan&utm_campaign=brand" target="_blank" rel="noopener">
+        <span>📜</span><b>Whitepaper</b>
+      </a>
+      <a class="q-card" href="https://PuffShop.store?utm_source=qr&utm_medium=scan&utm_campaign=brand" target="_blank" rel="noopener">
+        <span>🛒</span><b>Merch Shop</b>
+      </a>
     </section>
 
-    <!-- Tap zone: plays sound + spawns puff particles -->
+    <!-- Tap zone -->
     <button class="tap-zone" aria-label="Tap to puff">
       <span class="tap-text">Tap to Puff</span>
     </button>
@@ -45,7 +58,10 @@
     </footer>
   </main>
 
+  <!-- Puff sound -->
   <audio id="puff-sfx" src="../assets/queef-sound.mp3" preload="auto"></audio>
+
+  <!-- Script -->
   <script src="scan.js" defer></script>
 </body>
 </html>
