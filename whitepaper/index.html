@@ -22,7 +22,7 @@
   --page-max:1200px; --sidebar-w:340px; --gap:16px; --radius:14px;
 
   /* Spacing + screen bg scale */
-  --section-gap: 45px;           /* tweak value */
+  --section-gap: 50px;           /* tweak value */
   --screen-bg-height: 90vmin;   /* make this bigger for “wider” */
   --screen-bg-width: 120vmin;   /* make this bigger for “wider” */
 }
@@ -162,11 +162,11 @@ strong{ font-weight: 800; }
   
 /* ===== SECTION CARDS ===== */
 .section{
-  background: linear-gradient(180deg, rgba(14,14,14,.60) 0%, rgba(13,13,13,.60) 100%);
+  background: linear-gradient(180deg, rgba(14,14,14,.75) 0%, rgba(13,13,13,.75) 100%);
   backdrop-filter: blur(12px);   /* applies frosted blur */
   -webkit-backdrop-filter: blur(12px); /* Safari support */
   padding: 24px 28px 40px;
-  border: 1px solid #1f1f1f;   /* solid dark gray */
+  border: 1px solid #000000;
   border-radius: var(--radius);
   box-shadow: 0 10px 40px rgba(0,0,0,.35);
 }
@@ -243,20 +243,74 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
   position: sticky; top:24px;
   height: calc(100vh - 48px);     /* fallback */
   height: calc(100svh - 48px);    /* modern mobile */
-  background: #121212; border: 1px solid #1f1f1f; border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(14,14,14,.65) 0%, rgba(13,13,13,.65) 100%);
+  border: 1px solid rgba(31,31,31,.6);
+  border-radius: var(--radius);
   padding: 16px; overflow:auto;
-  box-shadow: 0 0 0 1px rgba(255,255,255,.03) inset, 0 10px 30px rgba(0,0,0,.35);
+  box-shadow: 0 10px 40px rgba(0,0,0,.35);
 }
 
-.toc__title{ font-family:"Luckiest Guy"; color: var(--orange); font-size:1.35rem; margin-bottom:8px; }
+.toc__title{ font-family:"Luckiest Guy"; color: var(--orange); font-size:1.35rem; margin-bottom:12px; }
+.toc a{ color: var(--white); opacity:.9; }
+.toc a:hover{ opacity:1; text-decoration: underline; }
+details summary{ cursor: pointer; }
 .toc__controls{ display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap; }
 .btn{ appearance:none; border:1px solid #2a2a2a; background:#181818; color:var(--white);
       padding:8px 10px; border-radius:10px; cursor:pointer; font:700 .9rem 'Rubik', sans-serif; }
 
 .btn:hover{ border-color:#3a3a3a; background:#1e1e1e; }
-.wrap.collapsed{ grid-template-columns: 0 1fr; }
-.wrap.collapsed .toc{ display:none; }
-.sidebar-toggle{ position: fixed; left:18px; bottom:18px; z-index:9999; }
+.wrap.collapsed{
+  grid-template-columns: 1fr;   /* instead of 0 1fr */
+  max-width: var(--page-max);   /* stop reserving space for the sidebar */
+}
+.wrap.collapsed .toc{ display: none !important; }
+.sidebar-toggle{
+  position: fixed;
+  top: max(14px, env(safe-area-inset-top));
+  left: max(14px, env(safe-area-inset-left));
+  z-index: 9999;
+
+  background: var(--orange);
+  color: var(--black);
+  border: none;
+  border-radius: 9999px;
+  padding: 10px 14px;
+  font-family: "Luckiest Guy", system-ui, sans-serif;
+  font-size: 0.98rem;
+  line-height: 1;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35), 0 0 0 1px rgba(0,0,0,.35) inset;
+}
+.sidebar-toggle:hover{ filter: brightness(1.05); }
+.sidebar-toggle:focus{ outline: 2px solid #fff3; outline-offset: 2px; }
+
+/* Give content some headroom so nothing sits under the fixed button */
+.wrap{ padding-top: 72px; }
+@media (min-width: 1280px){
+  .wrap{ padding-top: 24px; } /* plenty of room on large screens */
+}
+  /* Overlay behavior on smaller screens */
+@media (max-width: 1279px){
+  .wrap{ grid-template-columns: 1fr; max-width: var(--page-max); }
+  .toc{
+    position: fixed;
+    top: 0; bottom: 0; left: 0;
+    width: min(86vw, var(--sidebar-w));
+    padding: 16px;
+    transform: translateX(-100%);
+    transition: transform .28s ease;
+    z-index: 9998;
+    overflow: auto;
+  }
+  .wrap.nav-open .toc{ transform: translateX(0); }
+
+  /* dim the page behind the drawer */
+  .wrap.nav-open::after{
+    content:"";
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 9997;
+  }
+}
 
 /* ===== Section-specific background utility ===== */
 .section--bg{ position: relative; overflow:hidden; }
@@ -1049,9 +1103,39 @@ function buildTOC(){
 }
 
 // Sidebar toggle + expand/collapse
-const wrap = document.getElementById('wrap');
-document.getElementById('sidebarToggle')?.addEventListener('click', () => {
-  wrap.classList.toggle('collapsed');
+const wrap = document.getElementById('wrap');        // keep only one 'wrap' const in your file
+const mq = window.matchMedia('(max-width: 1279px)');
+const toggleBtn = document.getElementById('sidebarToggle');
+
+function toggleTOC(){
+  if (mq.matches){
+    // mobile/tablet → slide-in overlay
+    wrap.classList.toggle('nav-open');
+    document.body.style.overflow = wrap.classList.contains('nav-open') ? 'hidden' : '';
+  } else {
+    // desktop → collapse the sidebar column
+    wrap.classList.toggle('collapsed');
+  }
+}
+toggleBtn?.addEventListener('click', toggleTOC);
+
+// Click outside to close (mobile)
+document.addEventListener('click', (e) => {
+  if (!mq.matches) return;
+  if (!wrap.classList.contains('nav-open')) return;
+  const insidePanel = e.target.closest('.toc, #sidebarToggle');
+  if (!insidePanel){
+    wrap.classList.remove('nav-open');
+    document.body.style.overflow = '';
+  }
+});
+
+// ESC to close (mobile)
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && wrap.classList.contains('nav-open')){
+    wrap.classList.remove('nav-open');
+    document.body.style.overflow = '';
+  }
 });
 document.getElementById('expandAll')?.addEventListener('click', () => {
   document.querySelectorAll('details.toc__group').forEach(d => d.open = true);
@@ -1099,7 +1183,7 @@ function wrapHashtagsAndSlogans(root){
   });
 }
 
-// PRINT-ONLY TOC (H1s only)
+// PRINT-ONLY TOC (H1s only!)
 function buildPrintOnlyTOCMain() {
   const container = document.getElementById('printTocList');
   if (!container) return;
