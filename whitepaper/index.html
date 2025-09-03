@@ -191,69 +191,80 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
 @page { size: A4; margin: 0; }
 
 @media print {
- html, body{ -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-
-  /* Dark paper */
-  body{
-    background: var(--black) !important;
-    background-image: none !important;
-    position: relative; /* anchor the pseudo-element stacking */
+  html, body {
+    -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
   }
 
-  /* Watermark: ABOVE body bg, BELOW content */
-  body::before{
+  /* Dark paper background */
+  body {
+    background: var(--black) !important;
+    background-image: none !important;
+    position: relative;
+  }
+
+  /* Kill the fixed body watermark in print (causes blank page/scale bugs) */
+  body::before { content: none !important; }
+
+  /* Apply watermark per page container (consistent + centered) */
+  .section, .print-toc {
+    position: relative;
+    z-index: 1;
+  }
+  .section::before, .print-toc::before {
     content:"";
-    position: fixed;
-    top:0; right:0; bottom:0; left:0;
+    position: absolute; inset: 0;
     background-image: var(--watermark-url);
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: contain;   /* tweak to taste */
+    background-size: 75% auto;   /* tweak scale if needed */
     opacity: .18;
     pointer-events: none;
     z-index: 0;
   }
-
-  /* Content stacks above the watermark */
-  .wrap, main, .section, .print-toc{ position: relative; z-index: 1; }
+  .section > *, .print-toc > * { position: relative; z-index: 1; }
 
   /* Layout + pages */
-  .toc, .sidebar-toggle{ display:none !important; }
-  .wrap{ display:block; padding:0; }
-  main{ max-width:none; margin:0; }
+  .toc, .sidebar-toggle { display: none !important; }
+  .wrap { display: block; padding: 0; }
+  main { max-width: none; margin: 0; }
 
-  .coverpage{ break-after: page; page-break-after: always; height:100vh; background: var(--black) !important; }
-   /* Hide watermark on the cover and the end page only */
-  .coverpage, .endpage{ position: relative; }
-  .coverpage::before,
-  .endpage::before{
-    content:"";
-    position: absolute; inset: 0;
+  /* Cover + End pages: no watermark, solid background */
+  .coverpage, .endpage { position: relative; background: var(--black) !important; }
+  .coverpage::before, .endpage::before { content: none !important; }
+  .coverpage { page-break-after: always; height: 100vh; }
+  .endpage { page-break-before: always; }
+
+  /* Print-only TOC */
+  .print-toc {
+    display: block !important;
+    page-break-after: always;
     background: var(--black);
-    z-index: 2; /* sits above body::before, below actual content */
+    color: var(--white);
   }
-  .coverpage > *, .endpage > *{ position: relative; z-index: 3; }
-  
-  .print-toc{
-    display:block !important;
-    break-after: page; page-break-after: always;
-    background: var(--black); color: var(--white);
-  }
-  .print-toc__inner{ padding:21mm 20mm 24mm; }
-  
-  .section{
+  .print-toc__inner { padding: 21mm 20mm 24mm; }
+
+  /* Sections */
+  .section {
     background: linear-gradient(180deg, rgba(14,14,14,.75) 0%, rgba(13,13,13,.75) 100%);
-    border-radius:0; border:none; box-shadow:none;
-    min-height:100vh;
-    padding:21mm 20mm 24mm;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    min-height: 100vh;
+    padding: 21mm 20mm 24mm;
   }
-  .section:not(:first-of-type){ break-before: page; page-break-before: always; }
-  .endpage{ break-before: page; page-break-before: always; }
+  .section:not(:first-of-type) { page-break-before: always; }
 
   /* Tidy breaks */
-  h1,h2,h3{ margin-top:1.6em; page-break-after: avoid; break-after: avoid; }
-  .section h1:first-child, .section h2:first-child, .section h3:first-child{ margin-top:0; }
-  .section, .callout{ page-break-inside: avoid; break-inside: avoid; }
+  h1,h2,h3 {
+    margin-top: 1.6em;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  .section h1:first-child,
+  .section h2:first-child,
+  .section h3:first-child { margin-top: 0; }
+  .section, .callout { page-break-inside: avoid; break-inside: avoid; }
 }
   
 /* ===== TOC SIDEBAR ===== */
@@ -1282,6 +1293,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </body>
 
 </html>
+
 
 
 
