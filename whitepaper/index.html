@@ -194,69 +194,86 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
   html, body {
     -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
+    height: auto !important;          /* avoid WebKit blank-first-page quirk */
+    overflow: visible !important;
   }
 
-  /* Dark paper background */
+  /* Dark paper + ensure screen bg is OFF */
   body {
     background: var(--black) !important;
-    background-image: none !important;
+    background-image: none !important;   /* disable on-screen page bg */
+    position: static !important;
+  }
+
+  /* Remove any fixed/overlay UI that can trigger an extra page */
+  .toc,
+  .sidebar-toggle { display: none !important; }
+
+  /* Layout reset */
+  .wrap { display: block; padding: 0 !important; margin: 0 !important; }
+  main   { max-width: none; margin: 0 !important; padding: 0 !important; }
+
+  /* COVER: must be the first printed page, no watermark on it */
+  .coverpage {
+    page-break-before: avoid;
+    page-break-after: always;
+    break-inside: avoid;
+    height: 100vh; min-height: 100vh;
+    background: var(--black) !important;
     position: relative;
   }
 
-  /* Kill the fixed body watermark in print (causes blank page/scale bugs) */
-  body::before { content: none !important; }
-
-  /* Apply watermark per page container (consistent + centered) */
-  .section, .print-toc {
-    position: relative;
-    z-index: 1;
-  }
-  .section::before, .print-toc::before {
-    content:"";
-    position: absolute; inset: 0;
-    background-image: var(--watermark-url);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 75% auto;   /* tweak scale if needed */
-    opacity: .18;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .section > *, .print-toc > * { position: relative; z-index: 1; }
-
-  /* Layout + pages */
-  .toc, .sidebar-toggle { display: none !important; }
-  .wrap { display: block; padding: 0; }
-  main { max-width: none; margin: 0; }
-
-  /* Cover + End pages: no watermark, solid background */
-  .coverpage, .endpage { position: relative; background: var(--black) !important; }
-  .coverpage::before, .endpage::before { content: none !important; }
-  .coverpage { page-break-after: always; height: 100vh; }
-  .endpage { page-break-before: always; }
-
-  /* Print-only TOC */
+  /* PRINT TOC page (no pseudo-elements needed) */
   .print-toc {
     display: block !important;
     page-break-after: always;
-    background: var(--black);
-    color: var(--white);
+    background: var(--black) !important;
+    color: var(--white) !important;
   }
   .print-toc__inner { padding: 21mm 20mm 24mm; }
 
-  /* Sections */
+  /* PER-PAGE WATERMARK VIA MULTIPLE BACKGROUNDS
+     Layer order: [top] gradient (semi-transparent) , watermark image [bottom]
+     The alpha in the gradient lets the watermark show through. */
+  .section,
+  .print-toc {
+    /* Paint gradient FIRST (top layer), watermark SECOND (bottom layer) */
+    background-image:
+      linear-gradient(180deg, rgba(14,14,14,.75) 0%, rgba(13,13,13,.75) 100%),
+      var(--watermark-url);
+    background-repeat: no-repeat, no-repeat;
+    background-position: center center, center center;
+    background-size: cover, 75% auto;   /* adjust 2nd value to scale watermark */
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    position: relative;
+    z-index: 0;
+  }
+
+  /* Section page sizing/padding */
   .section {
-    background: linear-gradient(180deg, rgba(14,14,14,.75) 0%, rgba(13,13,13,.75) 100%);
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
     min-height: 100vh;
-    padding: 21mm 20mm 24mm;
+    padding: 21mm 20mm 24mm !important;
   }
   .section:not(:first-of-type) { page-break-before: always; }
+  .section, .callout { page-break-inside: avoid; break-inside: avoid; }
 
-  /* Tidy breaks */
-  h1,h2,h3 {
+  /* END PAGE (no watermark) */
+  .endpage {
+    page-break-before: always;
+    min-height: 100vh;
+    position: relative;
+    background: var(--black) !important;
+    /* ensure no inherited multi-bg from .section */
+    background-image: var(--endpage-url) !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: contain !important;
+  }
+
+  /* Headings: tidy page breaks */
+  h1, h2, h3 {
     margin-top: 1.6em;
     page-break-after: avoid;
     break-after: avoid;
@@ -264,7 +281,6 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
   .section h1:first-child,
   .section h2:first-child,
   .section h3:first-child { margin-top: 0; }
-  .section, .callout { page-break-inside: avoid; break-inside: avoid; }
 }
   
 /* ===== TOC SIDEBAR ===== */
@@ -1293,6 +1309,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </body>
 
 </html>
+
 
 
 
