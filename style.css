@@ -136,7 +136,7 @@ body.overlay-active { overflow: hidden; }
   background-image:
     linear-gradient(to bottom, rgba(9,7,17,.55), rgba(9,7,17,.65)),
     url("assets/welcome-background.png");
-  background-position: center 70%, center 70%;   /* nudge image down a bit */
+  background-position: center 75%, center 75%;   /* nudge image down a bit */
   background-size: cover, cover;                 /* <-- important */
   background-repeat: no-repeat, no-repeat;
   background-blend-mode: normal;
@@ -737,12 +737,10 @@ section.has-bg::after {
 
 /* Contract line: keep label + hash tight, copy button aligned */
 .contract-line{
-  display:flex; align-items:center; justify-content:center; gap: 6px; flex-wrap:wrap;  /* 3rem -> 6px */
+  display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap;
 }
-
-}
-.contract-line .label{ font-weight: 800; }
-.contract-line .hash{ font-weight: 800; letter-spacing:.2px; }
+.contract-line .label{ font-weight:800; }
+.contract-line .hash{ font-weight:800; letter-spacing:.2px; }
 
 /* Add space between the two hero CTAs */
 .hero__cta .btn + .btn,
@@ -867,7 +865,7 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
       linear-gradient(to bottom, rgba(9,7,17,.55), rgba(9,7,17,.65)),
       url("assets/welcome-background.png");
     background-size: 100% 100%, clamp(1200px, 82vw, 1600px) auto;
-    background-position: center 45%, center 45%;
+    background-position: center 65%, center 65%;
     background-repeat: no-repeat, no-repeat;
   }
 }
@@ -906,7 +904,7 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
 
 /* 4) Keep message from hugging the bottom too hard */
 .welcome-message{
-  margin: 5px 5px clamp(8px, 2vh, 14px);
+  margin: 5px 5px clamp(8px, 2vh, 20px);
 }
 
 @media (max-width: 768px) {
