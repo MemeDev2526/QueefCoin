@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>$QUEEF — Whitepaper (Print/PDF-Ready)</title>
+<!-- Fonts: Luckiest Guy (headings) + Rubik (body) -->
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&amp;family=Rubik:wght@400;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+/* ===== IMAGE PLACEHOLDERS (swap these) ===== */
+:root{
+  /* Paths or data URIs */
+  --cover-url: url("assets/Cover.png");         /* Title/cover full page */
+  --watermark-url: url("assets/Watermark.png");  /* Faint logo on pages */
+  --page-bg-url: url("assets/Watermark.png");           /* Optional page bg */
+  --endpage-url: url("assets/Endpage.png");      /* optional endpage image */
+
+  /* Brand tokens */
+  --orange:#FF6B00; --orange-hi:#FF9500; --black:#0D0D0D; --white:#FFFFFF;
+  --gold:#FDC100; --solanaL:#94DAFF; --solanaD:#008CFF; --gray:#AAAAAA;
+  --page-max:1100px; --sidebar-w:340px; --gap:16px; --radius:14px;
+}
+
+/* ===== GLOBAL BASE ===== */
+*{ box-sizing: border-box; }
+html, body{
+  margin:0; padding:0; background: var(--black);
+  color: var(--white);
+  font-family: "Rubik", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height:1.6;
+  -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+}
+a{ color: var(--solanaL); text-decoration: none; }
+a:hover{ text-decoration: underline; }
+
+h1, h2, h3{
+  font-family: "Luckiest Guy", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  letter-spacing: .5px;
+  color: var(--orange);
+  margin: 0 0 12px 0;
+  line-height: 1.15;
+}
+h1{ font-size: 2.2rem; }
+h2{ font-size: 1.55rem; }
+h3{ font-size: 1.2rem; }
+p, li{ font-weight: 400; font-size: 1.02rem; }
+strong{ font-weight: 800; }
+
+.wrap{
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  gap: var(--gap);
+  max-width: calc(var(--page-max) + var(--sidebar-w) + var(--gap));
+  margin: 0 auto;
+  padding: 24px;
+  min-height: 100vh;
+  position: relative;
+}
+
+.highlight{
+  font-weight: 800;
+  color: var(--orange);
+  letter-spacing: .5px;
+}
+
+.print-toc { display: none; }
+
+/* Brand color swatches */
+.swatches{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 12px 0 8px;
+}
+
+.swatch{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #121212;
+  border: 1px solid #1f1f1f;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.03) inset, 0 10px 24px rgba(0,0,0,.35);
+}
+
+.swatch__chip{
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  box-shadow:
+    inset 0 0 0 4px rgba(255,255,255,.06),
+    inset 0 0 0 1px rgba(0,0,0,.25),
+    0 6px 16px rgba(0,0,0,.35);
+  flex: 0 0 auto;
+}
+
+.swatch__meta{
+  display: grid;
+  gap: 2px;
+}
+
+.swatch__meta strong{
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+.swatch__meta small{
+  display: block;
+  color: var(--gray);
+  font-size: .9rem;
+  opacity: .95;
+}
+
+/* ===== END PAGE ===== */
+.endpage{
+  page-break-before: always;
+  min-height: 100vh;
+  position: relative;
+  background: var(--black);
+}
+.endpage::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image: var(--endpage-url);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain; /* or 'cover' */
+}
+@media print{
+  .endpage{ break-before: page; }
+}
+
+/* ===== COVER PAGE ===== */
+
+.coverpage {
+  z-index: 3;
+  page-break-after: always;
+  height: 100vh; min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.coverpage img.cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* show entire cover without cropping */
+  background-color: var(--black);
+  display: block;
+}
+
+
+/* ===== GLOBAL WATERMARK ===== */
+@media print {
+  .watermarked .section::before,
+  .watermarked .print-toc::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: var(--watermark-url);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity:.15;
+    pointer-events:none;
+    z-index:0;
+    -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+  }
+
+  /* opt-out on specific pages/blocks */
+  .watermarked .section.no-watermark::before,
+  .watermarked .print-toc.no-watermark::before{
+    content:none !important;
+  }
+}
+
+/* ensure content is above the watermark */
+.section, .print-toc { position: relative; z-index: 1; }
+
+/* cover never gets a watermark */
+.coverpage::before{ content:none !important; }
+.section, .print-toc { position: relative; z-index:1; }
+  /* Pages without watermark */
+.no-watermark::before { content:none !important; }
+/* Ensure content sits above watermark */
+#content { position: relative; z-index: 1; }
+.coverpage::before{ content:none !important; }
+
+/* ===== SECTION CARDS ===== */
+.section{
+  background: linear-gradient(180deg, rgba(14,14,14,.85) 0%, rgba(13,13,13,.85) 100%);
+  padding: 24px 28px 40px;
+  border: 1px solid rgba(31,31,31,.6);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 40px rgba(0,0,0,.35);
+}
+.section + .section{ margin-top: 22px; }
+
+/* Prevent awkward breaks */
+h1,h2,h3{ page-break-after: avoid; break-after: avoid; }
+h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
+.section, .callout{ page-break-inside: avoid; break-inside: avoid; }
+
+/* ===== PRINT RULES ===== */
+@page{ size: A4; margin: 0; }
+@media print{
+  .toc, .sidebar-toggle{ display: none !important; }
+  .wrap{ display:block; padding:0; }
+  main{ max-width:none; margin:0; }
+  body{ background: var(--black) !important; }
+ .section{
+    background: linear-gradient(180deg, rgba(14,14,14,.75) 0%, rgba(13,13,13,.75) 100%);
+    border-radius:0; border:none; box-shadow:none;
+    min-height: 100vh;
+    padding: 21mm 20mm 24mm;
+  }
+
+  .section:not(:first-of-type){ break-before: page; page-break-before: always; }
+
+  .print-toc{ 
+    display: block !important;
+    break-after: page;
+    page-break-after: always;
+    background: var(--black); 
+    color: var(--white); 
+  }
+
+  .print-toc__inner{
+    padding: 21mm 20mm 24mm;     /* match section top padding */
+  }
+
+  h1, h2, h3 { margin-top: 1.6em; }  /* bigger gap before headings */
+  .section h1:first-child,
+  .section h2:first-child,
+  .section h3:first-child { margin-top: 0; }
+}
+
+/* ===== TOC SIDEBAR ===== */
+.toc{
+  position: sticky; top:24px;
+  height: calc(100vh - 48px);     /* fallback */
+  height: calc(100svh - 48px);    /* modern mobile */
+  background: #121212; border: 1px solid #1f1f1f; border-radius: var(--radius);
+  padding: 16px; overflow:auto;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.03) inset, 0 10px 30px rgba(0,0,0,.35);
+}
+
+.toc__title{ font-family:"Luckiest Guy"; color: var(--orange); font-size:1.35rem; margin-bottom:8px; }
+.toc__controls{ display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap; }
+.btn{ appearance:none; border:1px solid #2a2a2a; background:#181818; color:var(--white);
+      padding:8px 10px; border-radius:10px; cursor:pointer; font:700 .9rem 'Rubik', sans-serif; }
+
+.btn:hover{ border-color:#3a3a3a; background:#1e1e1e; }
+.wrap.collapsed{ grid-template-columns: 0 1fr; }
+.wrap.collapsed .toc{ display:none; }
+.sidebar-toggle{ position: fixed; left:18px; bottom:18px; z-index:9999; }
+
+/* ===== Section-specific background utility ===== */
+.section--bg{ position: relative; overflow:hidden; }
+.section--bg::before{
+  content:""; position:absolute; inset:0;
+  background: var(--section-bg-url, none) center/cover no-repeat;
+  opacity:.18; z-index:0;
+}
+.section--bg > *{ position:relative; z-index:1; }
+
+/* ===== TOC toggle icons ===== */
+details summary::before{ content:"► "; color: var(--orange); font-weight:700; margin-right:4px; }
+details[open] summary::before{ content:"▼ "; color: var(--orange); }
+
+  /* SCREEN-ONLY PAGE BG */
+@media screen {
+  body{
+    background-image: var(--page-bg-url);
+    background-position: center center;
+    background-size: auto;        /* no zoom/stretch */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+}
+
+</style>
+</head>
+<body class="watermarked">
+<button type="button" aria-label="Toggle Table of Contents" class="btn sidebar-toggle" id="sidebarToggle">☰ Table of Contents</button>
+<div class="wrap" id="wrap">
+<!-- ===== Sidebar (screen) ===== -->
+<aside aria-label="Table of Contents" class="toc">
+<div class="toc__title">Table of Contents</div>
+<div class="toc__controls">
+<button type="button" class="btn" id="expandAll">Expand all</button>
+<button type="button" class="btn" id="collapseAll">Collapse all</button>
+</div>
+<nav aria-label="Whitepaper sections" id="tocTree">
+<!-- Built by JS -->
+</nav>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main id="content">
+
+<!-- ===== COVER PAGE ===== -->
+<section class="coverpage no-watermark">
+<img alt="Cover Page" class="cover-img" 
+     src="assets/Cover.png" />
+</section>
+
+<!-- ===== PRINT-ONLY TOC (now page 2) ===== -->
+<section class="print-toc">
+  <div class="print-toc__inner">
+    <h1>Table of Contents</h1>
+    <ol id="printTocList"></ol>
+  </div>
+</section>
+
+<!-- Sections -->
+<section class="section" data-title="Abstract — THE PUFF THAT PUMPS 💨🚀" id="sec-1">
+<h1>1. Abstract — THE PUFF THAT PUMPS 💨🚀</h1>
+<p class="section__lead"><em class="slogan">Play Hard. Pump Harder. 📈</em></p>
+<p>Solana’s been sweating: rugs, memes, endless degens grinding the chain. All that hype? All that motion? It built up something no one could hold in.</p>
+<p><strong>And then it happened.</strong><br/> The release. The prophecy. The QUEEF. 💨✨</p>
+<p>Born from trapped chaos and pure degen joy, $QUEEF blasts louder, prouder, and wilder than the rest. It’s not bottled-up bullshit — it’s the puff that proves pressure creates legends.</p>
+<p>This isn’t just another memecoin.<br/>
+        It’s the glow-up. The aftershock. The puff the timeline didn’t see coming — and the chain couldn’t contain.</p>
+<p class="highlight">LOUD. PROUD. FERAL.</p>
+<p>$QUEEF is play turned power. Meme turned movement. <em class="slogan">Puff turned prophecy.</em></p>
+<p>Because when Solana needed a hero, it didn’t get a dog or a cat.<br/>It got a QUEEF. 💨🔥</p>
+</section>
+<section class="section" data-title="Executive Summary — The Puff That Rules" id="sec-2">
+<h1>2. Executive Summary — The Puff That Rules</h1>
+<p><em class="slogan">$QUEEF isn’t here to whisper. It’s here to blast. 💨</em></p>
+<p>Launched on Solana via BONK.fun bonding curve, $QUEEF is built on four unshakable pillars:</p>
+<ul>
+<li><strong>Meme Momentum 💨</strong> – Fueled by lore, art, and the power of the Queef community.</li>
+<li><strong>The Puff That Burns 🔥</strong> – Puff Dodge, the first burn-per-play arcade, where every run shrinks supply and pumps the prophecy.</li>
+<li><strong>The Puff That Rules 🗳️</strong> – DAO-lite governance (the Destiny Allocation Oracle), where holders vote on burns, treasury moves, partnerships, and meme crusades.</li>
+<li><strong>The Puff With Purpose 💝</strong> – Community-voted causes and charitable campaigns proving memes can pump and give back.</li>
+</ul>
+<p><strong>Key Features:</strong></p>
+<ul>
+<li>Fixed Supply: 69,000,000 $QUEEF (nice).</li>
+<li>LP Locked Forever: BONK.fun → Raydium migration, rug-proof.</li>
+<li>Dev Allocation Slashed: From 10% → 1% after community feedback.</li>
+<li>Transparent Wallets: Dev, DAO, Game, Merch, Rewards — all visible.</li>
+<li>Revenue Loops: Gameplay + merch sales → burns, rewards, DAO treasury.</li>
+</ul>
+<p><em class="slogan">Why it matters:</em> Meme coins live on hype. Most die on silence.</p>
+<p>$QUEEF is engineered to stay loud — combining memetic lore, real deflation, community governance, and a culture too feral to fade.</p>
+<p>Because when Solana needed a hero, it didn’t get another dog or cat.<br/>It got a QUEEF. 🚀🌕</p>
+<p><em class="slogan">This is not just a coin. This is the puff that pumps. 🚀</em></p>
+</section>
+<section class="section" data-title="Market Opportunity — Why the Puff Pumps Now" id="sec-3">
+<h1>3. Market Opportunity — Why the Puff Pumps Now</h1>
+<p>The crypto trenches are louder than ever: rugs, dogs, cats, frogs, fish — the memecoin wars never stop. But memes alone fade. To survive, a coin needs hype + mechanics + culture.</p>
+<p>That’s where $QUEEF comes in.</p>
+<h2 id="sec-3-1">3.1 The Rise of Meme Coins</h2>
+<ul>
+<li><strong>Billions in Volume:</strong> BONK, WIF, POPCAT, PNUT, JustaChillGuy, Pepe, and countless others have proven that memes aren’t side-shows — they’re the main show of Solana and crypto culture.</li>
+<li><strong>Community First:</strong> Meme coins thrive not because of tech, but because of believers, memes, and lore.</li>
+<li><strong>Problem:</strong> Most memes rug, fade, or die when hype cools.</li>
+</ul>
+<h2 id="sec-3-2">3.2 GameFi Demand</h2>
+<ul>
+<li><strong>Play-to-Burn &gt; Play-to-Earn:</strong> Traditional P2E failed because emissions killed value. $QUEEF flips the model with deflationary play.</li>
+<li><strong>Puff Dodge:</strong> The first meme-arcade where every run burns tokens, pumps scarcity, and drives FOMO.</li>
+<li><strong>Replayability:</strong> Quick, fun, and addictive — a model proven by games like Flappy Bird and Subway Surfers.</li>
+</ul>
+<h2 id="sec-3-3">3.3 DAO as a Differentiator</h2>
+<ul>
+<li><strong>DAO-lite → Full DAO:</strong> While most meme coins are opaque, $QUEEF builds community governance into the treasury from day one.</li>
+<li><strong>Trust + Transparency:</strong> Public wallets, multisig execution, live dashboards.</li>
+<li><strong>Narrative Power:</strong> A prophecy owned and steered by its believers.</li>
+</ul>
+<h2 id="sec-3-4">3.4 Why $QUEEF Wins</h2>
+<p>$QUEEF sits at the intersection of:</p>
+<ul>
+<li><em class="slogan">Meme Mania 🚀</em> — tapping into Solana’s strongest cultural wave.</li>
+<li><em class="slogan">Deflationary Mechanics 🔥</em> — burns hard-coded into play and merch.</li>
+<li><em class="slogan">GameFi Fun 🎮</em> — a sticky arcade loop with leaderboard clout.</li>
+<li><em class="slogan">DAO Power 🗳️</em> — transparency, control, and purpose baked in.</li>
+<li><em class="slogan">Chaotic Good Narrative 💨</em> — loud, feral, underdog hero energy.</li>
+</ul>
+<h2 id="sec-3-5">3.5 The Timing</h2>
+<ul>
+<li>Solana is thriving with low fees + high speed → perfect for micro-burn gameplay.</li>
+<li>Meme seasons are cyclical, and the next wave is brewing.</li>
+<li>Communities are hungry for more than just hype — they want fun + transparency + movement.</li>
+</ul>
+<p><em class="slogan">When hype meets mechanics meets prophecy… that’s when charts explode.</em></p>
+</section>
+<section class="section" data-title="Queefonomics (Tokenomics)" id="sec-4">
+<h1>4. Queefonomics (Tokenomics)</h1>
+<h2 id="sec-4-1">4.1 Overview</h2>
+<p>$QUEEF is a fixed-supply Solana token launched via BONK.fun bonding curve, ensuring permanent liquidity and fair distribution. The tokenomics model emphasizes transparency, deflationary design, community governance, and sustainable growth through gameplay and merchandise revenue.</p>
+<h2 id="sec-4-2">4.2 Total Supply</h2>
+<ul>
+<li>Total Supply: 69,000,000 $QUEEF</li>
+<li>Supply Type: Fixed (no inflation or additional minting)</li>
+<li>Decimals: 9</li>
+<li>Contract Address: 43AJD4sVmEChP1pDmXRZTYbrV73JhUVTrFXz9GNabonk</li>
+</ul>
+<h2 id="sec-4-3">4.3 Launch &amp; Liquidity</h2>
+<ul>
+<li>Launch Method: BONK.fun bonding curve</li>
+<li>Locked LP: ~80%+ supply paired with SOL at launch and permanently locked (LP tokens burned after migration to Raydium)</li>
+<li>Public Holders: Tokens acquired through bonding curve at launch</li>
+<li>Dev Allocation: Initially 10% of supply, reduced to 1% after community feedback to minimize rug risk and keep the project community-centric</li>
+<li>Locking Policy: Dev allocation is not locked; however, any future dev purchases will have 50% locked to promote trust and long-term alignment</li>
+</ul>
+<h2 id="sec-4-4">4.4 Wallet Structure</h2>
+<ul>
+<li><strong>Locked LP Wallet</strong> — Permanent liquidity from BONK.fun bonding curve → Raydium migration</li>
+<li><strong>Public Holder Wallets</strong> — Majority of supply held by community</li>
+<li><strong>Developer Wallet (1%)</strong> — Reduced from 10% → 1% after community feedback; not locked, but future dev purchases lock 50%; used for operations, development, and incentives</li>
+<li><strong>DAO Treasury Wallet 🗳️</strong> — Receives share of game + merch revenue; community-controlled via DAO votes; may fund liquidity adds, burns, rewards, partnerships, marketing, charity</li>
+<li><strong>Game Revenue Wallet</strong> — Source: Puff Dodge in-game purchases; split into Dev / DAO / Leaderboard / Burn allocations</li>
+<li><strong>Leaderboard Rewards Wallet 🏆</strong> — Rewards Top 10 Puff Dodge players; distributed weekly/monthly</li>
+<li><strong>Merch Revenue Wallet</strong> — Source: Net profits from merchandise sales; split: 60% Dev / 30% DAO / 10% Buyback &amp; Burn 🔥; special charitable drops: 100% → DAO Treasury for causes</li>
+</ul>
+<h2 id="sec-4-5">4.5 DAO Governance</h2>
+<ul>
+<li>Voting Eligibility: Threshold TBD at launch; adjustable if token price surges</li>
+<li>Treasury Usage: DAO votes on burns, liquidity, partnerships, charity</li>
+<li>Transparency: All wallets publicly labeled + trackable via Solscan</li>
+<li>Flexibility Clause: DAO may adjust revenue allocations as project matures</li>
+</ul>
+<h2 id="sec-4-6">4.6 Burn Mechanics</h2>
+<ul>
+<li><strong>Automatic Burns:</strong> From game revenue + merch buybacks → Solana incinerator 1nc1nerator11111111111111111111111111111111</li>
+<li><strong>DAO Burns:</strong> Treasury can vote additional burns</li>
+<li><strong>Execution:</strong> Batched weekly for efficiency + on-chain proof</li>
+</ul>
+<h2 id="sec-4-7">4.7 Charitable Initiatives – Puff With Purpose</h2>
+<ul>
+<li>DAO allocates funds directly to charities</li>
+<li>Special <em class="slogan">Puff With Purpose</em> merch drops: 100% profits → DAO for voting</li>
+</ul>
+<h2 id="sec-4-8">4.8 Summary</h2>
+<ul>
+<li>Rug-proof launch: BONK.fun → Raydium LP locked &amp; burned</li>
+<li>Dev allocation cut 10% → 1% after feedback</li>
+<li>Future dev purchases: 50% lock guarantee</li>
+<li>DAO Treasury governs burns/liquidity/community growth</li>
+<li>Gameplay + merch revenue fuel deflationary model</li>
+<li>Supply = deflationary — circulating tokens continuously reduced by burns</li>
+</ul>
+<p><em class="slogan">If you know, you puff.</em></p>
+</section>
+<section class="section" data-title="Burn Mechanics &amp; Treasury Flow" id="sec-5">
+<h1>5. Burn Mechanics &amp; Treasury Flow</h1>
+<h2 id="sec-5-1">5.1 Launch Phase (Months 0–3)</h2>
+<p>To create early scarcity and community hype, $QUEEF adopts an aggressive burn model:</p>
+<ul>
+<li><strong>Burn Percentage:</strong> 50% of all game revenue (entry fees + in-game purchases).</li>
+<li><strong>Revenue Split:</strong>
+<ul>
+<li>10% Dev Wallet – operations, hosting, updates</li>
+<li>20% DAO Treasury – governance-controlled initiatives</li>
+<li>20% Leaderboard Rewards – distributed weekly to top players</li>
+<li>50% Burn – sent immediately to Solana’s incinerator address:<br/><code>1nc1nerator11111111111111111111111111111111</code></li>
+</ul>
+</li>
+<li><strong>Minimum Entry Fee:</strong> 200 $QUEEF per leaderboard-eligible play</li>
+<li><strong>In-Game Purchases:</strong> Power-ups, skins, revives, etc. follow the same split as above</li>
+</ul>
+<p>This ensures rapid supply reduction while building a substantial DAO treasury for future governance.</p>
+<h2 id="sec-5-2">5.2 DAO Governance Phase (Month 4+)</h2>
+<p>After the launch phase, burn mechanics become DAO-controlled. The DAO will vote quarterly (or at a frequency it later determines) on:</p>
+<ul>
+<li>Burn percentage</li>
+<li>Entry fee minimum</li>
+<li>Leaderboard reward allocations</li>
+<li>DAO treasury share</li>
+<li>Frequency of governance votes</li>
+</ul>
+<p>Changes are applied via backend-controlled logic initially, secured by multisig for transparency. Long-term, the system will migrate to a light Solana program, allowing on-chain updates to splits, followed by full DAO-managed treasury and burns.</p>
+<h2 id="sec-5-3">5.3 Burn Visibility</h2>
+<ul>
+<li>Real-Time Burn Tracker in-game and on the website</li>
+<li>Public Wallet Links for Dev, DAO, Leaderboard, and Burn allocations</li>
+<li>Leaderboard Recognition: Top 1–3 players earn the majority of rewards, while ranks 6–10 receive recognition/participation bonuses to encourage engagement</li>
+</ul>
+<h2 id="sec-5-4">5.4 Special &amp; Scheduled Burns</h2>
+<p>Beyond automated mechanics, burns may also be triggered by DAO votes or Dev-scheduled events, e.g.:</p>
+<ul>
+<li>Pre-exchange listing Hype Burns</li>
+<li>Community milestone celebrations</li>
+<li>DAO-directed treasury burns</li>
+</ul>
+<p>These events provide additional deflationary pressure while giving the community visible participation in shaping the $QUEEF economy.</p>
+</section>
+<section class="section" data-title="Governance — From Trenches to Treasury" id="sec-6">
+<h1>6. Governance — From Trenches to Treasury</h1>
+<p>The Puff was born in the meme trenches — chaos, energy, and community hype forged it into prophecy. Because the Puff came from the people, it must always be driven by the people.</p>
+<p>That’s why $QUEEF governance evolves into DAO-lite after migration, once the community is strong enough to carry it. From there, the DAO becomes the engine of burns, rewards, stability, and purpose.</p>
+<h2 id="sec-6-1">6.1 DAO-lite Activation</h2>
+<ul>
+<li><strong>Trigger Conditions:</strong> DAO-lite activates only when:
+            <ul>
+<li>Migration is complete ✅</li>
+<li>At least 1,000 unique holders ✅</li>
+<li>At least 30% of supply circulating outside dev/DAO wallets ✅</li>
+</ul>
+</li>
+<li><strong>Treasury Wallet (DAO Wallet):</strong> The DAO wallet is the community treasury. It receives inflows from Puff Dodge game revenue 🎮, Merch revenue (quarterly, with audits) 🛍️, Dev contributions 💼 (voluntary), Community donations 💝</li>
+</ul>
+<p><em class="slogan">The puff fuels the treasury, and the people decide where it flows.</em></p>
+<h2 id="sec-6-2">6.2 Wallet Structure &amp; Smart Contract Flows</h2>
+<ul>
+<li><strong>Game Revenue Wallet:</strong> All game entry fees &amp; purchases land here. Smart contract automatically splits allocations into: Dev Wallet (10%), Leaderboard Wallet (20%), DAO Wallet (20%), Burn (50%) → Solana Incinerator.</li>
+<li><strong>Leaderboard Wallet:</strong> Receives its allocation automatically from the Game Wallet. Payouts to top players handled automatically on a weekly/seasonal basis.</li>
+<li><strong>DAO Wallet (Treasury):</strong> Receives allocations from game, merch, donations, and dev contributions. Controlled by holders through DAO-lite → full DAO. DAO can adjust Game &amp; Leaderboard allocations quarterly.</li>
+</ul>
+<h2 id="sec-6-3">6.3 Governance Parameters</h2>
+<ul>
+<li><strong>Voting Power:</strong> 1 vote per 69,000 $QUEEF.</li>
+<li><strong>Eligibility:</strong> Must hold ≥69,000 $QUEEF to vote or propose.</li>
+<li><strong>Voting Window:</strong> 5 days.</li>
+<li><strong>Quorum:</strong> 20% of circulating supply required for validity.</li>
+<li><strong>Pass Threshold:</strong> &gt;50% majority.</li>
+<li><strong>Execution:</strong> Approved proposals executed by multisig within 7 days.</li>
+</ul>
+<p><em class="slogan">The puff doesn’t move unless the people show up.</em></p>
+<h2 id="sec-6-4">6.4 Proposals — How They Work</h2>
+<ul>
+<li><strong>Who Can Propose:</strong> Any eligible holder (≥69,000 $QUEEF) or coalitions pooling to reach the threshold.</li>
+<li><strong>Submission:</strong> Via DAO dashboard (clear proposal: burns, allocations, rewards, initiatives).</li>
+<li><strong>Validation:</strong> Multisig council ensures proposals are legitimate and executable.</li>
+<li><strong>Voting:</strong> Opens immediately → runs 5 days.</li>
+<li><strong>Cadence:</strong> Monthly governance cycles for standard proposals. Quarterly reviews for tokenomics parameters (burn %, revenue splits, fees) to prevent churn.</li>
+</ul>
+<h2 id="sec-6-5">6.5 What the DAO Can Control</h2>
+<p><em class="slogan">The Puff flows where the people will it:</em></p>
+<ul>
+<li><em class="slogan">Revenue Splits</em> — Game, merch, donations.</li>
+<li><em class="slogan">Burn Rates</em> — Adjust deflation dial quarterly. 🔥</li>
+<li><em class="slogan">Game Costs</em> — Entry fees, power-up pricing.</li>
+<li><em class="slogan">Leaderboard Rewards</em> — Pool size &amp; distribution.</li>
+<li><em class="slogan">Holder Distributions</em> — Direct rewards to puff believers.</li>
+<li><em class="slogan">Treasury Burns</em> — Vote to send funds to the incinerator.</li>
+<li><em class="slogan">Liquidity &amp; Buybacks</em> — Allocate treasury funds to stabilize the puff.</li>
+<li><em class="slogan">Puff With Purpose</em> — Charitable allocations.</li>
+</ul>
+<h2 id="sec-6-6">6.6 DAO-lite vs Full DAO</h2>
+<ul>
+<li><strong>DAO-lite (Phase 1):</strong> Transparent wallets on Solscan. Off-chain token-weighted voting dashboard (snapshot-style). Multisig executes passed proposals. Monthly cycles for regular proposals; quarterly for tokenomics reviews. Extraordinary votes if ≥10% of supply signs petition.</li>
+<li><strong>Full DAO (Phase 2):</strong> On-chain Solana governance (Realms, Squads, etc.). Voting remains 1 vote per 69,000 $QUEEF (eligibility intact). Automatic execution: burns, transfers, splits run on-chain. Full decentralization: the puff runs itself.</li>
+</ul>
+<h2 id="sec-6-7">6.7 Transparency &amp; Reporting</h2>
+<ul>
+<li><strong>Live DAO Dashboard:</strong> Treasury balance 💰; Public wallets 🔗; Real-time burn counter 🔥; Game + merch revenue feeds 🎮🛍️; Dev &amp; community contributions 💼💝; Active proposals &amp; vote status 🗳️; Final results ✅</li>
+<li><strong>Quarterly Reports:</strong> Summaries of inflows/outflows; Merch revenue audits; Burn metrics; Commentary digest for believers &amp; investors</li>
+</ul>
+<h2 id="sec-6-8">6.8 DAO Multisig Council &amp; Emergency Powers</h2>
+<ul>
+<li><strong>Council Composition (DAO-lite):</strong> Initial council = dev team + 2–3 trusted community reps. Once DAO-lite activates, community elects future council seats via Telegram poll.</li>
+<li><strong>Emergency Powers:</strong> Multisig may act in emergencies (contract exploits, hacks). Must disclose actions within 48 hours and seek retroactive DAO approval.</li>
+</ul>
+<p><em class="slogan">The prophecy is transparent. The Puff belongs to the people.</em></p>
+</section>
+<section class="section" data-title="Treasury &amp; Wallet Transparency" id="sec-7">
+<h1>7. Treasury &amp; Wallet Transparency</h1>
+<p>$QUEEF is prophecy, but it’s also proof. No shadows. No rugs. No games with the numbers. The Puff is loud, proud — and transparent.</p>
+<p>All wallets tied to $QUEEF are publicly labeled and traceable on Solscan. Every puff in, every puff out, every burn, every prize pool — visible in real time.</p>
+<h2 id="sec-7-1">7.1 Core Wallets</h2>
+<ul>
+<li><strong>DAO Treasury Wallet 🗳️</strong> — The community’s pool. Receives allocations from game revenue, merch revenue (quarterly with audits), dev contributions, and community donations. Controlled by DAO-lite → full DAO.</li>
+<li><strong>Game Revenue Wallet 🎮</strong> — Collects all $QUEEF from entry fees and purchases. Smart contract automatically splits to: Dev, Leaderboard, DAO, Burn.</li>
+<li><strong>Leaderboard Wallet 🏆</strong> — Receives its cut from the Game Wallet. Pays out leaderboard rewards automatically on a weekly/seasonal basis.</li>
+<li><strong>Burn Address 🔥</strong> — Irrecoverable Solana incinerator: <code>1nc1nerator11111111111111111111111111111111</code> (proof of sacrifice, visible on-chain).</li>
+<li><strong>Dev Wallet 💼</strong> — Reduced from 10% → 1% of total supply. Future dev purchases: 50% locked by policy. Also receives a 10% allocation from game revenue. Dev may voluntarily contribute to DAO wallet.</li>
+</ul>
+<h2 id="sec-7-2">7.2 Transparency Features</h2>
+<ul>
+<li><strong>Public Labels:</strong> All wallets named and linked on Solscan.</li>
+<li><strong>Real-Time Burn Tracker:</strong> Website + in-game counter shows tokens burned live.</li>
+<li><strong>DAO Dashboard:</strong> Dedicated microsite displaying: Live DAO treasury balance; Game + merch inflows; Dev + community contributions; Active proposals + voting results.</li>
+<li><strong>Quarterly Reports:</strong> Treasury digest (all inflows/outflows); Merch revenue audit results; Burn metrics + progress toward supply milestones.</li>
+</ul>
+<h2 id="sec-7-3">7.3 Why It Matters</h2>
+<ul>
+<li>Locked LP = no rug liquidity pulls.</li>
+<li>Public wallets = trustless proof, not promises.</li>
+<li>DAO control = no single hand on the treasury.</li>
+</ul>
+<p><em class="slogan">The Puff doesn’t just speak prophecy. It shows receipts.</em></p>
+</section>
+<section class="section" data-title="Game Mechanics — Puff Dodge" id="sec-8">
+<h1>8. Game Mechanics — Puff Dodge</h1>
+<p><em class="slogan">“Every dodge is prophecy. Every puff is deflation.”</em></p>
+<p>Puff Dodge is the official meme-powered browser game of QueefCoin ($QUEEF). Players control Queefy, our chaotic puff mascot, dodging rugs, FUD, and scam coins while stacking $QUEEF coins and power-ups.</p>
+<p>The game fuses fast-paced arcade gameplay with real token economics, embedding burn mechanics, governance, and $QUEEF utility directly into play.</p>
+<h2 id="sec-8-1">8.1 Core Gameplay</h2>
+<ul>
+<li><strong>Mode:</strong> Side-scrolling dodge runner. Queefy moves forward automatically; player controls vertical movement.</li>
+<li><strong>Lives:</strong> Start with 3. Lose 1 per hit. Game ends at 0.</li>
+<li><strong>Scoring:</strong> Distance + coins. Multipliers (2× / 5× / 10× / 100×) apply for 5s during their active window.</li>
+<li><strong>Difficulty:</strong> Ramps every 15s with faster speed, more obstacles, and tighter clusters.</li>
+<li><strong>Controls:</strong> Desktop: Hold Space / ↑ / W to rise, release to fall. ↓ / S for quick-drop. Mobile: Tap &amp; hold to rise, release to fall. Swipe down for quick-drop.</li>
+</ul>
+<h2 id="sec-8-2">8.2 Power-Ups, Inventory &amp; Store</h2>
+<ul>
+<li><strong>Inventory Bar:</strong> Max 3 slots per run.</li>
+<li><strong>Pre-Load:</strong> Players may pre-load up to 3 items before a run.</li>
+<li><strong>Activation:</strong> Tap/click (mobile/desktop) or 1 / 2 / 3 hotkeys (desktop).</li>
+<li><strong>Consumable:</strong> Reset each run, no persistence between sessions.</li>
+<li><strong>Power-Up Variants (Locked):</strong>
+<ul>
+<li>+1 Life</li>
+<li>+3 Lives</li>
+<li>Shield (3 hits)</li>
+<li>Shield (5s duration)</li>
+<li>Slow-Mo (5s)</li>
+<li>Score Multipliers (2×, 5×, 10×, 100× for 5s)</li>
+</ul>
+</li>
+</ul>
+<h2 id="sec-8-3">8.3 Burn Integration &amp; Game Modes</h2>
+<p><strong>Practice Mode (Free-to-Play):</strong></p>
+<ul>
+<li>No wallet required.</li>
+<li>Mock burn mechanic: each run displays “🔥 200 $QUEEF could have been burned.”</li>
+<li>Global FOMO Counter: For every practice run, the site tracks 50% of entry fee (100 $QUEEF) as “could-have-burned.” Counter visible on the website for maximum hype.</li>
+<li>No leaderboard, no rewards.</li>
+</ul>
+<p><strong>Competitive Mode (200 $QUEEF / Run):</strong></p>
+<ul>
+<li>Requires Solana wallet connect (Phantom, Backpack, etc.).</li>
+<li>Entry fee split automatically per QueefCoin tokenomics: 10% Dev / 20% DAO / 20% Leaderboard / 50% Burn 🔥</li>
+<li>Real-time counters show actual burns + allocations in-game and on the website.</li>
+<li>Store purchases (power-ups, cosmetics) follow the same split.</li>
+</ul>
+<p><em class="slogan">Every competitive run pumps the prophecy.</em></p>
+<h2 id="sec-8-4">8.4 Leaderboard &amp; Rewards</h2>
+<ul>
+<li><strong>Global Rankings:</strong> Wallet, Username, Score, Distance, Coins, Date.</li>
+<li><strong>Epoch:</strong> Rewards distributed monthly by default (DAO can vote to adjust).</li>
+<li><strong>Top 10 rewarded, Top 3 take the majority.</strong></li>
+<li><strong>Cosmetics:</strong> Frames, highlights, and icons earned from ranks or purchased in-store.</li>
+<li><strong>Profile Tracking:</strong> Wallet + Username, best score, cosmetic unlocks.</li>
+</ul>
+<h2 id="sec-8-5">8.5 Cosmetics &amp; Customization</h2>
+<ul>
+<li><strong>Earned:</strong> Leaderboard rewards, seasonal ranks.</li>
+<li><strong>Purchased:</strong> In-game store with $QUEEF.</li>
+<li><strong>DAO Control:</strong> DAO can vote quarterly to add/remove cosmetic rewards, adjust prices, or introduce exclusive drops.</li>
+</ul>
+<h2 id="sec-8-6">8.6 Wallet Security &amp; Integration</h2>
+<ul>
+<li><strong>Non-custodial, least-privilege design.</strong></li>
+<li><strong>Supported Wallets:</strong> Phantom, Solflare, Backpack (via Solana Wallet Adapter).</li>
+<li><strong>Authentication:</strong> Sign-in with Solana (nonce + domain + expiry).</li>
+<li><strong>Transactions:</strong> Only requests signTransaction for entry fees and purchases. Users see exact amounts, recipients, and memos before signing.</li>
+<li><strong>Burns:</strong> Verified SPL transfers to Solana’s incinerator address.</li>
+<li><strong>Anti-Cheat:</strong> Server verifies run data vs spawn seeds to block spoofing.</li>
+<li><strong>Custody:</strong> No seed phrases ever handled; rewards distributed via DAO multisig.</li>
+</ul>
+<h2 id="sec-8-7">8.7 DAO Expansion &amp; Control</h2>
+<ul>
+<li>Entry fee for competitive runs.</li>
+<li>Power-up &amp; cosmetic pricing.</li>
+<li>Reward pool distribution model.</li>
+<li>Revenue split percentages (Dev / DAO / Leaderboard / Burn).</li>
+</ul>
+<h2 id="sec-8-8">8.8 Art &amp; Experience</h2>
+<ul>
+<li><strong>Playable Character:</strong> Queefy (additional skins in Phase 2).</li>
+<li><strong>Obstacles:</strong> Rugs, FUD placards, scam fartcoins.</li>
+<li><strong>Biomes:</strong> Cosmic backgrounds + themed parallax environments.</li>
+<li><strong>SFX:</strong> Puff bursts, coin pings, shield hum, hit thuds, “<em class="slogan">Pump the Puff 💨</em>” stinger.</li>
+</ul>
+<h2 id="sec-8-9">8.9 Roadmap Alignment</h2>
+<ul>
+<li><strong>Phase 1:</strong> MVP launch — Practice + Competitive, burn mechanics, store, leaderboard, inventory.</li>
+<li><strong>Phase 2:</strong> Cosmetics &amp; skins, seasonal backgrounds.</li>
+<li><strong>Phase 3:</strong> DAO-voted adjustments to splits, burns, and rewards.</li>
+<li><strong>Phase 4:</strong> Puff Dodge 2.0 — expanded gameplay, NFT unlockables, deeper DAO utility.</li>
+</ul>
+</section>
+<section class="section" data-title="Brand Identity — Loud. Proud. Feral." id="sec-9">
+<h1>9. Brand Identity — Loud. Proud. Feral.</h1>
+<p>The Puff isn’t just a coin. It’s the release, the chaos, the prophecy turned culture. Every color, logo, slogan, and hashtag doesn’t just brand $QUEEF — it pumps it louder.</p>
+<h2 id="sec-9-1">9.1 Brand Colors</h2>
+<p>$QUEEF runs bold, cosmic, and high-contrast — so the prophecy always stands out.</p>
+<div class="swatches">
+<div class="swatch">
+<div class="swatch__chip" style="background:#FF6B00;"></div>
+<div class="swatch__meta"><strong>Primary Brand Orange</strong><small>#FF6B00 — Core puff &amp; coin</small></div>
+</div>
+<div class="swatch">
+<div class="swatch__chip" style="background:#FF9500;"></div>
+<div class="swatch__meta"><strong>Highlight Orange</strong><small>#FF9500 — Glows &amp; hovers</small></div>
+</div>
+<div class="swatch">
+<div class="swatch__chip" style="background:#0D0D0D;"></div>
+<div class="swatch__meta"><strong>Jet Black</strong><small>#0D0D0D — Background/base</small></div>
+</div>
+<div class="swatch">
+<div class="swatch__chip" style="background:#FFFFFF;"></div>
+<div class="swatch__meta"><strong>Puff White</strong><small>#FFFFFF — Text/highlights</small></div>
+</div>
+<div class="swatch">
+<div class="swatch__chip" style="background:#FDC100;"></div>
+<div class="swatch__meta"><strong>Golden Yellow</strong><small>#FDC100 — Coin shading</small></div>
+</div>
+<div class="swatch">
+<div class="swatch__chip" style="background:#94DAFF;"></div>
+<div class="swatch__meta"><strong>Solana Blue Light</strong><small>#94DAFF — Accents</small></div>
+</div>
+<div class="swatch">
+<div class="swatch__chip" style="background:#008CFF;"></div>
+<div class="swatch__meta"><strong>Solana Blue Dark</strong><small>#008CFF — Accents</small></div>
+</div>
+<div class="swatch">
+<div class="swatch__chip" style="background:#AAAAAA;"></div>
+<div class="swatch__meta"><strong>Soft Gray</strong><small>#AAAAAA — Subtext</small></div>
+</div>
+</div>
+<p><em class="slogan">The Puff shines brightest against the void.</em></p>
+<h2 id="sec-9-2">9.2 Typography</h2>
+<ul>
+<li><strong>Headlines &amp; Slogans:</strong> Luckiest Guy — bold, meme-native, impact lettering.</li>
+<li><strong>Body:</strong> Rubik 400/700 — modern, legible, flexible.</li>
+<li><strong>Style:</strong> Big, punchy headings. Short, hypey. Never corporate.</li>
+</ul>
+<h2 id="sec-9-3">9.3 Mascot — Queefy 💨</h2>
+<ul>
+<li><strong>Core Form:</strong> An expressive orange puff cloud with a vapor trail instead of legs.</li>
+<li><strong>Design:</strong> BONK-style shading + bold outlines.</li>
+<li><strong>Features:</strong> Arms with gloves (often diamond hands 🧤). Face = expressive, feral, cheeky, sassy and meme ready. Vapor/puff blast trail = motion &amp; energy.</li>
+<li><strong>Variants:</strong> Hero pose, power pose, celebrate, cosmic, alt moods.</li>
+<li><strong>Rule:</strong> Queefy = chaotic good, never generic, always recognizable.</li>
+</ul>
+<h2 id="sec-9-4">9.4 Logos</h2>
+<ul>
+<li><strong>Primary Logo:</strong> Cosmic orange puff with $QUEEF text, accents.</li>
+<li><strong>Minimal Logo:</strong> Puff outline with $QUEEF inside.</li>
+<li><strong>Merch Variant:</strong> Store logo and other variants simplified for apparel.</li>
+<li><strong>Favicon Set:</strong> For site + game assets.</li>
+<li><strong>Game Logos:</strong> Puff Dodge &amp; other expansions.</li>
+<li><strong>Usage:</strong> Web, game, socials, merch, dashboards.</li>
+</ul>
+<h2 id="sec-9-5">9.5 Slogans</h2>
+<ul>
+<li><em class="slogan">Pump the Puff 💨</em> (rally cry)</li>
+<li><em class="slogan">Puff Believer 💨</em> (identity for holders / community pride)</li>
+<li><em class="slogan">Puff Powered ⚡</em> (strength + unity)</li>
+<li><em class="slogan">Glorify the Puff 🔮</em> (lore-driven hype)</li>
+</ul>
+<h2 id="sec-9-6">9.6 Hashtags</h2>
+<p><strong>Core:</strong> <span class="hashes">#PumpThePuff • #DontFadeThePuff • #PuffPowered • #QueefCoin</span></p>
+<p><strong>Expansion:</strong> <span class="hashes">#PuffBeliever • #QueefArmy • #PuffTheDip • #BlowUpTheCharts • #BonkPowered</span></p>
+<p><strong>Situational/Trend Hijack:</strong> <span class="hashes">#SolanaDegens • #AltSeason • #FOMO • #LFG</span></p>
+<h2 id="sec-9-7">9.7 Core Personality</h2>
+<ul>
+<li><strong>Alignment:</strong> Chaotic good.</li>
+<li><strong>Traits:</strong> Feral, sassy, cheeky, bold, confident, fun.</li>
+<li><strong>Identity:</strong> Meme prophet. Underdog hero.</li>
+<li><strong>Limits:</strong> Bold &amp; irreverent, sometimes NSFW — but never outright offensive or FUD.</li>
+</ul>
+<h2 id="sec-9-8">9.8 Voice &amp; Tone</h2>
+<ul>
+<li><strong>Bold &amp; Punchy:</strong> short, powerful, meme-native</li>
+<li><strong>Witty &amp; Playful:</strong> Wordplay, lore, double meanings, inside jokes.</li>
+<li><strong>Sassy &amp; Irreverent:</strong> Not corporate, never boring. always puffed</li>
+<li><strong>Community-Centric:</strong> “We” over “I.”</li>
+</ul>
+<p>Rules: ✅ Celebrate wins loudly, roast FUD cheekily. ✅ Always tie hype back to prophecy. ❌ Never neutral or generic. ❌ No corporate jargon.</p>
+<p><em class="slogan">In short: LOUD. PROUD. FERAL.</em><br/>The Puff is prophecy, and the brand makes sure you feel it in every color, slogan, and meme.</p>
+</section>
+<section class="section" data-title="Merch Ecosystem — Puff Gear, No Shame" id="sec-10">
+<h1>10. Merch Ecosystem — Puff Gear, No Shame</h1>
+<p>$QUEEF doesn’t just live on-chain. It lives on your chest, your phone case, your hoodie, your mug. The merch is meme, the meme is money, and the revenue powers the prophecy.</p>
+<h2 id="sec-10-1">10.1 Store Setup</h2>
+<ul>
+<li><strong>Access:</strong> A dedicated online merch shop will launch soon.</li>
+<li><strong>Announcement:</strong> The official store link will be revealed through QueefCoinSOL.com and socials at launch.</li>
+<li><strong>Token-Gated Perks:</strong> Holders unlock discounts and exclusive drops by connecting their wallet.</li>
+</ul>
+<h2 id="sec-10-2">10.2 Product Line</h2>
+<ul>
+<li><strong>Apparel:</strong> Tees, hoodies, beanies, joggers.</li>
+<li><strong>Accessories:</strong> Phone cases, mugs, stickers, posters.</li>
+<li><strong>Seasonal Drops:</strong> DAO-voted limited editions (ex. Puff Army Hoodies, Queefy plushies).</li>
+<li><strong>Charitable Merch:</strong> “<em class="slogan">Puff With Purpose</em>” campaigns with 100% profits directed to DAO-voted causes.</li>
+</ul>
+<h2 id="sec-10-3">10.3 Revenue Flow &amp; Transparency</h2>
+<ul>
+<li><strong>Quarterly Contributions:</strong> Net merch profits transferred into DAO Treasury.</li>
+<li><strong>Quarterly Audit Reports:</strong> Each distribution is accompanied by a transparent audit of sales, expenses, and allocations, published publicly.</li>
+<li><strong>Initial Split:</strong> 60% Dev/Operations • 30% DAO Treasury • 10% Burn 🔥 (sent to Solana incinerator). DAO can adjust quarterly.</li>
+</ul>
+<h2 id="sec-10-4">10.4 Holder Benefits</h2>
+<ul>
+<li><strong>Discounts:</strong> % off all merch for Puff Believers (wallet connect).</li>
+<li><strong>Exclusive Drops:</strong> Holder-only editions (DAO can vote designs).</li>
+<li><strong>Status Flex:</strong> Leaderboard champs may unlock cosmetic merch badges or limited items.</li>
+</ul>
+<h2 id="sec-10-5">10.5 Brand Expansion</h2>
+<p>Merch = meme amplifier. Every hoodie or sticker is free advertising on the streets and socials.</p>
+<p>DAO may vote to expand into collabs with other meme projects (BONK, WIF, etc.) for crossover hype.</p>
+<p>Special campaigns can tie burn events to merch sales → e.g., “<em class="slogan">🔥 Every hoodie sold burns 1,000 $QUEEF.</em>”</p>
+<p><em class="slogan">Wear the prophecy. Pump the Puff.</em></p>
+</section>
+<section class="section" data-title="Puff With Purpose — Turning Memes Into Meaning" id="sec-11">
+<h1>11. Puff With Purpose — Turning Memes Into Meaning</h1>
+<p>The prophecy isn’t just about pumping charts 🚀 — it’s about pumping change 🔥. <em class="slogan">Puff With Purpose</em> is $QUEEF’s community-powered mission to prove memes 💨 can move more than markets — they can move the world 🌍.</p>
+<h2 id="sec-11-1">11.1 Why It Exists</h2>
+<ul>
+<li><strong>Real-World Impact</strong> — While we’re building a loud, proud, chaotic community of degens 🐸, we also channel that energy into causes that make a tangible difference 💎.</li>
+<li><strong>Expanding the Puff</strong> — Connecting impactful causes with meme culture showcases the power of crypto 🌕 to do good, grows awareness of $QUEEF, and invites more people into our movement.</li>
+</ul>
+<h2 id="sec-11-2">11.2 How It Works</h2>
+<ul>
+<li><strong>DAO-Directed Giving 🗳️</strong> — Funds from the DAO Treasury are deployed only after a community vote decides how much to give and where it goes.</li>
+<li><strong>Special Campaigns 👕🖼️</strong> — Limited merch drops, themed events, NFT auctions, and more tied to a cause send 100% of proceeds directly to that purpose.</li>
+<li><strong>Creative Impact Events 🎮</strong> — Puff Dodge challenges, meme raids, and community contests that channel hype into action.</li>
+<li><strong>Transparency:</strong> All donations and allocations are on-chain, visible in labeled wallets. Quarterly reports published with receipts, merch audits, and meme recaps.</li>
+</ul>
+<h2 id="sec-11-3">11.3 Possible Focus Areas (Chosen by DAO)</h2>
+<ul>
+<li>🌍 Global Impact — Disaster relief, clean water, environmental action.</li>
+<li>🤝 Community Uplift — Grassroots movements, underdog causes, local initiatives.</li>
+<li>🔗 Crypto for Good — Blockchain solutions for social or environmental problems.</li>
+<li>⚡ Rapid Response — Puff-powered aid delivered fast where it’s needed most.</li>
+</ul>
+<h2 id="sec-11-4">11.4 The Vibe</h2>
+<p>This isn’t just about memes 🐸. It’s about building something that gives back — together.</p>
+<p>Turning viral chaos into real-world impact 🌕, one glorious puff at a time 💨.</p>
+<p><em class="slogan">Puff With Purpose. Give where it matters.</em></p>
+<p><em class="hashes">#PumpThePuff</em> • <em class="hashes">#DontFadeThePuff</em> • <em class="hashes">#PuffPowered</em> • <em class="hashes">#QueefCoin</em></p>
+</section>
+<section class="section" data-title="Technical Overview — The Puff Runs on Code" id="sec-12">
+<h1>12. Technical Overview — The Puff Runs on Code</h1>
+<p>Behind the prophecy is a real system of contracts, wallets, and code. $QUEEF is loud and chaotic on the surface, but under the hood it runs on a transparent, efficient Solana stack.</p>
+<h2 id="sec-12-1">12.1 Token Contract</h2>
+<ul>
+<li><strong>Chain:</strong> Solana (SPL Token Standard).</li>
+<li><strong>Supply:</strong> 69,000,000 $QUEEF (fixed, no inflation).</li>
+<li><strong>Decimals:</strong> 9.</li>
+<li><strong>Contract Address:</strong> 43AJD4sVmEChP1pDmXRZTYbrV73JhUVTrFXz9GNabonk</li>
+<li><strong>Launch:</strong> BONK.fun bonding curve → liquidity permanently locked on Raydium.</li>
+<li><strong>Wallet Labels:</strong> Dev, DAO, Leaderboard, Game, Burn (publicly visible on Solscan).</li>
+</ul>
+<h2 id="sec-12-2">12.2 Governance Stack</h2>
+<ul>
+<li><strong>Phase 1 (DAO-lite):</strong> Off-chain voting dashboard (snapshot-style). Token-weighted voting (1 vote per 69,000 $QUEEF). Multisig executes proposals. Monthly governance cycles; quarterly reviews for tokenomics parameters.</li>
+<li><strong>Phase 2 (Full DAO):</strong> On-chain governance using Solana tooling (Realms, Squads). Automatic execution of treasury actions (burns, allocations, splits). Public DAO dashboard for proposals + results.</li>
+</ul>
+<h2 id="sec-12-3">12.3 Game Infrastructure — Puff Dodge</h2>
+<ul>
+<li><strong>Frontend:</strong> Browser-based (HTML5/JS). Hosted on a dedicated Puff Dodge site (URL revealed at launch).</li>
+<li><strong>Backend:</strong> Firebase (or equivalent) to handle leaderboard, validation, anti-cheat.</li>
+<li><strong>Wallet Integration:</strong> Solana Wallet Adapter (Phantom, Backpack, Solflare).</li>
+<li><strong>Burn Execution:</strong> On-chain transfer of 50% of entry fees → Solana incinerator address.</li>
+<li><strong>Security:</strong> SignTransaction only (users see amounts + recipients before signing). No seed phrases ever handled. Leaderboard payouts via DAO multisig. Server-side anti-bot + score validation.</li>
+</ul>
+<h2 id="sec-12-4">12.4 Website &amp; Dashboards</h2>
+<ul>
+<li><strong>Main Site:</strong> QueefCoinSOL.com — prophecy hub with roadmap, tokenomics, burn tracker.</li>
+<li><strong>DAO Microsite:</strong> Live treasury balances, burn counter, inflows/outflows, proposals, voting status/results.</li>
+<li><strong>Game Portal:</strong> Puff Dodge integrated once live, with leaderboard + real-time burn tracker.</li>
+<li><strong>Transparency:</strong> All wallets + burns linked directly to Solscan.</li>
+</ul>
+<h2 id="sec-12-5">12.5 Security &amp; Reliability</h2>
+<ul>
+<li><strong>Multisig Custody:</strong> Dev + community reps sign treasury actions in DAO-lite.</li>
+<li><strong>Emergency Powers:</strong> Dev multisig can act if exploit occurs; mandatory DAO disclosure + retroactive approval.</li>
+<li><strong>Audits:</strong> Token contract &amp; game logic to undergo independent review.</li>
+<li><strong>Quarterly Reports:</strong> Transparency reports published for merch, treasury, and burns.</li>
+</ul>
+<h2 id="sec-12-6">12.6 Automation Architecture</h2>
+<ul>
+<li><strong>Phase 1 (DAO-lite):</strong> Game revenue lands in the Game Wallet. Smart contract (or scheduled multisig execution) splits: 10% Dev, 20% DAO, 20% Leaderboard, 50% Burn. All transactions public and auditable.</li>
+<li><strong>Phase 2 (On-chain Programs):</strong> Revenue Splitter Program; Rewards Distributor Program; Parameter Registry — with parameters adjustable only quarterly by DAO vote. Game + dashboards read directly from registry so parameters always match.</li>
+</ul>
+<p><em class="slogan">The Puff may be prophecy — but the code is real, public, and built to last.</em></p>
+</section>
+<section class="section" data-title="Security &amp; Compliance — Proof Over Promises" id="sec-13">
+<h1>13. Security &amp; Compliance — Proof Over Promises</h1>
+<p>Memes may be chaos, but money demands trust. $QUEEF secures the prophecy with transparent systems, standardized launch contracts, and protections against rugs, bots, and fraud.</p>
+<h2 id="sec-13-1">13.1 Token Security</h2>
+<ul>
+<li><strong>BONK.fun Standard:</strong> $QUEEF launched via BONK.fun’s audited bonding curve. No custom mint code, no hidden inflation, no backdoor rug switches.</li>
+<li><strong>Fixed Supply:</strong> 69M tokens — capped forever.</li>
+<li><strong>LP Locked:</strong> BONK.fun → Raydium migration with liquidity permanently locked.</li>
+<li><strong>Dev Allocation Reduced:</strong> From 10% → 1%, with policy that 50% of future dev buys are locked.</li>
+<li><strong>Burns:</strong> All burns go directly to Solana’s official incinerator wallet.</li>
+</ul>
+<h2 id="sec-13-2">13.2 Multisig Custody</h2>
+<ul>
+<li><strong>DAO-lite:</strong> Dev wallet actions and treasury allocations require multisig (dev + community reps).</li>
+<li><strong>Full DAO:</strong> On-chain governance removes dev custody entirely.</li>
+<li><strong>Emergency Powers:</strong> Dev multisig may act only to protect funds in case of exploit — must disclose actions and seek retroactive DAO approval.</li>
+</ul>
+<h2 id="sec-13-3">13.3 Game &amp; Platform Security</h2>
+<ul>
+<li><strong>Wallet Integration:</strong> SignTransaction only — no custody, no seed phrases.</li>
+<li><strong>Anti-Bot:</strong> Server-side validation of scores, spawn-seed checks, rate-limiting, heuristics.</li>
+<li><strong>Fair Play:</strong> Suspicious scores flagged + appeal process. DAO reserves the right to adjust or revoke rewards in cases of exploit or manipulation.</li>
+<li><strong>Leaderboard Rewards:</strong> Payouts via DAO multisig or audited Rewards Distributor program.</li>
+</ul>
+<h2 id="sec-13-4">13.4 Audits &amp; Testing</h2>
+<ul>
+<li><strong>Token Contract:</strong> BONK.fun launch means mint logic already follows audited, standardized contracts.</li>
+<li><strong>Custom Programs:</strong> Future $QUEEF smart contracts (Revenue Splitter, Rewards Distributor) will undergo independent audit before DAO migration.</li>
+<li><strong>Upgradeability:</strong> Any upgrades can only occur via DAO-approved vote + timelock, not by dev discretion.</li>
+<li><strong>Game Logic:</strong> Puff Dodge code reviewed before full release.</li>
+<li><strong>Merch:</strong> Quarterly revenue audits confirm DAO transfers + burns.</li>
+<li><strong>Bug Bounty:</strong> Community members who find and disclose vulnerabilities may receive rewards by DAO vote.</li>
+</ul>
+<h2 id="sec-13-5">13.5 Regulatory &amp; Legal</h2>
+<ul>
+<li><strong>Not a Security:</strong> $QUEEF is a brand, a meme, and a community token — not a financial product or investment contract.</li>
+<li><strong>No Guarantees:</strong> No yields, no staking, no dividends, no promises of profit.</li>
+<li><strong>Jurisdictions:</strong> $QUEEF is not publicly offered in any regulated jurisdiction. Participation is voluntary and at your own risk. KYC may be required for certain third‑party services; those are outside our control.</li>
+<li><strong>Transparency:</strong> Public docs, labeled wallets, dashboards, quarterly reports.</li>
+<li><strong>Backstop Power:</strong> DAO may vote to replenish the Leaderboard Wallet or other allocations in case of exploit.</li>
+<li><strong>Upgrade Rights:</strong> Smart contract upgrade rights controlled by the DAO once live.</li>
+</ul>
+<p><em class="slogan">The Puff is prophecy, not a promise. It’s a brand, a meme, and a movement — secured by transparency, not guarantees.</em></p>
+</section>
+<section class="section" data-title="The Puff Plan — Prophecy in Motion" id="sec-14">
+<h1>14. The Puff Plan — Prophecy in Motion</h1>
+<p>📜 The prophecy isn’t just told — it’s lived. Each phase unleashes the Puff louder, bolder, and harder to fade, carrying $QUEEF from a meme into legend.</p>
+<h2 id="sec-14-1">Phase 1: Puff Origin — The First Breath</h2>
+<p>Where it all begins — one puff, infinite potential.</p>
+<ul>
+<li>✅ Genesis drop on Solana via BONK.fun (because obviously it’s the best)</li>
+<li>💬 The First Gathering — Telegram opens</li>
+<li>🐦 Twitter/X — The Puff Speaks</li>
+<li>📦 Sticker packs, GIFs &amp; Telegram bots unleashed</li>
+<li>🌐 Website &amp; meme-grade whitepaper goes live</li>
+<li>📜 Lore Drop #1 — “<em class="slogan">The Puff Prophecy</em>” — cinematic launch reel reveal</li>
+</ul>
+<h2 id="sec-14-2">Phase 2: Pump the Puff — The Cult Takes Shape</h2>
+<p>We meme. We build. We grow feral.</p>
+<ul>
+<li>🚀 Meme Raids: Operation Cloudburst</li>
+<li>🎨 Meme War Contests w/ $QUEEF rewards (judged by community)</li>
+<li>🛍️ Merch Store Launch — Puff Gear, No Shame</li>
+<li>💸 Holder-Only Merch Discounts</li>
+<li>🕹️ Puff Dodge DEMO — “The Trial Run”</li>
+<li>🔥 Mini Burn #1 — symbolic start to the prophecy</li>
+<li>🤝 Alliances with BONK-affiliated projects</li>
+</ul>
+<h2 id="sec-14-3">Phase 3: Puff Unleashed — The Prophecy Manifests</h2>
+<p>We burn. We roar. We make the Puff unstoppable!</p>
+<ul>
+<li>🕹️ Puff Dodge FULL Release — Burn-Per-Play unlocked</li>
+<li>🌍 Global Leaderboards go live</li>
+<li>🗳️ DAO-lite voting begins for burns &amp; treasury moves</li>
+<li>🔥 The Great Burn — the first prophecy-scale sacrifice, united by the community</li>
+<li>🧢 Themed Restock Drops (Holder-Only Discounts)</li>
+<li>👀 Lore Drop #2 — “The Puff Takes Form”</li>
+</ul>
+<h2 id="sec-14-4">Phase 4: Puff With Purpose — The Mission Awakens</h2>
+<p>The joke becomes a quest — We vote. We give. We blow for change.</p>
+<ul>
+<li>🗳️ DAO chooses the first <em class="slogan">Puff With Purpose</em> cause</li>
+<li>💝 Charitable merch for chosen cause</li>
+<li>🤝 Partnerships with mission-aligned builders</li>
+<li>📊 Transparent donation &amp; burn tracker goes public</li>
+<li>📣 Lore Drop #3 — “The First Quest” — Meme-for-a-Cause Week begins</li>
+</ul>
+<h2 id="sec-14-5">Phase 5: The Puff Beyond — The Hidden Verse</h2>
+<p>We hold. We rise. We ascend together!</p>
+<ul>
+<li>🚫 Redacted until the prophecy demands it</li>
+<li>🗝️ Hidden clues scattered across earlier phases (stickers, memes, lore drops 👀)</li>
+<li>🔮 Lore Drop #4 — “<em class="slogan">Ascension</em>” — When the Puff rises, you’ll know</li>
+</ul>
+<p class="callout"><em class="slogan">“This is a meme. We are not responsible for what this becomes. But it will be legendary. Do your own research. And maybe your kegels.”</em></p>
+</section>
+<section class="section" data-title="Disclaimer" id="sec-15">
+<h1>15. Disclaimer</h1>
+<p>This document is for entertainment and community purposes only. $QUEEF is a meme coin with no guarantees of value. DYOR (and maybe your kegels).</p>
+<p>Participation in the QueefCoin project may result in:</p>
+<ul>
+<li>Uncontrollable laughter 💨</li>
+<li>Meme addiction 📱</li>
+<li>Sudden belief in prophecy 🔮</li>
+<li>Endless energy to <em class="slogan">pump the puff</em> 🚀</li>
+<li>Strange pride in saying “I’m a <em class="slogan">Puff Believer</em>” 🌕</li>
+<li>Fascination — even attraction — to queefs ✨</li>
+</ul>
+<p>Side effects may include joy, community, and the unstoppable urge to <em class="slogan">glorify the puff</em>.</p>
+<p><em class="slogan">💨 Pump the Puff. Don’t fade the Puff.</em></p>
+</section>
+<section class="endpage"></section>
+</main>
+</div>
+<script>
+    /* =========================================================
+       5) JS: Build TOC, Expand/Collapse, Sidebar toggle,
+              and auto-italicize hashtags/slogans everywhere.
+       ========================================================= */
+
+    // Collect sections and subheads for TOC
+   const sections = Array.from(document.querySelectorAll('main .section'));
+const tocTree = document.getElementById('tocTree');
+
+function buildTOC(){
+  const container = document.createElement('div');
+  sections.forEach((sec, idx) => {
+    const title = sec.dataset.title || sec.querySelector('h1')?.textContent || ('Section ' + (idx+1));
+
+    // Ensure IDs on subsections
+    const subs = Array.from(sec.querySelectorAll('h2, h3')).map(h => {
+      if(!h.id){
+        h.id = (sec.id + '-' + h.textContent.toLowerCase().replace(/[^a-z0-9]+/g,'-'));
+      }
+      return { id: h.id, text: h.textContent, tag: h.tagName };
+    });
+
+    const det = document.createElement('details');
+    det.className = 'toc__group';
+    if(idx === 0) det.open = true;
+
+    const summary = document.createElement('summary');
+    const sLink = document.createElement('a');
+    sLink.href = '#' + sec.id;
+    sLink.textContent = title;
+    sLink.style.color = 'var(--orange)';
+    summary.appendChild(sLink);
+    det.appendChild(summary);
+
+    if(subs.length){
+      const ul = document.createElement('ul');
+      ul.className = 'toc__sublist';
+      subs.forEach(s => {
+        const li = document.createElement('li');
+        li.className = 'toc__item';
+        const a = document.createElement('a');
+        a.href = '#' + s.id;
+        a.textContent = s.text;
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+      det.appendChild(ul);
+    }
+    container.appendChild(det);
+  });
+  tocTree.innerHTML = '';
+  tocTree.appendChild(container);
+}
+
+// Sidebar toggle + expand/collapse
+const wrap = document.getElementById('wrap');
+document.getElementById('sidebarToggle')?.addEventListener('click', () => {
+  wrap.classList.toggle('collapsed');
+});
+document.getElementById('expandAll')?.addEventListener('click', () => {
+  document.querySelectorAll('details.toc__group').forEach(d => d.open = true);
+});
+document.getElementById('collapseAll')?.addEventListener('click', () => {
+  document.querySelectorAll('details.toc__group').forEach(d => d.open = false);
+});
+
+// Slogans/hashtags autostyle
+const SKIP_WITHIN = new Set(['CODE','PRE','A','SCRIPT','STYLE','TEXTAREA','INPUT']);
+const SLOGANS = [
+  'Pump the Puff', 'Puff Believer', 'Puff Powered', 'Glorify the Puff',
+  'Puff With Purpose', 'The Puff Prophecy', 'The Puff Takes Form', 'Ascension',
+  'The puff that pumps', 'Puff turned prophecy', 'Every dodge is prophecy'
+];
+
+function wrapHashtagsAndSlogans(root){
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      if (!node.nodeValue) return NodeFilter.FILTER_REJECT;
+      const parent = node.parentElement;
+      if (!parent) return NodeFilter.FILTER_REJECT;
+      if (SKIP_WITHIN.has(parent.nodeName)) return NodeFilter.FILTER_REJECT;
+      if (parent.closest('em.slogan, em.hashtag, .no-autostyle, .hashes')) return NodeFilter.FILTER_REJECT;
+
+      const txt = node.nodeValue;
+      return /#\w+/.test(txt) || SLOGANS.some(s => txt.toLowerCase().includes(s.toLowerCase()))
+        ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+
+  nodes.forEach(textNode => {
+    if (!textNode.parentNode) return;
+    const span = document.createElement('span');
+    let html = textNode.nodeValue.replace(/(#\w+)/g, '<em class="hashtag">$1</em>');
+    SLOGANS.forEach(s => {
+      const re = new RegExp(s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+      html = html.replace(re, m => `<em class="slogan">${m}</em>`);
+    });
+    span.innerHTML = html;
+    textNode.parentNode.replaceChild(span, textNode);
+  });
+}
+
+// PRINT-ONLY TOC (H1s only)
+function buildPrintOnlyTOCMain() {
+  const container = document.getElementById('printTocList');
+  if (!container) return;
+  const ol = document.createElement('ol');
+  sections.forEach(sec => {
+    const id = sec.id;
+    if (!id) return;
+    const title = sec.getAttribute('data-title') ||
+                  (sec.querySelector('h1') ? sec.querySelector('h1').textContent : id);
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#' + id;
+    a.textContent = title;
+    li.appendChild(a);
+    ol.appendChild(li);
+  });
+  container.innerHTML = '';
+  container.appendChild(ol);
+}
+
+// Init
+buildTOC();
+wrapHashtagsAndSlogans(document.getElementById('content'));
+buildPrintOnlyTOCMain();
+
+// Smooth scroll (screen only)
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const tgt = document.getElementById(id);
+    if(tgt){
+      e.preventDefault();
+      tgt.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+
+</body>
+
+</html>
+
+
+
+
+
