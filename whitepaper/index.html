@@ -22,8 +22,8 @@
   --page-max:1200px; --sidebar-w:340px; --gap:16px; --radius:14px;
 
   /* Spacing + screen bg scale */
-  --section-gap: 40px;           /* tweak value */
-  --screen-bg-size: 55vmin;      /* try 45–70vmin or e.g. 720px */
+  --section-gap: 45px;           /* tweak value */
+  --screen-bg-size: 90vmin;      /* try 45–70vmin or e.g. 720px */
 }
 
 /* ===== GLOBAL BASE ===== */
@@ -133,9 +133,6 @@ strong{ font-weight: 800; }
   background-position: center;
   background-size: contain; /* or 'cover' */
 }
-@media print{
-  .endpage{ break-before: page; }
-}
 
 /* ===== COVER PAGE ===== */
 
@@ -162,12 +159,6 @@ strong{ font-weight: 800; }
 }
 
 
-/* ===== GLOBAL WATERMARK (PRINT) ===== */
-@media print {
-  /* kill per-section watermarks so we don't double */
-  .watermarked .section::before,
-  .watermarked .print-toc::before { content: none !important; }
-
   /* one centered watermark on EVERY page */
   html::before{
     content:"";
@@ -188,16 +179,12 @@ strong{ font-weight: 800; }
   body, .wrap, main, .section, .print-toc { position: relative; z-index: 1; }
   body { background-image: none !important; }
 }
-
-/* cover never gets a watermark */
-.coverpage::before{ content:none !important; }
-  /* Pages without watermark */
-.no-watermark::before { content:none !important; }
-
-
+ 
 /* ===== SECTION CARDS ===== */
 .section{
-  background: linear-gradient(180deg, rgba(14,14,14,.75) 0%, rgba(13,13,13,.75) 100%);
+  background: linear-gradient(180deg, rgba(14,14,14,.65) 0%, rgba(13,13,13,.65) 100%);
+  backdrop-filter: blur(12px);   /* applies frosted blur */
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
   padding: 24px 28px 40px;
   border: 1px solid rgba(31,31,31,.6);
   border-radius: var(--radius);
@@ -212,39 +199,63 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
 .section, .callout{ page-break-inside: avoid; break-inside: avoid; }
 
 /* ===== PRINT RULES ===== */
-@page{ size: A4; margin: 0; }
-@media print{
-  .toc, .sidebar-toggle{ display: none !important; }
-  .wrap{ display:block; padding:0; }
-  main{ max-width:none; margin:0; }
-  body{ background: var(--black) !important; }
- .section{
+@page { size: A4; margin: 0; }
+
+@media print {
+  /* One centered watermark on EVERY page */
+  html::before{
+    content:"";
+    position: fixed; inset: 0;
+    background-image: var(--watermark-url);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 65% auto;     /* adjust 50–80% */
+    opacity: .15;
+    pointer-events: none;
+    z-index: 0;
+    -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+  }
+
+  /* keep content above the watermark + kill any screen bg */
+  body, .wrap, main, .section, .print-toc { position: relative; z-index: 1; }
+  body { background: var(--black) !important; background-image: none !important; }
+
+  /* layout resets */
+  .toc, .sidebar-toggle { display: none !important; }
+  .wrap { display: block; padding: 0; }
+  main { max-width: none; margin: 0; }
+
+  /* section cards become full-page panels */
+  .section{
     background: linear-gradient(180deg, rgba(14,14,14,.75) 0%, rgba(13,13,13,.75) 100%);
-    border-radius:0; border:none; box-shadow:none;
+    border-radius: 0; border: none; box-shadow: none;
     min-height: 100vh;
     padding: 21mm 20mm 24mm;
   }
 
+  /* page flow */
+  .coverpage { break-after: page; page-break-after: always; height: 100vh; z-index: 3; background: var(--black); }
   .section:not(:first-of-type){ break-before: page; page-break-before: always; }
-
-  .print-toc{ 
+  .print-toc{
     display: block !important;
-    break-after: page;
-    page-break-after: always;
-    background: var(--black); 
-    color: var(--white); 
+    break-after: page; page-break-after: always;
+    background: var(--black); color: var(--white);
   }
+  .print-toc__inner{ padding: 21mm 20mm 24mm; }
+  .endpage{ break-before: page; page-break-before: always; }
 
-  .print-toc__inner{
-    padding: 21mm 20mm 24mm;     /* match section top padding */
+  /* tidy breaks */
+  h1, h2, h3 { margin-top: 1.6em; page-break-after: avoid; break-after: avoid; }
+  .section h1:first-child, .section h2:first-child, .section h3:first-child { margin-top: 0; }
+  .section, .callout { page-break-inside: avoid; break-inside: avoid; }
+
+  /* allow per-page opt-out: make those pages fully opaque so watermark doesn't show through */
+  .no-watermark{
+    background: var(--black) !important;   /* opaque background */
   }
-
-  h1, h2, h3 { margin-top: 1.6em; }  /* bigger gap before headings */
-  .section h1:first-child,
-  .section h2:first-child,
-  .section h3:first-child { margin-top: 0; }
 }
-
+  
 /* ===== TOC SIDEBAR ===== */
 .toc{
   position: sticky; top:24px;
@@ -1149,6 +1160,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </body>
 
 </html>
+
 
 
 
