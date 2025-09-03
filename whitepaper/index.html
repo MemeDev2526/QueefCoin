@@ -165,22 +165,24 @@ strong{ font-weight: 800; }
 @media print {
   .watermarked .section::before,
   .watermarked .print-toc:: { content: none !important; }
-    body::before{
+   html::before{
       content:"";
       position: fixed inset:0;
       background-image: var(--watermark-url);
-      background-position: center;
+      background-position: center center;
       background-repeat: no-repeat;
-      background-size: auto;
-      opacity:.17;
+      background-size: cover;
+      opacity:.18;
       pointer-events:none;
-      z-index:0;
+      z-index:1;
       -webkit-print-color-adjust: exact !important;
               print-color-adjust: exact !important;
   }
   
 /* content prints above it */
-  #content, .section, .print-toc { position: relative; z-index:1; }
+  body, .wrap, main .section, .print-toc { position: relative; z-index:1; }
+}
+  
   /* opt-out on specific pages/blocks */
   .watermarked .section.no-watermark::before,
   .watermarked .print-toc.no-watermark::before{
@@ -1154,6 +1156,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </body>
 
 </html>
+
 
 
 
