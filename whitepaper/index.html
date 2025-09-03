@@ -22,7 +22,7 @@
   --page-max:1200px; --sidebar-w:340px; --gap:16px; --radius:14px;
 
   /* Spacing + screen bg scale */
-  --section-gap: 50px;           /* tweak value */
+  --section-gap: 60px;           /* tweak value */
   --screen-bg-height: 90vmin;   /* make this bigger for “wider” */
   --screen-bg-width: 120vmin;   /* make this bigger for “wider” */
 }
@@ -162,7 +162,7 @@ strong{ font-weight: 800; }
   
 /* ===== SECTION CARDS ===== */
 .section{
-   background: linear-gradient(180deg, rgba(20,20,20,.92) 0%, rgba(15,15,15,.92) 100%);
+   background: linear-gradient(180deg, rgba(20,20,20,.75) 0%, rgba(15,15,15,.75) 100%);
    backdrop-filter: none;
   -webkit-backdrop-filter: none;
 
@@ -279,10 +279,25 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
 .toc a:hover{ opacity:1; text-decoration: underline; }
 details summary{ cursor: pointer; }
 .toc__controls{ display:flex; gap:8px; margin-bottom:10px; flex-wrap:wrap; }
-.btn{ appearance:none; border:1px solid #2a2a2a; background:#181818; color:var(--white);
-      padding:8px 10px; border-radius:10px; cursor:pointer; font:700 .9rem 'Rubik', sans-serif; }
+.btn{   
+  appearance:none;
+  border: none;
+  background: var(--orange);   /* brand orange */
+  color: var(--black);         /* contrast */
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: "Luckiest Guy", system-ui, sans-serif; /* headings font */
+  font-size: 1rem;
+  line-height: 1;
+  box-shadow: 0 6px 18px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.08) inset;
+  transition: filter .2s ease, transform .15s ease;
+}
 
-.btn:hover{ border-color:#3a3a3a; background:#1e1e1e; }
+.btn:hover{   
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
 .wrap.collapsed{
   grid-template-columns: 1fr;   /* instead of 0 1fr */
   max-width: var(--page-max);   /* stop reserving space for the sidebar */
@@ -1266,6 +1281,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </body>
 
 </html>
+
 
 
 
