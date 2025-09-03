@@ -737,7 +737,7 @@ section.has-bg::after {
 
 /* Contract line: keep label + hash tight, copy button aligned */
 .contract-line{
-  display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap;
+  display:flex; align-items:left; justify-content:center; gap:2px; flex-wrap:wrap;
 }
 .contract-line .label{ font-weight:800; }
 .contract-line .hash{ font-weight:800; letter-spacing:.2px; }
