@@ -162,25 +162,25 @@ strong{ font-weight: 800; }
   
 /* ===== SECTION CARDS ===== */
 .section{
-  background: linear-gradient(180deg, rgba(20,20,20,.75) 0%, rgba(20,20,20,.75)) 100%);
-  backdrop-filter: blur(12px);   /* applies frosted blur */
-  -webkit-backdrop-filter: blur(12px); /* Safari support */
+   background: linear-gradient(180deg, rgba(20,20,20,.92) 0%, rgba(15,15,15,.92) 100%);
+   backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+
   padding: 32px 36px 48px;
-  border: 1px solid rgba(255,255,255,.08); /* crisp border */
+  border: 1px solid rgba(255,255,255,.08);
   border-radius: 18px;
-  box-shadow: 0 12px 40px rgba(0,0,0,.6), 
+  box-shadow: 0 12px 40px rgba(0,0,0,.6),
               0 0 0 1px rgba(255,255,255,.05) inset;
   margin: var(--card-margin) 0;
+
+  /* anchors won’t hide under the fixed toggle button */
+  scroll-margin-top: 72px;
 }
-  /* Title treatment inside cards */
-.section h1, .section h2, .section h3 {
-  text-shadow: 0 2px 6px rgba(0,0,0,.65); /* glow for legibility */
-}
+.section h1, .section h2, .section h3 { text-shadow: 0 2px 6px rgba(0,0,0,.65); }
   
 .section + .section{
     margin-top: calc(var(--section-gap) + var(--card-margin));
   }
-
 
 /* Prevent awkward breaks */
 h1,h2,h3{ page-break-after: avoid; break-after: avoid; }
@@ -191,10 +191,7 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
 @page { size: A4; margin: 0; }
 
 @media print {
-  html, body{
-    -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-  }
+ html, body{ -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 
   /* Dark paper */
   body{
@@ -210,8 +207,8 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
     top:0; right:0; bottom:0; left:0;
     background-image: var(--watermark-url);
     background-repeat: no-repeat;
-    background-position: Contain;
-    background-size: 65% auto;   /* tweak to taste */
+    background-position: center center;
+    background-size: auto;   /* tweak to taste */
     opacity: .18;
     pointer-events: none;
     z-index: 0;
@@ -236,7 +233,6 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
     z-index: 2; /* sits above body::before, below actual content */
   }
   .coverpage > *, .endpage > *{ position: relative; z-index: 3; }
-}
   
   .print-toc{
     display:block !important;
@@ -244,6 +240,7 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
     background: var(--black); color: var(--white);
   }
   .print-toc__inner{ padding:21mm 20mm 24mm; }
+  
   .section{
     background: linear-gradient(180deg, rgba(14,14,14,.75) 0%, rgba(13,13,13,.75) 100%);
     border-radius:0; border:none; box-shadow:none;
@@ -261,20 +258,21 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
   
 /* ===== TOC SIDEBAR ===== */
 .toc{
-  position: sticky; left: 12px top:24px;
+  position: sticky;
+  top: 24px;                 /* this is the anchor for sticky */
   align-self: start;
-  height: calc(100vh - 48px);     /* fallback */
-  height: calc(100svh - 48px);    /* modern mobile */
-  overflow-y: auto;           /* scrollable if longer */
+  height: calc(100vh - 48px);
+  overflow-y: auto;
+
+  /* keep your existing aesthetics below */
   background: linear-gradient(180deg, rgba(14,14,14,.65) 0%, rgba(13,13,13,.65) 100%);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255,255,255,.06);
   border-radius: var(--radius);
-  padding: 16px; overflow:auto;
+  padding: 16px;
   box-shadow: var(--card-shadow);
-  margin: var(--card-margin);
-}
+  margin: var(--card-
 
 .toc__title{ font-family:"Luckiest Guy"; color: var(--orange); font-size:1.35rem; margin-bottom:12px; }
 .toc a{ color: var(--white); opacity:.9; }
@@ -1268,6 +1266,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </body>
 
 </html>
+
 
 
 
