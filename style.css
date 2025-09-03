@@ -738,14 +738,14 @@ section.has-bg::after {
 
 /* Contract line: keep label + hash tight, copy button aligned */
 .contract-line{
-  display:flex; align-items:left; justify-content:center; gap:2px; flex-wrap:wrap;
+  display:flex; align-items:left; justify-content:left; gap:2px; flex-wrap:wrap;
 }
 .contract-line .label{ font-weight:800; }
 .contract-line .hash{ font-weight:800; letter-spacing:.2px; }
 
 /* Add space between the two hero CTAs */
 .hero__cta .btn + .btn,
-.hero__cta .cta-button + .cta-button{ margin-left: 27px; }
+.hero__cta .cta-button + .cta-button{ margin-left: 30px; }
 
 
 
