@@ -158,28 +158,7 @@ strong{ font-weight: 800; }
   display: block;
 }
 
-
-  /* one centered watermark on EVERY page */
-  html::before{
-    content:"";
-    position: fixed;
-    inset: 0;
-    background-image: var(--watermark-url);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 65% auto;     /* adjust 50–80% to taste */
-    opacity: .15;
-    pointer-events: none;
-    z-index: 0;
-    -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-  }
-
-  /* ensure content prints above watermark + kill screen bg in print */
-  body, .wrap, main, .section, .print-toc { position: relative; z-index: 1; }
-  body { background-image: none !important; }
-}
- 
+  
 /* ===== SECTION CARDS ===== */
 .section{
   background: linear-gradient(180deg, rgba(14,14,14,.65) 0%, rgba(13,13,13,.65) 100%);
@@ -294,7 +273,7 @@ details[open] summary::before{ content:"▼ "; color: var(--orange); }
   body{
     background-image: var(--page-bg-url);
     background-position: center center;
-    background-size: var(--screen-bg-size);       /* no zoom/stretch */
+    background-size: var(--screen-bg-size);
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
@@ -1160,6 +1139,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </body>
 
 </html>
+
 
 
 
