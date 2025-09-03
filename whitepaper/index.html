@@ -208,7 +208,7 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
     background-image: var(--watermark-url);
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: cover;   /* tweak to taste */
+    background-size: contain;   /* tweak to taste */
     opacity: .18;
     pointer-events: none;
     z-index: 0;
@@ -1282,6 +1282,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </body>
 
 </html>
+
 
 
 
