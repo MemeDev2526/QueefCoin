@@ -134,7 +134,7 @@ body.overlay-active { overflow: hidden; }
   z-index: 0;
   /* softer overlay + explicit size for BOTH layers */
   background-image:
-    linear-gradient(to bottom, rgba(9,7,17,.55), rgba(9,7,17,.65)),
+    linear-gradient(to bottom, rgba(9,7,17,.75), rgba(9,7,17,.85)),
     url("assets/welcome-background.png");
   background-position: center 75%, center 75%;   /* nudge image down a bit */
   background-size: cover, cover;                 /* <-- important */
@@ -862,14 +862,15 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
 @media (min-width: 1200px){
   .loading-overlay .overlay-bg{
    background-image:
-      linear-gradient(to bottom, rgba(9,7,17,.55), rgba(9,7,17,.65)),
+      linear-gradient(to bottom, rgba(9,7,17,.75), rgba(9,7,17,.85)),
       url("assets/welcome-background.png");
-    background-size: 100% 100%, clamp(1200px, 82vw, 1600px) auto;
-    background-position: center 65%, center 65%;
+    background-size: 100% 100%, clamp(1200px, 82vw, 1600px) cover;
+    background-position: center 85%, center 85%;
     background-repeat: no-repeat, no-repeat;
+    background-blend-mode: normal;
   }
-}
 
+}
 /* 2) Keep the stack higher and reserve bottom space */
 .loading-overlay .overlay-content{
   min-height: 90dvh;                     /* full viewport height */
