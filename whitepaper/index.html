@@ -182,58 +182,60 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
 @page { size: A4; margin: 0; }
 
 @media print {
-  /* One centered watermark on EVERY page */
-  html::before{
-    content:"";
-    position: fixed; inset: 0;
-    background-image: var(--watermark-url);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 65% auto;     /* adjust 50–80% */
-    opacity: .15;
-    pointer-events: none;
-    z-index: 0;
+  html, body{
     -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
   }
 
-  /* keep content above the watermark + kill any screen bg */
-  body, .wrap, main, .section, .print-toc { position: relative; z-index: 1; }
-  body { background: var(--black) !important; background-image: none !important; }
-
-  /* layout resets */
-  .toc, .sidebar-toggle { display: none !important; }
-  .wrap { display: block; padding: 0; }
-  main { max-width: none; margin: 0; }
-
-  /* section cards become full-page panels */
-  .section{
-    background: linear-gradient(180deg, rgba(14,14,14,.75) 0%, rgba(13,13,13,.75) 100%);
-    border-radius: 0; border: none; box-shadow: none;
-    min-height: 100vh;
-    padding: 21mm 20mm 24mm;
+  /* Dark paper */
+  body{
+    background: var(--black) !important;
+    background-image: none !important;
+    position: relative; /* anchor the pseudo-element stacking */
   }
 
-  /* page flow */
-  .coverpage { break-after: page; page-break-after: always; height: 100vh; z-index: 3; background: var(--black); }
-  .section:not(:first-of-type){ break-before: page; page-break-before: always; }
+  /* Watermark: ABOVE body bg, BELOW content */
+  body::before{
+    content:"";
+    position: fixed;
+    top:0; right:0; bottom:0; left:0;
+    background-image: var(--watermark-url);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 65% auto;   /* tweak to taste */
+    opacity: .16;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Content stacks above the watermark */
+  .wrap, main, .section, .print-toc{ position: relative; z-index: 1; }
+
+  /* Layout + pages */
+  .toc, .sidebar-toggle{ display:none !important; }
+  .wrap{ display:block; padding:0; }
+  main{ max-width:none; margin:0; }
+
+  .coverpage{ break-after: page; page-break-after: always; height:100vh; background: var(--black) !important; }
   .print-toc{
-    display: block !important;
+    display:block !important;
     break-after: page; page-break-after: always;
     background: var(--black); color: var(--white);
   }
-  .print-toc__inner{ padding: 21mm 20mm 24mm; }
+  .print-toc__inner{ padding:21mm 20mm 24mm; }
+  .section{
+    background: linear-gradient(180deg, rgba(14,14,14,.75) 0%, rgba(13,13,13,.75) 100%);
+    border-radius:0; border:none; box-shadow:none;
+    min-height:100vh;
+    padding:21mm 20mm 24mm;
+  }
+  .section:not(:first-of-type){ break-before: page; page-break-before: always; }
   .endpage{ break-before: page; page-break-before: always; }
 
-  /* tidy breaks */
-  h1, h2, h3 { margin-top: 1.6em; page-break-after: avoid; break-after: avoid; }
-  .section h1:first-child, .section h2:first-child, .section h3:first-child { margin-top: 0; }
-  .section, .callout { page-break-inside: avoid; break-inside: avoid; }
-
-  /* allow per-page opt-out: make those pages fully opaque so watermark doesn't show through */
-  .no-watermark{
-    background: var(--black) !important;   /* opaque background */
-  }
+  /* Tidy breaks */
+  h1,h2,h3{ margin-top:1.6em; page-break-after: avoid; break-after: avoid; }
+  .section h1:first-child, .section h2:first-child, .section h3:first-child{ margin-top:0; }
+  .section, .callout{ page-break-inside: avoid; break-inside: avoid; }
 }
   
 /* ===== TOC SIDEBAR ===== */
@@ -1140,6 +1142,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </body>
 
 </html>
+
 
 
 
