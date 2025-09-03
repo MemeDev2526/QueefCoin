@@ -23,7 +23,8 @@
 
   /* Spacing + screen bg scale */
   --section-gap: 45px;           /* tweak value */
-  --screen-bg-size: 90vmin;      /* try 45–70vmin or e.g. 720px */
+  --screen-bg-height: 90vmin;   /* make this bigger for “wider” */
+  --screen-bg-width: 120vmin;   /* make this bigger for “wider” */
 }
 
 /* ===== GLOBAL BASE ===== */
@@ -272,8 +273,8 @@ details[open] summary::before{ content:"▼ "; color: var(--orange); }
 @media screen {
   body{
     background-image: var(--page-bg-url);
+    background-size: var(--screen-bg-width) var(--screen-bg-height); /* width height */
     background-position: center center;
-    background-size: var(--screen-bg-size);
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
@@ -1139,6 +1140,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </body>
 
 </html>
+
 
 
 
