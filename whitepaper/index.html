@@ -19,10 +19,11 @@
   /* Brand tokens */
   --orange:#FF6B00; --orange-hi:#FF9500; --black:#0D0D0D; --white:#FFFFFF;
   --gold:#FDC100; --solanaL:#94DAFF; --solanaD:#008CFF; --gray:#AAAAAA;
-  --page-max:1100px; --sidebar-w:340px; --gap:16px; --radius:14px;
+  --page-max:1200px; --sidebar-w:340px; --gap:16px; --radius:14px;
   
   /* More space between section cards (screen) */
   --section-gap: 40px; } /* tweak value */
+  --screen-bg-size: 55vmin;     /* try 45–70vmin or e.g. 720px */
 }
 
 /* ===== GLOBAL BASE ===== */
@@ -161,47 +162,38 @@ strong{ font-weight: 800; }
 }
 
 
-/* ===== GLOBAL WATERMARK ===== */
+/* ===== GLOBAL WATERMARK (PRINT) ===== */
 @media print {
+  /* kill per-section watermarks so we don't double */
   .watermarked .section::before,
-  .watermarked .print-toc:: { content: none !important; }
-   html::before{
-      content:"";
-      position: fixed inset:0;
-      background-image: var(--watermark-url);
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      opacity:.18;
-      pointer-events:none;
-      z-index:1;
-      -webkit-print-color-adjust: exact !important;
-              print-color-adjust: exact !important;
-  }
-  
-/* content prints above it */
-  body, .wrap, main .section, .print-toc { position: relative; z-index:1; }
-}
-  
-  /* opt-out on specific pages/blocks */
-  .watermarked .section.no-watermark::before,
-  .watermarked .print-toc.no-watermark::before{
-    content:none !important;
-  }
-  body{ background-image: none !important; }
-}
+  .watermarked .print-toc::before { content: none !important; }
 
-/* ensure content is above the watermark */
-.section, .print-toc { position: relative; z-index: 1; }
+  /* one centered watermark on EVERY page */
+  html::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    background-image: var(--watermark-url);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 65% auto;     /* adjust 50–80% to taste */
+    opacity: .15;
+    pointer-events: none;
+    z-index: 0;
+    -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+  }
+
+  /* ensure content prints above watermark + kill screen bg in print */
+  body, .wrap, main, .section, .print-toc { position: relative; z-index: 1; }
+  body { background-image: none !important; }
+}
 
 /* cover never gets a watermark */
 .coverpage::before{ content:none !important; }
-.section, .print-toc { position: relative; z-index:1; }
   /* Pages without watermark */
 .no-watermark::before { content:none !important; }
-/* Ensure content sits above watermark */
-#content { position: relative; z-index: 1; }
-.coverpage::before{ content:none !important; }
+
 
 /* ===== SECTION CARDS ===== */
 .section{
@@ -211,7 +203,8 @@ strong{ font-weight: 800; }
   border-radius: var(--radius);
   box-shadow: 0 10px 40px rgba(0,0,0,.35);
 }
-.section + .section{ margin-top: 22px; }
+.section + .section{ margin-top: var(--section-gap); }
+
 
 /* Prevent awkward breaks */
 h1,h2,h3{ page-break-after: avoid; break-after: avoid; }
@@ -319,7 +312,7 @@ details[open] summary::before{ content:"▼ "; color: var(--orange); }
 <!-- ===== COVER PAGE ===== -->
 <section class="coverpage no-watermark">
 <img alt="Cover Page" class="cover-img" 
-     src="assets/Cover.png" />
+     src="whitepaper/Cover.png" />
 </section>
 
 <!-- ===== PRINT-ONLY TOC (now page 2) ===== -->
@@ -1156,6 +1149,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </body>
 
 </html>
+
 
 
 
