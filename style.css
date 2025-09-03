@@ -161,6 +161,7 @@ body.overlay-active { overflow: hidden; }
 
 /* MASCOT — the ONLY thing that moves */
 .queef-puff{
+  position: center;
   width: min(64vw, 600px);
   height: auto;
   display: block;
