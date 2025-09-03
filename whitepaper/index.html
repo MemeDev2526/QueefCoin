@@ -166,11 +166,14 @@ strong{ font-weight: 800; }
   backdrop-filter: blur(12px);   /* applies frosted blur */
   -webkit-backdrop-filter: blur(12px); /* Safari support */
   padding: 24px 28px 40px;
-  border: 1px solid #000000;
+  border: 1px solid rgba(255,255,255,.06);
   border-radius: var(--radius);
-  box-shadow: 0 10px 40px rgba(0,0,0,.35);
+  box-shadow: var(--card-shadow);
+  margin: var(--card-margin);
 }
-.section + .section{ margin-top: var(--section-gap); }
+.section + .section{
+    margin-top: calc(var(--section-gap) + var(--card-margin));
+  }
 
 
 /* Prevent awkward breaks */
@@ -201,9 +204,9 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
     top:0; right:0; bottom:0; left:0;
     background-image: var(--watermark-url);
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: Contain;
     background-size: 65% auto;   /* tweak to taste */
-    opacity: .16;
+    opacity: .18;
     pointer-events: none;
     z-index: 0;
   }
@@ -217,6 +220,18 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
   main{ max-width:none; margin:0; }
 
   .coverpage{ break-after: page; page-break-after: always; height:100vh; background: var(--black) !important; }
+   /* Hide watermark on the cover and the end page only */
+  .coverpage, .endpage{ position: relative; }
+  .coverpage::before,
+  .endpage::before{
+    content:"";
+    position: absolute; inset: 0;
+    background: var(--black);
+    z-index: 2; /* sits above body::before, below actual content */
+  }
+  .coverpage > *, .endpage > *{ position: relative; z-index: 3; }
+}
+  
   .print-toc{
     display:block !important;
     break-after: page; page-break-after: always;
@@ -244,10 +259,13 @@ h1 + *, h2 + *, h3 + *{ page-break-before: avoid; break-before: avoid; }
   height: calc(100vh - 48px);     /* fallback */
   height: calc(100svh - 48px);    /* modern mobile */
   background: linear-gradient(180deg, rgba(14,14,14,.65) 0%, rgba(13,13,13,.65) 100%);
-  border: 1px solid rgba(31,31,31,.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.06);
   border-radius: var(--radius);
   padding: 16px; overflow:auto;
-  box-shadow: 0 10px 40px rgba(0,0,0,.35);
+  box-shadow: var(--card-shadow);
+  margin: var(--card-margin);
 }
 
 .toc__title{ font-family:"Luckiest Guy"; color: var(--orange); font-size:1.35rem; margin-bottom:12px; }
@@ -327,6 +345,12 @@ details[open] summary::before{ content:"▼ "; color: var(--orange); }
 
   /* SCREEN-ONLY PAGE BG */
 @media screen {
+  :root{
+    --card-margin: clamp(16px, 3.5vmin, 40px);
+    --card-shadow: 0 20px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.03) inset;
+  }
+  main{ padding-block: var(--card-margin); }
+  
   body{
     background-image: var(--page-bg-url);
     background-size: var(--screen-bg-width) var(--screen-bg-height); /* width height */
@@ -1100,8 +1124,18 @@ function buildTOC(){
   });
   tocTree.innerHTML = '';
   tocTree.appendChild(container);
-}
 
+  // Close the mobile drawer after clicking a TOC link
+  tocTree.addEventListener('click', (e) => {
+    if (!mq.matches) return;
+    const link = e.target.closest('a[href^="#"]');
+    if (link){
+      wrap.classList.remove('nav-open');
+      document.body.style.overflow = '';
+    }
+  });
+} 
+  
 // Sidebar toggle + expand/collapse
 const wrap = document.getElementById('wrap');        // keep only one 'wrap' const in your file
 const mq = window.matchMedia('(max-width: 1279px)');
@@ -1226,6 +1260,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </body>
 
 </html>
+
 
 
 
