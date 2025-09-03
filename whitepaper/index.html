@@ -11,19 +11,19 @@
 /* ===== IMAGE PLACEHOLDERS (swap these) ===== */
 :root{
   /* Paths or data URIs */
-  --cover-url: url("whitepaper/Cover.png");         /* Title/cover full page */
-  --watermark-url: url("whitepaper/Watermark.png");  /* Faint logo on pages */
-  --page-bg-url: url("whitepaper/Watermark.png");           /* Optional page bg */
-  --endpage-url: url("whitepaper/Endpage.png");      /* optional endpage image */
+  --cover-url: url("whitepaper/Cover.png");
+  --watermark-url: url("whitepaper/Watermark.png");
+  --page-bg-url: url("whitepaper/Watermark.png");
+  --endpage-url: url("whitepaper/Endpage.png");
 
   /* Brand tokens */
   --orange:#FF6B00; --orange-hi:#FF9500; --black:#0D0D0D; --white:#FFFFFF;
   --gold:#FDC100; --solanaL:#94DAFF; --solanaD:#008CFF; --gray:#AAAAAA;
   --page-max:1200px; --sidebar-w:340px; --gap:16px; --radius:14px;
-  
-  /* More space between section cards (screen) */
-  --section-gap: 40px; } /* tweak value */
-  --screen-bg-size: 55vmin;     /* try 45–70vmin or e.g. 720px */
+
+  /* Spacing + screen bg scale */
+  --section-gap: 40px;           /* tweak value */
+  --screen-bg-size: 55vmin;      /* try 45–70vmin or e.g. 720px */
 }
 
 /* ===== GLOBAL BASE ===== */
@@ -283,7 +283,7 @@ details[open] summary::before{ content:"▼ "; color: var(--orange); }
   body{
     background-image: var(--page-bg-url);
     background-position: center center;
-    background-size: contain;        /* no zoom/stretch */
+    background-size: var(--screen-bg-size);       /* no zoom/stretch */
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
@@ -1149,6 +1149,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 </body>
 
 </html>
+
 
 
 
