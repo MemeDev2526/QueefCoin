@@ -677,6 +677,49 @@ footer .btn {
   word-break: break-all;
 }
 
+/* =========================================
+   UNIVERSAL SECTION BACKGROUND SYSTEM
+   ========================================= */
+.section,
+section { position: relative; isolation: isolate; }
+
+.section.has-bg::before,
+section.has-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;                 /* behind content */
+  background-image: var(--bg-image, none);
+  background-size: var(--bg-size, cover);
+  background-position: var(--bg-position, center);
+  background-repeat: no-repeat;
+  background-attachment: var(--bg-attach, scroll);
+  /* Optional color/gradient overlay ABOVE the image */
+  background-blend-mode: var(--bg-blend, normal);
+}
+
+/* A dedicated overlay layer so you can tint independently */
+.section.has-bg::after,
+section.has-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;                 /* still behind content */
+  background: var(--bg-overlay, transparent);
+  pointer-events: none;
+}
+
+/* Handy helpers */
+.bg-fixed   { --bg-attach: fixed; }
+.bg-scroll  { --bg-attach: scroll; }
+.bg-cover   { --bg-size: cover; }
+.bg-contain { --bg-size: contain; }
+
+/* Mobile: avoid janky fixed backgrounds */
+@media (max-width: 768px) {
+  .bg-fixed { --bg-attach: scroll; }
+}
+
 /* Chart spacing (keeps your embed spacing safe) */
 .chart-frame { margin-top: clamp(16px, 3vh, 28px); }
 
@@ -736,6 +779,12 @@ footer .btn {
   font-family: 'Rubik', sans-serif;
   font-size: 1rem; /* body base size */
   margin-left: 0; /* flush left */
+}
+/* TOKENOMICS background */
+#tokenomics {
+  --bg-image: url('assets/bg-tokenomics.png');       /* swap for your asset */
+  --bg-overlay: linear-gradient(180deg, rgba(13,13,13,.45), rgba(13,13,13,.65));
+  --bg-position: center top;
 }
 
 /* TIKTOK */
