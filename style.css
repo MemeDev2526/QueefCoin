@@ -348,13 +348,29 @@ section.has-bg::after {
 }
 
 
-
-
 /* Handy helpers */
 .bg-fixed   { --bg-attach: fixed; }
 .bg-scroll  { --bg-attach: scroll; }
 .bg-cover   { --bg-size: cover; }
 .bg-contain { --bg-size: contain; }
+
+.puff-divider{
+  position: relative;
+  height: 80px;                /* divider height */
+  margin-top: -20px;           /* slight overlap if you like */
+  z-index: 0;                  /* above bg layers, below content */
+  pointer-events: none;
+}
+.puff-divider svg{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  display:block;
+}
+.puff-divider .puff-path{
+  fill: var(--black);          /* or currentColor + set .puff-divider{color:...} */
+  opacity:.95;
+  filter: drop-shadow(0 -6px 18px rgba(0,0,0,.35));
+}
 
 
 /* =========================================================
