@@ -644,7 +644,7 @@ footer .btn {
    ========================================================= */
 /* HERO / HOME */
 #home.has-bg {
-  --bg-image: url('assets/bg-hero-cosmic.png');
+  --bg-image: url('assets/herosectionbanner.png');
   --bg-position: center top;
   --bg-size: cover;
   --bg-attach: scroll;           /* use .bg-fixed if desired on desktop */
@@ -796,7 +796,7 @@ footer .btn {
 
 /* TOKENOMICS */
 #tokenomics.has-bg {
-  --bg-image: url('assets/bg-tokenomics.png');
+  --bg-image: url('assets/tokenomicssectionbanner.png');
   --bg-position: center top;
   --bg-overlay: linear-gradient(180deg, rgba(13,13,13,.55), rgba(13,13,13,.75));
 }
@@ -831,7 +831,7 @@ footer .btn {
 
 /* CHARITY */
 #charity.has-bg {
-  --bg-image: url('assets/bg-charity.png');
+  --bg-image: url('assets/puffwithpurposesectionbanner.png');
   --bg-position: center;
   --bg-overlay: linear-gradient(180deg, rgba(12,10,22,.55), rgba(12,10,22,.8));
 }
@@ -839,7 +839,7 @@ footer .btn {
 
 /* MERCH */
 #merch.has-bg {
-  --bg-image: url('assets/bg-merch.png');
+  --bg-image: url('assets/merchsectionbanner.png');
   --bg-position: center;
   --bg-overlay: linear-gradient(180deg, rgba(9,7,17,.45), rgba(9,7,17,.75));
 }
