@@ -820,8 +820,18 @@ footer .btn {
 .hero{ padding-top: clamp(18px, 6vh, 45px); }       /* half the previous feel */
 
 /* Contract line: keep label + hash tight, copy button aligned */
-.contract-line{
-  display:flex; align-items:left; justify-content:center; gap:1px; flex-wrap:wrap;
+.contract-line {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px; /* small, consistent space */
+  flex-wrap: wrap;
+}
+
+#qc-contract {
+  margin: 0; /* remove stray margins */
+}
+
 }
 .contract-line .label{ font-weight:800; }
 .contract-line .hash{ font-weight:800; letter-spacing:.2px; }
