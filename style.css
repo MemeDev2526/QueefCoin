@@ -271,6 +271,84 @@ section{
   margin-right: auto; }
 .section-inner li { margin: 0 0 .8em; }
 
+/* =========================================
+   UNIVERSAL SECTION BACKGROUND SYSTEM
+   ========================================= */
+.section,
+section { position: relative; isolation: isolate; }
+
+/* Per-section background: set with CSS variables (see presets below) */
+.section.has-bg,
+
+/* Image layer */
+.section.has-bg::before,
+section.has-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: var(--bg-image, none);
+  background-size: var(--bg-size, cover);
+  background-position: var(--bg-position, center);
+  background-repeat: no-repeat;
+  background-attachment: var(--bg-attach, scroll);
+  filter: var(--bg-filter, none); /* optional blur/desat per section */
+}
+
+/* Tint/gradient overlay above the image */
+.section.has-bg::after,
+section.has-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--bg-overlay, linear-gradient(180deg, rgba(13,13,13,.45), rgba(13,13,13,.65)));
+  pointer-events: none;
+}
+
+/* Floating card wrapper (put on your inner container) */
+.section-card,
+.section-inner.section-card,
+.section-inner.section-inner--card {
+  background: linear-gradient(180deg, rgba(14,14,14,.60) 0%, rgba(13,13,13,.60) 100%);
+  /* frosted look (with graceful fallback) */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.35),
+    0 0 0 1px rgba(255,149,0,.04) inset;
+}
+
+/* Optional variants (use one extra class if you need to tilt the tone) */
+.section-card.card-dark {
+  background: linear-gradient(180deg, rgba(10,10,12,.68) 0%, rgba(10,10,12,.74) 100%);
+}
+.section-card.card-light {
+  background: linear-gradient(180deg, rgba(32,32,36,.48) 0%, rgba(28,28,30,.56) 100%);
+}
+
+
+/* A dedicated overlay layer so you can tint independently */
+.section.has-bg::after,
+section.has-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;                 /* still behind content */
+  background: var(--bg-overlay, transparent);
+  pointer-events: none;
+}
+
+/* Handy helpers */
+.bg-fixed   { --bg-attach: fixed; }
+.bg-scroll  { --bg-attach: scroll; }
+.bg-cover   { --bg-size: cover; }
+.bg-contain { --bg-size: contain; }
+
+}
+
 /* =========================================================
    4) NAV & BANNERS
    ========================================================= */
@@ -575,6 +653,15 @@ footer .btn {
 /* =========================================================
    6) SECTION OVERRIDES (Minimal)
    ========================================================= */
+/* HERO / HOME */
+#home.has-bg {
+  --bg-image: url('assets/bg-hero-cosmic.png');
+  --bg-position: center top;
+  --bg-size: cover;
+  --bg-attach: scroll;           /* use .bg-fixed if desired on desktop */
+  --bg-overlay: linear-gradient(180deg, rgba(13,13,13,.35), rgba(13,13,13,.55));
+  --bg-filter: none;
+}
 /* ===============================
    HERO — Cosmic background bundle
    (non-breaking, scoped)
@@ -680,7 +767,6 @@ footer .btn {
 }
 .hero__contract > *{ flex: 0 0 auto; }  /* stop stretching */
 
-
 .hero__contract #qc-contract {
   display: inline-block;
   font-weight: 800;
@@ -690,52 +776,8 @@ footer .btn {
   word-break: break-all;
 }
 
-/* =========================================
-   UNIVERSAL SECTION BACKGROUND SYSTEM
-   ========================================= */
-.section,
-section { position: relative; isolation: isolate; }
-
-.section.has-bg::before,
-section.has-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;                 /* behind content */
-  background-image: var(--bg-image, none);
-  background-size: var(--bg-size, cover);
-  background-position: var(--bg-position, center);
-  background-repeat: no-repeat;
-  background-attachment: var(--bg-attach, scroll);
-  /* Optional color/gradient overlay ABOVE the image */
-  background-blend-mode: var(--bg-blend, normal);
-}
-
-/* A dedicated overlay layer so you can tint independently */
-.section.has-bg::after,
-section.has-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;                 /* still behind content */
-  background: var(--bg-overlay, transparent);
-  pointer-events: none;
-}
-
-/* Handy helpers */
-.bg-fixed   { --bg-attach: fixed; }
-.bg-scroll  { --bg-attach: scroll; }
-.bg-cover   { --bg-size: cover; }
-.bg-contain { --bg-size: contain; }
-
-/* Mobile: avoid janky fixed backgrounds */
-@media (max-width: 768px) {
-  .bg-fixed { --bg-attach: scroll; }
-}
-
 /* Chart spacing (keeps your embed spacing safe) */
 .chart-frame { margin-top: clamp(16px, 3vh, 28px); }
-
 
 #qc-contract{ margin-right:.25rem; }
 .cta-button.buy{ margin:12px 0 20px; }
@@ -759,13 +801,16 @@ section.has-bg::after {
 .hero__cta .btn + .btn,
 .hero__cta .cta-button + .cta-button{ margin-left: 30px; }
 
-
-
 /* ROADMAP */
 .roadmap hr { margin: 2em 0; border-color: var(--orange); }
 .roadmap .final-note { font-style: italic; text-align: center; font-size: .9em; }
 
 /* TOKENOMICS */
+#tokenomics.has-bg {
+  --bg-image: url('assets/bg-tokenomics.png');
+  --bg-position: center top;
+  --bg-overlay: linear-gradient(180deg, rgba(13,13,13,.55), rgba(13,13,13,.75));
+}
 #tokenomics .section-inner{ max-width:1200px; margin:0 auto; }
 #tokenomics p, #tokenomics li{ line-height:1.65; margin-bottom:12px; }
 #tokenomics .token-footer { font-style: italic; color: var(--orange); text-align: center; margin-top: 2em; }
@@ -802,9 +847,26 @@ section.has-bg::after {
 #tiktok h2 { font-size: clamp(2rem, 5vw, 3rem); }
 
 /* CHARITY */
+#charity.has-bg {
+  --bg-image: url('assets/bg-charity.png');
+  --bg-position: center;
+  --bg-overlay: linear-gradient(180deg, rgba(12,10,22,.55), rgba(12,10,22,.8));
+}
 .charity p { text-shadow: 0 0 4px #000; }
 
-/* FAQ (accordion) */
+/* MERCH */
+#merch.has-bg {
+  --bg-image: url('assets/bg-merch.png');
+  --bg-position: center;
+  --bg-overlay: linear-gradient(180deg, rgba(9,7,17,.45), rgba(9,7,17,.75));
+}
+
+/* FAQ */
+#faq.has-bg {
+  --bg-image: url('assets/bg-faq.png');
+  --bg-position: center top;
+  --bg-overlay: linear-gradient(180deg, rgba(9,9,11,.55), rgba(9,9,11,.82));
+}
 #faq .section-inner { max-width: 1200px; }
 #faq details {
   background: rgba(0,0,0,0.7);
