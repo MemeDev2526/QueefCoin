@@ -662,7 +662,19 @@ footer .btn {
    6) SECTION OVERRIDES (Minimal)
    ========================================================= */
 /* HERO / HOME */
-#home.has-bg { --bg-image: url('assets/herosectionbanner.png'); }
+#home.has-bg { 
+   --bg-image: url('assets/herosectionbanner.png');
+   --bg-attach: fixed;                /* parallax */
+   --bg-position: center top;
+   --bg-size: cover;
+   --bg-overlay: linear-gradient(180deg, rgba(10,10,12,.35), rgba(10,10,12,.65));
+}
+
+#home.has-bg::before,
+#home.has-bg::after {
+  position: absolute;
+  inset: 0;                          /* top:0; right:0; bottom:0; left:0 */
+}
 
 /* ===============================
    HERO — Cosmic background bundle
@@ -674,7 +686,7 @@ footer .btn {
   color: #FFFFFF;
   padding-top: clamp(40px, 10vh, 140px);
   padding-bottom: clamp(20px, 8vh, 100px);
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Make hero content sit directly on the cosmic bg */
