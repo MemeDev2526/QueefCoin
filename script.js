@@ -463,8 +463,8 @@ document.addEventListener('DOMContentLoaded', function () {
 if (window.gsap && window.MorphSVGPlugin) {
   gsap.registerPlugin(MorphSVGPlugin);
   gsap.to('.puff-path', {
-    duration: 7,
-    repeat: -1,
+    duration: 8,
+    repeat: 2,
     yoyo: true,
     ease: 'sine.inOut',
     morphSVG: {
