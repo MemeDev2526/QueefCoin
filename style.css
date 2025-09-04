@@ -289,7 +289,7 @@ section.has-bg::before {
   inset: 0;
   z-index: -2;
   background-image: var(--bg-image, none);
-  background-size: var(--bg-size, cover);
+  background-size: var(--bg-size, contain);
   background-position: var(--bg-position, center);
   background-repeat: no-repeat;
   background-attachment: var(--bg-attach, scroll);
@@ -300,15 +300,15 @@ section.has-bg::before {
 .section-card,
 .section-inner.section-card,
 .section-inner.section-inner--card {
-  background: linear-gradient(180deg, rgba(14,14,14,.60) 0%, rgba(13,13,13,.60) 100%);
+  background: linear-gradient(180deg, rgba(10,10,12,.78) 0%, rgba(10,10,12,.82) 100%);
   /* frosted look (with graceful fallback) */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(255,255,255,0.06);
   border-radius: 16px;
   box-shadow:
-    0 10px 40px rgba(0,0,0,.35),
-    0 0 0 1px rgba(255,149,0,.04) inset;
+    0 10px 40px rgba(0,0,0,.45),
+    0 0 0 1px rgba(255,149,0,.05) inset;
 }
 
 /* Optional variants (use one extra class if you need to tilt the tone) */
@@ -791,6 +791,11 @@ footer .btn {
 .hero__cta .cta-button + .cta-button{ margin-left: 30px; }
 
 /* ROADMAP */
+#roadmap.has-bg {
+  --bg-image: url('assets/bg-roadmap.png');
+  --bg-position: center top;
+  --bg-overlay: linear-gradient(180deg, rgba(13,13,13,.55), rgba(13,13,13,.75));
+}
 .roadmap hr { margin: 2em 0; border-color: var(--orange); }
 .roadmap .final-note { font-style: italic; text-align: center; font-size: .9em; }
 
@@ -827,6 +832,11 @@ footer .btn {
 }
 
 /* TIKTOK */
+#tiktok.has-bg {
+  --bg-image: url('assets/bg-tiktok.png');
+  --bg-position: center;
+  --bg-overlay: linear-gradient(180deg, rgba(12,10,22,.55), rgba(12,10,22,.8));
+}
 #tiktok h2 { font-size: clamp(2rem, 5vw, 3rem); }
 
 /* CHARITY */
