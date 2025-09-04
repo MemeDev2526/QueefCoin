@@ -279,7 +279,15 @@ section { position: relative; isolation: isolate; }
 
 /* Per-section background: set with CSS variables (see presets below) */
 .section.has-bg,
-section.has-bg { position: relative; isolation: isolate; }
+section.has-bg {
+   /* one source of truth */
+  --bg-image: none;
+  --bg-size: cover;
+  --bg-position: center center;
+  --bg-attach: scroll;     /* default: scroll everywhere */
+  --bg-overlay: linear-gradient(180deg, rgba(10,10,12,.35), rgba(10,10,12,.55));
+  --bg-filter: none;
+}
 
 /* Image layer */
 .section.has-bg::before,
@@ -288,39 +296,14 @@ section.has-bg::before {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-image: var(--bg-image, none);
-  background-size: var(--bg-size, clamp(900px, 85vw, 1600px) auto);
-  background-position: var(--bg-position, center top);
+  background-image: var(--bg-image);
+  background-size: var(--bg-size);
+  background-position: var(--bg-position);
   background-repeat: no-repeat;
-  background-attachment: var(--bg-attach, scroll);
-  filter: var(--bg-filter, none); /* optional blur/desat per section */
+  background-attachment: var(--bg-attach); 
 }
 
-/* Floating card wrapper (put on your inner container) */
-.section-card,
-.section-inner.section-card,
-.section-inner.section-inner--card {
-  background: linear-gradient(180deg, rgba(8,8,12,.88) 0%, rgba(8,8,12,.92) 100%);
-  /* frosted look (with graceful fallback) */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 16px;
-  box-shadow:
-    0 10px 40px rgba(0,0,0,.55),
-    0 0 0 1px rgba(255,149,0,.05) inset;
-}
-
-/* Optional variants (use one extra class if you need to tilt the tone) */
-.section-card.card-dark {
-  background: linear-gradient(180deg, rgba(10,10,12,.68) 0%, rgba(10,10,12,.74) 100%);
-}
-.section-card.card-light {
-  background: linear-gradient(180deg, rgba(32,32,36,.48) 0%, rgba(28,28,30,.56) 100%);
-}
-
-
-/* A dedicated overlay layer so you can tint independently */
+/* the tint above image */
 .section.has-bg::after,
 section.has-bg::after {
   content: "";
@@ -330,6 +313,36 @@ section.has-bg::after {
   background: var(--bg-overlay, transparent);
   pointer-events: none;
 }
+
+/* desktop-only “pinned” option via class, not per-section copy/paste */
+@media (min-width: 1024px) {
+  .bg-fixed { --bg-attach: fixed; }
+}
+
+/* Floating card wrapper (put on your inner container) */
+.section-card,
+.section-inner.section-card,
+.section-inner.section-inner--card {
+  background: linear-gradient(180deg, rgba(10,10,12,.88) 0%, rgba(10,10,12,.92) 100%);
+  /* frosted look (with graceful fallback) */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow:
+    0 14px 40px rgba(0,0,0,.55),
+    0 0 0 1px rgba(255,149,0,.04) inset;
+}
+
+/* Optional variants (use one extra class if you need to tilt the tone) */
+.section-card.card-light {
+  background: linear-gradient(180deg, rgba(24,24,28,.78) 0%, rgba(22,22,26,.86) 100%);
+}
+.section-card.card-light {
+  background: linear-gradient(180deg, rgba(32,32,36,.48) 0%, rgba(28,28,30,.56) 100%);
+}
+
+
+
 
 /* Handy helpers */
 .bg-fixed   { --bg-attach: fixed; }
@@ -643,15 +656,14 @@ footer .btn {
    6) SECTION OVERRIDES (Minimal)
    ========================================================= */
 /* HERO / HOME */
-#home.has-bg {
-  --bg-image: url('assets/herosectionbanner.png');
-  --bg-position: center top;
-   --bg-attach: scroll;           /* use .bg-fixed if desired on desktop */
-  }
+#home.has-bg { --bg-image: url('assets/herosectionbanner.png'); 
+   --bg-position: center top;
+  /* inherits cover + scroll from defaults */
+}
+
 /* ===============================
    HERO — Cosmic background bundle
-   (non-breaking, scoped)
-================================== */
+ ================================== */
 .hero--cosmic {
   position: relative;
   isolation: isolate;
@@ -788,18 +800,12 @@ footer .btn {
 .hero__cta .cta-button + .cta-button{ margin-left: 30px; }
 
 /* ROADMAP */
-#roadmap.has-bg {
-  --bg-image: url('assets/bg-roadmap.png');
-  --bg-position: center top;  
-}
+#roadmap.has-bg { --bg-image: url('assets/bg-roadmap.png'); }
 .roadmap hr { margin: 2em 0; border-color: var(--orange); }
 .roadmap .final-note { font-style: italic; text-align: center; font-size: .9em; }
 
 /* TOKENOMICS */
-#tokenomics.has-bg {
-  --bg-image: url('assets/tokenomicssectionbanner.png');
-  --bg-position: center top;
-}
+#tokenomics.has-bg { --bg-image: url('assets/tokenomicssectionbanner.png'); --bg-position: center top; }
 #tokenomics .section-inner{ max-width:1200px; margin:0 auto; }
 #tokenomics p, #tokenomics li{ line-height:1.65; margin-bottom:12px; }
 #tokenomics .token-footer { font-style: italic; color: var(--orange); text-align: center; margin-top: 2em; }
@@ -827,31 +833,19 @@ footer .btn {
 }
 
 /* TIKTOK */
-#tiktok.has-bg {
-  --bg-image: url('assets/bg-tiktok.png');
-  --bg-position: center top;  
-}
+#tiktok.has-bg { --bg-image: url('assets/bg-tiktok.png'); --bg-position: center top; }
 
 #tiktok h2 { font-size: clamp(2rem, 5vw, 3rem); }
 
 /* CHARITY */
-#charity.has-bg {
-  --bg-image: url('assets/puffwithpurposesectionbanner.png');
-  --bg-position: center top;  
-}
+#charity.has-bg { --bg-image: url('assets/puffwithpurposesectionbanner.png'); --bg-position: center top; }
 .charity p { text-shadow: 0 0 4px #000; }
 
 /* MERCH */
-#merch.has-bg {
-  --bg-image: url('assets/merchsectionbanner.png');
-  --bg-position: center top;
-}
+#merch.has-bg { --bg-image: url('assets/merchsectionbanner.png'); --bg-position: center top; }
 
 /* FAQ */
-#faq.has-bg {
-  --bg-image: url('assets/bg-faq.png');
-  --bg-position: center top;  
-}
+#faq.has-bg { --bg-image: url('assets/bg-faq.png'); --bg-position: center top; }
 #faq .section-inner { max-width: 1200px; }
 #faq details {
   background: rgba(0,0,0,0.7);
