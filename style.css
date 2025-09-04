@@ -326,6 +326,7 @@ section.has-bg::after {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;   /* <<< Rounded corners */
   box-shadow:
     0 14px 40px rgba(0,0,0,.55),
     0 0 0 1px rgba(255,149,0,.04) inset;
