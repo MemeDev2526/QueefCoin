@@ -279,6 +279,7 @@ section { position: relative; isolation: isolate; }
 
 /* Per-section background: set with CSS variables (see presets below) */
 .section.has-bg,
+section.has-bg { position: relative; isolation: isolate; }
 
 /* Image layer */
 .section.has-bg::before,
@@ -347,7 +348,6 @@ section.has-bg::after {
 .bg-cover   { --bg-size: cover; }
 .bg-contain { --bg-size: contain; }
 
-}
 
 /* =========================================================
    4) NAV & BANNERS
@@ -835,12 +835,6 @@ footer .btn {
   font-family: 'Rubik', sans-serif;
   font-size: 1rem; /* body base size */
   margin-left: 0; /* flush left */
-}
-/* TOKENOMICS background */
-#tokenomics {
-  --bg-image: url('assets/bg-tokenomics.png');       /* swap for your asset */
-  --bg-overlay: linear-gradient(180deg, rgba(13,13,13,.45), rgba(13,13,13,.65));
-  --bg-position: center top;
 }
 
 /* TIKTOK */
