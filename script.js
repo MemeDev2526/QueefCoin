@@ -457,19 +457,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   })();
 
-  // (Optional Morph animation was disabled)
-  /*
-  const puffPath = document.querySelector('.puff-path');
-  if (puffPath && typeof gsap !== 'undefined' && typeof window.MorphSVGPlugin !== 'undefined') {
-    const MorphSVGPlugin = window.MorphSVGPlugin;
-    gsap.registerPlugin(MorphSVGPlugin);
-    gsap.to(puffPath, {
-      duration: 4,
-      repeat: -1,
-      yoyo: true,
-      ease: "power1.inOut",
-      morphSVG: { shape: "M0,160 Q360,180 720,240 T1440,160 V320 H0 Z" }
-    });
-  }
-  */
-});
+  // (Optional Morph animation )
+ 
+ // === Puff divider morph animation ===
+if (window.gsap && window.MorphSVGPlugin) {
+  gsap.registerPlugin(MorphSVGPlugin);
+  gsap.to('.puff-path', {
+    duration: 4,
+    repeat: -1,
+    yoyo: true,
+    ease: 'power1.inOut',
+    morphSVG: {
+      shape: "M0,110 Q360,80 720,120 T1440,110 V160 H0 Z"
+    }
+  });
+}
+
