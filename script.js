@@ -463,14 +463,15 @@ document.addEventListener('DOMContentLoaded', function () {
 if (window.gsap && window.MorphSVGPlugin) {
   gsap.registerPlugin(MorphSVGPlugin);
   gsap.to('.puff-path', {
-    duration: 4,
+    duration: 7,
     repeat: -1,
     yoyo: true,
-    ease: 'power1.inOut',
+    ease: 'sine.inOut',
     morphSVG: {
-      shape: "M0,110 Q360,80 720,120 T1440,110 V160 H0 Z"
+      shape: "M0,120 Q360,140 720,120 T1440,120 V160 H0 Z" // smoother wave
     }
   });
 }
+
 
 });
