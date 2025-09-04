@@ -834,11 +834,12 @@ footer .btn {
 
 #tokenomics .faq-item summary {
   font-family: 'Luckiest Guy', cursive;
-  font-size: 1.5rem; /* 4pt larger than body text (~16px body) */
+  font-size: 1.6rem; /* 4pt larger than body text (~16px body) */
   font-weight: 400;
   cursor: pointer;
   list-style: none; /* remove default marker */
   text-align: left;
+  color: var(--orange); /* brand orange */
 }
 
 #tokenomics .faq-item p,
