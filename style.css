@@ -117,7 +117,7 @@ body.overlay-active { overflow: hidden; }
   inset: 0;
   width: 100%;              /* add */
   height: 100%;             /* add */
-  z-index: 99998;
+  z-index: 9998;
   display: grid;
   place-items: center;
   opacity: 1;
@@ -282,7 +282,7 @@ section { position: relative; isolation: isolate; }
 section.has-bg {
    /* one source of truth */
   --bg-image: none;
-  --bg-size: cover;
+  --bg-size: contain;
   --bg-position: center center;
   --bg-attach: scroll;     /* default: scroll everywhere */
   --bg-overlay: linear-gradient(180deg, rgba(10,10,12,.35), rgba(10,10,12,.55));
@@ -297,7 +297,7 @@ section.has-bg::before {
   inset: 0;
   z-index: -2;
   background-image: var(--bg-image);
-  background-size:  var(--bg-size, cover); 
+  background-size:  var(--bg-size, contain); 
   background-position: var(--bg-position, center center);
   background-repeat: no-repeat;
   background-attachment: var(--bg-attach); 
