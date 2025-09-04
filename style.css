@@ -666,8 +666,8 @@ footer .btn {
    --bg-image: url('assets/herosectionbanner.png');
    --bg-attach: fixed;                /* parallax */
    --bg-position: center top;
-   --bg-size: cover;
-   --bg-overlay: linear-gradient(180deg, rgba(10,10,12,.35), rgba(10,10,12,.65));
+   --bg-size: var(--section-bg-width) auto; 
+   --bg-overlay: linear-gradient(180deg, rgba(10,10,12,.75), rgba(10,10,12,.75));
 }
 
 #home.has-bg::before,
