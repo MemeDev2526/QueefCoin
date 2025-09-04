@@ -289,6 +289,7 @@ section.has-bg{
   --bg-attach: fixed;                          /* <- makes content scroll OVER */
   --bg-size: var(--section-bg-width) auto;     /* <- same width, auto height */
   --bg-position: center top;                   /* consistent anchor */
+  --bg-border-radius: 20px; 
 }
  
 /* Image layer */
@@ -303,6 +304,9 @@ section.has-bg::before {
   background-position: var(--bg-position);
   background-repeat: no-repeat;
   background-attachment: var(--bg-attach); 
+  border-radius: var(--bg-border-radius);     /* round the image edges */
+  overflow: hidden;                           /* clip inside radius */
+  background-clip: border-box;                /* clip background to radius */
 }
 
 /* the tint above image */
