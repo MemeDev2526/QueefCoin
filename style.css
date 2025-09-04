@@ -654,10 +654,7 @@ footer .btn {
    6) SECTION OVERRIDES (Minimal)
    ========================================================= */
 /* HERO / HOME */
-#home.has-bg { --bg-image: url('assets/herosectionbanner.png'); 
-   --bg-position: center top;
-  /* inherits cover + scroll from defaults */
-}
+#home.has-bg { --bg-image: url('assets/herosectionbanner.png'); }
 
 /* ===============================
    HERO — Cosmic background bundle
@@ -803,7 +800,7 @@ footer .btn {
 .roadmap .final-note { font-style: italic; text-align: center; font-size: .9em; }
 
 /* TOKENOMICS */
-#tokenomics.has-bg { --bg-image: url('assets/tokenomicssectionbanner.png'); --bg-position: center top; }
+#tokenomics.has-bg { --bg-image: url('assets/tokenomicssectionbanner.png'); }
 #tokenomics .section-inner{ max-width:1200px; margin:0 auto; }
 #tokenomics p, #tokenomics li{ line-height:1.65; margin-bottom:12px; }
 #tokenomics .token-footer { font-style: italic; color: var(--orange); text-align: center; margin-top: 2em; }
@@ -831,19 +828,19 @@ footer .btn {
 }
 
 /* TIKTOK */
-#tiktok.has-bg { --bg-image: url('assets/bg-tiktok.png'); --bg-position: center top; }
+#tiktok.has-bg { --bg-image: url('assets/bg-tiktok.png'); }
 
 #tiktok h2 { font-size: clamp(2rem, 5vw, 3rem); }
 
 /* CHARITY */
-#charity.has-bg { --bg-image: url('assets/puffwithpurposesectionbanner.png'); --bg-position: center top; }
+#charity.has-bg { --bg-image: url('assets/puffwithpurposesectionbanner.png'); }
 .charity p { text-shadow: 0 0 4px #000; }
 
 /* MERCH */
-#merch.has-bg { --bg-image: url('assets/merchsectionbanner.png'); --bg-position: center top; }
+#merch.has-bg { --bg-image: url('assets/merchsectionbanner.png'); }
 
 /* FAQ */
-#faq.has-bg { --bg-image: url('assets/bg-faq.png'); --bg-position: center top; }
+#faq.has-bg { --bg-image: url('assets/bg-faq.png'); }
 #faq .section-inner { max-width: 1200px; }
 #faq details {
   background: rgba(0,0,0,0.7);
