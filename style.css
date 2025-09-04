@@ -10,8 +10,8 @@
   --gold: #FDC100;         /* Golden Yellow */
   --solanaD: #008CFF;      /* Solana Blue Dark */
   --solanaL: #94DAFF;      /* Solana Blue Light */
-  --purpleA: #2A004F;   /* Deep cosmic purple */
-  --purpleB: #3D0066;      /* Rich vivid purple */
+  --purpleA: #2C0A44;   /* Cosmic purple start (brand-locked) */
+  --purpleB: #4D0D57;   /* Cosmic purple end   (brand-locked) */
   --blueBlack: #080A16;    /* Deep blue-black */
   --gray: #AAAAAA;         /* Soft Gray */
 
@@ -45,11 +45,11 @@ body {
   background: linear-gradient(
     180deg,
     var(--purpleA) 0%,
-    #2B0058 24%,
+    color-mix(in srgb, var(--purpleA) 60%, var(--purpleB)) 24%,
     var(--purpleB) 50%,
     var(--blueBlack) 78%,
     var(--black) 100%
-  );
+);
   background-attachment: fixed;
   background-size: cover;
   background-color: var(--black); /* fallback */
@@ -161,8 +161,8 @@ body.overlay-active { overflow: hidden; }
 
 /* MASCOT — the ONLY thing that moves */
 .queef-puff{
-  position: center;
   width: min(64vw, 600px);
+  min-width: 220px;            /* keeps size readable on small phones */
   height: auto;
   display: block;
   margin: 0 auto 1px;
@@ -299,7 +299,19 @@ nav {
 .nav-links a.active { background: var(--orange); color: var(--black); } /* or use #FDC100 */
 .nav-links .coming-soon { color: var(--gray); font-style: italic; padding: .5em 1em; }
 
-.nav-toggle { display: none; position: absolute; top: 10px; right: 20px; font-size: 2rem; background: none; color: var(--orange); border: none; cursor: pointer; z-index: 1001; }
+.nav-toggle {
+  display: none;
+  position: absolute;
+  top: 6px; right: 12px;
+  font-size: 2rem;
+  line-height: 1;
+  background: none; color: var(--orange);
+  border: none; cursor: pointer; z-index: 1001;
+  padding: 10px 14px;              /* bigger hit area */
+  border-radius: 12px;             /* nicer focus ring shape */
+}
+.nav-toggle:hover { background: rgba(255,149,0,0.08); }
+
 
 /* Bottom image marquee */
 .image-banner-scroll {
@@ -352,9 +364,9 @@ nav {
 
 .chart-embed iframe {
   position: absolute;
-  top: 0; left: 0;
-  width: 80%;
-  height: 80%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   border: 0;
   border-radius: 12px;
 }
@@ -595,7 +607,7 @@ footer .btn {
   background:
     radial-gradient(1200px 600px at 70% -10%, rgba(255,107,0,0.18), transparent 60%),
     radial-gradient(900px 500px at 20% 110%, rgba(255,149,0,0.14), transparent 60%),
-    url('assets/hero-stars.png') repeat center/auto;
+    url('assets/hero-stars.png') center / auto repeat;
   opacity: 0.7;
   pointer-events: none;
   z-index: -1;
@@ -798,6 +810,9 @@ section.has-bg::after {
   background: rgba(0,0,0,0.7);
   border: 1px solid #222; border-radius: 10px;
   margin: 10px 0; padding: .5em .75em;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.03);
 }
 .back-to-top {
   text-align: center;
@@ -865,7 +880,7 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
    background-image:
       linear-gradient(to bottom, rgba(9,7,17,.75), rgba(9,7,17,.85)),
       url("assets/welcome-background.png");
-    background-size: 100% 100%, clamp(1200px, 82vw, 1600px) cover;
+    background-size: 100% 100%, clamp(1200px, 82vw, 1600px) auto;
     background-position: center 75%, center 75%;
     background-repeat: no-repeat, no-repeat;
     background-blend-mode: normal;
