@@ -297,8 +297,8 @@ section.has-bg::before {
   inset: 0;
   z-index: -2;
   background-image: var(--bg-image);
-  background-size: var(--bg-size);
-  background-position: var(--bg-position);
+  background-size:  var(--bg-size, cover); 
+  background-position: var(--bg-position, center center);
   background-repeat: no-repeat;
   background-attachment: var(--bg-attach); 
 }
@@ -314,19 +314,17 @@ section.has-bg::after {
   pointer-events: none;
 }
 
-/* desktop-only “pinned” option via class, not per-section copy/paste */
-@media (min-width: 1024px) {
-  .bg-fixed { --bg-attach: fixed; }
-}
+/* Parallax helper (already present, keep it) */
+.bg-fixed { --bg-attach: fixed; }
 
 /* Floating card wrapper (put on your inner container) */
 .section-card,
 .section-inner.section-card,
 .section-inner.section-inner--card {
-  background: linear-gradient(180deg, rgba(10,10,12,.88) 0%, rgba(10,10,12,.92) 100%);
+  background: linear-gradient(180deg, rgba(10,10,12,.86) 0%, rgba(10,10,12,.92) 100%);
   /* frosted look (with graceful fallback) */
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255,255,255,0.05);
   box-shadow:
     0 14px 40px rgba(0,0,0,.55),
@@ -977,7 +975,7 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
     background-attachment: scroll;
   }
 
-  .nav-toggle { display: block; }
+ .nav-toggle { display: block; }
  .nav-links {
   display: none;
   flex-direction: column;
@@ -1075,6 +1073,8 @@ body.loaded .section-inner { opacity: 1 !important; transform: none !important; 
 
   /* chart: taller aspect on small screens */
   .chart-embed { padding-bottom: 90%; }
+
+  .bg-fixed { --bg-attach: scroll; }  /* disable parallax on mobile */
 }
 
 
