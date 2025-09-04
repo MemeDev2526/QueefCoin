@@ -869,7 +869,7 @@ footer .btn {
 #tiktok h2 { font-size: clamp(2rem, 5vw, 3rem); }
 
 /* CHARITY */
-#charity.has-bg { --bg-image: url('assets/puffwithpurposesectionbanner.png'); }
+.charity.has-bg { --bg-image: url('assets/puffwithpurposesectionbanner.png'); }
 .charity p { text-shadow: 0 0 4px #000; }
 
 /* MERCH */
