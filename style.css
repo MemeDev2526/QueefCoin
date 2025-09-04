@@ -32,7 +32,10 @@
   /* Shadows */
   --shadow-lg: 0 0 20px rgba(0,0,0,0.3);
   --shadow-md: 0 2px 12px rgba(0,0,0,0.5);
+   
+  --section-bg-width: clamp(1200px, 92vw, 1600px); /* same width everywhere */
 }
+
 
 /* Global base */
 body {
@@ -279,16 +282,15 @@ section { position: relative; isolation: isolate; }
 
 /* Per-section background: set with CSS variables (see presets below) */
 .section.has-bg,
-section.has-bg {
-   /* one source of truth */
-  --bg-image: none;
-  --bg-size: contain;
-  --bg-position: center center;
-  --bg-attach: scroll;     /* default: scroll everywhere */
-  --bg-overlay: linear-gradient(180deg, rgba(10,10,12,.35), rgba(10,10,12,.55));
-  --bg-filter: none;
+section.has-bg{
+  position: relative;
+  z-index: 0;
+  /* unify defaults for all sections */
+  --bg-attach: fixed;                          /* <- makes content scroll OVER */
+  --bg-size: var(--section-bg-width) auto;     /* <- same width, auto height */
+  --bg-position: center top;                   /* consistent anchor */
 }
-
+ 
 /* Image layer */
 .section.has-bg::before,
 section.has-bg::before {
@@ -297,8 +299,8 @@ section.has-bg::before {
   inset: 0;
   z-index: -2;
   background-image: var(--bg-image);
-  background-size:  var(--bg-size, contain); 
-  background-position: var(--bg-position, center center);
+  background-size:  var(--bg-size);
+  background-position: var(--bg-position);
   background-repeat: no-repeat;
   background-attachment: var(--bg-attach); 
 }
@@ -310,23 +312,28 @@ section.has-bg::after {
   position: absolute;
   inset: 0;
   z-index: -1;                 /* still behind content */
-  background: var(--bg-overlay, transparent);
+  background: var(--bg-overlay, linear-gradient(180deg, rgba(10,10,12,.35), rgba(10,10,12,.55)));
   pointer-events: none;
 }
 
 /* Parallax helper (already present, keep it) */
 .bg-fixed { --bg-attach: fixed; }
 
+/* iOS / touch fallback: fixed is unreliable → degrade gracefully */
+@media (max-width: 1024px), (pointer: coarse){
+  section.has-bg{ --bg-attach: scroll; }
+}
+
 /* Floating card wrapper (put on your inner container) */
 .section-card,
 .section-inner.section-card,
 .section-inner.section-inner--card {
-  background: linear-gradient(180deg, rgba(10,10,12,.86) 0%, rgba(10,10,12,.92) 100%);
+  background: linear-gradient(180deg, rgba(10,10,12,.72) 0%, rgba(10,10,12,.75) 100%);
   /* frosted look (with graceful fallback) */
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255,255,255,0.05);
-  border-radius: 12px;   /* <<< Rounded corners */
+  border-radius: 16px;   /* <<< Rounded corners */
   box-shadow:
     0 14px 40px rgba(0,0,0,.55),
     0 0 0 1px rgba(255,149,0,.04) inset;
