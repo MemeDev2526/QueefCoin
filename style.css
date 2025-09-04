@@ -356,10 +356,12 @@ section.has-bg::after {
 
 .puff-divider{
   position: relative;
-  height: 80px;                /* divider height */
+  height: 100px;                /* divider height */
   margin-top: -20px;           /* slight overlap if you like */
   z-index: 0;                  /* above bg layers, below content */
   pointer-events: none;
+  overflow: hidden;
+  isolation: isolate;
 }
 .puff-divider svg{
   position:absolute; inset:0;
@@ -367,9 +369,14 @@ section.has-bg::after {
   display:block;
 }
 .puff-divider .puff-path{
-  fill: var(--black);          /* or currentColor + set .puff-divider{color:...} */
-  opacity:.95;
-  filter: drop-shadow(0 -6px 18px rgba(0,0,0,.35));
+  fill:   
+     radial-gradient(900px 500px at 75% -10%, rgba(255,149,0,.12), transparent 60%),
+     linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--purpleA) 88%, transparent) 0%,
+      color-mix(in srgb, var(--purpleB) 88%, transparent) 55%,
+      color-mix(in srgb, var(--black)   88%, transparent) 100%
+    );
 }
 
 
@@ -682,51 +689,16 @@ footer .btn {
    --bg-image: url('assets/herosectionbanner.png');
    --bg-attach: fixed;                /* parallax */
    --bg-position: center top;
-   --bg-size: var(--section-bg-width) auto; 
+   --bg-size: var(--section-bg-width) cover; 
    --bg-overlay: linear-gradient(180deg, rgba(10,10,12,.75), rgba(10,10,12,.75));
+   --bg-filter: none;
+
 }
 
 #home.has-bg::before,
 #home.has-bg::after {
   position: absolute;
   inset: 0;                          /* top:0; right:0; bottom:0; left:0 */
-}
-
-/* ===============================
-   HERO — Cosmic background bundle
- ================================== */
-.hero--cosmic {
-  position: relative;
-  isolation: isolate;
-  background: linear-gradient(160deg, var(--purpleA) 0%, var(--purpleB) 55%, var(--black) 100%);
-  color: #FFFFFF;
-  padding-top: clamp(40px, 10vh, 140px);
-  padding-bottom: clamp(20px, 8vh, 100px);
-  overflow: visible;
-}
-
-/* Make hero content sit directly on the cosmic bg */
-.hero--cosmic .section-inner {
-  background: transparent;
-  box-shadow: none;
-  padding-top: clamp(16px, 2vh, 24px);
-  padding-bottom: clamp(8px, 1.5vh, 16px);
-  max-width: 1200px; /* keeps text readable on desktop */
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* optional starfield & glows (swap URL for your asset path) */
-.hero--cosmic .hero__overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(1200px 600px at 70% -10%, rgba(255,107,0,0.18), transparent 60%),
-    radial-gradient(900px 500px at 20% 110%, rgba(255,149,0,0.14), transparent 60%),
-    url('assets/hero-stars.png') center / auto repeat;
-  opacity: 0.7;
-  pointer-events: none;
-  z-index: -1;
 }
 
 /* Typography */
