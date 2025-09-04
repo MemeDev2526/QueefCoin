@@ -690,7 +690,6 @@ footer .btn {
    --bg-attach: fixed;                /* parallax */
    --bg-position: center top;
    --bg-size: var(--section-bg-width) cover; 
-   --bg-overlay: linear-gradient(180deg, rgba(10,10,12,.75), rgba(10,10,12,.75));
    --bg-filter: none;
 
 }
