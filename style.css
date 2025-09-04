@@ -10,8 +10,8 @@
   --gold: #FDC100;         /* Golden Yellow */
   --solanaD: #008CFF;      /* Solana Blue Dark */
   --solanaL: #94DAFF;      /* Solana Blue Light */
-  --purpleA: #2C0A44;   /* Cosmic purple start (brand-locked) */
-  --purpleB: #4D0D57;   /* Cosmic purple end   (brand-locked) */
+  --purpleA: #2C0A44;      /* Cosmic purple start (brand-locked) */
+  --purpleB: #4D0D57;      /* Cosmic purple end   (brand-locked) */
   --blueBlack: #080A16;    /* Deep blue-black */
   --gray: #AAAAAA;         /* Soft Gray */
 
@@ -205,7 +205,7 @@ a:not(.btn):not(.cta-button):hover{
   color: #FFFFFF;
 }
 
-.coin { position: fixed; top: -80px; pointer-events: none; animation: fall 3.6s linear forwards; z-index: 9999; }
+.coin { position: fixed; top: -80px; pointer-events: none; animation: fall 3.8s linear forwards; z-index: 9999; }
 
 /* =========================================================
    3) LAYOUT & TYPOGRAPHY (CORE)
@@ -289,8 +289,8 @@ section.has-bg::before {
   inset: 0;
   z-index: -2;
   background-image: var(--bg-image, none);
-  background-size: var(--bg-size, contain);
-  background-position: var(--bg-position, center);
+  background-size: var(--bg-size, clamp(900px, 85vw, 1600px) auto);
+  background-position: var(--bg-position, center top);
   background-repeat: no-repeat;
   background-attachment: var(--bg-attach, scroll);
   filter: var(--bg-filter, none); /* optional blur/desat per section */
@@ -300,14 +300,14 @@ section.has-bg::before {
 .section-card,
 .section-inner.section-card,
 .section-inner.section-inner--card {
-  background: linear-gradient(180deg, rgba(10,10,12,.78) 0%, rgba(10,10,12,.82) 100%);
+  background: linear-gradient(180deg, rgba(8,8,12,.88) 0%, rgba(8,8,12,.92) 100%);
   /* frosted look (with graceful fallback) */
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
-  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.05);
   border-radius: 16px;
   box-shadow:
-    0 10px 40px rgba(0,0,0,.45),
+    0 10px 40px rgba(0,0,0,.55),
     0 0 0 1px rgba(255,149,0,.05) inset;
 }
 
@@ -358,7 +358,7 @@ header { position: relative; }
 nav {
   position: fixed; top: var(--status-height); left: 0; width: 100%;
   background: var(--black); box-shadow: var(--shadow-md);
-  padding: 0.5em 0; z-index: 1000;
+  padding: 0.7em 0; z-index: 1000;
 }
 .nav-links { display: flex; justify-content: center; gap: 2em; list-style: none; padding: 0; margin: 0; font-size: 18px; }
 .nav-links a { display: block; color: var(--orange); text-decoration: none; padding: .5em 1em; border-radius: 20px; font-weight: 700; transition: background .3s, color .3s; }
@@ -387,8 +387,8 @@ nav {
   z-index: 1000; overflow: hidden; padding: 0;
   display: flex; align-items: center;
 }
-.scroll-wrapper { display: flex; width: 200%; animation: scroll-banner 25s linear infinite; }
-.scroll-wrapper img { height: calc(var(--banner-height) - 25px); margin: 0 20px; object-fit: contain; display: block; }
+.scroll-wrapper { display: flex; width: 200%; animation: scroll-banner 30s linear infinite; }
+.scroll-wrapper img { height: calc(var(--banner-height) - 28px); margin: 0 30px; object-fit: contain; display: block; }
 
 /* =========================================================
    5) COMPONENTS
@@ -646,11 +646,8 @@ footer .btn {
 #home.has-bg {
   --bg-image: url('assets/herosectionbanner.png');
   --bg-position: center top;
-  --bg-size: cover;
-  --bg-attach: scroll;           /* use .bg-fixed if desired on desktop */
-  --bg-overlay: linear-gradient(180deg, rgba(13,13,13,.35), rgba(13,13,13,.55));
-  --bg-filter: none;
-}
+   --bg-attach: scroll;           /* use .bg-fixed if desired on desktop */
+  }
 /* ===============================
    HERO — Cosmic background bundle
    (non-breaking, scoped)
@@ -777,11 +774,11 @@ footer .btn {
 
 /* Reduce space between nav and hero headline */
 #home .section-inner{ margin-top: .9em; }           /* was 2em via .section-inner */
-.hero{ padding-top: clamp(24px, 6vh, 56px); }       /* half the previous feel */
+.hero{ padding-top: clamp(18px, 6vh, 45px); }       /* half the previous feel */
 
 /* Contract line: keep label + hash tight, copy button aligned */
 .contract-line{
-  display:flex; align-items:left; justify-content:left; gap:2px; flex-wrap:wrap;
+  display:flex; align-items:left; justify-content:center; gap:1px; flex-wrap:wrap;
 }
 .contract-line .label{ font-weight:800; }
 .contract-line .hash{ font-weight:800; letter-spacing:.2px; }
@@ -793,8 +790,7 @@ footer .btn {
 /* ROADMAP */
 #roadmap.has-bg {
   --bg-image: url('assets/bg-roadmap.png');
-  --bg-position: center top;
-  --bg-overlay: linear-gradient(180deg, rgba(13,13,13,.55), rgba(13,13,13,.75));
+  --bg-position: center top;  
 }
 .roadmap hr { margin: 2em 0; border-color: var(--orange); }
 .roadmap .final-note { font-style: italic; text-align: center; font-size: .9em; }
@@ -803,7 +799,6 @@ footer .btn {
 #tokenomics.has-bg {
   --bg-image: url('assets/tokenomicssectionbanner.png');
   --bg-position: center top;
-  --bg-overlay: linear-gradient(180deg, rgba(13,13,13,.55), rgba(13,13,13,.75));
 }
 #tokenomics .section-inner{ max-width:1200px; margin:0 auto; }
 #tokenomics p, #tokenomics li{ line-height:1.65; margin-bottom:12px; }
@@ -834,31 +829,28 @@ footer .btn {
 /* TIKTOK */
 #tiktok.has-bg {
   --bg-image: url('assets/bg-tiktok.png');
-  --bg-position: center;
-  --bg-overlay: linear-gradient(180deg, rgba(12,10,22,.55), rgba(12,10,22,.8));
+  --bg-position: center top;  
 }
+
 #tiktok h2 { font-size: clamp(2rem, 5vw, 3rem); }
 
 /* CHARITY */
 #charity.has-bg {
   --bg-image: url('assets/puffwithpurposesectionbanner.png');
-  --bg-position: center;
-  --bg-overlay: linear-gradient(180deg, rgba(12,10,22,.55), rgba(12,10,22,.8));
+  --bg-position: center top;  
 }
 .charity p { text-shadow: 0 0 4px #000; }
 
 /* MERCH */
 #merch.has-bg {
   --bg-image: url('assets/merchsectionbanner.png');
-  --bg-position: center;
-  --bg-overlay: linear-gradient(180deg, rgba(9,7,17,.45), rgba(9,7,17,.75));
+  --bg-position: center top;
 }
 
 /* FAQ */
 #faq.has-bg {
   --bg-image: url('assets/bg-faq.png');
-  --bg-position: center top;
-  --bg-overlay: linear-gradient(180deg, rgba(9,9,11,.55), rgba(9,9,11,.82));
+  --bg-position: center top;  
 }
 #faq .section-inner { max-width: 1200px; }
 #faq details {
