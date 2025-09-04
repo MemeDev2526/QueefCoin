@@ -77,194 +77,387 @@ const QC_PHASES = {
   }
 };
 
-
 document.addEventListener('DOMContentLoaded', function () {
-  document.body.classList.add('overlay-active');  // lock scroll until dismiss
-  const enterButton = document.getElementById('enter-btn');
-  const overlay = document.querySelector('.loading-overlay');
-  const navToggle = document.getElementById('nav-toggle');
-  const navLinks = document.getElementById('nav-links');
-  const homeSection = document.getElementById('home');
-  const queefSound = document.getElementById('queef-sound');
-  const puffImage = document.querySelector('.queef-puff');
-  const smokePoofs = document.querySelectorAll('.smoke');
+  document.body.classList.add('overlay-active'); // lock scroll until dismiss
+
+  const enterButton  = document.getElementById('enter-btn');
+  const overlay      = document.querySelector('.loading-overlay');
+  const navToggle    = document.getElementById('nav-toggle');
+  const navLinks     = document.getElementById('nav-links');
+  const homeSection  = document.getElementById('home');
+  const queefSound   = document.getElementById('queef-sound');
+  const puffImage    = document.querySelector('.queef-puff');
+  const smokePoofs   = document.querySelectorAll('.smoke');
+
+  // Respect prefers-reduced-motion
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function dismissOverlay() {
-    // add CSS exit state
+    if (!overlay) return;
     overlay.classList.add('is-hidden');
-    // release scroll lock
     document.body.classList.remove('overlay-active');
 
-    // remove overlay node after fade (match CSS transition ~600ms)
     setTimeout(() => {
       overlay?.remove();
-      document.body.classList.add('loaded'); // fallback visibility
-      // focus main content for a11y
+      document.body.classList.add('loaded');
       const main = document.getElementById('main');
       if (main) { main.setAttribute('tabindex', '-1'); main.focus(); }
-      // reveal home section
       if (homeSection) homeSection.classList.add('fade-in');
     }, 650);
   }
 
-  // Nav toggle
-// Mobile nav: open/close + accessibility + scroll lock
-if (navToggle && navLinks) {
-  const openNav = () => {
-    navLinks.classList.add('show');
-    navToggle.setAttribute('aria-expanded', 'true');
-    navToggle.setAttribute('aria-label', 'Close navigation');
-    navToggle.textContent = '✕';
-    document.body.classList.add('no-scroll');
-  };
+  // ===== Mobile nav: open/close + a11y + body lock =====
+  if (navToggle && navLinks) {
+    const openNav = () => {
+      navLinks.classList.add('show');
+      navToggle.setAttribute('aria-expanded', 'true');
+      navToggle.setAttribute('aria-label', 'Close navigation');
+      navToggle.textContent = '✕';
+      document.body.classList.add('no-scroll');
+    };
 
-  const closeNav = () => {
-    navLinks.classList.remove('show');
-    navToggle.setAttribute('aria-expanded', 'false');
-    navToggle.setAttribute('aria-label', 'Open navigation');
-    navToggle.textContent = '☰';
-    document.body.classList.remove('no-scroll');
-  };
+    const closeNav = () => {
+      navLinks.classList.remove('show');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open navigation');
+      navToggle.textContent = '☰';
+      document.body.classList.remove('no-scroll');
+    };
 
-  const isOpen = () => navLinks.classList.contains('show');
+    const isOpen = () => navLinks.classList.contains('show');
 
-  // Toggle on button
-  navToggle.addEventListener('click', () => (isOpen() ? closeNav() : openNav()));
+    navToggle.addEventListener('click', () => (isOpen() ? closeNav() : openNav()));
+    navLinks.addEventListener('click', (e) => { if (e.target.matches('a')) closeNav(); });
 
-  // Close when a menu link is clicked
-  navLinks.addEventListener('click', (e) => {
-    if (e.target.matches('a')) closeNav();
-  });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) closeNav();
+      // If overlay is up and user presses Esc, close overlay and restore focus to the button
+      if (e.key === 'Escape' && document.querySelector('.loading-overlay')) {
+        dismissOverlay();
+        enterButton?.focus();
+      }
+    });
 
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isOpen()) closeNav();
-  });
-
-  // Close on outside click
-  document.addEventListener('click', (e) => {
-    if (!isOpen()) return;
-    if (!e.target.closest('nav')) closeNav();
-  });
-}
-
- // === Roadmap (horizontal) popover wiring ===
-(function initRoadmap(){
-  const roadmap = document.querySelector('#roadmap');
-  if (!roadmap) return;
-
-  const popover = roadmap.querySelector('#puff-popover');
-  const card    = popover?.querySelector('.puff-popover__card');
-  const titleEl = popover?.querySelector('.puff-popover__title');
-  const bodyEl  = popover?.querySelector('.puff-popover__body');
-  const closeEl = popover?.querySelector('.puff-popover__close');
-
-  function positionCardNear(nodeBtn){
-    if (!roadmap || !popover || !card) return;
-    const rr = roadmap.getBoundingClientRect();
-    const rn = nodeBtn.getBoundingClientRect();
-    const cw = card.offsetWidth || 420;
-    const ch = card.offsetHeight || 240;
-
-    let top  = (rn.top  - rr.top)  + rn.height + 12;     // below node
-    let left = (rn.left - rr.left) + rn.width/2 - cw/2;  // centered
-
-    top  = Math.max(8, Math.min(top,  rr.height - ch - 8));
-    left = Math.max(8, Math.min(left, rr.width  - cw - 8));
-
-    card.style.top  = `${top}px`;
-    card.style.left = `${left}px`;
+    document.addEventListener('click', (e) => {
+      if (!isOpen()) return;
+      if (!e.target.closest('nav')) closeNav();
+    });
   }
 
- function openPopoverFor(btn){
-  const key = btn.dataset.phase;
-  if (!key) return;
-  const data = QC_PHASES[key];
-  if (!data || !titleEl || !bodyEl || !popover || !card) return;
+  // ===== Roadmap (horizontal) popover wiring =====
+  (function initRoadmap() {
+    const roadmap  = document.querySelector('#roadmap');
+    if (!roadmap) return;
 
-  titleEl.textContent = data.title;
-  bodyEl.innerHTML = data.body;
-  popover.hidden = false;
+    const popover  = roadmap.querySelector('#puff-popover');
+    const card     = popover?.querySelector('.puff-popover__card');
+    const titleEl  = popover?.querySelector('.puff-popover__title');
+    const bodyEl   = popover?.querySelector('.puff-popover__body');
+    const closeEl  = popover?.querySelector('.puff-popover__close');
 
-  requestAnimationFrame(() => {
-    // Desktop/tablet: keep your precise positioning
-    if (window.matchMedia('(min-width: 769px)').matches) {
-      positionCardNear(btn);
-      card.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-    } else {
-      // Mobile: bottom sheet — no special positioning needed
-      window.setTimeout(() => card.focus?.(), 10);
+    function positionCardNear(nodeBtn) {
+      if (!roadmap || !popover || !card) return;
+      const rr = roadmap.getBoundingClientRect();
+      const rn = nodeBtn.getBoundingClientRect();
+      const cw = card.offsetWidth || 420;
+      const ch = card.offsetHeight || 240;
+
+      let top  = (rn.top  - rr.top)  + rn.height + 12;     // below node
+      let left = (rn.left - rr.left) + rn.width/2 - cw/2;  // centered
+
+      top  = Math.max(8, Math.min(top,  rr.height - ch - 8));
+      left = Math.max(8, Math.min(left, rr.width  - cw - 8));
+
+      card.style.top  = `${top}px`;
+      card.style.left = `${left}px`;
     }
+
+    function openPopoverFor(btn) {
+      const key = btn.dataset.phase;
+      if (!key) return;
+      const data = QC_PHASES[key];
+      if (!data || !titleEl || !bodyEl || !popover || !card) return;
+
+      titleEl.textContent = data.title;
+      bodyEl.innerHTML = data.body;
+      popover.hidden = false;
+
+      requestAnimationFrame(() => {
+        if (window.matchMedia('(min-width: 769px)').matches) {
+          positionCardNear(btn);
+          card.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+        } else {
+          window.setTimeout(() => card.focus?.(), 10);
+        }
+      });
+    }
+
+    function closePopover() { if (popover) popover.hidden = true; }
+
+    roadmap.addEventListener('click', (e) => {
+      const btn = e.target.closest('.puff-node');
+      if (btn) openPopoverFor(btn);
+    });
+
+    closeEl && closeEl.addEventListener('click', closePopover);
+    document.addEventListener('keydown', (e) => e.key === 'Escape' && !popover.hidden && closePopover());
+    window.addEventListener('resize', () => !popover.hidden && closePopover());
+    document.addEventListener('click', (e) => {
+      if (!popover || popover.hidden) return;
+      if (!e.target.closest('#puff-popover') && !e.target.closest('.puff-node')) closePopover();
+    });
+  })();
+
+  // ===== Enter button interaction =====
+  if (enterButton && overlay && homeSection && queefSound && puffImage) {
+    // CTA click
+    enterButton.addEventListener('click', () => {
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      playQueefEffect(centerX, centerY);
+
+      // burst class (skip animation if reduced motion)
+      if (!prefersReducedMotion) {
+        puffImage.classList.remove('puff-explode');
+        void puffImage.offsetWidth; // reflow
+        puffImage.classList.add('puff-explode');
+        smokePoofs.forEach(smoke => smoke.classList.add('show'));
+      }
+      setTimeout(dismissOverlay, 800);
+    });
+
+    // Backdrop bursts (no dismiss)
+    let lastOverlayBurst = 0;
+    const burstIfOk = (x, y) => {
+      const now = Date.now();
+      if (now - lastOverlayBurst < 300) return; // debounce
+      lastOverlayBurst = now;
+      playQueefEffect(x, y);
+    };
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target !== overlay) return;
+      burstIfOk(e.clientX ?? window.innerWidth / 2, e.clientY ?? window.innerHeight / 2);
+    });
+
+    overlay.addEventListener('touchstart', (e) => {
+      if (e.target !== overlay) return;
+      const t = e.touches && e.touches[0];
+      burstIfOk((t && t.clientX) || window.innerWidth / 2, (t && t.clientY) || window.innerHeight / 2);
+    }, { passive: true });
+  }
+
+  // ===== ScrollReveal =====
+  window.addEventListener('load', function () {
+    if (!window.ScrollReveal) return;
+    const sr = ScrollReveal({
+      distance: '30px',
+      duration: 800,
+      easing: 'ease-out',
+      origin: 'bottom',
+      scale: 0.95,
+      reset: false
+    });
+
+    sr.reveal('.hero h1', { delay: 100 });
+    sr.reveal('.hero p', { delay: 200, interval: 100 });
+    sr.reveal('.hero .cta-button', { delay: 400 });
+    sr.reveal('.roadmap h2, .tokenomics h2, .charity h2, .merch h2, footer', { delay: 150 });
+    sr.reveal('.roadmap h3, .roadmap p, .roadmap ul li, .tokenomics p, .tokenomics ul li, .charity p, .merch p, .carousel-item', {
+      delay: 200,
+      interval: 100
+    });
+    sr.reveal('.roadmap__nodes .puff-node', { delay: 150, interval: 80, scale: 0.98 });
   });
-}
 
+  // ===== Copy-to-clipboard (single implementation) =====
+  (function () {
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+      }
+      // Fallback
+      return new Promise((resolve, reject) => {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.top = '-9999px';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          ta.setSelectionRange(0, ta.value.length);
+          const ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+          ok ? resolve() : reject(new Error('execCommand copy failed'));
+        } catch (e) { reject(e); }
+      });
+    }
 
-  function closePopover(){ if (popover) popover.hidden = true; }
+    function setupCopy(btn) {
+      const targetSel = btn.getAttribute('data-copy-target');
+      const target = document.querySelector(targetSel);
+      const feedback = document.getElementById('copy-feedback');
+      if (!target) return;
 
-  // Delegation: any click on a .puff-node inside the roadmap
-  roadmap.addEventListener('click', (e)=>{
-    const btn = e.target.closest('.puff-node');
-    if (btn) openPopoverFor(btn);
-  });
+      btn.addEventListener('click', async () => {
+        const text = (target.textContent || target.innerText || '').trim();
+        const prev = btn.textContent;
+        btn.disabled = true;
 
-  closeEl && closeEl.addEventListener('click', closePopover);
-  document.addEventListener('keydown', (e)=> e.key === 'Escape' && !popover.hidden && closePopover());
-  window.addEventListener('resize', ()=> !popover.hidden && closePopover());
-  document.addEventListener('click', (e)=>{
-    if (!popover || popover.hidden) return;
-    if (!e.target.closest('#puff-popover') && !e.target.closest('.puff-node')) closePopover();
-  });
-})();
+        try {
+          await copyText(text);
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          if (feedback) feedback.textContent = 'Contract address copied to clipboard.';
+        } catch (err) {
+          btn.textContent = 'Copy failed';
+          if (feedback) feedback.textContent = 'Copy failed. Tap and hold to select manually.';
+          console.error(err);
+        } finally {
+          setTimeout(() => {
+            btn.textContent = prev;
+            btn.classList.remove('copied');
+            btn.disabled = false;
+            if (feedback) feedback.textContent = '';
+          }, 1400);
+        }
+      });
+    }
 
-// 🟠 Enter button interaction
-if (enterButton && overlay && homeSection && queefSound && puffImage) {
-  // Enter button click
-  enterButton.addEventListener('click', () => {
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-    playQueefEffect(centerX, centerY);
+    // Single + future-proof
+    document.querySelectorAll('[data-copy-target]').forEach(setupCopy);
+  })();
 
-    // optional burst on Queefy, then dismiss
-    puffImage.classList.remove('puff-explode'); // reset if clicked twice
-    void puffImage.offsetWidth; // reflow
-    puffImage.classList.add('puff-explode');
+  // ===== DEXTools chart shimmer =====
+  (function initChartLoader() {
+    const iframe = document.getElementById('dextools-widget');
+    const placeholder = document.querySelector('.chart-placeholder');
+    if (!iframe || !placeholder) return;
 
-    smokePoofs.forEach(smoke => smoke.classList.add('show')); 
-    setTimeout(dismissOverlay, 800);
-  });
+    let fallbackTimeout = setTimeout(() => {
+      placeholder.textContent = '⚠️ Chart failed to load. Open on DEXTools directly.';
+      placeholder.style.background = 'rgba(0,0,0,.7)';
+      placeholder.style.color = '#FF6B00';
+      placeholder.style.display = 'flex';
+      placeholder.style.alignItems = 'center';
+      placeholder.style.justifyContent = 'center';
+      placeholder.style.fontWeight = '700';
+    }, 8000);
 
-  // 💨 Burst on backdrop tap/click (no dismiss)
-  let lastOverlayBurst = 0;
+    iframe.addEventListener('load', () => {
+      clearTimeout(fallbackTimeout);
+      placeholder.style.transition = "opacity .4s ease";
+      placeholder.style.opacity = "0";
+      setTimeout(() => placeholder.remove(), 500);
+    });
+  })();
 
-  // Click
-  overlay.addEventListener('click', (e) => {
-    if (e.target !== overlay) return; // only backdrop
-    const now = Date.now();
-    if (now - lastOverlayBurst < 300) return; // debounce
-    lastOverlayBurst = now;
+  // ===== Puff explosion utilities =====
+  function triggerEmojiPuffsFrom(xStart, yStart) {
+    const emojiContainer = document.querySelector('.emoji-explosion');
+    if (!emojiContainer) return;
 
-    const x = e.clientX ?? window.innerWidth / 2;
-    const y = e.clientY ?? window.innerHeight / 2;
-    playQueefEffect(x, y);
-  });
+    const N = prefersReducedMotion ? 8 : 20;
+    for (let i = 0; i < N; i++) {
+      const puff = document.createElement('span');
+      puff.innerText = '💨';
+      puff.classList.add('emoji-particle');
 
-  // Touch
-  overlay.addEventListener('touchstart', (e) => {
-    if (e.target !== overlay) return;
-    const now = Date.now();
-    if (now - lastOverlayBurst < 300) return;
-    lastOverlayBurst = now;
+      const angle = Math.random() * 2 * Math.PI;
+      const distance = Math.random() * (prefersReducedMotion ? 300 : 800) + (prefersReducedMotion ? 80 : 200);
+      const x = Math.cos(angle) * distance;
+      const y = Math.sin(angle) * distance;
 
-    const t = e.touches && e.touches[0];
-    const x = (t && t.clientX) || window.innerWidth / 2;
-    const y = (t && t.clientY) || window.innerHeight / 2;
-    playQueefEffect(x, y);
-  }, { passive: true });
-}
+      puff.style.left = `${xStart}px`;
+      puff.style.top = `${yStart}px`;
+      puff.style.setProperty('--x', `${x}px`);
+      puff.style.setProperty('--y', `${y}px`);
+      puff.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
+      puff.style.willChange = 'transform, opacity';
 
+      emojiContainer.appendChild(puff);
+      setTimeout(() => puff.remove(), prefersReducedMotion ? 1000 : 1800);
+    }
+  }
 
+  function playQueefEffect(x, y) {
+    const audio = document.getElementById('queef-sound');
+    if (audio && !prefersReducedMotion) {
+      audio.currentTime = 0;
+      audio.play().catch(err => console.warn('Autoplay blocked:', err));
+    }
+    triggerEmojiPuffsFrom(x, y);
+  }
 
-  // 💨 Puff divider animation temporarily disabled
+  // Global puffs: skip on interactive UI to avoid annoyance
+  (function enableGlobalPuffs() {
+    const el = document.querySelector('.emoji-explosion');
+    if (!el) return;
+
+    const shouldSkip = (target) => {
+      return target.closest('a, button, input, textarea, select, [role="button"], [data-no-puff]'); // opt-out hook too
+    };
+
+    const play = (x, y) => playQueefEffect(x, y);
+
+    document.addEventListener('click', (e) => {
+      if (shouldSkip(e.target)) return;
+      const x = e.clientX ?? window.innerWidth / 2;
+      const y = e.clientY ?? window.innerHeight / 2;
+      play(x, y);
+    });
+
+    document.addEventListener('touchstart', (e) => {
+      if (shouldSkip(e.target)) return;
+      const t = e.touches?.[0];
+      const x = (t && t.clientX) || window.innerWidth / 2;
+      const y = (t && t.clientY) || window.innerHeight / 2;
+      play(x, y);
+    }, { passive: true });
+  })();
+
+  // ===== Coin Rain Observer (spawn once per view, scoped to container) =====
+  (function coinRainOnce() {
+    const container = document.querySelector("#coin-rain-container");
+    if (!container) return;
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const count = prefersReducedMotion ? 10 : 25;
+          for (let i = 0; i < count; i++) {
+            const coin = document.createElement("img");
+            coin.src = "assets/queef-coin.png";
+            coin.classList.add("coin");
+            coin.alt = "$QUEEF coin";
+
+            coin.style.left = `${Math.random() * 100}vw`;
+            coin.style.animationDelay = `${Math.random()}s`;
+
+            const size = 60 + Math.random() * 40;
+            coin.style.width = `${size}px`;
+            coin.style.height = `${size}px`;
+            coin.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+            // keep DOM tidy: within container instead of body
+            container.appendChild(coin);
+            setTimeout(() => coin.remove(), 4000);
+          }
+          // Only once per entry; disconnect to avoid repeats
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(container);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) observer.disconnect();
+    });
+  })();
+
+  // (Optional Morph animation was disabled)
   /*
   const puffPath = document.querySelector('.puff-path');
   if (puffPath && typeof gsap !== 'undefined' && typeof window.MorphSVGPlugin !== 'undefined') {
@@ -279,218 +472,4 @@ if (enterButton && overlay && homeSection && queefSound && puffImage) {
     });
   }
   */
-
-  // (Optional extras—uncomment if you want these behaviors)
-  // if (queefSound) queefSound.addEventListener('ended', dismissOverlay);
-  // window.addEventListener('keydown', (e) => {
-  //   if (e.key === 'Escape' && document.querySelector('.loading-overlay')) dismissOverlay();
-  // });
-  // overlay?.addEventListener('click', (e) => { if (e.target === overlay) dismissOverlay(); });
 });
-
-// ✅ ScrollReveal (run after full window load)
-window.addEventListener('load', function () {
-  if (!window.ScrollReveal) return;
-  const sr = ScrollReveal({
-    distance: '30px',
-    duration: 800,
-    easing: 'ease-out',
-    origin: 'bottom',
-    scale: 0.95,
-    reset: false
-  });
-
-  sr.reveal('.hero h1', { delay: 100 });
-  sr.reveal('.hero p', { delay: 200, interval: 100 });
-  sr.reveal('.hero .cta-button', { delay: 400 });
-  // sr.reveal('.puff-divider', { delay: 100 }); // puff disabled
-  sr.reveal('.roadmap h2, .tokenomics h2, .charity h2, .merch h2, footer', { delay: 150 });
-  sr.reveal('.roadmap h3, .roadmap p, .roadmap ul li, .tokenomics p, .tokenomics ul li, .charity p, .merch p, .carousel-item', {
-    delay: 200,
-    interval: 100
-  });
-  // Nicely stagger the roadmap nodes
-  sr.reveal('.roadmap__nodes .puff-node', { delay: 150, interval: 80, scale: 0.98 });
-
-  console.log('[ScrollReveal targets]', document.querySelectorAll('.tokenomics p, .charity p, .merch p'));
-});
-
-// 💨 Puff explosion utility
-function triggerEmojiPuffsFrom(xStart, yStart) {
-  const emojiContainer = document.querySelector('.emoji-explosion');
-  if (!emojiContainer) return;
-
-  for (let i = 0; i < 20; i++) {
-    const puff = document.createElement('span');
-    puff.innerText = '💨';
-    puff.classList.add('emoji-particle');
-
-    const angle = Math.random() * 2 * Math.PI;
-    const distance = Math.random() * 800 + 200;
-    const x = Math.cos(angle) * distance;
-    const y = Math.sin(angle) * distance;
-
-    puff.style.left = `${xStart}px`;
-    puff.style.top = `${yStart}px`;
-    puff.style.setProperty('--x', `${x}px`);
-    puff.style.setProperty('--y', `${y}px`);
-    puff.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
-    puff.style.willChange = 'transform, opacity';
-
-    emojiContainer.appendChild(puff);
-    setTimeout(() => puff.remove(), 1800);
-  }
-}
-
-function playQueefEffect(x, y) {
-  const queefSound = document.getElementById('queef-sound');
-  if (queefSound) {
-    queefSound.currentTime = 0;
-    queefSound.play().catch(err => console.warn('Autoplay blocked:', err));
-  }
-  triggerEmojiPuffsFrom(x, y);
-}
-// Global "any click or tap" -> play sound + puffs
-(function enableGlobalPuffs(){
-  const el = document.querySelector('.emoji-explosion');
-  if (!el) return;
-  const play = (x,y) => playQueefEffect(x,y);
-
-  // Click anywhere
-  document.addEventListener('click', (e) => {
-    // ignore if clicking the CTA already triggers (won't hurt if double)
-    const x = e.clientX ?? window.innerWidth/2;
-    const y = e.clientY ?? window.innerHeight/2;
-    play(x,y);
-  });
-
-  // Touch anywhere
-  document.addEventListener('touchstart', (e) => {
-    const t = e.touches?.[0];
-    const x = (t && t.clientX) || window.innerWidth/2;
-    const y = (t && t.clientY) || window.innerHeight/2;
-    play(x,y);
-  }, {passive:true});
-})();
-
- // 💰 Coin Rain Observer
-const coinContainer = document.querySelector("#coin-rain-container");
-if (coinContainer) {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        for (let i = 0; i < 25; i++) {
-          const coin = document.createElement("img");
-          coin.src = "assets/queef-coin.png";
-          coin.classList.add("coin");
-
-          coin.style.left = `${Math.random() * 100}vw`;
-          coin.style.animationDelay = `${Math.random()}s`;
-
-          const size = 60 + Math.random() * 40;
-          coin.style.width = `${size}px`;
-          coin.style.height = `${size}px`;
-          coin.style.transform = `rotate(${Math.random() * 360}deg)`;
-
-          document.body.appendChild(coin);
-          setTimeout(() => coin.remove(), 4000);
-        }
-      }
-    });
-  }, { threshold: 0.3 });
-
-  observer.observe(coinContainer);
-}
-
-
-(function () {
-  function copyText(text) {
-    // Primary: modern async Clipboard API
-    if (navigator.clipboard && window.isSecureContext) {
-      return navigator.clipboard.writeText(text);
-    }
-    // Fallback: hidden textarea + execCommand
-    return new Promise((resolve, reject) => {
-      try {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.setAttribute('readonly', '');
-        ta.style.position = 'fixed';
-        ta.style.top = '-9999px';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        ta.setSelectionRange(0, ta.value.length);
-        const ok = document.execCommand('copy');
-        document.body.removeChild(ta);
-        ok ? resolve() : reject(new Error('execCommand copy failed'));
-      } catch (e) {
-        reject(e);
-      }
-    });
-  }
-
-  function setupCopy(btn) {
-    const targetSel = btn.getAttribute('data-copy-target');
-    const target = document.querySelector(targetSel);
-    const feedback = document.getElementById('copy-feedback');
-    if (!target) return;
-
-    btn.addEventListener('click', async () => {
-      const text = (target.textContent || target.innerText || '').trim();
-      const prev = btn.textContent;
-      btn.disabled = true;
-
-      try {
-        await copyText(text);
-        btn.textContent = 'Copied!';
-        btn.classList.add('copied');
-        if (feedback) feedback.textContent = 'Contract address copied to clipboard.';
-      } catch (err) {
-        btn.textContent = 'Copy failed';
-        if (feedback) feedback.textContent = 'Copy failed. Tap and hold to select manually.';
-        console.error(err);
-      } finally {
-        setTimeout(() => {
-          btn.textContent = prev;
-          btn.classList.remove('copied');
-          btn.disabled = false;
-          if (feedback) feedback.textContent = '';
-        }, 1400);
-      }
-    });
-  }
-
-  // Single button
-  const singleBtn = document.getElementById('copy-contract-btn');
-  if (singleBtn) setupCopy(singleBtn);
-
-  // If you add more copy buttons later, auto-wire them:
-  document.querySelectorAll('[data-copy-target]').forEach(btn => {
-    if (btn !== singleBtn) setupCopy(btn);
-  });
-})();
-
-// === DEXTools chart shimmer ===
-(function initChartLoader(){
-  const iframe = document.getElementById('dextools-widget');
-  const placeholder = document.querySelector('.chart-placeholder');
-  if (!iframe || !placeholder) return;
-
-  let fallbackTimeout = setTimeout(() => {
-    placeholder.textContent = '⚠️ Chart failed to load. Open on DEXTools directly.';
-    placeholder.style.background = 'rgba(0,0,0,.7)';
-    placeholder.style.color = '#FF6B00';
-    placeholder.style.display = 'flex';
-    placeholder.style.alignItems = 'center';
-    placeholder.style.justifyContent = 'center';
-    placeholder.style.fontWeight = '700';
-  }, 8000); // 8s fallback
-
-  iframe.addEventListener('load', () => {
-    clearTimeout(fallbackTimeout);
-    placeholder.style.opacity = "0";
-    placeholder.style.transition = "opacity .4s ease";
-    setTimeout(() => placeholder.remove(), 500);
-  });
-})();
