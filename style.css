@@ -296,17 +296,6 @@ section.has-bg::before {
   filter: var(--bg-filter, none); /* optional blur/desat per section */
 }
 
-/* Tint/gradient overlay above the image */
-.section.has-bg::after,
-section.has-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: var(--bg-overlay, linear-gradient(180deg, rgba(13,13,13,.45), rgba(13,13,13,.65)));
-  pointer-events: none;
-}
-
 /* Floating card wrapper (put on your inner container) */
 .section-card,
 .section-inner.section-card,
