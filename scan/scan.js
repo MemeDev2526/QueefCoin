@@ -37,18 +37,31 @@ function spawnPuff(x, y) {
   p.addEventListener('animationend', () => p.remove(), { once: true });
 }
 
-// Play puff sound (safe unlock on first gesture)
+// Small burst helper around a rect center
+function burstAtRectCenter(rect, count=12) {
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top  + rect.height / 2;
+  for (let i = 0; i < count; i++) {
+    const angle = (Math.PI * 2 * i) / count;
+    const r = Math.min(rect.width, rect.height) * (0.15 + Math.random() * 0.2);
+    spawnPuff(cx + Math.cos(angle) * r, cy + Math.sin(angle) * r, 12, 22);
+  }
+}
+
+// Play puff sound with a touch of variety
 function playSfx() {
   if (!sfx) return;
   try {
     sfx.currentTime = 0;
-    sfx.volume = 0.6;
+    sfx.volume = 0.85; // a bit louder on click
+    const rate = 0.95 + Math.random() * 0.1; // slight variation
+    sfx.playbackRate = rate;
     sfx.play();
   } catch (_) { /* autoplay restrictions */ }
 }
 
 // Optional: light haptics on mobile
-function vibrate(ms = 15) {
+function vibrate(ms = 20) {
   if (navigator.vibrate) navigator.vibrate(ms);
 }
 
@@ -86,22 +99,34 @@ if (tapZone) {
 
 // ---- Mascot intro fade-out ----
 const mascotOverlay = document.querySelector('.mascot-overlay');
+const mascotImg = mascotOverlay ? mascotOverlay.querySelector('img') : null;
 
-if (mascotOverlay) {
-  // Prevent the dismiss click from triggering underlying handlers
+if (mascotOverlay && mascotImg) {
+  const dismiss = () => {
+    // 1) Click animation + burst
+    mascotImg.classList.add('clicked');
+    const rect = mascotImg.getBoundingClientRect();
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced) burstAtRectCenter(rect, 14);
+
+    // 2) Sound & haptics
+    playSfx();
+    vibrate(20);
+
+    // 3) Fade overlay then remove on transition end
+    mascotOverlay.classList.add('fade-out');
+    const cleanup = () => mascotOverlay.remove();
+    mascotOverlay.addEventListener('transitionend', cleanup, { once: true });
+  };
+
+  // Dismiss on pointerdown directly on overlay (avoid triggering elements below)
   mascotOverlay.addEventListener('pointerdown', (e) => {
     e.stopPropagation();
-    mascotOverlay.classList.add('fade-out');
-    // Also unlock audio on first gesture if desired
-    playSfx();
-    setTimeout(() => mascotOverlay.remove(), 1200);
+    dismiss();
   }, { once: true });
 
-  (Optional) auto-dismiss after 3s if no interaction:
-   setTimeout(() => {
-     if (document.body.contains(mascotOverlay)) {
-       mascotOverlay.classList.add('fade-out');
-      setTimeout(() => mascotOverlay.remove(), 1200);
-     }
-   }, 3000);
+  // Optional: auto-dismiss after 4s if no interaction
+  setTimeout(() => {
+    if (document.body.contains(mascotOverlay)) dismiss();
+  }, 4000);
 }
