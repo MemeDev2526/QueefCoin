@@ -67,3 +67,14 @@ tapZone.addEventListener('pointerdown', () => {
   t.textContent = '💨 Pump the Puff!';
   setTimeout(() => t.textContent = 'Tap to Puff', 900);
 });
+
+// Mascot intro fade-out
+const mascotOverlay = document.querySelector('.mascot-overlay');
+
+if (mascotOverlay) {
+  // Dismiss on first click/tap anywhere
+  document.addEventListener('click', () => {
+    mascotOverlay.classList.add('fade-out');
+    setTimeout(() => mascotOverlay.remove(), 1200); // remove fully
+  }, { once: true });
+}
