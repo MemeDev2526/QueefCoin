@@ -21,32 +21,28 @@
 
 /* Mascot Intro Overlay */
 .mascot-overlay{
-  position:fixed; 
-  inset:0;
-  z-index:2147483647;           /* max-ish */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position:fixed; inset:0; z-index:2147483647;
+  display:flex; align-items:center; justify-content:center;
   background:rgba(0,0,0,.90);
   transition:opacity 1.7s ease;
+  pointer-events:auto;
 }
 .mascot-overlay img{
-  max-width: 85vw;
-  max-height: 85vh;
-  height: auto;
-  width: auto;
-  filter: drop-shadow(0 0 18px rgba(255,107,0,.28));
-  animation: intro-pop .8s ease-out both, breathe 3.6s ease-in-out 0.7s infinite;
-  will-change: transform, filter;
+  max-width:85vw; max-height:85vh;
+  height:auto; width:auto;
+  filter:drop-shadow(0 0 18px rgba(255,107,0,.28));
+  animation:intro-pop .8s ease-out both, breathe 3.6s ease-in-out .7s infinite;
+  will-change:transform, filter;
 }
 .mascot-overlay.fade-out{
   opacity:0;
-  /* DO NOT set pointer-events:none here — wait until it's removed */
-
-.mascot-overlay img.clicked{
-  animation: click-pop .35s ease-out forwards;
-  filter: drop-shadow(0 0 24px rgba(255,149,0,.5));
+  /* keep pointer-events until removed in JS */
 }
+.mascot-overlay img.clicked{
+  animation:click-pop .35s ease-out forwards;
+  filter:drop-shadow(0 0 24px rgba(255,149,0,.5));
+}
+
 
 /* Base */
 *{box-sizing:border-box}
