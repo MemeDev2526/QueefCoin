@@ -62,7 +62,11 @@ html,body{
   margin:0;
   color:var(--white);
   font-family:'Rubik', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background:linear-gradient(180deg, var(--purpleA), var(--purpleB));
+  /* Cosmic gradient + logo background */
+  background:
+    linear-gradient(180deg, var(--purpleA), var(--purpleB)),
+    url('../assets/logo-main-final.png') center center / 480px auto no-repeat;
+  background-attachment: fixed;
 }
 
 /* A11y focus cue */
