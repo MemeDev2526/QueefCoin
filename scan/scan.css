@@ -21,35 +21,28 @@
 
 /* Mascot Intro Overlay */
 .mascot-overlay{
-  position:center; inset:0;
+  position:fixed; 
+  inset:0;
   z-index:2147483647;           /* max-ish */
-  pointer-events:auto;          /* must accept events */
-  background:rgba(0,0,0,.85);
-  transition:opacity 1.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:rgba(0,0,0,.90);
+  transition:opacity 1.7s ease;
 }
 .mascot-overlay img{
-  max-width:min(70vw,620px); height:auto;
-  animation:float 4.1s ease-in-out infinite;
+  max-width: 85vw;
+  max-height: 85vh;
+  height: auto;
+  width: auto;
   filter: drop-shadow(0 0 18px rgba(255,107,0,.28));
+  animation: intro-pop .8s ease-out both, breathe 3.6s ease-in-out 0.7s infinite;
+  will-change: transform, filter;
 }
 .mascot-overlay.fade-out{
   opacity:0;
   /* DO NOT set pointer-events:none here — wait until it's removed */
-}
 
-.mascot-overlay img {
-  max-width: 60vw;
-  height: auto;
-  animation: float 3.6s ease-in-out infinite;
-}
-
-/* Mascot image animations */
-.mascot-overlay img{
-  max-width:min(60vw,560px); height:auto;
-  filter: drop-shadow(0 0 18px rgba(255,107,0,.28));
-  animation: intro-pop .7s ease-out both, breathe 3.6s ease-in-out 0.7s infinite;
-  will-change: transform, filter;
-}
 .mascot-overlay img.clicked{
   animation: click-pop .35s ease-out forwards;
   filter: drop-shadow(0 0 24px rgba(255,149,0,.5));
@@ -65,7 +58,7 @@ html,body{
   /* Cosmic gradient + logo background */
   background:
     linear-gradient(180deg, var(--purpleA), var(--purpleB)),
-    url('../assets/logo-main-final.png') center center / 480px auto no-repeat;
+    url('../assets/logo-main.png') center center / 480px auto no-repeat;
   background-attachment: fixed;
 }
 
