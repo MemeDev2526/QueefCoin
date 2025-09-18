@@ -28,8 +28,8 @@
   transition:opacity 1.2s ease;
 }
 .mascot-overlay img{
-  max-width:min(60vw,560px); height:auto;
-  animation:float 3.6s ease-in-out infinite;
+  max-width:min(70vw,620px); height:auto;
+  animation:float 4.1s ease-in-out infinite;
   filter: drop-shadow(0 0 18px rgba(255,107,0,.28));
 }
 .mascot-overlay.fade-out{
