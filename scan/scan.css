@@ -21,8 +21,9 @@
 
 /* Mascot Intro Overlay */
 .mascot-overlay{
-  position:fixed; inset:0; z-index:9999;
-  display:flex; align-items:center; justify-content:center;
+  position:fixed; inset:0;
+  z-index:2147483647;           /* max-ish */
+  pointer-events:auto;          /* must accept events */
   background:rgba(0,0,0,.85);
   transition:opacity 1.2s ease;
 }
@@ -31,8 +32,10 @@
   animation:float 3.6s ease-in-out infinite;
   filter: drop-shadow(0 0 18px rgba(255,107,0,.28));
 }
-.mascot-overlay.fade-out{ opacity:0; pointer-events:none; }
-@media (prefers-reduced-motion: reduce){ .mascot-overlay img{ animation:none; } }
+.mascot-overlay.fade-out{
+  opacity:0;
+  /* DO NOT set pointer-events:none here — wait until it's removed */
+}
 
 .mascot-overlay img {
   max-width: 60vw;
