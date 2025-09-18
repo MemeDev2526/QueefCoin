@@ -20,7 +20,7 @@ const BRAND_COLOURS = [
 ];
 
 // Spawn a puff particle with brand colour
-function spawnPuff(x, y) {
+function spawnPuff(x, y, sizeMin = 10, sizeJitter = 18) {
   const p = document.createElement('div');
   p.className = 'puff';
 
