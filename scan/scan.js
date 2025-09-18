@@ -97,36 +97,52 @@ if (tapZone) {
   }, { passive: true });
 }
 
-// ---- Mascot intro fade-out ----
 const mascotOverlay = document.querySelector('.mascot-overlay');
-const mascotImg = mascotOverlay ? mascotOverlay.querySelector('img') : null;
+const mascotImg      = mascotOverlay?.querySelector('img');
 
-if (mascotOverlay && mascotImg) {
-  const dismiss = () => {
-    // 1) Click animation + burst
-    mascotImg.classList.add('clicked');
-    const rect = mascotImg.getBoundingClientRect();
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefersReduced) burstAtRectCenter(rect, 14);
+function cancel(e){
+  e.preventDefault();
+  e.stopPropagation();
+  if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+}
 
-    // 2) Sound & haptics
-    playSfx();
-    vibrate(20);
+function shieldDuringFade(ms = 1250){
+  // Capture-phase shields so nothing underneath gets the same click
+  const shield = (e) => cancel(e);
+  document.addEventListener('pointerdown', shield, true);
+  document.addEventListener('click',       shield, true);
+  document.addEventListener('touchstart',  shield, true);
 
-    // 3) Fade overlay then remove on transition end
-    mascotOverlay.classList.add('fade-out');
-    const cleanup = () => mascotOverlay.remove();
-    mascotOverlay.addEventListener('transitionend', cleanup, { once: true });
-  };
-
-  // Dismiss on pointerdown directly on overlay (avoid triggering elements below)
-  mascotOverlay.addEventListener('pointerdown', (e) => {
-    e.stopPropagation();
-    dismiss();
-  }, { once: true });
-
-  // Optional: auto-dismiss after 4s if no interaction
   setTimeout(() => {
-    if (document.body.contains(mascotOverlay)) dismiss();
-  }, 4000);
+    document.removeEventListener('pointerdown', shield, true);
+    document.removeEventListener('click',       shield, true);
+    document.removeEventListener('touchstart',  shield, true);
+  }, ms);
+}
+
+function dismiss(){
+  if (!mascotOverlay || mascotOverlay.classList.contains('fade-out')) return;
+
+  // optional: little pop + particles + sound
+  mascotImg?.classList.add('clicked');
+  // ... your burstAtRectCenter(rect) + playSfx() here ...
+
+  shieldDuringFade(1250);          // <- critical part
+  mascotOverlay.classList.add('fade-out');
+  mascotOverlay.addEventListener('transitionend', () => {
+    mascotOverlay.remove();        // finally remove (then clicks can pass through)
+  }, { once:true });
+}
+
+if (mascotOverlay){
+  // Capture-phase handlers so we beat links below
+  ['pointerdown','click','touchstart'].forEach(type => {
+    mascotOverlay.addEventListener(type, (e) => {
+      cancel(e);
+      dismiss();
+    }, { capture:true, once: type === 'pointerdown' ? false : false });
+  });
+
+  // Optional auto-dismiss if no interaction
+  setTimeout(() => { if (document.body.contains(mascotOverlay)) dismiss(); }, 4000);
 }
