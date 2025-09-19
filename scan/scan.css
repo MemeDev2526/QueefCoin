@@ -54,7 +54,7 @@ html,body{
   /* Cosmic gradient + logo background */
   background:
     linear-gradient(180deg, var(--purpleA), var(--purpleB)),
-    url('assets/logo-main.png') center center / 480px auto no-repeat;
+    url('assets/logo-main.png') center center / 480px auto no-repeat; z-index:99999; 
   background-attachment: fixed;
 }
 
